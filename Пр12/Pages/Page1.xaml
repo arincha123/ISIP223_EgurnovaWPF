@@ -9,6 +9,29 @@
       Title="Page1">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Выберите модель машины" Grid.Row="0" FontFamily="Times New Roman" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <WrapPanel Grid.Row="1" VerticalAlignment="Center">
+            <RadioButton Content="Седан" Margin="210 0 30 0" Checked="Model_Checked"/>
+            <RadioButton Content="Хэтчбек" Margin="70 0 0 0" Checked="Model_Checked"/>
+            <RadioButton Content="Внедорожник" Margin="100 0 0 0" Checked="Model_Checked"/>
+        </WrapPanel>
+
+        <TextBlock Text="Выберите тип двигателя" Grid.Row="2" FontFamily="Times New Roman" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <WrapPanel Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="800" >
+            <RadioButton Content="Бензиновый 1.5 л (120 л. с.)" Margin="100 0 0 0" Checked="Type_Checked"/>
+            <RadioButton Content="Бензиновый 2.0 л (150 л. с.)" Margin="100 0 0 0" Checked="Type_Checked"/>
+            <RadioButton Content="Гибрид 2.5 л (200 л. с.)" Margin="80 0 0 0" Checked="Type_Checked"/>
+        </WrapPanel>
+
+        <Button x:Name="Forward" Content="Далее" Grid.Row="4" Height="50" Width="100" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="Forward_Click"/>
+        <Button x:Name="Back" Content="Назад" Grid.Row="4" Height="50" Width="100" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="Back_Click"/>
     </Grid>
 </Page>
