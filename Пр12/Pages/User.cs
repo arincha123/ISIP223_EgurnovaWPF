@@ -24,7 +24,6 @@ namespace Пр12
         static public string Phone { get; set; } = "";
         static public string Email { get; set; } = "";
 
-
         public static void UpdateStrOptions()
         {
             StrOptions = string.Join(", ", Options);

@@ -25,6 +25,7 @@ namespace Пр12.Pages
             InitializeComponent();
             LoadData();
         }
+
         private void LoadData()
         {
             User.TOTAL = User.ModelCost + User.TypeCost + User.ColorCost + User.OptionsCost;
@@ -66,6 +67,5 @@ namespace Пр12.Pages
         {
             LoadData();
         }
-
     }
 }
