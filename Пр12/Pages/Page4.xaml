@@ -9,6 +9,47 @@
       Title="Page4">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock x:Name="FirstPay" Text="Процент первоначального взноса от полной стоимости автомобиля" Grid.Row="0" Grid.Column="0" Margin="10 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox x:Name="FPText" Grid.Row="0" Grid.Column="1" Width="100" VerticalAlignment="Center" HorizontalAlignment="Center" TextChanged="FPText_TextChanged" PreviewTextInput="FPText_PreviewTextInput"/>
+
+        <TextBlock x:Name="Months" Text="Срок кредита в месяцах" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <WrapPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Slider x:Name="Slider" Minimum="12" Maximum="96" IsSnapToTickEnabled="True"  Width="150" ValueChanged="Slider_ValueChanged"/>
+            <TextBox x:Name="TextCounts" Text="" Grid.Row="1" Grid.Column="1"  Width="30" />
+        </WrapPanel>
+        <TextBlock x:Name="Stav" Text="Месячная процентная ставка" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox x:Name="MPS" Width="50" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" TextChanged="MPS_TextChanged"/>
+
+        <Button x:Name="raschet" Grid.Row="3" Grid.ColumnSpan="2" Content="Вычислить" Width="100" Height="50"  Click="raschet_Click"/>
+
+        <TextBlock x:Name="FirstVznos" Text="Сумма первоначального взноса" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBlock x:Name="VznosText" Text="" Width="100" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <TextBlock x:Name="SumCredit" Text="Cумма, берущаяся в кредит" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock x:Name="Credit" Text="" Width="100" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <TextBlock x:Name="Itog" Text="Ориентировочный ежемесячный платёж" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBlock x:Name="ItogZnach" Width="100" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+
+        <Button x:Name="Forward" Content="Далее" Grid.Row="7" Grid.ColumnSpan="2" Height="50" Width="100" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="Forward_Click"/>
+        <Button x:Name="Back" Content="Назад" Grid.Row="7" Grid.ColumnSpan="2" Height="50" Width="100" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="Back_Click"/>
     </Grid>
 </Page>
