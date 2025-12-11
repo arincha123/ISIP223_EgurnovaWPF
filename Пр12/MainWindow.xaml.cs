@@ -20,9 +20,25 @@ namespace Пр12
     /// </summary>
     public partial class MainWindow : Window
     {
+        static public int Progresses = 0;
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        static public void MinusProgress()
+        {
+            Progresses--;
+        }
+
+        static public void PlusProgress()
+        {
+            Progresses++;
+        }
+
+        private void MainFrame_OnNavigated(object sender, NavigationEventArgs e)
+        {
+            Progress.Value = Progresses;
         }
     }
 }
