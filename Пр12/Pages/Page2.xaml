@@ -9,6 +9,32 @@
       Title="Page2">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="110"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Выберите цвет корпуса автомобиля" Grid.Row="0" FontFamily="Times New Roman" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <WrapPanel Grid.Row="1" VerticalAlignment="Top">
+            <RadioButton x:Name="BlackColor" Content="Чёрный цвет (+200)" Margin=" 30 0 55 0" Checked="Color_Checked"/>
+            <RadioButton x:Name="RedColor" Content="Красный цвет (+500)" Margin="30 0 50 0" Checked="Color_Checked"/>
+            <RadioButton x:Name="OrangeColor" Content="Оранжевый цвет (+500)" Margin="0 0 40 0" Checked="Color_Checked"/>
+            <RadioButton x:Name="YellowColor" Content="Жёлтый цвет (+500)" Margin="0 0 0 0" Checked="Color_Checked"/>
+            <RadioButton x:Name="GreenColor" Content="Зелёный цвет (+500)" Margin="30 30 50 0" Checked="Color_Checked"/>
+            <RadioButton x:Name="LightBlueColor" Content="Голубой цвет (+500)" Margin="30 30 50 0" Checked="Color_Checked"/>
+            <RadioButton x:Name="BlueColor" Content="Синий цвет (+500)" Margin="0 30 40 0" Checked="Color_Checked"/>
+            <RadioButton x:Name="PurpleColor" Content="Фиолетовый цвет (+500)" Margin="35 30 0 0" Checked="Color_Checked"/>
+        </WrapPanel>
+
+        <TextBlock Text="Выберите дополнительные опции" Grid.Row="2" FontFamily="Times New Roman" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <CheckBox x:Name="Krisha" Content="Понарамная крыша (+8000)" Grid.Row="3" Margin="200 20 0 0" Click="Krisha_Click"/>
+        <CheckBox x:Name="Salon" Content="Кожаный салон (+120000)" Grid.Row="3" Margin="200 50 0 0" Click="Salon_Click" />
+        <CheckBox x:Name="Climat" Content="Клима-контроль (+25000)" Grid.Row="3" Margin="500 20 0 0" Click="Climat_Click"/>
+        <CheckBox x:Name="Cruise" Content="Круиз-контроль (+45000)" Grid.Row="3" Margin="500 50 0 0" Click="Cruise_Click" />
+
+        <Button x:Name="Forward" Content="Далее" Grid.Row="4" Height="50" Width="100" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="Forward_Click"/>
+        <Button x:Name="Back" Content="Назад" Grid.Row="4" Height="50" Width="100" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="Back_Click"/>
     </Grid>
 </Page>
