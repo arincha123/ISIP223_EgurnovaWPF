@@ -9,6 +9,30 @@
       Title="Page5">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width= "400"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Введите ваше имя" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox x:Name="Name" Width="300" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" TextChanged="Name_TextChanged" PreviewTextInput="Name_PreviewTextInput"/>
+
+        <TextBlock Text="Введите ваш телефон" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox x:Name="Phone" Width="300" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" TextChanged="Phone_TextChanged"/>
+
+        <TextBlock Text="Введите адре электронной почты" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox x:Name="Email" Width="300" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" TextChanged="Email_TextChanged"/>
+
+        <Button x:Name="SubmitButton"  Content="Оставить заявку" Grid.ColumnSpan="2" Grid.Row="3" Width="200" Height="50" Click="SubmitButton_Click"/>
+
+        <Button x:Name="BackButton" Content="Назад" Grid.Row="6"  Height="50" Width="100" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="BackButton_Click"/>
     </Grid>
 </Page>
