@@ -23,6 +23,7 @@ namespace Пр12.Pages
         public Page2()
         {
             InitializeComponent();
+            Loaded += Page_Loaded;
         }
 
         private void Forward_Click(object sender, RoutedEventArgs e)
