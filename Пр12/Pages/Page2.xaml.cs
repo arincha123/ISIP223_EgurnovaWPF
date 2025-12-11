@@ -124,7 +124,5 @@ namespace Пр12.Pages
         {
             User.UpdateOption("кожаный салон", 120000, Salon.IsChecked == true);
         }
-
-
     }
 }
