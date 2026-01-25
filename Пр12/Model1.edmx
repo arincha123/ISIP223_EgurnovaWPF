@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище onlinemagazModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CART">
+          <Key>
+            <PropertyRef Name="ID_CART" />
+          </Key>
+          <Property Name="ID_CART" Type="int" Nullable="false" />
+          <Property Name="id_tovar" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CUSTOMER">
+          <Key>
+            <PropertyRef Name="ID_CUSTOMER" />
+          </Key>
+          <Property Name="ID_CUSTOMER" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME_CUSTOMER" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EMAIL_CUSTOMER" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ADRESS_CUSTOMER" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ORDER">
+          <Key>
+            <PropertyRef Name="ID_ORDER" />
+          </Key>
+          <Property Name="ID_ORDER" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_cart" Type="int" Nullable="false" />
+          <Property Name="id_customer" Type="int" Nullable="false" />
+          <Property Name="PRICE_ORDER" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TOVAR">
+          <Key>
+            <PropertyRef Name="ID_TOVAR" />
+          </Key>
+          <Property Name="ID_TOVAR" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME_TOVAR" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PRICE_TOVAR" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CART_TOVAR">
+          <End Role="TOVAR" Type="Self.TOVAR" Multiplicity="1" />
+          <End Role="CART" Type="Self.CART" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TOVAR">
+              <PropertyRef Name="ID_TOVAR" />
+            </Principal>
+            <Dependent Role="CART">
+              <PropertyRef Name="id_tovar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDER_CART">
+          <End Role="CART" Type="Self.CART" Multiplicity="1" />
+          <End Role="ORDER" Type="Self.ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CART">
+              <PropertyRef Name="ID_CART" />
+            </Principal>
+            <Dependent Role="ORDER">
+              <PropertyRef Name="id_cart" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDER_CUSTOMER">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+          <End Role="ORDER" Type="Self.ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="ID_CUSTOMER" />
+            </Principal>
+            <Dependent Role="ORDER">
+              <PropertyRef Name="id_customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище onlinemagazModelContainer">
+          <EntitySet Name="CART" EntityType="Self.CART" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDER" EntityType="Self.ORDER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TOVAR" EntityType="Self.TOVAR" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CART_TOVAR" Association="Self.FK_CART_TOVAR">
+            <End Role="TOVAR" EntitySet="TOVAR" />
+            <End Role="CART" EntitySet="CART" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDER_CART" Association="Self.FK_ORDER_CART">
+            <End Role="CART" EntitySet="CART" />
+            <End Role="ORDER" EntitySet="ORDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDER_CUSTOMER" Association="Self.FK_ORDER_CUSTOMER">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="ORDER" EntitySet="ORDER" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="onlinemagazModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CART">
+          <Key>
+            <PropertyRef Name="ID_CART" />
+          </Key>
+          <Property Name="ID_CART" Type="Int32" Nullable="false" />
+          <Property Name="id_tovar" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TOVAR" Relationship="Self.FK_CART_TOVAR" FromRole="CART" ToRole="TOVAR" />
+          <NavigationProperty Name="ORDER" Relationship="Self.FK_ORDER_CART" FromRole="CART" ToRole="ORDER" />
+        </EntityType>
+        <EntityType Name="CUSTOMER">
+          <Key>
+            <PropertyRef Name="ID_CUSTOMER" />
+          </Key>
+          <Property Name="ID_CUSTOMER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME_CUSTOMER" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EMAIL_CUSTOMER" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ADRESS_CUSTOMER" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ORDER" Relationship="Self.FK_ORDER_CUSTOMER" FromRole="CUSTOMER" ToRole="ORDER" />
+        </EntityType>
+        <EntityType Name="ORDER">
+          <Key>
+            <PropertyRef Name="ID_ORDER" />
+          </Key>
+          <Property Name="ID_ORDER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_cart" Type="Int32" Nullable="false" />
+          <Property Name="id_customer" Type="Int32" Nullable="false" />
+          <Property Name="PRICE_ORDER" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="CART" Relationship="Self.FK_ORDER_CART" FromRole="ORDER" ToRole="CART" />
+          <NavigationProperty Name="CUSTOMER" Relationship="Self.FK_ORDER_CUSTOMER" FromRole="ORDER" ToRole="CUSTOMER" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TOVAR">
+          <Key>
+            <PropertyRef Name="ID_TOVAR" />
+          </Key>
+          <Property Name="ID_TOVAR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME_TOVAR" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PRICE_TOVAR" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="CART" Relationship="Self.FK_CART_TOVAR" FromRole="TOVAR" ToRole="CART" />
+        </EntityType>
+        <Association Name="FK_CART_TOVAR">
+          <End Role="TOVAR" Type="Self.TOVAR" Multiplicity="1" />
+          <End Role="CART" Type="Self.CART" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TOVAR">
+              <PropertyRef Name="ID_TOVAR" />
+            </Principal>
+            <Dependent Role="CART">
+              <PropertyRef Name="id_tovar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDER_CART">
+          <End Role="CART" Type="Self.CART" Multiplicity="1" />
+          <End Role="ORDER" Type="Self.ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CART">
+              <PropertyRef Name="ID_CART" />
+            </Principal>
+            <Dependent Role="ORDER">
+              <PropertyRef Name="id_cart" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDER_CUSTOMER">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+          <End Role="ORDER" Type="Self.ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="ID_CUSTOMER" />
+            </Principal>
+            <Dependent Role="ORDER">
+              <PropertyRef Name="id_customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="onlinemagazEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CART" EntityType="Self.CART" />
+          <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" />
+          <EntitySet Name="ORDER" EntityType="Self.ORDER" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TOVAR" EntityType="Self.TOVAR" />
+          <AssociationSet Name="FK_CART_TOVAR" Association="Self.FK_CART_TOVAR">
+            <End Role="TOVAR" EntitySet="TOVAR" />
+            <End Role="CART" EntitySet="CART" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDER_CART" Association="Self.FK_ORDER_CART">
+            <End Role="CART" EntitySet="CART" />
+            <End Role="ORDER" EntitySet="ORDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDER_CUSTOMER" Association="Self.FK_ORDER_CUSTOMER">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="ORDER" EntitySet="ORDER" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище onlinemagazModelContainer" CdmEntityContainer="onlinemagazEntities">
+          <EntitySetMapping Name="CART">
+            <EntityTypeMapping TypeName="onlinemagazModel.CART">
+              <MappingFragment StoreEntitySet="CART">
+                <ScalarProperty Name="ID_CART" ColumnName="ID_CART" />
+                <ScalarProperty Name="id_tovar" ColumnName="id_tovar" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUSTOMER">
+            <EntityTypeMapping TypeName="onlinemagazModel.CUSTOMER">
+              <MappingFragment StoreEntitySet="CUSTOMER">
+                <ScalarProperty Name="ID_CUSTOMER" ColumnName="ID_CUSTOMER" />
+                <ScalarProperty Name="NAME_CUSTOMER" ColumnName="NAME_CUSTOMER" />
+                <ScalarProperty Name="EMAIL_CUSTOMER" ColumnName="EMAIL_CUSTOMER" />
+                <ScalarProperty Name="ADRESS_CUSTOMER" ColumnName="ADRESS_CUSTOMER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDER">
+            <EntityTypeMapping TypeName="onlinemagazModel.ORDER">
+              <MappingFragment StoreEntitySet="ORDER">
+                <ScalarProperty Name="ID_ORDER" ColumnName="ID_ORDER" />
+                <ScalarProperty Name="id_cart" ColumnName="id_cart" />
+                <ScalarProperty Name="id_customer" ColumnName="id_customer" />
+                <ScalarProperty Name="PRICE_ORDER" ColumnName="PRICE_ORDER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="onlinemagazModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TOVAR">
+            <EntityTypeMapping TypeName="onlinemagazModel.TOVAR">
+              <MappingFragment StoreEntitySet="TOVAR">
+                <ScalarProperty Name="ID_TOVAR" ColumnName="ID_TOVAR" />
+                <ScalarProperty Name="NAME_TOVAR" ColumnName="NAME_TOVAR" />
+                <ScalarProperty Name="PRICE_TOVAR" ColumnName="PRICE_TOVAR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

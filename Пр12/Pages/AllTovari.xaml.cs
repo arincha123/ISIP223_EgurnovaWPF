@@ -23,6 +23,8 @@ namespace Пр12.Pages
         public AllTovari()
         {
             InitializeComponent();
+
+            List<TOVAR> tovari = Core.Context.TOVAR.ToList();
         }
     }
 }
