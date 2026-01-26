@@ -23,6 +23,19 @@ namespace Пр12.Pages
         public Form()
         {
             InitializeComponent();
+
+            Carta.ItemsSource = Cart.korzinka;
         }
+
+        private void cart_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Order());
+
+            if (NavigationService?.CanGoForward == true)
+            {
+                NavigationService.GoForward();
+            }
+        }
+
     }
 }

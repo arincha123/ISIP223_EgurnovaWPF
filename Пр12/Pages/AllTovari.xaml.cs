@@ -31,10 +31,20 @@ namespace Пр12.Pages
         private void InCart_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            var i = button.DataContext as TOVAR; 
-            
+            TOVAR i = button.DataContext as TOVAR;
+            MessageBox.Show(i.PRICE_TOVAR.ToString());
             Cart.korzinka.Add(i);
 
+        }
+
+        private void cart_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Form());
+
+            if (NavigationService?.CanGoForward == true)
+            {
+                NavigationService.GoForward();
+            }
         }
     }
 }
