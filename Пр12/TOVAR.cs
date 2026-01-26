@@ -17,14 +17,15 @@ namespace Пр12
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TOVAR()
         {
-            this.CART = new HashSet<CART>();
+            this.ORDER = new HashSet<ORDER>();
         }
     
         public int ID_TOVAR { get; set; }
         public string NAME_TOVAR { get; set; }
         public decimal PRICE_TOVAR { get; set; }
+        public string IMAGE_TOVAR { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CART> CART { get; set; }
+        public virtual ICollection<ORDER> ORDER { get; set; }
     }
 }

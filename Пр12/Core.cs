@@ -8,6 +8,6 @@ namespace Пр12
 {
     internal class Core
     {
-        public static onlinemagazEntities Context = new onlinemagazEntities();
+        public static onlinemagazEntities1 Context = new onlinemagazEntities1();
     }
 }

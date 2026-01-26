@@ -13,10 +13,10 @@ namespace Пр12
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class onlinemagazEntities : DbContext
+    public partial class onlinemagazEntities1 : DbContext
     {
-        public onlinemagazEntities()
-            : base("name=onlinemagazEntities")
+        public onlinemagazEntities1()
+            : base("name=onlinemagazEntities1")
         {
         }
     
@@ -25,10 +25,8 @@ namespace Пр12
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CART> CART { get; set; }
         public virtual DbSet<CUSTOMER> CUSTOMER { get; set; }
         public virtual DbSet<ORDER> ORDER { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TOVAR> TOVAR { get; set; }
     }
 }

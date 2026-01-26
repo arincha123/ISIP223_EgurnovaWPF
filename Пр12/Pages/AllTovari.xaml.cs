@@ -25,6 +25,16 @@ namespace Пр12.Pages
             InitializeComponent();
 
             List<TOVAR> tovari = Core.Context.TOVAR.ToList();
+            Tovars.ItemsSource = tovari;
+        }
+
+        private void InCart_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            var i = button.DataContext as TOVAR; 
+            
+            Cart.korzinka.Add(i);
+
         }
     }
 }

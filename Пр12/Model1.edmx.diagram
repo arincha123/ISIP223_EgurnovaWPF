@@ -4,15 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fa11c3b11f3f4c0e9b1564b7f39444f9" Name="Diagram1">
-        <EntityTypeShape EntityType="onlinemagazModel.CART" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+      <Diagram DiagramId="22b2a384fb32418d8cb9978ec257527f" Name="Diagram1">
         <EntityTypeShape EntityType="onlinemagazModel.CUSTOMER" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="onlinemagazModel.ORDER" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="onlinemagazModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="onlinemagazModel.TOVAR" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <AssociationConnector Association="onlinemagazModel.FK_CART_TOVAR" ManuallyRouted="false" />
-        <AssociationConnector Association="onlinemagazModel.FK_ORDER_CART" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="onlinemagazModel.ORDER" Width="1.5" PointX="7.25" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="onlinemagazModel.TOVAR" Width="1.5" PointX="2.75" PointY="1.875" IsExpanded="true" />
         <AssociationConnector Association="onlinemagazModel.FK_ORDER_CUSTOMER" ManuallyRouted="false" />
+        <AssociationConnector Association="onlinemagazModel.TOVARI_IN_ORDER" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

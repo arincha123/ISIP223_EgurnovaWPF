@@ -14,12 +14,19 @@ namespace Пр12
     
     public partial class ORDER
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ORDER()
+        {
+            this.TOVAR = new HashSet<TOVAR>();
+        }
+    
         public int ID_ORDER { get; set; }
         public int id_cart { get; set; }
         public int id_customer { get; set; }
         public decimal PRICE_ORDER { get; set; }
     
-        public virtual CART CART { get; set; }
         public virtual CUSTOMER CUSTOMER { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TOVAR> TOVAR { get; set; }
     }
 }

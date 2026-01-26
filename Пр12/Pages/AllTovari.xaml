@@ -12,12 +12,12 @@
         <ListBox x:Name="Tovars" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.RowSpan="2">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel Width="100" Height="170">
+                    <WrapPanel Width="150" Height="170">
                         <StackPanel>
-                            <Image Source="{Binding ImagePath}" Width="100" Height="100"/>
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding Name, StringFormat=Название: {0}}"/>
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding Price, StringFormat=Цена: {0}}"/>
-                            <Button x:Name="InCart" Content="В корзину" HorizontalAlignment="Center"/>
+                            <Image Source="{Binding IMAGE_TOVAR}" Width="150" Height="100"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding NAME_TOVAR, StringFormat=Название: {0}}"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding PRICE_TOVAR, StringFormat=Цена: {0}}"/>
+                            <Button x:Name="InCart" Content="В корзину" HorizontalAlignment="Center" Click="InCart_Click"/>
                         </StackPanel>
                     </WrapPanel>
 
