@@ -32,7 +32,6 @@ namespace Пр12.Pages
         {
             Button button = sender as Button;
             TOVAR i = button.DataContext as TOVAR;
-            MessageBox.Show(i.PRICE_TOVAR.ToString());
             Cart.korzinka.Add(i);
 
         }

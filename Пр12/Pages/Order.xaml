@@ -9,6 +9,46 @@
       Title="Order">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+
+        <TextBlock Text="Введите своё ФИО" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="100 0 0 0" FontSize="14"/>
+        <TextBox x:Name="FIO" VerticalAlignment="Center" Width="400" Height="40" Margin="200 0 0 0" Grid.Row="0"/>
+
+        <TextBlock Text="Введите свой email" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="100 0 0 0" FontSize="14"/>
+        <TextBox x:Name="EMAIL" VerticalAlignment="Center" Width="400" Height="40" Margin="200 0 0 0" Grid.Row="1"/>
+
+        <TextBlock Text="Введите свой адрес" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="100 0 0 0" FontSize="14"/>
+        <TextBox x:Name="ADRESS" VerticalAlignment="Center" Width="400" Height="40" Margin="200 0 0 0" Grid.Row="2"/>
+
+        <ListBox x:Name="Carta" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=4}" Grid.Row="3" Margin="0,20,0,20">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel Width="150" Height="150">
+                        <StackPanel>
+                            <Image Source="{Binding IMAGE_TOVAR}" Width="150" Height="100"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding NAME_TOVAR, StringFormat=Название: {0}}"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding PRICE_TOVAR, StringFormat=Цена: {0}}"/>
+                        </StackPanel>
+                    </WrapPanel>
+
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Height="147" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+
+        <Button x:Name="form" Grid.Row="4" Height="45" Width="200"  VerticalAlignment="Center" Content="Оформить заказ" Click="form_Click"/>
+
+
     </Grid>
 </Page>
