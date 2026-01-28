@@ -19,28 +19,37 @@
             <PropertyRef Name="ID_ORDER" />
           </Key>
           <Property Name="ID_ORDER" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_cart" Type="int" Nullable="false" />
           <Property Name="id_customer" Type="int" Nullable="false" />
           <Property Name="PRICE_ORDER" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TOVAR">
           <Key>
             <PropertyRef Name="ID_TOVAR" />
           </Key>
           <Property Name="ID_TOVAR" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NAME_TOVAR" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NAME_TOVAR" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PRICE_TOVAR" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="IMAGE_TOVAR" Type="nvarchar(max)" />
+          <Property Name="IMAGE_TOVAR" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "onlinemagaz.dbo.TOVARI_IN_ORDER" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
-        <EntityType Name="TOVARI_IN_ORDER">
+        <EntityType Name="TOVAR_IN_ORDER">
           <Key>
-            <PropertyRef Name="id_tovar" />
-            <PropertyRef Name="id_order" />
+            <PropertyRef Name="ID_TOVAR_IN_ORDER" />
           </Key>
+          <Property Name="ID_TOVAR_IN_ORDER" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_tovar" Type="int" Nullable="false" />
           <Property Name="id_order" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Unit_Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
         </EntityType>
         <Association Name="FK_ORDER_CUSTOMER">
           <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
@@ -54,26 +63,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TOVARI_IN_ORDER_ORDER">
+        <Association Name="FK_TOVAR_IN_ORDER_ORDER">
           <End Role="ORDER" Type="Self.ORDER" Multiplicity="1" />
-          <End Role="TOVARI_IN_ORDER" Type="Self.TOVARI_IN_ORDER" Multiplicity="*" />
+          <End Role="TOVAR_IN_ORDER" Type="Self.TOVAR_IN_ORDER" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ORDER">
               <PropertyRef Name="ID_ORDER" />
             </Principal>
-            <Dependent Role="TOVARI_IN_ORDER">
+            <Dependent Role="TOVAR_IN_ORDER">
               <PropertyRef Name="id_order" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TOVARI_IN_ORDER_TOVAR">
+        <Association Name="FK_TOVAR_IN_ORDER_TOVAR">
           <End Role="TOVAR" Type="Self.TOVAR" Multiplicity="1" />
-          <End Role="TOVARI_IN_ORDER" Type="Self.TOVARI_IN_ORDER" Multiplicity="*" />
+          <End Role="TOVAR_IN_ORDER" Type="Self.TOVAR_IN_ORDER" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TOVAR">
               <PropertyRef Name="ID_TOVAR" />
             </Principal>
-            <Dependent Role="TOVARI_IN_ORDER">
+            <Dependent Role="TOVAR_IN_ORDER">
               <PropertyRef Name="id_tovar" />
             </Dependent>
           </ReferentialConstraint>
@@ -81,24 +90,20 @@
         <EntityContainer Name="Хранилище onlinemagazModelContainer">
           <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ORDER" EntityType="Self.ORDER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TOVAR" EntityType="Self.TOVAR" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TOVARI_IN_ORDER" EntityType="Self.TOVARI_IN_ORDER" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TOVARI_IN_ORDER].[id_tovar] AS [id_tovar], 
-    [TOVARI_IN_ORDER].[id_order] AS [id_order]
-    FROM [dbo].[TOVARI_IN_ORDER] AS [TOVARI_IN_ORDER]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="TOVAR_IN_ORDER" EntityType="Self.TOVAR_IN_ORDER" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ORDER_CUSTOMER" Association="Self.FK_ORDER_CUSTOMER">
             <End Role="CUSTOMER" EntitySet="CUSTOMER" />
             <End Role="ORDER" EntitySet="ORDER" />
           </AssociationSet>
-          <AssociationSet Name="FK_TOVARI_IN_ORDER_ORDER" Association="Self.FK_TOVARI_IN_ORDER_ORDER">
+          <AssociationSet Name="FK_TOVAR_IN_ORDER_ORDER" Association="Self.FK_TOVAR_IN_ORDER_ORDER">
             <End Role="ORDER" EntitySet="ORDER" />
-            <End Role="TOVARI_IN_ORDER" EntitySet="TOVARI_IN_ORDER" />
+            <End Role="TOVAR_IN_ORDER" EntitySet="TOVAR_IN_ORDER" />
           </AssociationSet>
-          <AssociationSet Name="FK_TOVARI_IN_ORDER_TOVAR" Association="Self.FK_TOVARI_IN_ORDER_TOVAR">
+          <AssociationSet Name="FK_TOVAR_IN_ORDER_TOVAR" Association="Self.FK_TOVAR_IN_ORDER_TOVAR">
             <End Role="TOVAR" EntitySet="TOVAR" />
-            <End Role="TOVARI_IN_ORDER" EntitySet="TOVARI_IN_ORDER" />
+            <End Role="TOVAR_IN_ORDER" EntitySet="TOVAR_IN_ORDER" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -120,21 +125,42 @@
             <PropertyRef Name="ID_ORDER" />
           </Key>
           <Property Name="ID_ORDER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_cart" Type="Int32" Nullable="false" />
           <Property Name="id_customer" Type="Int32" Nullable="false" />
           <Property Name="PRICE_ORDER" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <NavigationProperty Name="CUSTOMER" Relationship="Self.FK_ORDER_CUSTOMER" FromRole="ORDER" ToRole="CUSTOMER" />
-          <NavigationProperty Name="TOVAR" Relationship="onlinemagazModel.TOVARI_IN_ORDER" FromRole="ORDER" ToRole="TOVAR" />
+          <NavigationProperty Name="TOVAR_IN_ORDER" Relationship="Self.FK_TOVAR_IN_ORDER_ORDER" FromRole="ORDER" ToRole="TOVAR_IN_ORDER" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TOVAR">
           <Key>
             <PropertyRef Name="ID_TOVAR" />
           </Key>
           <Property Name="ID_TOVAR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NAME_TOVAR" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NAME_TOVAR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PRICE_TOVAR" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="IMAGE_TOVAR" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ORDER" Relationship="onlinemagazModel.TOVARI_IN_ORDER" FromRole="TOVAR" ToRole="ORDER" />
+          <Property Name="IMAGE_TOVAR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TOVAR_IN_ORDER" Relationship="Self.FK_TOVAR_IN_ORDER_TOVAR" FromRole="TOVAR" ToRole="TOVAR_IN_ORDER" />
+        </EntityType>
+        <EntityType Name="TOVAR_IN_ORDER">
+          <Key>
+            <PropertyRef Name="ID_TOVAR_IN_ORDER" />
+          </Key>
+          <Property Name="ID_TOVAR_IN_ORDER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_tovar" Type="Int32" Nullable="false" />
+          <Property Name="id_order" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Unit_Price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="ORDER" Relationship="Self.FK_TOVAR_IN_ORDER_ORDER" FromRole="TOVAR_IN_ORDER" ToRole="ORDER" />
+          <NavigationProperty Name="TOVAR" Relationship="Self.FK_TOVAR_IN_ORDER_TOVAR" FromRole="TOVAR_IN_ORDER" ToRole="TOVAR" />
         </EntityType>
         <Association Name="FK_ORDER_CUSTOMER">
           <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
@@ -148,29 +174,55 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="onlinemagazEntities1" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_TOVAR_IN_ORDER_ORDER">
+          <End Role="ORDER" Type="Self.ORDER" Multiplicity="1" />
+          <End Role="TOVAR_IN_ORDER" Type="Self.TOVAR_IN_ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDER">
+              <PropertyRef Name="ID_ORDER" />
+            </Principal>
+            <Dependent Role="TOVAR_IN_ORDER">
+              <PropertyRef Name="id_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TOVAR_IN_ORDER_TOVAR">
+          <End Role="TOVAR" Type="Self.TOVAR" Multiplicity="1" />
+          <End Role="TOVAR_IN_ORDER" Type="Self.TOVAR_IN_ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TOVAR">
+              <PropertyRef Name="ID_TOVAR" />
+            </Principal>
+            <Dependent Role="TOVAR_IN_ORDER">
+              <PropertyRef Name="id_tovar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="onlinemagazEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" />
           <EntitySet Name="ORDER" EntityType="Self.ORDER" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TOVAR" EntityType="Self.TOVAR" />
+          <EntitySet Name="TOVAR_IN_ORDER" EntityType="Self.TOVAR_IN_ORDER" />
           <AssociationSet Name="FK_ORDER_CUSTOMER" Association="Self.FK_ORDER_CUSTOMER">
             <End Role="CUSTOMER" EntitySet="CUSTOMER" />
             <End Role="ORDER" EntitySet="ORDER" />
           </AssociationSet>
-          <AssociationSet Name="TOVARI_IN_ORDER" Association="onlinemagazModel.TOVARI_IN_ORDER">
+          <AssociationSet Name="FK_TOVAR_IN_ORDER_ORDER" Association="Self.FK_TOVAR_IN_ORDER_ORDER">
             <End Role="ORDER" EntitySet="ORDER" />
+            <End Role="TOVAR_IN_ORDER" EntitySet="TOVAR_IN_ORDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TOVAR_IN_ORDER_TOVAR" Association="Self.FK_TOVAR_IN_ORDER_TOVAR">
             <End Role="TOVAR" EntitySet="TOVAR" />
+            <End Role="TOVAR_IN_ORDER" EntitySet="TOVAR_IN_ORDER" />
           </AssociationSet>
         </EntityContainer>
-        <Association Name="TOVARI_IN_ORDER">
-          <End Type="onlinemagazModel.ORDER" Role="ORDER" Multiplicity="*" />
-          <End Type="onlinemagazModel.TOVAR" Role="TOVAR" Multiplicity="*" />
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище onlinemagazModelContainer" CdmEntityContainer="onlinemagazEntities1">
+        <EntityContainerMapping StorageEntityContainer="Хранилище onlinemagazModelContainer" CdmEntityContainer="onlinemagazEntities">
           <EntitySetMapping Name="CUSTOMER">
             <EntityTypeMapping TypeName="onlinemagazModel.CUSTOMER">
               <MappingFragment StoreEntitySet="CUSTOMER">
@@ -185,30 +237,43 @@
             <EntityTypeMapping TypeName="onlinemagazModel.ORDER">
               <MappingFragment StoreEntitySet="ORDER">
                 <ScalarProperty Name="ID_ORDER" ColumnName="ID_ORDER" />
-                <ScalarProperty Name="id_cart" ColumnName="id_cart" />
                 <ScalarProperty Name="id_customer" ColumnName="id_customer" />
                 <ScalarProperty Name="PRICE_ORDER" ColumnName="PRICE_ORDER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="onlinemagazModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TOVAR">
             <EntityTypeMapping TypeName="onlinemagazModel.TOVAR">
               <MappingFragment StoreEntitySet="TOVAR">
-                <ScalarProperty Name="IMAGE_TOVAR" ColumnName="IMAGE_TOVAR" />
                 <ScalarProperty Name="ID_TOVAR" ColumnName="ID_TOVAR" />
                 <ScalarProperty Name="NAME_TOVAR" ColumnName="NAME_TOVAR" />
                 <ScalarProperty Name="PRICE_TOVAR" ColumnName="PRICE_TOVAR" />
+                <ScalarProperty Name="IMAGE_TOVAR" ColumnName="IMAGE_TOVAR" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="TOVARI_IN_ORDER" TypeName="onlinemagazModel.TOVARI_IN_ORDER" StoreEntitySet="TOVARI_IN_ORDER">
-            <EndProperty Name="TOVAR">
-              <ScalarProperty Name="ID_TOVAR" ColumnName="id_tovar" />
-            </EndProperty>
-            <EndProperty Name="ORDER">
-              <ScalarProperty Name="ID_ORDER" ColumnName="id_order" />
-            </EndProperty>
-          </AssociationSetMapping>
+          <EntitySetMapping Name="TOVAR_IN_ORDER">
+            <EntityTypeMapping TypeName="onlinemagazModel.TOVAR_IN_ORDER">
+              <MappingFragment StoreEntitySet="TOVAR_IN_ORDER">
+                <ScalarProperty Name="ID_TOVAR_IN_ORDER" ColumnName="ID_TOVAR_IN_ORDER" />
+                <ScalarProperty Name="id_tovar" ColumnName="id_tovar" />
+                <ScalarProperty Name="id_order" ColumnName="id_order" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Unit_Price" ColumnName="Unit_Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

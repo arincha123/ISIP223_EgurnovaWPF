@@ -12,20 +12,15 @@ namespace Пр12
     using System;
     using System.Collections.Generic;
     
-    public partial class TOVAR
+    public partial class TOVAR_IN_ORDER
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TOVAR()
-        {
-            this.TOVAR_IN_ORDER = new HashSet<TOVAR_IN_ORDER>();
-        }
+        public int ID_TOVAR_IN_ORDER { get; set; }
+        public int id_tovar { get; set; }
+        public int id_order { get; set; }
+        public int Quantity { get; set; }
+        public decimal Unit_Price { get; set; }
     
-        public int ID_TOVAR { get; set; }
-        public string NAME_TOVAR { get; set; }
-        public decimal PRICE_TOVAR { get; set; }
-        public string IMAGE_TOVAR { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TOVAR_IN_ORDER> TOVAR_IN_ORDER { get; set; }
+        public virtual ORDER ORDER { get; set; }
+        public virtual TOVAR TOVAR { get; set; }
     }
 }

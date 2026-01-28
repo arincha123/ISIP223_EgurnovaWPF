@@ -19,13 +19,13 @@
 
 
         <TextBlock Text="Введите своё ФИО" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="100 0 0 0" FontSize="14"/>
-        <TextBox x:Name="FIO" VerticalAlignment="Center" Width="400" Height="40" Margin="200 0 0 0" Grid.Row="0"/>
+        <TextBox x:Name="FIO" VerticalAlignment="Center" Width="400" Height="40" Margin="200 0 0 0" Grid.Row="0" SelectionChanged="stroka_SelectionChanged"/>
 
         <TextBlock Text="Введите свой email" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="100 0 0 0" FontSize="14"/>
-        <TextBox x:Name="EMAIL" VerticalAlignment="Center" Width="400" Height="40" Margin="200 0 0 0" Grid.Row="1"/>
+        <TextBox x:Name="EMAIL" VerticalAlignment="Center" Width="400" Height="40" Margin="200 0 0 0" Grid.Row="1" SelectionChanged="stroka_SelectionChanged"/>
 
         <TextBlock Text="Введите свой адрес" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="100 0 0 0" FontSize="14"/>
-        <TextBox x:Name="ADRESS" VerticalAlignment="Center" Width="400" Height="40" Margin="200 0 0 0" Grid.Row="2"/>
+        <TextBox x:Name="ADRESS" VerticalAlignment="Center" Width="400" Height="40" Margin="200 0 0 0" Grid.Row="2" SelectionChanged="stroka_SelectionChanged"/>
 
         <ListBox x:Name="Carta" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=4}" Grid.Row="3" Margin="0,20,0,20">
             <ListBox.ItemTemplate>
@@ -47,7 +47,7 @@
             </ListBox.ItemsPanel>
         </ListBox>
 
-        <Button x:Name="form" Grid.Row="4" Height="45" Width="200"  VerticalAlignment="Center" Content="Оформить заказ" Click="form_Click"/>
+        <Button x:Name="form" Grid.Row="4" Height="45" Width="200"  VerticalAlignment="Center" Content="Оформить заказ" Click="form_Click" IsEnabled="False"/>
 
 
     </Grid>

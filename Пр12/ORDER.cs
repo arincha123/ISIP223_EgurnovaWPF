@@ -17,16 +17,15 @@ namespace Пр12
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ORDER()
         {
-            this.TOVAR = new HashSet<TOVAR>();
+            this.TOVAR_IN_ORDER = new HashSet<TOVAR_IN_ORDER>();
         }
     
         public int ID_ORDER { get; set; }
-        public int id_cart { get; set; }
         public int id_customer { get; set; }
         public decimal PRICE_ORDER { get; set; }
     
         public virtual CUSTOMER CUSTOMER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TOVAR> TOVAR { get; set; }
+        public virtual ICollection<TOVAR_IN_ORDER> TOVAR_IN_ORDER { get; set; }
     }
 }

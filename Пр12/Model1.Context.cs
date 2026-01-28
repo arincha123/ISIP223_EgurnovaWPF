@@ -13,10 +13,10 @@ namespace Пр12
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class onlinemagazEntities1 : DbContext
+    public partial class onlinemagazEntities : DbContext
     {
-        public onlinemagazEntities1()
-            : base("name=onlinemagazEntities1")
+        public onlinemagazEntities()
+            : base("name=onlinemagazEntities")
         {
         }
     
@@ -27,6 +27,8 @@ namespace Пр12
     
         public virtual DbSet<CUSTOMER> CUSTOMER { get; set; }
         public virtual DbSet<ORDER> ORDER { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TOVAR> TOVAR { get; set; }
+        public virtual DbSet<TOVAR_IN_ORDER> TOVAR_IN_ORDER { get; set; }
     }
 }

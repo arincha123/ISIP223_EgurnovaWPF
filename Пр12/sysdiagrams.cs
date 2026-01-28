@@ -12,20 +12,12 @@ namespace Пр12
     using System;
     using System.Collections.Generic;
     
-    public partial class TOVAR
+    public partial class sysdiagrams
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TOVAR()
-        {
-            this.TOVAR_IN_ORDER = new HashSet<TOVAR_IN_ORDER>();
-        }
-    
-        public int ID_TOVAR { get; set; }
-        public string NAME_TOVAR { get; set; }
-        public decimal PRICE_TOVAR { get; set; }
-        public string IMAGE_TOVAR { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TOVAR_IN_ORDER> TOVAR_IN_ORDER { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
