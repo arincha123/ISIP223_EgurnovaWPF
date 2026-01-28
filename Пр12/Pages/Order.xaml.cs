@@ -78,7 +78,7 @@ namespace Пр12.Pages
 
                 Core.Context.TOVAR_IN_ORDER.Add(tOVARinoRder);
                 Core.Context.SaveChanges();
-
+                 
 
             }
 
