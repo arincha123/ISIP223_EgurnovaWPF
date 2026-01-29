@@ -14,14 +14,44 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            
-        </Grid.ColumnDefinitions>
+        <TextBox x:Name="Search" Grid.Row="0" Height="30" Margin="25,15,505,15" TextChanged="Search_TextChanged"/>
+        <!--<ComboBox Grid.Row="0" Margin="340,14,340,16"/>-->
 
 
-        <TextBox x:Name="Search" Grid.Row="0" Height="30" Width="300"/>
+        <WrapPanel Width="300" VerticalAlignment="Center" Margin="150 0 0 0">
+            <TextBlock Text="Сортировка по:"/>
+            <RadioButton x:Name="NameSort" Margin="20 0 0 0" Content="Названию" Checked="Sort_Checked"/>
+            <RadioButton x:Name="RatingSort" Margin="20 0 0 0" Content="Рейтингу" Checked="Sort_Checked"/>
+        </WrapPanel>
 
 
+
+
+
+
+
+
+        <ListBox x:Name="Films" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.RowSpan="2" Grid.Row="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel Width="150" Height="248">
+                        <StackPanel Margin="25">
+                            <Image Source="{Binding IMAGE_PATH}" Width="100" Height="130"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding NAME_FILM}"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding RATING_FILM}"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding START_FILM}"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding id_agerating}"/>
+                        </StackPanel>
+                    </WrapPanel>
+
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
 
 
 

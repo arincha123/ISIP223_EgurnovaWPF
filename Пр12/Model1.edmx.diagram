@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="93a3664e24374befbdd76e407b5ebb17" Name="Diagram1">
+        <EntityTypeShape EntityType="CinemaModel.Age_Rating" Width="1.5" PointX="10.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.AGERATING" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.CUSTOMER" Width="1.5" PointX="8.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.FILM" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.Film_Genre" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.FILM_IN_GENRE" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.GENRE" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.HALL" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.HALL_RATING" Width="1.5" PointX="3.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.Kinozal" Width="1.5" PointX="8" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.Kinozal_Rating" Width="1.5" PointX="5.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.Seans" Width="1.5" PointX="10.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.Seans_Seat" Width="1.5" PointX="12.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.SEAT" Width="1.5" PointX="3.75" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.SEAT_IN_HALL" Width="1.5" PointX="10.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.SEAT_IN_SESSION" Width="1.5" PointX="6" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.SESSIONS" Width="1.5" PointX="8.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.sysdiagrams" Width="1.5" PointX="12.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.TICKET" Width="1.5" PointX="10.5" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.Users" Width="1.5" PointX="12.75" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="CinemaModel.FK_FILM_AGERATING1" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_TICKET_CUSTOMER" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_FILM_IN_GENRE_FILM" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_SESSIONS_FILM" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_FILM_IN_GENRE_GENRE" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_HALL_HALL_RATING" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_SEAT_HALL" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_SESSIONS_HALL1" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_Kinozal_Kinozal_Rating" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_Seans_Kinozal" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_Seans_Seat_Seans" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_SEAT_IN_SESSION_SEAT" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_SESSIONS_SEAT_IN_SESSION" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_TICKET_SESSIONS" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
