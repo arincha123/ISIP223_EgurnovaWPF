@@ -18,14 +18,18 @@
         <!--<ComboBox Grid.Row="0" Margin="340,14,340,16"/>-->
 
 
-        <WrapPanel Width="300" VerticalAlignment="Center" Margin="150 0 0 0">
+        <WrapPanel Width="300" VerticalAlignment="Center" Margin="150 0 0 0" Grid.Row="0">
             <TextBlock Text="Сортировка по:"/>
             <RadioButton x:Name="NameSort" Margin="20 0 0 0" Content="Названию" Checked="Sort_Checked"/>
             <RadioButton x:Name="RatingSort" Margin="20 0 0 0" Content="Рейтингу" Checked="Sort_Checked"/>
         </WrapPanel>
 
 
-
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Border CornerRadius="15" BorderBrush="Gray" BorderThickness="2"  Height="30" Width="100" Margin="0 0 10 0">
+                <Button x:Name="Reg" Content="Home" Grid.Row="0" Background="{x:Null}" BorderBrush="{x:Null}"/>
+            </Border>
+        </StackPanel>
 
 
 
@@ -39,7 +43,6 @@
                             <Image Source="{Binding IMAGE_PATH}" Width="100" Height="130"/>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding NAME_FILM}"/>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding RATING_FILM}"/>
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding START_FILM}"/>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding id_agerating}"/>
                         </StackPanel>
                     </WrapPanel>

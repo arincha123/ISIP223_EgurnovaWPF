@@ -13,10 +13,10 @@ namespace Пр12
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CinemaEntities : DbContext
+    public partial class CinemaEntities1 : DbContext
     {
-        public CinemaEntities()
-            : base("name=CinemaEntities")
+        public CinemaEntities1()
+            : base("name=CinemaEntities1")
         {
         }
     
@@ -25,25 +25,17 @@ namespace Пр12
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Age_Rating> Age_Rating { get; set; }
         public virtual DbSet<AGERATING> AGERATING { get; set; }
         public virtual DbSet<CUSTOMER> CUSTOMER { get; set; }
         public virtual DbSet<FILM> FILM { get; set; }
-        public virtual DbSet<Film_Genre> Film_Genre { get; set; }
         public virtual DbSet<FILM_IN_GENRE> FILM_IN_GENRE { get; set; }
         public virtual DbSet<GENRE> GENRE { get; set; }
         public virtual DbSet<HALL> HALL { get; set; }
         public virtual DbSet<HALL_RATING> HALL_RATING { get; set; }
-        public virtual DbSet<Kinozal> Kinozal { get; set; }
-        public virtual DbSet<Kinozal_Rating> Kinozal_Rating { get; set; }
-        public virtual DbSet<Seans> Seans { get; set; }
-        public virtual DbSet<Seans_Seat> Seans_Seat { get; set; }
         public virtual DbSet<SEAT> SEAT { get; set; }
-        public virtual DbSet<SEAT_IN_HALL> SEAT_IN_HALL { get; set; }
         public virtual DbSet<SEAT_IN_SESSION> SEAT_IN_SESSION { get; set; }
         public virtual DbSet<SESSIONS> SESSIONS { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TICKET> TICKET { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
     }
 }

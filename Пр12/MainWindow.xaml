@@ -7,7 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Source="/Pages/MainPage.xaml"/>
+        <!--<Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>-->
+
+
+
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Source="/Pages/MainPage.xaml" Navigated="MainFrame_Navigated"/>
 
     </Grid>
 </Window>

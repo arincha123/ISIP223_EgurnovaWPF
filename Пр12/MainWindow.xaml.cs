@@ -24,5 +24,10 @@ namespace Пр12
         {
             InitializeComponent();
         }
+
+        private void MainFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+
+        }
     }
 }

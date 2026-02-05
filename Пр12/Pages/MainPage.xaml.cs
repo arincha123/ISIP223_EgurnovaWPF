@@ -30,6 +30,8 @@ namespace Пр12.Pages
             PageLoad();
 
         }
+        
+
 
         private void PageLoad()
         {
