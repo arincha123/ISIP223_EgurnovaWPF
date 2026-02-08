@@ -54,15 +54,27 @@
         <ListBox x:Name="Films" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.RowSpan="2" Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel Width="190" Height="270">
-                        <StackPanel Margin="20 20 20 0">
-                            <Image Source="{Binding IMAGE_PATH}" Width="150" Height="200"/>
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding NAME_FILM}"/>
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding RATING_FILM}"/>
-                            <TextBlock Text="{Binding id_agerating, Converter={StaticResource MyAgeRatingConverter}}"/>
-                        </StackPanel>
-                    </WrapPanel>
+                    <Border Width="190" Height="250" Margin="10">
+                        <StackPanel>
+                            <Grid Width="150" Height="200" Margin="0,0,0,10">
 
+                                <Image Source="{Binding IMAGE_PATH}" Stretch="UniformToFill"/>
+
+                                <Border Background="#4CAF50" CornerRadius="3" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5" Padding="4,2">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="★" Foreground="White" FontSize="10" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding RATING_FILM, StringFormat={}{0:F1}}" Foreground="White" FontWeight="Bold" FontSize="11" Margin="2,0,0,0"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <Border Background="#FF5722" CornerRadius="3" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5" Padding="4,2">
+                                    <TextBlock Text="{Binding id_agerating, Converter={StaticResource MyAgeRatingConverter}}" Foreground="White" FontWeight="Bold" FontSize="11"/>
+                                </Border>
+                            </Grid>
+
+                            <TextBlock Text="{Binding NAME_FILM}" TextWrapping="Wrap" TextAlignment="Center" FontWeight="SemiBold" MaxHeight="40" TextTrimming="CharacterEllipsis"/>
+                        </StackPanel>
+                    </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
             <ListBox.ItemsPanel>

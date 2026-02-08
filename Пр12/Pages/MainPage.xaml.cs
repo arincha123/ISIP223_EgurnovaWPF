@@ -77,6 +77,21 @@ namespace Пр12.Pages
                 NavigationService.GoForward();
             }
         }
+
+
+        private void Films_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            FILM selectedFilm = Films.SelectedItem as FILM;
+
+            if (selectedFilm != null)
+            {
+                // Создаем страницу с подробной информацией
+                FilmInfo detailsPage = new FilmInfo(selectedFilm);
+
+                // Переходим на страницу
+                NavigationService.Navigate(detailsPage);
+            }
+        }
     }
 
     //public class AgeRatingConverter : IValueConverter
