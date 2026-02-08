@@ -23,7 +23,7 @@ namespace Пр12
         public int ID_CUSTOMER { get; set; }
         public string LOGIN { get; set; }
         public string PASSWORD { get; set; }
-        public System.DateTime BIRTH { get; set; }
+        public Nullable<System.DateTime> BIRTH { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TICKET> TICKET { get; set; }

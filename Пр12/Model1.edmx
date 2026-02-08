@@ -19,7 +19,7 @@
           <Property Name="ID_CUSTOMER" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="LOGIN" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PASSWORD" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="BIRTH" Type="datetime" Nullable="false" />
+          <Property Name="BIRTH" Type="datetime" />
         </EntityType>
         <EntityType Name="FILM">
           <Key>
@@ -28,9 +28,9 @@
           <Property Name="ID_FILM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IMAGE_PATH" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="NAME_FILM" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="RATING_FILM" Type="decimal" Precision="2" Scale="1" />
-          <Property Name="START_FILM" Type="datetime" />
-          <Property Name="id_agerating" Type="int" />
+          <Property Name="RATING_FILM" Type="decimal" Precision="2" Scale="1" Nullable="false" />
+          <Property Name="START_FILM" Type="datetime" Nullable="false" />
+          <Property Name="id_agerating" Type="int" Nullable="false" />
           <Property Name="DESCRIPTION" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="FILM_IN_GENRE">
@@ -88,8 +88,6 @@
           </Key>
           <Property Name="ID_SESSION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DATE_SESSION" Type="datetime" Nullable="false" />
-          <Property Name="TIME_SESSION" Type="time" Precision="7" Nullable="false" />
-          <Property Name="id_seat_in_session" Type="int" Nullable="false" />
           <Property Name="id_film" Type="int" Nullable="false" />
           <Property Name="id_hall" Type="int" Nullable="false" />
         </EntityType>
@@ -114,7 +112,7 @@
           <Property Name="id_seat" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_FILM_AGERATING1">
-          <End Role="AGERATING" Type="Self.AGERATING" Multiplicity="0..1" />
+          <End Role="AGERATING" Type="Self.AGERATING" Multiplicity="1" />
           <End Role="FILM" Type="Self.FILM" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AGERATING">
@@ -185,6 +183,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SEAT_IN_SESSION_SESSIONS">
+          <End Role="SESSIONS" Type="Self.SESSIONS" Multiplicity="1" />
+          <End Role="SEAT_IN_SESSION" Type="Self.SEAT_IN_SESSION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SESSIONS">
+              <PropertyRef Name="ID_SESSION" />
+            </Principal>
+            <Dependent Role="SEAT_IN_SESSION">
+              <PropertyRef Name="is_session" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SESSIONS_FILM">
           <End Role="FILM" Type="Self.FILM" Multiplicity="1" />
           <End Role="SESSIONS" Type="Self.SESSIONS" Multiplicity="*" />
@@ -206,18 +216,6 @@
             </Principal>
             <Dependent Role="SESSIONS">
               <PropertyRef Name="id_hall" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SESSIONS_SEAT_IN_SESSION">
-          <End Role="SEAT_IN_SESSION" Type="Self.SEAT_IN_SESSION" Multiplicity="1" />
-          <End Role="SESSIONS" Type="Self.SESSIONS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEAT_IN_SESSION">
-              <PropertyRef Name="ID_SEAT_IN_SESSION" />
-            </Principal>
-            <Dependent Role="SESSIONS">
-              <PropertyRef Name="id_seat_in_session" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -282,16 +280,16 @@
             <End Role="SEAT" EntitySet="SEAT" />
             <End Role="SEAT_IN_SESSION" EntitySet="SEAT_IN_SESSION" />
           </AssociationSet>
+          <AssociationSet Name="FK_SEAT_IN_SESSION_SESSIONS" Association="Self.FK_SEAT_IN_SESSION_SESSIONS">
+            <End Role="SESSIONS" EntitySet="SESSIONS" />
+            <End Role="SEAT_IN_SESSION" EntitySet="SEAT_IN_SESSION" />
+          </AssociationSet>
           <AssociationSet Name="FK_SESSIONS_FILM" Association="Self.FK_SESSIONS_FILM">
             <End Role="FILM" EntitySet="FILM" />
             <End Role="SESSIONS" EntitySet="SESSIONS" />
           </AssociationSet>
           <AssociationSet Name="FK_SESSIONS_HALL1" Association="Self.FK_SESSIONS_HALL1">
             <End Role="HALL" EntitySet="HALL" />
-            <End Role="SESSIONS" EntitySet="SESSIONS" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SESSIONS_SEAT_IN_SESSION" Association="Self.FK_SESSIONS_SEAT_IN_SESSION">
-            <End Role="SEAT_IN_SESSION" EntitySet="SEAT_IN_SESSION" />
             <End Role="SESSIONS" EntitySet="SESSIONS" />
           </AssociationSet>
           <AssociationSet Name="FK_TICKET_CUSTOMER" Association="Self.FK_TICKET_CUSTOMER">
@@ -323,7 +321,7 @@
           <Property Name="ID_CUSTOMER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="LOGIN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="BIRTH" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BIRTH" Type="DateTime" Precision="3" />
           <NavigationProperty Name="TICKET" Relationship="Self.FK_TICKET_CUSTOMER" FromRole="CUSTOMER" ToRole="TICKET" />
         </EntityType>
         <EntityType Name="FILM">
@@ -333,9 +331,9 @@
           <Property Name="ID_FILM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IMAGE_PATH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NAME_FILM" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="RATING_FILM" Type="Decimal" Precision="2" Scale="1" />
-          <Property Name="START_FILM" Type="DateTime" Precision="3" />
-          <Property Name="id_agerating" Type="Int32" />
+          <Property Name="RATING_FILM" Type="Decimal" Precision="2" Scale="1" Nullable="false" />
+          <Property Name="START_FILM" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="id_agerating" Type="Int32" Nullable="false" />
           <Property Name="DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AGERATING" Relationship="Self.FK_FILM_AGERATING1" FromRole="FILM" ToRole="AGERATING" />
           <NavigationProperty Name="FILM_IN_GENRE" Relationship="Self.FK_FILM_IN_GENRE_FILM" FromRole="FILM" ToRole="FILM_IN_GENRE" />
@@ -399,7 +397,7 @@
           <Property Name="is_session" Type="Int32" Nullable="false" />
           <Property Name="STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="SEAT" Relationship="Self.FK_SEAT_IN_SESSION_SEAT" FromRole="SEAT_IN_SESSION" ToRole="SEAT" />
-          <NavigationProperty Name="SESSIONS" Relationship="Self.FK_SESSIONS_SEAT_IN_SESSION" FromRole="SEAT_IN_SESSION" ToRole="SESSIONS" />
+          <NavigationProperty Name="SESSIONS" Relationship="Self.FK_SEAT_IN_SESSION_SESSIONS" FromRole="SEAT_IN_SESSION" ToRole="SESSIONS" />
         </EntityType>
         <EntityType Name="SESSIONS">
           <Key>
@@ -407,13 +405,11 @@
           </Key>
           <Property Name="ID_SESSION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DATE_SESSION" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="TIME_SESSION" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="id_seat_in_session" Type="Int32" Nullable="false" />
           <Property Name="id_film" Type="Int32" Nullable="false" />
           <Property Name="id_hall" Type="Int32" Nullable="false" />
           <NavigationProperty Name="FILM" Relationship="Self.FK_SESSIONS_FILM" FromRole="SESSIONS" ToRole="FILM" />
           <NavigationProperty Name="HALL" Relationship="Self.FK_SESSIONS_HALL1" FromRole="SESSIONS" ToRole="HALL" />
-          <NavigationProperty Name="SEAT_IN_SESSION" Relationship="Self.FK_SESSIONS_SEAT_IN_SESSION" FromRole="SESSIONS" ToRole="SEAT_IN_SESSION" />
+          <NavigationProperty Name="SEAT_IN_SESSION" Relationship="Self.FK_SEAT_IN_SESSION_SESSIONS" FromRole="SESSIONS" ToRole="SEAT_IN_SESSION" />
           <NavigationProperty Name="TICKET" Relationship="Self.FK_TICKET_SESSIONS" FromRole="SESSIONS" ToRole="TICKET" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -439,7 +435,7 @@
           <NavigationProperty Name="SESSIONS" Relationship="Self.FK_TICKET_SESSIONS" FromRole="TICKET" ToRole="SESSIONS" />
         </EntityType>
         <Association Name="FK_FILM_AGERATING1">
-          <End Role="AGERATING" Type="Self.AGERATING" Multiplicity="0..1" />
+          <End Role="AGERATING" Type="Self.AGERATING" Multiplicity="1" />
           <End Role="FILM" Type="Self.FILM" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AGERATING">
@@ -546,15 +542,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SESSIONS_SEAT_IN_SESSION">
-          <End Role="SEAT_IN_SESSION" Type="Self.SEAT_IN_SESSION" Multiplicity="1" />
-          <End Role="SESSIONS" Type="Self.SESSIONS" Multiplicity="*" />
+        <Association Name="FK_SEAT_IN_SESSION_SESSIONS">
+          <End Role="SESSIONS" Type="Self.SESSIONS" Multiplicity="1" />
+          <End Role="SEAT_IN_SESSION" Type="Self.SEAT_IN_SESSION" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="SEAT_IN_SESSION">
-              <PropertyRef Name="ID_SEAT_IN_SESSION" />
+            <Principal Role="SESSIONS">
+              <PropertyRef Name="ID_SESSION" />
             </Principal>
-            <Dependent Role="SESSIONS">
-              <PropertyRef Name="id_seat_in_session" />
+            <Dependent Role="SEAT_IN_SESSION">
+              <PropertyRef Name="is_session" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -619,9 +615,9 @@
             <End Role="SEAT" EntitySet="SEAT" />
             <End Role="SEAT_IN_SESSION" EntitySet="SEAT_IN_SESSION" />
           </AssociationSet>
-          <AssociationSet Name="FK_SESSIONS_SEAT_IN_SESSION" Association="Self.FK_SESSIONS_SEAT_IN_SESSION">
-            <End Role="SEAT_IN_SESSION" EntitySet="SEAT_IN_SESSION" />
+          <AssociationSet Name="FK_SEAT_IN_SESSION_SESSIONS" Association="Self.FK_SEAT_IN_SESSION_SESSIONS">
             <End Role="SESSIONS" EntitySet="SESSIONS" />
+            <End Role="SEAT_IN_SESSION" EntitySet="SEAT_IN_SESSION" />
           </AssociationSet>
           <AssociationSet Name="FK_TICKET_SESSIONS" Association="Self.FK_TICKET_SESSIONS">
             <End Role="SESSIONS" EntitySet="SESSIONS" />
@@ -725,8 +721,6 @@
               <MappingFragment StoreEntitySet="SESSIONS">
                 <ScalarProperty Name="ID_SESSION" ColumnName="ID_SESSION" />
                 <ScalarProperty Name="DATE_SESSION" ColumnName="DATE_SESSION" />
-                <ScalarProperty Name="TIME_SESSION" ColumnName="TIME_SESSION" />
-                <ScalarProperty Name="id_seat_in_session" ColumnName="id_seat_in_session" />
                 <ScalarProperty Name="id_film" ColumnName="id_film" />
                 <ScalarProperty Name="id_hall" ColumnName="id_hall" />
               </MappingFragment>

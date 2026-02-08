@@ -24,5 +24,50 @@ namespace Пр12.Pages
         {
             InitializeComponent();
         }
+
+        private void noReg_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Reg());
+
+            if (NavigationService?.CanGoForward == true)
+            {
+                NavigationService.GoForward();
+            }
+        }
+
+        private void GoIn_Click(object sender, RoutedEventArgs e)
+        {
+            string login = Login.Text;
+            string password = Password.Text;
+
+            CUSTOMER existing = Core.Context.CUSTOMER.Where(c => c.LOGIN == login && c.PASSWORD == password).FirstOrDefault();
+            if (existing != null)
+            {
+
+                NavigationService.Navigate(new HomePage());
+
+                Login.Text = "";
+                Password.Text = "";
+            }
+            else
+            {
+                MessageBox.Show("Неверный логин или пароль");
+            }
+
+        }
+
+        private void Danni_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            bool Check = (Login.Text.Length >= 5) && (Password.Text.Length >= 5);
+            GoIn.IsEnabled = Check;
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService?.CanGoBack == true)
+            {
+                NavigationService?.GoBack();
+            }
+        }
     }
 }

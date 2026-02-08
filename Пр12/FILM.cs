@@ -24,9 +24,9 @@ namespace Пр12
         public int ID_FILM { get; set; }
         public string IMAGE_PATH { get; set; }
         public string NAME_FILM { get; set; }
-        public Nullable<decimal> RATING_FILM { get; set; }
-        public Nullable<System.DateTime> START_FILM { get; set; }
-        public Nullable<int> id_agerating { get; set; }
+        public decimal RATING_FILM { get; set; }
+        public System.DateTime START_FILM { get; set; }
+        public int id_agerating { get; set; }
         public string DESCRIPTION { get; set; }
     
         public virtual AGERATING AGERATING { get; set; }

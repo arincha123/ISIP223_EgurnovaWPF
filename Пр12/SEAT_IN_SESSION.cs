@@ -14,19 +14,12 @@ namespace Пр12
     
     public partial class SEAT_IN_SESSION
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SEAT_IN_SESSION()
-        {
-            this.SESSIONS = new HashSet<SESSIONS>();
-        }
-    
         public int ID_SEAT_IN_SESSION { get; set; }
         public int id_seat { get; set; }
         public int is_session { get; set; }
         public string STATUS { get; set; }
     
         public virtual SEAT SEAT { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SESSIONS> SESSIONS { get; set; }
+        public virtual SESSIONS SESSIONS { get; set; }
     }
 }

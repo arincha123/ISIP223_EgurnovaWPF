@@ -17,13 +17,13 @@ using System.Windows.Shapes;
 namespace Пр12.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainPage.xaml
+    /// Логика взаимодействия для HomePage.xaml
     /// </summary>
-    public partial class MainPage : Page
+    public partial class HomePage : Page
     {
-        private List <FILM> allFs;
+        private List<FILM> allFs;
         private List<FILM> sorted;
-        public MainPage()
+        public HomePage()
         {
             InitializeComponent();
             List<FILM> films = Core.Context.FILM.ToList();
@@ -31,7 +31,7 @@ namespace Пр12.Pages
             PageLoad();
 
         }
-        
+
 
 
         private void PageLoad()
@@ -101,5 +101,4 @@ namespace Пр12.Pages
     //        throw new NotImplementedException();
     //    }
     //}
-
 }
