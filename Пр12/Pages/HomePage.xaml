@@ -51,7 +51,7 @@
             </ComboBox>
         </WrapPanel>
 
-        <ListBox x:Name="Films" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.RowSpan="2" Grid.Row="1">
+        <ListBox x:Name="Films" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.RowSpan="2" Grid.Row="1" MouseDoubleClick="Films_MouseDoubleClick">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border Width="190" Height="250" Margin="10">

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e3a9e43656624a3eab975d6325ed93ff" Name="Diagram1">
+      <Diagram DiagramId="5b87d019eb404b269f5e3d8c56d40bce" Name="Diagram1">
         <EntityTypeShape EntityType="CinemaModel.AGERATING" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CinemaModel.CUSTOMER" Width="1.5" PointX="5.25" PointY="10.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CinemaModel.FILM" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
@@ -15,7 +15,6 @@
         <EntityTypeShape EntityType="CinemaModel.SEAT" Width="1.5" PointX="5.25" PointY="13.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CinemaModel.SEAT_IN_SESSION" Width="1.5" PointX="7.5" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CinemaModel.SESSIONS" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CinemaModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CinemaModel.TICKET" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="CinemaModel.FK_FILM_AGERATING1" ManuallyRouted="false" />
         <AssociationConnector Association="CinemaModel.FK_TICKET_CUSTOMER" ManuallyRouted="false" />

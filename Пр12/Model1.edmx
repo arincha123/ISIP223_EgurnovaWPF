@@ -91,16 +91,6 @@
           <Property Name="id_film" Type="int" Nullable="false" />
           <Property Name="id_hall" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="TICKET">
           <Key>
             <PropertyRef Name="ID_TICKET" />
@@ -254,7 +244,6 @@
           <EntitySet Name="SEAT" EntityType="Self.SEAT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEAT_IN_SESSION" EntityType="Self.SEAT_IN_SESSION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SESSIONS" EntityType="Self.SESSIONS" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TICKET" EntityType="Self.TICKET" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_FILM_AGERATING1" Association="Self.FK_FILM_AGERATING1">
             <End Role="AGERATING" EntitySet="AGERATING" />
@@ -412,16 +401,6 @@
           <NavigationProperty Name="SEAT_IN_SESSION" Relationship="Self.FK_SEAT_IN_SESSION_SESSIONS" FromRole="SESSIONS" ToRole="SEAT_IN_SESSION" />
           <NavigationProperty Name="TICKET" Relationship="Self.FK_TICKET_SESSIONS" FromRole="SESSIONS" ToRole="TICKET" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="TICKET">
           <Key>
             <PropertyRef Name="ID_TICKET" />
@@ -566,7 +545,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CinemaEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CinemaEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AGERATING" EntityType="Self.AGERATING" />
           <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" />
           <EntitySet Name="FILM" EntityType="Self.FILM" />
@@ -577,7 +556,6 @@
           <EntitySet Name="SEAT" EntityType="Self.SEAT" />
           <EntitySet Name="SEAT_IN_SESSION" EntityType="Self.SEAT_IN_SESSION" />
           <EntitySet Name="SESSIONS" EntityType="Self.SESSIONS" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TICKET" EntityType="Self.TICKET" />
           <AssociationSet Name="FK_FILM_AGERATING1" Association="Self.FK_FILM_AGERATING1">
             <End Role="AGERATING" EntitySet="AGERATING" />
@@ -629,7 +607,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище CinemaModelContainer" CdmEntityContainer="CinemaEntities1">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CinemaModelContainer" CdmEntityContainer="CinemaEntities">
           <EntitySetMapping Name="AGERATING">
             <EntityTypeMapping TypeName="CinemaModel.AGERATING">
               <MappingFragment StoreEntitySet="AGERATING">
@@ -723,17 +701,6 @@
                 <ScalarProperty Name="DATE_SESSION" ColumnName="DATE_SESSION" />
                 <ScalarProperty Name="id_film" ColumnName="id_film" />
                 <ScalarProperty Name="id_hall" ColumnName="id_hall" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="CinemaModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

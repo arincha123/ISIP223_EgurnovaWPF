@@ -13,10 +13,10 @@ namespace Пр12
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CinemaEntities1 : DbContext
+    public partial class CinemaEntities : DbContext
     {
-        public CinemaEntities1()
-            : base("name=CinemaEntities1")
+        public CinemaEntities()
+            : base("name=CinemaEntities")
         {
         }
     
@@ -35,7 +35,6 @@ namespace Пр12
         public virtual DbSet<SEAT> SEAT { get; set; }
         public virtual DbSet<SEAT_IN_SESSION> SEAT_IN_SESSION { get; set; }
         public virtual DbSet<SESSIONS> SESSIONS { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TICKET> TICKET { get; set; }
     }
 }

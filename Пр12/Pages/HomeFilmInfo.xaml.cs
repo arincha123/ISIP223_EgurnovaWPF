@@ -16,21 +16,24 @@ using System.Windows.Shapes;
 namespace Пр12.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для FilmInfo.xaml
+    /// Логика взаимодействия для HomeFilmInfo.xaml
     /// </summary>
-    public partial class FilmInfo : Page
+    public partial class HomeFilmInfo : Page
     {
         public FILM CurrentFilm { get; set; }
 
-        public FilmInfo()
+        public List <SESSIONS> Seans { get; set; }
+
+        public HomeFilmInfo()
         {
             InitializeComponent();
         }
 
-        public FilmInfo(FILM film) : this()
+        public HomeFilmInfo(FILM film) : this()
         {
             CurrentFilm = film;
             DataContext = this;
+            Seans = Core.Context.SESSIONS.Where(s => s.id_film == CurrentFilm.ID_FILM).ToList();
 
             LoadFilmData();
         }
@@ -52,6 +55,19 @@ namespace Пр12.Pages
             if (NavigationService?.CanGoBack == true)
             {
                 NavigationService?.GoBack();
+            }
+        }
+
+
+        private void ChooseSeat(object sender, MouseButtonEventArgs e)
+        {
+            SESSIONS selectedseans = SeansList.SelectedItem as SESSIONS;
+
+            if (selectedseans != null)
+            {
+                SessionPage seansPage = new SessionPage(selectedseans);
+
+                NavigationService.Navigate(seansPage);
             }
         }
     }

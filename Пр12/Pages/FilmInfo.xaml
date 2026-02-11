@@ -70,21 +70,36 @@
             <Image Source="{Binding CurrentFilm.IMAGE_PATH}" Height="295" Stretch="UniformToFill" Margin="0,0,0,20" Width="204"/>
 
             <Border BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="5">
-                <ListBox x:Name="RatingsList" BorderThickness="0" Background="{x:Null}">
-                    <ListBoxItem>
-                        <WrapPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Text="Возрастной рейтинг: " Width="130"/>
-                            <TextBlock Text="{Binding DataContext.CurrentFilm.id_agerating, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource MyAgeRatingConverter}}" FontWeight="Bold" Width="66"/>
-                        </WrapPanel>
-                    </ListBoxItem>
+                <StackPanel>
 
-                    <ListBoxItem>
-                        <WrapPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Text="Рейтинг фильма: " Width="106"/>
-                            <TextBlock Text="{Binding DataContext.CurrentFilm.RATING_FILM, StringFormat={}{0:F1}}" FontWeight="Bold" Width="65"/>
-                        </WrapPanel>
-                    </ListBoxItem>
-                </ListBox>
+                    <WrapPanel Orientation="Horizontal" Margin="10">
+                        <TextBlock Text="Рейтинг фильма: " Width="106"/>
+                        <TextBlock Text="{Binding DataContext.CurrentFilm.RATING_FILM, StringFormat={}{0:F1}}" FontWeight="Bold" Width="65"/>
+                    </WrapPanel>
+
+                    <WrapPanel Orientation="Horizontal" Margin="10">
+                        <TextBlock Text="Возрастной рейтинг : " Width="106" Margin=" 0 0 10 0"/>
+                        <TextBlock Text="{Binding DataContext.CurrentFilm.id_agerating , StringFormat={}{0:F1}}" FontWeight="Bold" Width="65"/>
+                    </WrapPanel>
+
+                </StackPanel>
+
+
+                <!--<ListBox x:Name="RatingsList" BorderThickness="0" Background="{x:Null}">
+         <ListBoxItem>
+             <WrapPanel Orientation="Horizontal" Margin="10">
+                 <TextBlock Text="Возрастной рейтинг: " Width="130"/>
+                 <TextBlock Text="{Binding DataContext.CurrentFilm.id_agerating, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource MyAgeRatingConverter}}" FontWeight="Bold" Width="66"/>
+             </WrapPanel>
+         </ListBoxItem>
+
+         <ListBoxItem>
+             <WrapPanel Orientation="Horizontal" Margin="10">
+                 <TextBlock Text="Рейтинг фильма: " Width="106"/>
+                 <TextBlock Text="{Binding DataContext.CurrentFilm.RATING_FILM, StringFormat={}{0:F1}}" FontWeight="Bold" Width="65"/>
+             </WrapPanel>
+         </ListBoxItem>
+     </ListBox>-->
             </Border>
         </StackPanel>
         
@@ -99,8 +114,6 @@
                 </Border>
 
                 <StackPanel Margin="0,30,0,0">
-                    <TextBlock Text="Доступные сеансы:" FontSize="18" FontWeight="Bold" Margin="0,0,0,15"/>
-
                     <ItemsControl x:Name="SessionsList" ItemsSource="{Binding Sessions}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -154,7 +167,6 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
 
-                    <!-- Если нет сеансов -->
                     <TextBlock x:Name="NoSessionsText" Text="На данный момент нет доступных сеансов" Foreground="#999" FontStyle="Italic" Visibility="Collapsed" Margin="0,20,0,0"/>
                 </StackPanel>
             </StackPanel>

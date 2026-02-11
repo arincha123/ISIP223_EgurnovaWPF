@@ -20,9 +20,11 @@ namespace Пр12.Pages
     /// </summary>
     public partial class SessionPage : Page
     {
-        public SessionPage()
+
+        public SessionPage( SESSIONS selectedseans )
         {
             InitializeComponent();
+
         }
     }
 }

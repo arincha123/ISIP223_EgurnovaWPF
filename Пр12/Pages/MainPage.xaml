@@ -52,7 +52,7 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
             <Border CornerRadius="15" BorderBrush="Gray" BorderThickness="2"  Height="30" Width="100" Margin="0 0 10 0">
-                <Button x:Name="Reg" Content="Home" Grid.Row="0" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="16" Click="Reg_Click"/>
+                <Button x:Name="Reg" Content="Home" Grid.Row="0" Background="Transparent" BorderBrush="{x:Null}" FontSize="16" Click="Reg_Click"/>
             </Border>
         </StackPanel>
 
