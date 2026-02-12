@@ -20,10 +20,19 @@ namespace Пр12.Pages
     /// </summary>
     public partial class SessionPage : Page
     {
+        public List<SEAT> sEATs {  get; set; }
+
 
         public SessionPage( SESSIONS selectedseans )
         {
+            DataContext = this;
+            sEATs = Core.Context.SEAT.Where(s => s.id_hall == selectedseans.id_hall).ToList();
+
+
             InitializeComponent();
+            
+            SeatGrid.Width = sEATs.Max(s => s.NUMBER) * 30 + 70;
+            //SeatGrid.ItemsSource = sEATs;
 
         }
     }

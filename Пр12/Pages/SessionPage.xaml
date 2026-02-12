@@ -9,9 +9,65 @@
       Title="SessionPage">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="30">
+                <TextBlock Text="Выбор места в кинозале" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" />
+
+
+                <ListBox x:Name="SeatGrid" HorizontalAlignment="Center" Margin="0 0 0 30" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="250" ItemsSource="{Binding sEATs}" d:ItemsSource="{d:SampleData ItemCount=6}" >
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel></WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel Orientation="Horizontal">
+                                <Border Width="30" Height="30" >
+                                    <TextBlock Text="{Binding NUMBER}" Background="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+
+                                </Border>
+
+
+                            </WrapPanel>
+
+
+
+                        </DataTemplate>
+
+
+                    </ListBox.ItemTemplate>
+
+                </ListBox>
+
+            </StackPanel>    
+            
+            
+        </ScrollViewer>
         
         
-        
-        
+
+        <CheckBox Grid.Row="1" Content="Убрать занятые места" />
+
+        <WrapPanel Grid.Row="1" VerticalAlignment="Center" >
+            <ComboBox x:Name="SeatNum" Margin="100 0 10 0" Text="Место" Height="25" Width="150"/>
+            <ComboBox x:Name="SeatRow" Margin="90 0 0 0" Text="Ряд" Height="25" Width="150"/>
+            <Button x:Name="OrderTicket" Margin="90 0 0 0" Content="Оформить билет" Background="{x:Null}" />
+
+        </WrapPanel>
+
+
+
+
+
+
+
     </Grid>
 </Page>

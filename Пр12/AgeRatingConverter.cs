@@ -14,7 +14,6 @@ namespace Пр12.Pages
         {
             if (value is int id)
             {
-                // Просто преобразуем ID в текст без базы данных
                 if (id == 1) return "0+";
                 else if (id == 2) return "6+";
                 else if (id == 3) return "12+";
