@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ namespace Пр12.Pages
     public partial class SessionPage : Page
     {
         public List<SEAT> sEATs {  get; set; }
+        public List<SEAT_IN_SESSION> FreeSeat {  get; set; }
 
 
         public SessionPage( SESSIONS selectedseans )
@@ -28,11 +30,22 @@ namespace Пр12.Pages
             DataContext = this;
             sEATs = Core.Context.SEAT.Where(s => s.id_hall == selectedseans.id_hall).ToList();
 
+            FreeSeat = Core.Context.SEAT_IN_SESSION.Where(s => s.is_session == selectedseans.ID_SESSION && s.STATUS == "Свободно").ToList();
+
 
             InitializeComponent();
             
             SeatGrid.Width = sEATs.Max(s => s.NUMBER) * 30 + 70;
-            //SeatGrid.ItemsSource = sEATs;
+
+        }
+
+        private void SeatGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var seat = SeatGrid.SelectedItem as SEAT;
+            if (FreeSeat.FirstOrDefault(s => s.id_seat == s.id_seat) == null  )
+            {
+                return;
+            }
 
         }
     }
