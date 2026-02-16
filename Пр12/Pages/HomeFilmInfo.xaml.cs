@@ -24,6 +24,8 @@ namespace Пр12.Pages
 
         public List <SESSIONS> Seans { get; set; }
 
+        public List <GENRE> curgenre { get; set; }
+
         public HomeFilmInfo()
         {
             InitializeComponent();
@@ -35,8 +37,12 @@ namespace Пр12.Pages
             DataContext = this;
             Seans = Core.Context.SESSIONS.Where(s => s.id_film == CurrentFilm.ID_FILM).ToList();
 
+            curgenre = Core.Context.FILM_IN_GENRE.Where(g => g.id_film == CurrentFilm.ID_FILM).Select(s=>s.GENRE).ToList();
+
             LoadFilmData();
         }
+
+
 
         private void LoadFilmData()
         {

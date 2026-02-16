@@ -68,8 +68,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="AgeRatingConverter.cs" />
-    <Compile Include="Pages\ColorConvert.cs" />
-    <Compile Include="Core.cs" />
     <Compile Include="CUSTOMER.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -103,6 +101,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ColorConvert.cs" />
+    <Compile Include="Core.cs" />
     <Compile Include="Pages\FilmInfo.xaml.cs">
       <DependentUpon>FilmInfo.xaml</DependentUpon>
     </Compile>

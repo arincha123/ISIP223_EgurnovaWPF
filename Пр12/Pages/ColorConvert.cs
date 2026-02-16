@@ -14,11 +14,11 @@ namespace Пр12.Pages
         {
             //string statusVal = value as string;
             SEAT_IN_SESSION ss = Core.Context.SEAT_IN_SESSION.FirstOrDefault(s => s.id_seat == (int)value);
-            string status = ss.STATUS;
+            bool status = ss.STATUS;
 
-            if (status == "Свободно")
+            if (status == true)
                 return "#4CAF50";
-            else if (status == "Занято")
+            else if (status == false)
                 return "#F44336";
             else 
                 return "#9E9E9E";

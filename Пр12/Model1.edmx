@@ -80,7 +80,7 @@
           <Property Name="ID_SEAT_IN_SESSION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_seat" Type="int" Nullable="false" />
           <Property Name="is_session" Type="int" Nullable="false" />
-          <Property Name="STATUS" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="STATUS" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="SESSIONS">
           <Key>
@@ -384,7 +384,7 @@
           <Property Name="ID_SEAT_IN_SESSION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_seat" Type="Int32" Nullable="false" />
           <Property Name="is_session" Type="Int32" Nullable="false" />
-          <Property Name="STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="STATUS" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="SEAT" Relationship="Self.FK_SEAT_IN_SESSION_SEAT" FromRole="SEAT_IN_SESSION" ToRole="SEAT" />
           <NavigationProperty Name="SESSIONS" Relationship="Self.FK_SEAT_IN_SESSION_SESSIONS" FromRole="SEAT_IN_SESSION" ToRole="SESSIONS" />
         </EntityType>
@@ -545,7 +545,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CinemaEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CinemaEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AGERATING" EntityType="Self.AGERATING" />
           <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" />
           <EntitySet Name="FILM" EntityType="Self.FILM" />
@@ -607,7 +607,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище CinemaModelContainer" CdmEntityContainer="CinemaEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CinemaModelContainer" CdmEntityContainer="CinemaEntities1">
           <EntitySetMapping Name="AGERATING">
             <EntityTypeMapping TypeName="CinemaModel.AGERATING">
               <MappingFragment StoreEntitySet="AGERATING">

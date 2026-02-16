@@ -30,7 +30,7 @@ namespace Пр12.Pages
             DataContext = this;
             sEATs = Core.Context.SEAT.Where(s => s.id_hall == selectedseans.id_hall).ToList();
 
-            FreeSeat = Core.Context.SEAT_IN_SESSION.Where(s => s.is_session == selectedseans.ID_SESSION && s.STATUS == "Свободно").ToList();
+            FreeSeat = Core.Context.SEAT_IN_SESSION.Where(s => s.is_session == selectedseans.ID_SESSION && s.STATUS == true).ToList();
 
 
             InitializeComponent();
@@ -47,6 +47,26 @@ namespace Пр12.Pages
                 return;
             }
 
+        }
+
+        private void OrderTicket_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox ord = MessageBox.Show("Вы выбрали следующее место:\nЗал: \nРяд: \nНомер: ", "Покупка билета", MessageBoxButton.YesNo, MessageBoxResult.Yes);
+            if (ord == MessageBoxResult.Yes)
+            {
+                TICKET tICKET = new TICKET(
+                    
+                    
+
+
+                    
+                );
+            }
+            else if (ord == MessageBoxResult.No)
+            {
+                MessageBox.Show("Зачем ты нажал нет?(", "Не круто(", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                e.Cancel = true;
+            }
         }
     }
 }

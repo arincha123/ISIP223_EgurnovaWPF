@@ -22,47 +22,28 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="30">
                 <TextBlock Text="Выбор места в кинозале" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" />
-
-
                 <ListBox x:Name="SeatGrid" HorizontalAlignment="Center" Margin="0 0 0 30" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="250" ItemsSource="{Binding sEATs}" d:ItemsSource="{d:SampleData ItemCount=6}" SelectionChanged="SeatGrid_SelectionChanged">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel></WrapPanel>
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
-
+                    
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel Orientation="Horizontal">
                                 <Border Width="30" Height="30"  Background="{Binding ID_SEAT, Converter={StaticResource ColorConverts}}">
                                     <TextBlock Text="{Binding NUMBER}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-
-
                                 </Border>
-
-
                             </WrapPanel>
-
-
-
                         </DataTemplate>
-
-
                     </ListBox.ItemTemplate>
-
                 </ListBox>
-
-            </StackPanel>    
-            
-            
+            </StackPanel>
         </ScrollViewer>
-        
-        
-
-        <CheckBox Grid.Row="1" Content="Убрать занятые места" />
 
         <WrapPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" >
-            <Button x:Name="OrderTicket" Content="Оформить билет" Background="{x:Null}" />
+            <Button x:Name="OrderTicket" Content="Оформить билет" Background="{x:Null}" Click="OrderTicket_Click" />
 
         </WrapPanel>
 

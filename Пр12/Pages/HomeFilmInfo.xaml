@@ -37,23 +37,6 @@
                     </WrapPanel>
 
                 </StackPanel>
-
-
-                <!--<ListBox x:Name="RatingsList" BorderThickness="0" Background="{x:Null}">
-                    <ListBoxItem>
-                        <WrapPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Text="Возрастной рейтинг: " Width="130"/>
-                            <TextBlock Text="{Binding DataContext.CurrentFilm.id_agerating, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource MyAgeRatingConverter}}" FontWeight="Bold" Width="66"/>
-                        </WrapPanel>
-                    </ListBoxItem>
-
-                    <ListBoxItem>
-                        <WrapPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Text="Рейтинг фильма: " Width="106"/>
-                            <TextBlock Text="{Binding DataContext.CurrentFilm.RATING_FILM, StringFormat={}{0:F1}}" FontWeight="Bold" Width="65"/>
-                        </WrapPanel>
-                    </ListBoxItem>
-                </ListBox>-->
             </Border>
         </StackPanel>
 
@@ -65,6 +48,29 @@
 
                 <Border BorderBrush="#E0E0E0" BorderThickness="0,1,0,1" Padding="0,10">
                     <TextBlock Text="{Binding CurrentFilm.DESCRIPTION}" TextWrapping="Wrap" FontSize="14" LineHeight="22"/>
+                </Border>
+
+                <Border BorderBrush="#E0E0E0" BorderThickness="0,1,0,1" Padding="0,10" Margin="0 20 0 0 ">
+                    <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" ItemsSource="{Binding curgenre}" IsEnabled="False">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <WrapPanel>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding NAME_GENRE, StringFormat='\{0}' }" HorizontalAlignment="Center"/>
+
+
+                                    </StackPanel>
+                                </WrapPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
                 </Border>
 
                 <StackPanel Margin="0,30,0,0">
