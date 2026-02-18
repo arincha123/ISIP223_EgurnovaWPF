@@ -20,6 +20,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <Button x:Name="Home" Grid.Row="0" Width="100" Height="33" Content="Личная страница" HorizontalAlignment="Right" Margin="10" Click="Home_Click"/>
+
         <WrapPanel HorizontalAlignment="Left" VerticalAlignment="Center" >
             <TextBox x:Name="Search" Grid.Row="0" Width="350" Height="30" Margin="25 0 0 0" TextChanged="Search_TextChanged" FontSize="16"/>
             <TextBlock Text="Фильтры" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" FontSize="16"/>
@@ -83,5 +85,9 @@
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
+        
+       
+        
+        
     </Grid>
 </Page>

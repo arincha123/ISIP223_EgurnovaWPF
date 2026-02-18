@@ -81,9 +81,10 @@ namespace Пр12.Pages
 
         }
 
-
-
-
+        private void Home_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new YourTickets());
+        }
     }
 
 

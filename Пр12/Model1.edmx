@@ -79,7 +79,7 @@
           </Key>
           <Property Name="ID_SEAT_IN_SESSION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_seat" Type="int" Nullable="false" />
-          <Property Name="is_session" Type="int" Nullable="false" />
+          <Property Name="id_session" Type="int" Nullable="false" />
           <Property Name="STATUS" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="SESSIONS">
@@ -181,7 +181,7 @@
               <PropertyRef Name="ID_SESSION" />
             </Principal>
             <Dependent Role="SEAT_IN_SESSION">
-              <PropertyRef Name="is_session" />
+              <PropertyRef Name="id_session" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -383,7 +383,7 @@
           </Key>
           <Property Name="ID_SEAT_IN_SESSION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_seat" Type="Int32" Nullable="false" />
-          <Property Name="is_session" Type="Int32" Nullable="false" />
+          <Property Name="id_session" Type="Int32" Nullable="false" />
           <Property Name="STATUS" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="SEAT" Relationship="Self.FK_SEAT_IN_SESSION_SEAT" FromRole="SEAT_IN_SESSION" ToRole="SEAT" />
           <NavigationProperty Name="SESSIONS" Relationship="Self.FK_SEAT_IN_SESSION_SESSIONS" FromRole="SEAT_IN_SESSION" ToRole="SESSIONS" />
@@ -529,7 +529,7 @@
               <PropertyRef Name="ID_SESSION" />
             </Principal>
             <Dependent Role="SEAT_IN_SESSION">
-              <PropertyRef Name="is_session" />
+              <PropertyRef Name="id_session" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -689,7 +689,7 @@
               <MappingFragment StoreEntitySet="SEAT_IN_SESSION">
                 <ScalarProperty Name="ID_SEAT_IN_SESSION" ColumnName="ID_SEAT_IN_SESSION" />
                 <ScalarProperty Name="id_seat" ColumnName="id_seat" />
-                <ScalarProperty Name="is_session" ColumnName="is_session" />
+                <ScalarProperty Name="id_session" ColumnName="id_session" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -16,13 +16,16 @@ using System.Windows.Shapes;
 namespace Пр12.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для FilmPage.xaml
+    /// Логика взаимодействия для YourTickets.xaml
     /// </summary>
-    public partial class FilmPage : Page
+    public partial class YourTickets : Page
     {
-        public FilmPage()
+
+        public YourTickets()
         {
             InitializeComponent();
+            CUSTOMER us = User.curuser;
+
         }
     }
 }

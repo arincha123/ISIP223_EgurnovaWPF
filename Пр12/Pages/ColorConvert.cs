@@ -12,7 +12,6 @@ namespace Пр12.Pages
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            //string statusVal = value as string;
             SEAT_IN_SESSION ss = Core.Context.SEAT_IN_SESSION.FirstOrDefault(s => s.id_seat == (int)value);
             bool status = ss.STATUS;
 

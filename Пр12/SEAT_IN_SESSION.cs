@@ -16,7 +16,7 @@ namespace Пр12
     {
         public int ID_SEAT_IN_SESSION { get; set; }
         public int id_seat { get; set; }
-        public int is_session { get; set; }
+        public int id_session { get; set; }
         public bool STATUS { get; set; }
     
         public virtual SEAT SEAT { get; set; }

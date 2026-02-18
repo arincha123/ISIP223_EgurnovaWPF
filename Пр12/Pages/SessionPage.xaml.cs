@@ -35,7 +35,7 @@ namespace Пр12.Pages
             DataContext = this;
             sEATs = Core.Context.SEAT.Where(s => s.id_hall == selectedseans.id_hall).ToList();
 
-            FreeSeat = Core.Context.SEAT_IN_SESSION.Where(s => s.is_session == selectedseans.ID_SESSION && s.STATUS == true).ToList();
+            FreeSeat = Core.Context.SEAT_IN_SESSION.Where(s => s.id_session == selectedseans.ID_SESSION && s.STATUS == true).ToList();
 
 
             InitializeComponent();
