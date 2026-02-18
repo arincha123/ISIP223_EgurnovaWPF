@@ -23,10 +23,15 @@ namespace Пр12.Pages
     {
         public List<SEAT> sEATs {  get; set; }
         public List<SEAT_IN_SESSION> FreeSeat {  get; set; }
+        public SEAT selectedseat { get; set; }
+        public SESSIONS selses { get; set; }
+
+
 
 
         public SessionPage( SESSIONS selectedseans )
         {
+            selses = selectedseans;
             DataContext = this;
             sEATs = Core.Context.SEAT.Where(s => s.id_hall == selectedseans.id_hall).ToList();
 
@@ -41,7 +46,7 @@ namespace Пр12.Pages
 
         private void SeatGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var seat = SeatGrid.SelectedItem as SEAT;
+            selectedseat = SeatGrid.SelectedItem as SEAT;
             if (FreeSeat.FirstOrDefault(s => s.id_seat == s.id_seat) == null  )
             {
                 return;
@@ -51,21 +56,45 @@ namespace Пр12.Pages
 
         private void OrderTicket_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox ord = MessageBox.Show("Вы выбрали следующее место:\nЗал: \nРяд: \nНомер: ", "Покупка билета", MessageBoxButton.YesNo, MessageBoxResult.Yes);
+            MessageBoxResult ord = MessageBox.Show($"Вы выбрали следующее место:\nЗал: {selectedseat.HALL.HALL_NAME}\nРяд: {selectedseat.ROW}\nНомер: {selectedseat.NUMBER}", "Покупка билета", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes);
             if (ord == MessageBoxResult.Yes)
             {
-                TICKET tICKET = new TICKET(
-                    
-                    
+                TICKET tICKET = new TICKET()
+                {
+                    id_session = selses.ID_SESSION,
+                    id_customer = User.curuser.ID_CUSTOMER,
+                    id_seat = selectedseat.ID_SEAT,
+                    TOTAL_PRICE = selectedseat.HALL.HALL_RATING.TICKET_PRICE
+                };
 
 
-                    
-                );
+                MessageBox.Show("Вы успешно приобрели билет");
+
+                SEAT_IN_SESSION setinsession = Core.Context.SEAT_IN_SESSION.FirstOrDefault(s => s.id_seat == selectedseat.ID_SEAT);
+
+                setinsession.STATUS = false;
+
+                Core.Context.TICKET.Add(tICKET);
+                Core.Context.SaveChanges();
+
+
+                if (NavigationService?.CanGoBack == true)
+                {
+                    NavigationService?.GoBack();
+                }
             }
             else if (ord == MessageBoxResult.No)
             {
-                MessageBox.Show("Зачем ты нажал нет?(", "Не круто(", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                e.Cancel = true;
+                MessageBox.Show("выключи с позором", "Не круто(", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService?.CanGoBack == true)
+            {
+                NavigationService?.GoBack();
             }
         }
     }

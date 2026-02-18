@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Пр12
 {
-    internal class Core
+    static internal class User
     {
-        public static CinemaEntities Context = new CinemaEntities();
+        public static CUSTOMER curuser;
+        public static bool isLoged => curuser != null;
     }
 }

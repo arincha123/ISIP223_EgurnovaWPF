@@ -54,6 +54,8 @@ namespace Пр12.Pages
                 MessageBox.Show("Неверный логин или пароль");
             }
 
+            User.curuser = existing;
+
         }
 
         private void Danni_SelectionChanged(object sender, RoutedEventArgs e)

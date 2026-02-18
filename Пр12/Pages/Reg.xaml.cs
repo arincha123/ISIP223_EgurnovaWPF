@@ -57,6 +57,8 @@ namespace Пр12.Pages
                 PASSWORD = password
             };
 
+            customer = User.curuser;
+
             Core.Context.CUSTOMER.Add(customer);
             Core.Context.SaveChanges();
 

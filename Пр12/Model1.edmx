@@ -545,7 +545,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CinemaEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CinemaEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AGERATING" EntityType="Self.AGERATING" />
           <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" />
           <EntitySet Name="FILM" EntityType="Self.FILM" />
@@ -607,7 +607,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище CinemaModelContainer" CdmEntityContainer="CinemaEntities1">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CinemaModelContainer" CdmEntityContainer="CinemaEntities">
           <EntitySetMapping Name="AGERATING">
             <EntityTypeMapping TypeName="CinemaModel.AGERATING">
               <MappingFragment StoreEntitySet="AGERATING">
