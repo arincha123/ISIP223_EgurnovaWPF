@@ -49,7 +49,7 @@
 
 
 
-        <Button x:Name="Back" Content="Назад" Grid.Row="1" Width="100" Height="33" HorizontalAlignment="Left" Margin="20 0 0 0"/>
+        <Button x:Name="Back" Content="Назад" Grid.Row="1" Width="100" Height="33" HorizontalAlignment="Left" Margin="20 0 0 0" Click="Back_Click"/>
 
 
 

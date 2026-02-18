@@ -97,5 +97,6 @@ namespace Пр12.Pages
                 NavigationService?.GoBack();
             }
         }
+
     }
 }

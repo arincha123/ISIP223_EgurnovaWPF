@@ -10,21 +10,28 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
+            <RowDefinition Height="45"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" />
 
-        <ListBox Grid.Row="1">
+        <WrapPanel x:Name="UserInfo" Grid.Row="0" VerticalAlignment="Center">
+            <TextBlock Text="Купленные билеты" FontSize="24" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding LOGIN,StringFormat = Логин: {0}}" FontSize="18" Margin="100 0 0 0" Width="200" />
+        </WrapPanel>
+
+        <Button x:Name="Back" Content="Назад" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10" Width="100" Height="35" Click="Back_Click"/>
+
+        <ListBox x:Name="listoftickets" Grid.ColumnSpan="2" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
                         <TextBlock Text="{Binding SESSIONS.FILM.NAME_FILM, StringFormat= Название фильма: {0}}"/>
                         <TextBlock Text="{Binding SESSIONS.DATE_SESSION, StringFormat= Дата сеанса: {0:dd.MM}}"/>
                         <TextBlock Text="{Binding SESSIONS.DATE_SESSION, StringFormat= Время сеанса: {0:hh:mm}}"/>
-                        <TextBlock Text="{Binding SESSIONS., StringFormat= Время сеанса: {0:hh:mm}}"/>
-                        <TextBlock Text="{Binding SESSIONS.DATE_SESSION, StringFormat= Место: {0:}}"/>
+                        <TextBlock Text="{Binding SEAT.ROW, StringFormat= Номер ряда: {0}}"/>
+                        <TextBlock Text="{Binding SEAT.NUMBER, StringFormat= Номер сидения: {0}}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

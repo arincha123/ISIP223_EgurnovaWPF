@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище CinemaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище CinemaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AGERATING">
           <Key>
             <PropertyRef Name="ID_AGERATING" />
@@ -90,6 +90,16 @@
           <Property Name="DATE_SESSION" Type="datetime" Nullable="false" />
           <Property Name="id_film" Type="int" Nullable="false" />
           <Property Name="id_hall" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TICKET">
           <Key>
@@ -221,6 +231,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TICKET_SEAT">
+          <End Role="SEAT" Type="Self.SEAT" Multiplicity="1" />
+          <End Role="TICKET" Type="Self.TICKET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEAT">
+              <PropertyRef Name="ID_SEAT" />
+            </Principal>
+            <Dependent Role="TICKET">
+              <PropertyRef Name="id_seat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TICKET_SESSIONS">
           <End Role="SESSIONS" Type="Self.SESSIONS" Multiplicity="1" />
           <End Role="TICKET" Type="Self.TICKET" Multiplicity="*" />
@@ -244,6 +266,7 @@
           <EntitySet Name="SEAT" EntityType="Self.SEAT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEAT_IN_SESSION" EntityType="Self.SEAT_IN_SESSION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SESSIONS" EntityType="Self.SESSIONS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TICKET" EntityType="Self.TICKET" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_FILM_AGERATING1" Association="Self.FK_FILM_AGERATING1">
             <End Role="AGERATING" EntitySet="AGERATING" />
@@ -285,13 +308,16 @@
             <End Role="CUSTOMER" EntitySet="CUSTOMER" />
             <End Role="TICKET" EntitySet="TICKET" />
           </AssociationSet>
+          <AssociationSet Name="FK_TICKET_SEAT" Association="Self.FK_TICKET_SEAT">
+            <End Role="SEAT" EntitySet="SEAT" />
+            <End Role="TICKET" EntitySet="TICKET" />
+          </AssociationSet>
           <AssociationSet Name="FK_TICKET_SESSIONS" Association="Self.FK_TICKET_SESSIONS">
             <End Role="SESSIONS" EntitySet="SESSIONS" />
             <End Role="TICKET" EntitySet="TICKET" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CinemaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -376,6 +402,7 @@
           <Property Name="id_hall" Type="Int32" Nullable="false" />
           <NavigationProperty Name="HALL" Relationship="Self.FK_SEAT_HALL" FromRole="SEAT" ToRole="HALL" />
           <NavigationProperty Name="SEAT_IN_SESSION" Relationship="Self.FK_SEAT_IN_SESSION_SEAT" FromRole="SEAT" ToRole="SEAT_IN_SESSION" />
+          <NavigationProperty Name="TICKET" Relationship="Self.FK_TICKET_SEAT" FromRole="SEAT" ToRole="TICKET" />
         </EntityType>
         <EntityType Name="SEAT_IN_SESSION">
           <Key>
@@ -386,7 +413,7 @@
           <Property Name="id_session" Type="Int32" Nullable="false" />
           <Property Name="STATUS" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="SEAT" Relationship="Self.FK_SEAT_IN_SESSION_SEAT" FromRole="SEAT_IN_SESSION" ToRole="SEAT" />
-          <NavigationProperty Name="SESSIONS" Relationship="Self.FK_SEAT_IN_SESSION_SESSIONS" FromRole="SEAT_IN_SESSION" ToRole="SESSIONS" />
+          <NavigationProperty Name="SESSIONS" Relationship="CinemaModel.FK_SEAT_IN_SESSION_SESSIONS" FromRole="SEAT_IN_SESSION" ToRole="SESSIONS" />
         </EntityType>
         <EntityType Name="SESSIONS">
           <Key>
@@ -398,8 +425,18 @@
           <Property Name="id_hall" Type="Int32" Nullable="false" />
           <NavigationProperty Name="FILM" Relationship="Self.FK_SESSIONS_FILM" FromRole="SESSIONS" ToRole="FILM" />
           <NavigationProperty Name="HALL" Relationship="Self.FK_SESSIONS_HALL1" FromRole="SESSIONS" ToRole="HALL" />
-          <NavigationProperty Name="SEAT_IN_SESSION" Relationship="Self.FK_SEAT_IN_SESSION_SESSIONS" FromRole="SESSIONS" ToRole="SEAT_IN_SESSION" />
           <NavigationProperty Name="TICKET" Relationship="Self.FK_TICKET_SESSIONS" FromRole="SESSIONS" ToRole="TICKET" />
+          <NavigationProperty Name="SEAT_IN_SESSION" Relationship="CinemaModel.FK_SEAT_IN_SESSION_SESSIONS" FromRole="SESSIONS" ToRole="SEAT_IN_SESSION" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TICKET">
           <Key>
@@ -411,6 +448,7 @@
           <Property Name="id_customer" Type="Int32" Nullable="false" />
           <Property Name="id_seat" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CUSTOMER" Relationship="Self.FK_TICKET_CUSTOMER" FromRole="TICKET" ToRole="CUSTOMER" />
+          <NavigationProperty Name="SEAT" Relationship="Self.FK_TICKET_SEAT" FromRole="TICKET" ToRole="SEAT" />
           <NavigationProperty Name="SESSIONS" Relationship="Self.FK_TICKET_SESSIONS" FromRole="TICKET" ToRole="SESSIONS" />
         </EntityType>
         <Association Name="FK_FILM_AGERATING1">
@@ -521,15 +559,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SEAT_IN_SESSION_SESSIONS">
-          <End Role="SESSIONS" Type="Self.SESSIONS" Multiplicity="1" />
-          <End Role="SEAT_IN_SESSION" Type="Self.SEAT_IN_SESSION" Multiplicity="*" />
+        <Association Name="FK_TICKET_SEAT">
+          <End Role="SEAT" Type="Self.SEAT" Multiplicity="1" />
+          <End Role="TICKET" Type="Self.TICKET" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="SESSIONS">
-              <PropertyRef Name="ID_SESSION" />
+            <Principal Role="SEAT">
+              <PropertyRef Name="ID_SEAT" />
             </Principal>
-            <Dependent Role="SEAT_IN_SESSION">
-              <PropertyRef Name="id_session" />
+            <Dependent Role="TICKET">
+              <PropertyRef Name="id_seat" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -545,7 +583,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CinemaEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CinemaEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AGERATING" EntityType="Self.AGERATING" />
           <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" />
           <EntitySet Name="FILM" EntityType="Self.FILM" />
@@ -556,6 +594,7 @@
           <EntitySet Name="SEAT" EntityType="Self.SEAT" />
           <EntitySet Name="SEAT_IN_SESSION" EntityType="Self.SEAT_IN_SESSION" />
           <EntitySet Name="SESSIONS" EntityType="Self.SESSIONS" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TICKET" EntityType="Self.TICKET" />
           <AssociationSet Name="FK_FILM_AGERATING1" Association="Self.FK_FILM_AGERATING1">
             <End Role="AGERATING" EntitySet="AGERATING" />
@@ -593,21 +632,37 @@
             <End Role="SEAT" EntitySet="SEAT" />
             <End Role="SEAT_IN_SESSION" EntitySet="SEAT_IN_SESSION" />
           </AssociationSet>
-          <AssociationSet Name="FK_SEAT_IN_SESSION_SESSIONS" Association="Self.FK_SEAT_IN_SESSION_SESSIONS">
-            <End Role="SESSIONS" EntitySet="SESSIONS" />
-            <End Role="SEAT_IN_SESSION" EntitySet="SEAT_IN_SESSION" />
+          <AssociationSet Name="FK_TICKET_SEAT" Association="Self.FK_TICKET_SEAT">
+            <End Role="SEAT" EntitySet="SEAT" />
+            <End Role="TICKET" EntitySet="TICKET" />
           </AssociationSet>
           <AssociationSet Name="FK_TICKET_SESSIONS" Association="Self.FK_TICKET_SESSIONS">
             <End Role="SESSIONS" EntitySet="SESSIONS" />
             <End Role="TICKET" EntitySet="TICKET" />
           </AssociationSet>
+          <AssociationSet Name="FK_SEAT_IN_SESSION_SESSIONS" Association="CinemaModel.FK_SEAT_IN_SESSION_SESSIONS">
+            <End Role="SESSIONS" EntitySet="SESSIONS" />
+            <End Role="SEAT_IN_SESSION" EntitySet="SEAT_IN_SESSION" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_SEAT_IN_SESSION_SESSIONS">
+          <End Type="CinemaModel.SESSIONS" Role="SESSIONS" Multiplicity="1" />
+          <End Type="CinemaModel.SEAT_IN_SESSION" Role="SEAT_IN_SESSION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SESSIONS">
+              <PropertyRef Name="ID_SESSION" />
+            </Principal>
+            <Dependent Role="SEAT_IN_SESSION">
+              <PropertyRef Name="id_session" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище CinemaModelContainer" CdmEntityContainer="CinemaEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CinemaModelContainer" CdmEntityContainer="CinemaEntities1">
           <EntitySetMapping Name="AGERATING">
             <EntityTypeMapping TypeName="CinemaModel.AGERATING">
               <MappingFragment StoreEntitySet="AGERATING">
@@ -701,6 +756,17 @@
                 <ScalarProperty Name="DATE_SESSION" ColumnName="DATE_SESSION" />
                 <ScalarProperty Name="id_film" ColumnName="id_film" />
                 <ScalarProperty Name="id_hall" ColumnName="id_hall" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CinemaModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

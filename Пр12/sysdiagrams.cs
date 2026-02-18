@@ -12,16 +12,12 @@ namespace Пр12
     using System;
     using System.Collections.Generic;
     
-    public partial class TICKET
+    public partial class sysdiagrams
     {
-        public int ID_TICKET { get; set; }
-        public decimal TOTAL_PRICE { get; set; }
-        public int id_session { get; set; }
-        public int id_customer { get; set; }
-        public int id_seat { get; set; }
-    
-        public virtual CUSTOMER CUSTOMER { get; set; }
-        public virtual SEAT SEAT { get; set; }
-        public virtual SESSIONS SESSIONS { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
