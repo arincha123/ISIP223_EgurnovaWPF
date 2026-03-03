@@ -1,0 +1,132 @@
+﻿<Page x:Class="Пр12.Pages.PageOfFullSborka"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Пр12.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageOfFullSborka">
+
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Собери свой компьютер" 
+                   Grid.Row="0" Grid.ColumnSpan="2"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" 
+                   FontSize="24" 
+                   FontWeight="Bold"
+                   Foreground="#2196F3"/>
+
+        <ListBox x:Name="PartTypesList" 
+                 Grid.Row="1" Grid.Column="0" Margin="5" ItemsSource="{Binding parttypes}" SelectedItem="{Binding SelectedPartType}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=8}">
+
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="#E0E0E0" BorderThickness="0,0,0,1" Padding="10,8">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+ 
+                            <TextBlock Text="{Binding name}" Grid.Column="0" VerticalAlignment="Center" FontSize="14"/>
+
+                            <Button Grid.Column="1" Content="Выбрать" Width="70" Height="30" Background="#2196F3" Foreground="White" BorderThickness="0" Cursor="Hand"/>
+                                    <!--Command="{Binding DataContext.AddComponentCommand, 
+                                            RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}"-->
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Grid Grid.Row="1" Grid.Column="1" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Background="#F5F5F5" CornerRadius="8" Padding="15" Margin="0,0,0,10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Ваша сборка" FontSize="18" FontWeight="Bold" VerticalAlignment="Center"/>
+
+                    <TextBlock Grid.Column="1" Text="{Binding TotalPriceFormatted}" FontSize="18" FontWeight="Bold" Foreground="#4CAF50" VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+            <ListBox x:Name="SelectedComponentsList" Grid.Row="1" ItemsSource="{Binding SelectedComponents}" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     Background="Transparent" BorderThickness="0" Margin="0,0,0,10" d:ItemsSource="{d:SampleData ItemCount=5}">
+
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="White" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="8" Padding="10" Margin="0,0,0,5">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.Column="0" Width="50" Height="50" Background="#F0F0F0" CornerRadius="4" Margin="0,0,10,0">
+                                    <TextBlock Text="🖥️" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding ComponentName}" FontWeight="SemiBold" FontSize="14"/>
+                                    <TextBlock Text="{Binding Specifications}" Foreground="#757575" FontSize="12"/>
+                                </StackPanel>
+
+                                <TextBlock Grid.Column="2" Text="{Binding PriceFormatted}" FontWeight="Bold" Foreground="#4CAF50" VerticalAlignment="Center" Margin="10,0"/>
+
+                                <Button Grid.Column="3" Content="✖" Width="30" Height="30" Background="#F44336" Foreground="White" BorderThickness="0"  Cursor="Hand"/>
+                                <!--Command="{Binding DataContext.RemoveComponentCommand, 
+                                                RelativeSource={RelativeSource AncestorType=Page}}"
+                                        CommandParameter="{Binding}"/>-->
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal"  HorizontalAlignment="Right"  Margin="0,10,0,0">
+
+                <Button Content="Сохранить сборку" Width="120" Height="35" Background="#4CAF50" Foreground="White" BorderThickness="0" Margin="5" Cursor="Hand"  Command="{Binding SaveBuildCommand}"/>
+
+                <Button Content="Очистить" Width="100" Height="35" Background="#F44336" Foreground="White" BorderThickness="0" Margin="5"  Cursor="Hand"/>
+                        <!--Command="{Binding ClearBuildCommand}"/>-->
+
+                <Button Content="Просмотреть сборки" Width="150" Height="35"  Background="#2196F3" Foreground="White" BorderThickness="0"   Margin="5"  Cursor="Hand"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>
