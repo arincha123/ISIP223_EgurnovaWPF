@@ -24,10 +24,42 @@ namespace Пр12.Pages
         {
             InitializeComponent();
             List<parttype> parttypes = Core.Context.parttype.ToList();
-
+            PartTypesList.ItemsSource = parttypes;
         }
 
         private void AllDetails_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Clear_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ViewAll_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SelectedComponentsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void SelectEl_Click(object sender, RoutedEventArgs e)
+        {
+            Button bt = (Button)sender;
+            parttype pt = (parttype)bt.DataContext;
+            NavigationService.Navigate(new TypeInfo(pt));
+        }
+
+        private void DelFromSborka_Click(object sender, RoutedEventArgs e)
         {
 
         }

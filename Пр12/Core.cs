@@ -8,6 +8,6 @@ namespace Пр12
 {
     internal class Core
     {
-        public static PCBuildEntities Context = new PCBuildEntities();
+        public static CompBuilderEntities Context = new CompBuilderEntities();
     }
 }

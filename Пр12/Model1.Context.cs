@@ -13,10 +13,10 @@ namespace Пр12
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PCBuildEntities : DbContext
+    public partial class CompBuilderEntities : DbContext
     {
-        public PCBuildEntities()
-            : base("name=PCBuildEntities")
+        public CompBuilderEntities()
+            : base("name=CompBuilderEntities")
         {
         }
     
@@ -52,6 +52,7 @@ namespace Пр12
         public virtual DbSet<storagedevice> storagedevice { get; set; }
         public virtual DbSet<storagedeviceinterface> storagedeviceinterface { get; set; }
         public virtual DbSet<storagedevicetype> storagedevicetype { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<videoconnector> videoconnector { get; set; }
         public virtual DbSet<videoconnectorgpu> videoconnectorgpu { get; set; }
     }
