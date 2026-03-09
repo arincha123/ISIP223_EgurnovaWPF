@@ -73,5 +73,9 @@ namespace Пр12.Pages
             }
         }
 
+        private void AddInAssemb_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

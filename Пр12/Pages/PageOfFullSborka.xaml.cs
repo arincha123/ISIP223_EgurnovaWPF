@@ -44,7 +44,7 @@ namespace Пр12.Pages
 
         private void ViewAll_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new YourAssembly());
         }
 
         private void SelectedComponentsList_SelectionChanged(object sender, SelectionChangedEventArgs e)

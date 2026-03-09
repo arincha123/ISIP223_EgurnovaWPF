@@ -1,0 +1,58 @@
+﻿<Page x:Class="Пр12.Pages.YourAssembly"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Пр12.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="YourAssembly">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Ваши сборки" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   FontSize="24" FontWeight="Bold" Foreground="#2196F3"/>
+        <ListBox x:Name="Assemly" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <!--<Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel></StackPanel>-->
+                        <TextBlock Text="{Binding name}" FontSize="20"/>
+                        <ListBox x:Name="PartsAssembly" ItemsSource="{Binding partassembly}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding basepart.name}" FontSize="16"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+
+
+
+        <Button Content="Назад" Grid.Row="2" Width="70" Height="30" Background="#2196F3" Foreground="White" BorderThickness="0"
+                VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10" FontSize="16" Click="Button_Click"/>
+
+    </Grid>
+</Page>

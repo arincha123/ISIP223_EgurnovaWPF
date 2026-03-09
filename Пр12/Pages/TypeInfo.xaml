@@ -47,14 +47,17 @@
                         <Image Source="{Binding image}" Width="170" Grid.Column="0" Grid.RowSpan="2"/>
                         <TextBlock Text="{Binding name}" FontSize="20" Grid.Column="1" />
                         <TextBlock Text="{Binding price, StringFormat={}{0:N0} ₽}" Grid.Column="2" FontSize="20" HorizontalAlignment="Right" />
-                        <Button x:Name="AddInAssemb" Content="Добавить" FontSize="16" Grid.Row="1" Grid.Column="2" Width="85" Height="33" VerticalAlignment="Top" />
+                        <Button x:Name="AddInAssemb" Content="Добавить" FontSize="16" Grid.Row="1" Grid.Column="2" Width="80" Height="30" Background="#2196F3" 
+                                    Foreground="White" BorderThickness="0" VerticalAlignment="Top" Click="AddInAssemb_Click" />
                     </Grid>
 
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Button Content="Назад" Grid.Row="2" Height="33" Width="75" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10" FontSize="16" Click="Button_Click"/>
+        <Button Content="Назад" Grid.Row="2" Width="70" Height="30" Background="#2196F3" 
+        Foreground="White" BorderThickness="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10" 
+                FontSize="16" Click="Button_Click"/>
 
 
 
