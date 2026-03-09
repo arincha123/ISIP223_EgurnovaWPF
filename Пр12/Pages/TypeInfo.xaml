@@ -20,25 +20,45 @@
         <WrapPanel HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" >
             <TextBox x:Name="Search" Grid.Row="0" Width="350" Height="30" Margin="25 0 0 0" TextChanged="Search_TextChanged" FontSize="16"/>
             <TextBlock Text="Фильтры" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" FontSize="16"/>
-            <ComboBox x:Name="ComboFiltr" Grid.Row="0" Height="30" SelectionChanged="ComboBox_SelectionChanged" SelectedIndex="0" FontSize="18"/>
-            <ListBox x:Name="Selectedparts" >
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel/>
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                       
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-
-
-
-
+            <ComboBox x:Name="ComboFiltr" Grid.Row="0" Height="30" SelectionChanged="ComboBox_SelectionChanged" SelectedIndex="0" FontSize="16"/>
         </WrapPanel>
+
+
+        <ListBox x:Name="Selectedparts" Grid.Row="2" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <Image Source="{Binding image}" Width="170" Grid.Column="0" Grid.RowSpan="2"/>
+                        <TextBlock Text="{Binding name}" FontSize="20" Grid.Column="1" />
+                        <TextBlock Text="{Binding price, StringFormat={}{0:N0} ₽}" Grid.Column="2" FontSize="20" HorizontalAlignment="Right" />
+                        <Button x:Name="AddInAssemb" Content="Добавить" FontSize="16" Grid.Row="1" Grid.Column="2" Width="85" Height="33" VerticalAlignment="Top" />
+                    </Grid>
+
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Button Content="Назад" Grid.Row="2" Height="33" Width="75" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10" FontSize="16" Click="Button_Click"/>
+
+
+
+
 
     </Grid>
 </Page>

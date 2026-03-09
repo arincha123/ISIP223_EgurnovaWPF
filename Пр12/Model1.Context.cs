@@ -13,10 +13,10 @@ namespace Пр12
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CompBuilderEntities : DbContext
+    public partial class PCBuildEntities : DbContext
     {
-        public CompBuilderEntities()
-            : base("name=CompBuilderEntities")
+        public PCBuildEntities()
+            : base("name=PCBuildEntities")
         {
         }
     

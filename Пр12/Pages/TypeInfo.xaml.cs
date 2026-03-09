@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace Пр12.Pages
 {
@@ -20,31 +21,57 @@ namespace Пр12.Pages
     /// </summary>
     public partial class TypeInfo : Page
     {
-        public List<basepart> baseparts { get; set; }
-        public List<string> man {  get; set; }
+        private int selectedTypeId;
+
+        private List<basepart> allPartsOfCurrentType;
+
         public TypeInfo(parttype Types)
         {
             InitializeComponent();
-            baseparts = Core.Context.basepart.Where(p => p.parttypeid == Types.id).ToList();
-            man = baseparts.Select(p => p.manufacturer.name).Distinct().ToList();
-            man.Insert(0, "Все");
-            ComboFiltr.ItemsSource = man;
-            NameOfPart.DataContext = Types;
-            
-        }
+            selectedTypeId = Types.id;
 
+            allPartsOfCurrentType = Core.Context.basepart.Where(p => p.parttypeid == selectedTypeId).ToList();
+            List<string> manufacturers = allPartsOfCurrentType.Select(p => p.manufacturer.name).Distinct().ToList();
+
+            manufacturers.Insert(0, "Все");
+
+            ComboFiltr.ItemsSource = manufacturers;
+            ComboFiltr.SelectedIndex = 0;
+
+            NameOfPart.DataContext = Types;
+            Selectedparts.ItemsSource = allPartsOfCurrentType;
+        }
         private void Search_TextChanged(object sender, TextChangedEventArgs e)
         {
+            string searchText = Search.Text.ToLower();
+            List<basepart> filteredParts = new List<basepart>(allPartsOfCurrentType);
 
+            if (ComboFiltr.SelectedItem.ToString() != "Все")
+            {
+                string selectedManufacturer = ComboFiltr.SelectedItem.ToString();
+                filteredParts = filteredParts.Where(p => p.manufacturer.name == selectedManufacturer).ToList();
+            }
+
+            if (searchText != "")
+            {
+                filteredParts = filteredParts.Where(p => p.name.ToLower().Contains(searchText)).ToList();
+            }
+
+            Selectedparts.ItemsSource = filteredParts;
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(ComboFiltr.SelectedItem.ToString() == "Все")
-            {
-                Selectedparts.ItemsSource = baseparts;
-            }
-            else Selectedparts.ItemsSource = baseparts.Where(p => p.manufacturer.name == ComboFiltr.SelectedItem.ToString());
+            Search_TextChanged(null, null);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
+        }
+
     }
 }
