@@ -49,7 +49,46 @@ namespace Пр12.Pages
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
+            if (!string.IsNullOrEmpty(NameOfAssembly.Text))
+            {
+                if (UsersAssemblies.UsAssembl.Count > 0)
+                {
+                    assembly userassembly = new assembly()
+                    {
+                        author = UsersAssemblies.username,
+                        name = NameOfAssembly.Text 
+                    };
 
+                    Core.Context.assembly.Add(userassembly);
+                    Core.Context.SaveChanges();
+
+                    foreach (var part in UsersAssemblies.UsAssembl)
+                    {
+                        partassembly partassem = new partassembly
+                        {
+                            assemblyid = userassembly.id,
+                            partid = part.id
+                        };
+                        Core.Context.partassembly.Add(partassem);
+                    }
+
+                    Core.Context.SaveChanges();
+
+                    MessageBox.Show("Сборка сохранена!");
+
+                    NameOfAssembly.Text = "";
+
+                    NavigationService.Navigate(new YourAssembly());
+                }
+                else
+                {
+                    MessageBox.Show("Добавьте детали в сборку!!!!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Введите название сборки");
+            }
         }
 
         private void Clear_Click(object sender, RoutedEventArgs e)

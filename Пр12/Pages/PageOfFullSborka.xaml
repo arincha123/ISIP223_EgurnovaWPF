@@ -97,13 +97,15 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Image Source="{Binding image}" Width="50"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <Border Grid.Column="0" Width="50" Height="50">
+                                    <Image Source="{Binding image}" Width="50"  Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding ComponentName}" FontWeight="SemiBold" FontSize="14"/>
-                                    <TextBlock Text="{Binding Specifications}" Foreground="#757575" FontSize="12"/>
+                                    <TextBlock Text="{Binding name}" FontWeight="SemiBold" FontSize="14"/>
+                                    <TextBlock Text="{Binding parttype.name}" Foreground="#757575" FontSize="12"/>
                                 </StackPanel>
 
-                                <TextBlock Grid.Column="2" Text="{Binding PriceFormatted}" FontWeight="Bold" Foreground="#4CAF50" VerticalAlignment="Center" Margin="10,0"/>
+                                <TextBlock Grid.Column="2" Text="{Binding price, StringFormat={}{0:N0} ₽}" FontWeight="Bold" Foreground="#4CAF50" VerticalAlignment="Center" Margin="10,0"/>
 
                                 <Button x:Name="DelFromSborka" Grid.Column="3" Content="✖" Width="30" Height="30" Background="#F44336" Foreground="White" BorderThickness="0" Click="DelFromSborka_Click" />
                                 
