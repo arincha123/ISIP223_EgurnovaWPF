@@ -45,7 +45,8 @@
                         </Grid.RowDefinitions>
                         
                         <Image Source="{Binding image}" Width="170" Grid.Column="0" Grid.RowSpan="2"/>
-                        <TextBlock Text="{Binding name}" FontSize="20" Grid.Column="1" />
+                        <TextBlock Text="{Binding name}" FontSize="20" Grid.Column="1"  />
+                        <TextBlock Text="{Binding FullDescription, StringFormat=[{0}]}" FontSize="20" Grid.Column="1" Grid.Row="1" />
                         <TextBlock Text="{Binding price, StringFormat={}{0:N0} ₽}" Grid.Column="2" FontSize="20" HorizontalAlignment="Right" />
                         <Button x:Name="AddInAssemb" Content="Добавить" FontSize="16" Grid.Row="1" Grid.Column="2" Width="80" Height="30" Background="#2196F3" 
                                     Foreground="White" BorderThickness="0" VerticalAlignment="Top" Click="AddInAssemb_Click" />

@@ -23,12 +23,27 @@ namespace Пр12.Pages
         public PageOfFullSborka()
         {
             InitializeComponent();
+            Loaded += PageOfFullSborka_Loaded;
             List<parttype> parttypes = Core.Context.parttype.ToList();
             PartTypesList.ItemsSource = parttypes;
         }
 
-        private void AllDetails_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void PageOfFullSborka_Loaded(object sender, RoutedEventArgs e)
         {
+            UpdateSelectedComponentsList();
+            UpdateTotalPrice();
+        }
+
+        private void UpdateSelectedComponentsList()
+        {
+            SelectedComponentsList.ItemsSource = null;
+            SelectedComponentsList.ItemsSource = UsersAssemblies.UsAssembl;
+            UpdateTotalPrice();
+        }
+
+        private void UpdateTotalPrice()
+        {
+            UsersAssemblies.TotalAmount = UsersAssemblies.UsAssembl.Sum(p => p.price);
 
         }
 
@@ -39,17 +54,27 @@ namespace Пр12.Pages
 
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
+            if (UsersAssemblies.UsAssembl.Count == 0)
+                return;
 
+            MessageBoxResult result = MessageBox.Show(
+                "Очистить всю сборку?",
+                "Подтверждение",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                UsersAssemblies.UsAssembl.Clear();
+                UsersAssemblies.TotalAmount = 0;
+                UsersAssemblies.Sort();
+                UpdateSelectedComponentsList();
+            }
         }
 
         private void ViewAll_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new YourAssembly());
-        }
-
-        private void SelectedComponentsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
 
         private void SelectEl_Click(object sender, RoutedEventArgs e)
@@ -61,7 +86,21 @@ namespace Пр12.Pages
 
         private void DelFromSborka_Click(object sender, RoutedEventArgs e)
         {
+            Button button = (Button)sender;
+            basepart partToRemove = (basepart)button.DataContext;
 
+            MessageBoxResult result = MessageBox.Show(
+                $"Удалить {partToRemove.name} из сборки?",
+                "Подтверждение удаления",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                UsersAssemblies.UsAssembl.Remove(partToRemove);
+                UsersAssemblies.Sort();
+                UpdateSelectedComponentsList();
+            }
         }
     }
 }

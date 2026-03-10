@@ -19,8 +19,12 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Собери свой компухтер" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" 
+        <TextBlock Text="Собери свой компухтер" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" 
                    FontSize="24" FontWeight="Bold" Foreground="#2196F3"/>
+        <WrapPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+            <TextBlock x:Name="NameOfAssembly" Text="Названеи сборки: " Margin="30 0 30 0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <TextBox Text="" Width="200" HorizontalAlignment="Stretch"/>
+        </WrapPanel>
 
         <ListBox x:Name="PartTypesList" Grid.Row="1" Grid.Column="0" Margin="5" ItemsSource="{Binding parttypes}" 
                  SelectedItem="{Binding SelectedPartType}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  
@@ -73,7 +77,7 @@
             </Border>
 
             <ListBox x:Name="SelectedComponentsList" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                     Background="Transparent" BorderThickness="0" Margin="0,0,0,10" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="SelectedComponentsList_SelectionChanged">
+                     Background="Transparent" BorderThickness="0" Margin="0,0,0,10" d:ItemsSource="{d:SampleData ItemCount=5}">
 
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -93,10 +97,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Border Grid.Column="0" Width="50" Height="50" Background="#F0F0F0" CornerRadius="4" Margin="0,0,10,0">
-                                    <TextBlock Text="🖥️" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-
+                                <Image Source="{Binding image}" Width="50"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                     <TextBlock Text="{Binding ComponentName}" FontWeight="SemiBold" FontSize="14"/>
                                     <TextBlock Text="{Binding Specifications}" Foreground="#757575" FontSize="12"/>

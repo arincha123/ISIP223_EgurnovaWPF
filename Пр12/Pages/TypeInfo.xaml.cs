@@ -75,6 +75,45 @@ namespace Пр12.Pages
 
         private void AddInAssemb_Click(object sender, RoutedEventArgs e)
         {
+            Button btn = (Button)sender;
+            basepart selectedpart = (basepart)btn.DataContext;
+
+            if (CheckCompatibility.CanAddPart(UsersAssemblies.UsAssembl, selectedpart, out string errorMessage, out basepart partToReplace))
+            {
+                if (partToReplace != null)
+                {
+                    MessageBoxResult result = MessageBox.Show(
+                        $"В вашей сборке уже есть {partToReplace.parttype.name}: {partToReplace.name}. Заменить на {selectedpart.name}?",
+                        "Замена детали",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Question);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        UsersAssemblies.UsAssembl.Remove(partToReplace);
+                        UsersAssemblies.UsAssembl.Add(selectedpart);
+
+                    }
+                }
+                else
+                {
+                    UsersAssemblies.UsAssembl.Add(selectedpart);
+
+                }
+                NavigationService.GoBack();
+            }
+            else
+            {
+                MessageBox.Show(errorMessage, "Ошибка совместимости",
+                               MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            UsersAssemblies.Sort();
+            UpdatePrice();
+
+        }
+        private void UpdatePrice()
+        {
+            UsersAssemblies.TotalAmount = UsersAssemblies.UsAssembl.Sum(p => p.price);
 
         }
     }

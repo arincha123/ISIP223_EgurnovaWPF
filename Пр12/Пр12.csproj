@@ -82,6 +82,7 @@
     <Compile Include="certificate.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="CheckCompatibility.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="cpu.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -125,6 +126,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\basepart.cs" />
     <Compile Include="motherboard.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -173,6 +175,7 @@
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="UsersAssemblies.cs" />
     <Compile Include="videoconnector.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
