@@ -21,7 +21,7 @@
 
         <TextBlock Text="Собери свой компухтер" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" 
                    FontSize="24" FontWeight="Bold" Foreground="#2196F3"/>
-        <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+        <WrapPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
             <WrapPanel>
                 <TextBlock Text="Название сборки: " Margin="10 0 10 0" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 <TextBox x:Name="NameOfAssembly" Text="" Width="200" Height="15" HorizontalAlignment="Stretch"/>
@@ -30,7 +30,7 @@
                 <TextBlock Text="Имя автора: " Margin="10 0 10 0" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 <TextBox x:Name="NameOfAuthor" Text="" Width="200" Height="15" HorizontalAlignment="Stretch"/>
             </WrapPanel>
-        </StackPanel>
+        </WrapPanel>
 
 
         <ListBox x:Name="PartTypesList" Grid.Row="1" Grid.Column="0" Margin="5" ItemsSource="{Binding parttypes}" 
