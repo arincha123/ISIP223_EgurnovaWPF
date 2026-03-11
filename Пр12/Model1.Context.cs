@@ -52,7 +52,6 @@ namespace Пр12
         public virtual DbSet<storagedevice> storagedevice { get; set; }
         public virtual DbSet<storagedeviceinterface> storagedeviceinterface { get; set; }
         public virtual DbSet<storagedevicetype> storagedevicetype { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<videoconnector> videoconnector { get; set; }
         public virtual DbSet<videoconnectorgpu> videoconnectorgpu { get; set; }
     }

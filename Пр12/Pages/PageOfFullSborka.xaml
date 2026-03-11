@@ -21,10 +21,17 @@
 
         <TextBlock Text="Собери свой компухтер" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" 
                    FontSize="24" FontWeight="Bold" Foreground="#2196F3"/>
-        <WrapPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
-            <TextBlock x:Name="NameOfAssembly" Text="Названеи сборки: " Margin="30 0 30 0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <TextBox Text="" Width="200" HorizontalAlignment="Stretch"/>
-        </WrapPanel>
+        <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+            <WrapPanel>
+                <TextBlock Text="Название сборки: " Margin="10 0 10 0" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBox x:Name="NameOfAssembly" Text="" Width="200" Height="15" HorizontalAlignment="Stretch"/>
+            </WrapPanel>
+            <WrapPanel>
+                <TextBlock Text="Имя автора: " Margin="10 0 10 0" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBox x:Name="NameOfAuthor" Text="" Width="200" Height="15" HorizontalAlignment="Stretch"/>
+            </WrapPanel>
+        </StackPanel>
+
 
         <ListBox x:Name="PartTypesList" Grid.Row="1" Grid.Column="0" Margin="5" ItemsSource="{Binding parttypes}" 
                  SelectedItem="{Binding SelectedPartType}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  
@@ -72,7 +79,7 @@
 
                     <TextBlock Text="Ваша сборка" FontSize="18" FontWeight="Bold" VerticalAlignment="Center"/>
 
-                    <TextBlock Grid.Column="1" Text="{Binding TotalPriceFormatted}" FontSize="18" FontWeight="Bold" Foreground="#4CAF50" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="TextOfPrice" Grid.Column="1" FontSize="18" FontWeight="Bold" Foreground="#4CAF50" VerticalAlignment="Center"/>
                 </Grid>
             </Border>
 

@@ -233,16 +233,6 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="videoconnector">
           <Key>
             <PropertyRef Name="id" />
@@ -682,7 +672,6 @@
           <EntitySet Name="storagedevice" EntityType="Self.storagedevice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="storagedeviceinterface" EntityType="Self.storagedeviceinterface" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="storagedevicetype" EntityType="Self.storagedevicetype" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="videoconnector" EntityType="Self.videoconnector" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="videoconnectorgpu" EntityType="Self.videoconnectorgpu" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_basepart_manufacturer" Association="Self.FK_basepart_manufacturer">
@@ -1113,16 +1102,6 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="storagedevice" Relationship="Self.FK_storagedevice_storagedevicetype" FromRole="storagedevicetype" ToRole="storagedevice" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="videoconnector">
           <Key>
@@ -1566,7 +1545,6 @@
           <EntitySet Name="storagedevice" EntityType="Self.storagedevice" />
           <EntitySet Name="storagedeviceinterface" EntityType="Self.storagedeviceinterface" />
           <EntitySet Name="storagedevicetype" EntityType="Self.storagedevicetype" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="videoconnector" EntityType="Self.videoconnector" />
           <EntitySet Name="videoconnectorgpu" EntityType="Self.videoconnectorgpu" />
           <AssociationSet Name="FK_partassembly_assembly" Association="Self.FK_partassembly_assembly">
@@ -1960,17 +1938,6 @@
               <MappingFragment StoreEntitySet="storagedevicetype">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="PCBuildModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

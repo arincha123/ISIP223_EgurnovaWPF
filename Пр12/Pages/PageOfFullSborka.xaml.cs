@@ -26,6 +26,7 @@ namespace Пр12.Pages
             Loaded += PageOfFullSborka_Loaded;
             List<parttype> parttypes = Core.Context.parttype.ToList();
             PartTypesList.ItemsSource = parttypes;
+            TextOfPrice.DataContext = UsersAssemblies.TotalAmount;
         }
 
         private void PageOfFullSborka_Loaded(object sender, RoutedEventArgs e)
@@ -44,7 +45,7 @@ namespace Пр12.Pages
         private void UpdateTotalPrice()
         {
             UsersAssemblies.TotalAmount = UsersAssemblies.UsAssembl.Sum(p => p.price);
-
+            TextOfPrice.Text = $"{UsersAssemblies.TotalAmount} ₽";
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
@@ -55,12 +56,11 @@ namespace Пр12.Pages
                 {
                     assembly userassembly = new assembly()
                     {
-                        author = UsersAssemblies.username,
+                        author = NameOfAuthor.Text,
                         name = NameOfAssembly.Text 
                     };
 
                     Core.Context.assembly.Add(userassembly);
-                    Core.Context.SaveChanges();
 
                     foreach (var part in UsersAssemblies.UsAssembl)
                     {
@@ -74,7 +74,7 @@ namespace Пр12.Pages
 
                     Core.Context.SaveChanges();
 
-                    MessageBox.Show("Сборка сохранена!");
+                    MessageBox.Show("Ваша отстойная сборка сохранена");
 
                     NameOfAssembly.Text = "";
 
@@ -82,12 +82,12 @@ namespace Пр12.Pages
                 }
                 else
                 {
-                    MessageBox.Show("Добавьте детали в сборку!!!!");
+                    MessageBox.Show("Сборка пустая. Где детали, дятел?!");
                 }
             }
             else
             {
-                MessageBox.Show("Введите название сборки");
+                MessageBox.Show("Где название?");
             }
         }
 
@@ -121,6 +121,7 @@ namespace Пр12.Pages
             Button bt = (Button)sender;
             parttype pt = (parttype)bt.DataContext;
             NavigationService.Navigate(new TypeInfo(pt));
+
         }
 
         private void DelFromSborka_Click(object sender, RoutedEventArgs e)
