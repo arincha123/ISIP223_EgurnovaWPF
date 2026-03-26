@@ -67,8 +67,41 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\GamePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\WelcomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Armor.cs" />
+    <Compile Include="Model\BossArchmage.cs" />
+    <Compile Include="Model\BossKovalsky.cs" />
+    <Compile Include="Model\BossPestov.cs" />
+    <Compile Include="Model\BossVVG.cs" />
+    <Compile Include="Model\ConsoleColors.cs" />
+    <Compile Include="Model\ConsoleHelper.cs" />
+    <Compile Include="Model\Enemy.cs" />
+    <Compile Include="Model\EnemyFactory.cs" />
+    <Compile Include="Model\Game.cs" />
+    <Compile Include="Model\Goblin.cs" />
+    <Compile Include="Model\HealthPotion.cs" />
+    <Compile Include="Model\Item.cs" />
+    <Compile Include="Model\ItemFactory.cs" />
+    <Compile Include="Model\Mage.cs" />
+    <Compile Include="Model\Player.cs" />
+    <Compile Include="Model\Skeleton.cs" />
+    <Compile Include="Model\Slime.cs" />
+    <Compile Include="Model\Weapon.cs" />
+    <Compile Include="Pages\GamePage.xaml.cs">
+      <DependentUpon>GamePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WelcomePage.xaml.cs">
+      <DependentUpon>WelcomePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -93,6 +126,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

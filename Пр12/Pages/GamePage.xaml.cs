@@ -13,21 +13,25 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Пр12
+namespace Пр12.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для GamePage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GamePage : Page
     {
-        public MainWindow()
+        public GamePage()
         {
             InitializeComponent();
         }
 
-        private void MainFrame_Navigated(object sender, NavigationEventArgs e)
-        {
 
-        }
+
+
+
+
+
+
+
     }
 }
