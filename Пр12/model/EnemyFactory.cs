@@ -19,7 +19,7 @@ namespace ISIP223_Egurnova.Model
                 case 0: return new Goblin();
                 case 1: return new Skeleton();
                 case 2: return new Mage();
-                case 3: return new Slime();
+                //case 3: return new Slime();
                 default: return new Goblin();
             }
         }

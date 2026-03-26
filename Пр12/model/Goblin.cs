@@ -11,10 +11,10 @@ namespace ISIP223_Egurnova.Model
         public Goblin()
         {
             Name = "Гоблин";
-            MaxHP = 15;
-            CurrentHP = 15;
-            Attack = 4;
-            Defense = 2;
+            MaxHP = 30;
+            CurrentHP = 30;
+            Attack = 12;
+            Defense = 3;
         }
 
         public override int GetDamage(Player player, bool usedDefense)
@@ -26,7 +26,7 @@ namespace ISIP223_Egurnova.Model
 
             if (isCrit)
             {
-                damage = (int)(damage * 1.5);
+                damage = (int)(damage * 2);
                 Console.WriteLine("Критический удар!");
             }
 

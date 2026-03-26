@@ -94,7 +94,6 @@
     <Compile Include="Model\Mage.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Skeleton.cs" />
-    <Compile Include="Model\Slime.cs" />
     <Compile Include="Model\Weapon.cs" />
     <Compile Include="Pages\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
@@ -128,7 +127,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\" />
+    <Resource Include="Pages\фон.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\фон.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Weap\арбалет.png" />
+    <Resource Include="Images\Weap\боев пос.png" />
+    <Resource Include="Images\Weap\кинжал убийцы.png" />
+    <Resource Include="Images\Weap\клинок.png" />
+    <Resource Include="Images\Weap\лук.png" />
+    <Resource Include="Images\Weap\секира воина.png" />
+    <Resource Include="Images\Weap\снайп арб.png" />
+    <Resource Include="Images\Weap\стальной меч.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

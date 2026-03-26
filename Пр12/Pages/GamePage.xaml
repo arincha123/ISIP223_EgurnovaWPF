@@ -11,14 +11,14 @@
     <Grid Background="Black">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="250"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Border BorderBrush="#FF137D26" BorderThickness="5" CornerRadius="10" >
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="400"/>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Этаж" Grid.Row="0" Grid.Column="0" Margin="10 0 0 0" FontSize="18" VerticalAlignment="Center" Foreground="White" />
@@ -29,12 +29,26 @@
             </Grid>
         </Border>
 
-        <Border>
-            
+        <Border Grid.Row="1" >
+            <Border.Background>
+                <ImageBrush ImageSource="/Pages/фон.png" Stretch="Fill"/>
+            </Border.Background>
+
         </Border>
+
+        <Border Grid.Row="2" BorderBrush="#FF137D26" BorderThickness="5" CornerRadius="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+            </Grid>
+        </Border>
+
+
         
-
-
-
+        
     </Grid>
 </Page>

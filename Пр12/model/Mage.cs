@@ -12,10 +12,10 @@ namespace ISIP223_Egurnova.Model
         public Mage()
         {
             Name = "Маг";
-            MaxHP = 20;
-            CurrentHP = 20;
-            Attack = 10;
-            Defense = 1;
+            MaxHP = 25;
+            CurrentHP = 25;
+            Attack = 15;
+            Defense = 2;
         }
 
         public override int GetDamage(Player player, bool usedDefense)
@@ -26,7 +26,7 @@ namespace ISIP223_Egurnova.Model
         public override string Effect(Player player)
         {
             Random random = new Random();
-            int freezeRoll = random.Next(0, 4);
+            int freezeRoll = random.Next(0, 7);
             bool isFrozen = (freezeRoll == 0);
 
             if (isFrozen)
