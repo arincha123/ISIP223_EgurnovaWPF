@@ -21,7 +21,6 @@ namespace Пр12
         public int id_seat { get; set; }
     
         public virtual CUSTOMER CUSTOMER { get; set; }
-        public virtual SEAT SEAT { get; set; }
         public virtual SESSIONS SESSIONS { get; set; }
     }
 }

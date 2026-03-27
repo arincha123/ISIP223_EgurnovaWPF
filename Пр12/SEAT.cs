@@ -18,7 +18,6 @@ namespace Пр12
         public SEAT()
         {
             this.SEAT_IN_SESSION = new HashSet<SEAT_IN_SESSION>();
-            this.TICKET = new HashSet<TICKET>();
         }
     
         public int ID_SEAT { get; set; }
@@ -29,7 +28,5 @@ namespace Пр12
         public virtual HALL HALL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SEAT_IN_SESSION> SEAT_IN_SESSION { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TICKET> TICKET { get; set; }
     }
 }

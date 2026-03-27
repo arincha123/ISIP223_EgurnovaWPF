@@ -8,6 +8,6 @@ namespace Пр12
 {
     internal class Core
     {
-        public static CinemaEntities1 Context = new CinemaEntities1();
+        public static CinemaEntities Context = new CinemaEntities();
     }
 }

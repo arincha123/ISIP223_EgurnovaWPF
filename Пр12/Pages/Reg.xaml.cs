@@ -43,29 +43,71 @@ namespace Пр12.Pages
         {
             string login = Login.Text;
             string password = Password.Text;
-
-            CUSTOMER existing = Core.Context.CUSTOMER.Where(c => c.LOGIN == login).FirstOrDefault();
-            if (existing != null)
+            if (Regist(login, password))
             {
-                MessageBox.Show("Такой логин уже существует!");
-                return;
+                CUSTOMER customer = new CUSTOMER()
+                {
+                    LOGIN = login,
+                    PASSWORD = password
+                };
+
+                User.curuser = customer;
+
+                Core.Context.CUSTOMER.Add(customer);
+                Core.Context.SaveChanges();
+
+                MessageBox.Show("Регистрация успешна!");
+            }
+            else
+            {
+                MessageBox.Show("Неверный логин или пароль");
+            }
+            //string login = Login.Text;
+            //string password = Password.Text;
+
+            //CUSTOMER existing = Core.Context.CUSTOMER.Where(c => c.LOGIN == login).FirstOrDefault();
+            //if (existing != null)
+            //{
+            //    MessageBox.Show("Такой логин уже существует!");
+            //    return;
+            //}
+
+            //CUSTOMER customer = new CUSTOMER()
+            //{
+            //    LOGIN = login,
+            //    PASSWORD = password
+            //};
+
+            //User.curuser = customer;
+
+            //Core.Context.CUSTOMER.Add(customer);
+            //Core.Context.SaveChanges();
+
+            //MessageBox.Show("Регистрация успешна!");
+        }
+        public bool Regist(string login, string password)
+        {
+            if (string.IsNullOrEmpty(login) || login.Length < 5 || string.IsNullOrEmpty(password) || password.Length < 5)
+            {
+                MessageBox.Show("Неверный логин или пароль");
+                return false;
             }
 
-            CUSTOMER customer = new CUSTOMER()
+            using (var db = new CinemaEntities())
             {
-                LOGIN = login,
-                PASSWORD = password
-            };
+                var user = db.CUSTOMER.AsNoTracking().FirstOrDefault(u => u.LOGIN == login && u.PASSWORD == password);
 
-            customer = User.curuser;
+                if (user != null)
+                {
+                    MessageBox.Show("Пользователь с такими данными уже есть");
+                    return false;
+                }
 
-            Core.Context.CUSTOMER.Add(customer);
-            Core.Context.SaveChanges();
+                Login.Clear();
+                Password.Clear();
 
-            MessageBox.Show("Регистрация успешна!");
-
+                return true;
+            }
         }
-
-
     }
 }

@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36221.1 d17.14
+VisualStudioVersion = 17.14.36221.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Пр12", "Пр12\Пр12.csproj", "{CA3628A7-ABE2-4425-BC92-5F59B97810AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthTest", "AuthTest\AuthTest.csproj", "{409DA12A-2B36-4942-B7F6-8283BE029844}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegTest", "RegTest\RegTest.csproj", "{4DC5C644-6D30-4C2C-8E4E-B345C703D9F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{CA3628A7-ABE2-4425-BC92-5F59B97810AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA3628A7-ABE2-4425-BC92-5F59B97810AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA3628A7-ABE2-4425-BC92-5F59B97810AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{409DA12A-2B36-4942-B7F6-8283BE029844}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{409DA12A-2B36-4942-B7F6-8283BE029844}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{409DA12A-2B36-4942-B7F6-8283BE029844}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{409DA12A-2B36-4942-B7F6-8283BE029844}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DC5C644-6D30-4C2C-8E4E-B345C703D9F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DC5C644-6D30-4C2C-8E4E-B345C703D9F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DC5C644-6D30-4C2C-8E4E-B345C703D9F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DC5C644-6D30-4C2C-8E4E-B345C703D9F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

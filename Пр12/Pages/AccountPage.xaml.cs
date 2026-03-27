@@ -37,25 +37,41 @@ namespace Пр12.Pages
 
         private void GoIn_Click(object sender, RoutedEventArgs e)
         {
-            string login = Login.Text;
-            string password = Password.Text;
-
-            CUSTOMER existing = Core.Context.CUSTOMER.Where(c => c.LOGIN == login && c.PASSWORD == password).FirstOrDefault();
-            if (existing != null)
+            if (Auth(Login.Text, Password.Text))
             {
+                CUSTOMER existing = new CUSTOMER()
+                {
+                    LOGIN = Login.Text,
+                    PASSWORD = Password.Text
+                };
 
-                NavigationService.Navigate(new HomePage());
-
-                Login.Text = "";
-                Password.Text = "";
+                User.curuser = existing;
             }
-            else
+        }
+
+        public bool Auth(string log, string pass)
+        {
+            if (string.IsNullOrEmpty(log) && log.Length > 5 || string.IsNullOrEmpty(pass) && pass.Length > 5)
             {
                 MessageBox.Show("Неверный логин или пароль");
             }
 
-            User.curuser = existing;
+            using (var db = new CinemaEntities())
+            {
+                var user = db.CUSTOMER.AsNoTracking().FirstOrDefault(u => u.LOGIN == log && u.PASSWORD == pass);
 
+                if (user == null)
+                {
+                    MessageBox.Show("Пользователь с такими данными не найден");
+                    return false;
+                }
+
+                MessageBox.Show("Пользователь успешно найден");
+                Login.Clear();
+                Password.Clear();
+
+                return true;
+            }
         }
 
         private void Danni_SelectionChanged(object sender, RoutedEventArgs e)

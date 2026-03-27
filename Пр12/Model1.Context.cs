@@ -13,10 +13,10 @@ namespace Пр12
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CinemaEntities1 : DbContext
+    public partial class CinemaEntities : DbContext
     {
-        public CinemaEntities1()
-            : base("name=CinemaEntities1")
+        public CinemaEntities()
+            : base("name=CinemaEntities")
         {
         }
     
