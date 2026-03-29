@@ -2,8 +2,7 @@
 
 Егурнова Арина Евгеньевна 3ИСИП-223 Кучеренко Егор Дмитриевич 3ИСИП-223
 
-Содержимое таблицы "CUSTOMER" с
-пользователями из СУБД Microsoft SQL Server
+Содержимое таблицы "CUSTOMER" с пользователями из СУБД Microsoft SQL Server
 <img width="324" height="192" alt="image" src="https://github.com/user-attachments/assets/7ef862c3-f578-4b14-9fa9-ce001049798f" />
 
 Результаты тестирования метода Auth 
