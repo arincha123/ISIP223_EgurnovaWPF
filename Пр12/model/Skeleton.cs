@@ -11,10 +11,10 @@ namespace ISIP223_Egurnova.Model
         public Skeleton()
         {
             Name = "Скелет";
-            MaxHP = 40;
-            CurrentHP = 40;
-            Attack = 10;
-            Defense = 5;
+            MaxHP = 20;
+            CurrentHP = 20;
+            Attack = 8;
+            Defense = 3;
         }
 
         public override int GetDamage(Player player, bool usedDefense)

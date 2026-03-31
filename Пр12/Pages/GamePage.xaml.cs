@@ -93,7 +93,6 @@ namespace Пр12.Pages
 
                 var stackPanel = new StackPanel();
 
-                // Картинка врага
                 var image = new Image
                 {
                     Source = GetEnemyImage(enemy),
@@ -103,7 +102,6 @@ namespace Пр12.Pages
                 };
                 stackPanel.Children.Add(image);
 
-                // Имя врага
                 var nameText = new TextBlock
                 {
                     Text = enemy.Name,
@@ -115,7 +113,6 @@ namespace Пр12.Pages
                 };
                 stackPanel.Children.Add(nameText);
 
-                // HP
                 var hpText = new TextBlock
                 {
                     Text = $"HP: {enemy.CurrentHP}/{enemy.MaxHP}",
@@ -125,7 +122,6 @@ namespace Пр12.Pages
                 };
                 stackPanel.Children.Add(hpText);
 
-                // ATK/DEF
                 var statsText = new TextBlock
                 {
                     Text = $"ATK: {enemy.Attack} DEF: {enemy.Defense}",
@@ -137,10 +133,8 @@ namespace Пр12.Pages
 
                 enemyBorder.Child = stackPanel;
 
-                // Добавляем обработчик клика
                 enemyBorder.MouseLeftButtonDown += Enemy_Click;
 
-                // Подсвечиваем выбранного врага
                 if (selectedEnemy == enemy)
                 {
                     enemyBorder.Background = new SolidColorBrush(Color.FromArgb(100, 100, 100, 100));
@@ -154,7 +148,6 @@ namespace Пр12.Pages
         {
             string imagePath = "";
 
-            // Определяем путь к картинке в зависимости от имени врага
             switch (enemy.Name)
             {
                 case "Гоблин":
@@ -330,6 +323,7 @@ namespace Пр12.Pages
 
                 isChoosingItem = true;
                 SelectBtn.Visibility = Visibility.Visible;
+                DiscardBtn.Visibility = Visibility.Visible;
                 AttackBtn.Visibility = Visibility.Collapsed;
                 DefenceBtn.Visibility = Visibility.Collapsed;
             }
@@ -351,10 +345,26 @@ namespace Пр12.Pages
             isChoosingItem = false;
             pendingItem = null;
             SelectBtn.Visibility = Visibility.Collapsed;
+            DiscardBtn.Visibility = Visibility.Collapsed;
             AttackBtn.Visibility = Visibility.Visible;
             DefenceBtn.Visibility = Visibility.Visible;
 
             UpdateUI();
+            ContinueGame();
+        }
+
+        private void DiscardBtn_Click(object sender, RoutedEventArgs e)
+        {
+            AddLog($"Вы отказались от {pendingItem.Name} и оставили его в сундуке.", ConsoleColors.WarningColor);
+
+            isChoosingItem = false;
+            pendingItem = null;
+
+            SelectBtn.Visibility = Visibility.Collapsed;
+            DiscardBtn.Visibility = Visibility.Collapsed;
+            AttackBtn.Visibility = Visibility.Visible;
+            DefenceBtn.Visibility = Visibility.Visible;
+
             ContinueGame();
         }
 
@@ -376,12 +386,10 @@ namespace Пр12.Pages
                 return;
             }
 
-            // Атака игрока
             int playerDamage = player.GetAttack();
             selectedEnemy.TakeDamage(playerDamage);
             AddLog($"Вы наносите {playerDamage} урона {selectedEnemy.Name}!", ConsoleColors.DamageColor);
 
-            // Проверка на смерть врага
             if (!selectedEnemy.IsAlive())
             {
                 AddLog($"{selectedEnemy.Name} повержен!", ConsoleColors.SystemColor);
@@ -401,7 +409,6 @@ namespace Пр12.Pages
                 DisplayEnemies();
             }
 
-            // Атака всех врагов
             foreach (var enemy in currentEnemies.ToList())
             {
                 if (!enemy.IsAlive()) continue;
@@ -472,7 +479,6 @@ namespace Пр12.Pages
 
             DisplayEnemies();
 
-            // Проверка на победу после атак врагов
             bool allEnemiesDead = true;
             foreach (var enemy in currentEnemies)
             {
@@ -491,7 +497,6 @@ namespace Пр12.Pages
             isDefending = true;
             AddLog("Вы готовитесь к защите...", ConsoleColors.SystemColor);
 
-            // Враги атакуют в защите
             foreach (var enemy in currentEnemies.ToList())
             {
                 if (!enemy.IsAlive()) continue;
@@ -584,11 +589,16 @@ namespace Пр12.Pages
             StartTurn();
         }
 
-        private void ShowGameOver()
+        private void ClearLog()
         {
-            var result = MessageBox.Show("Игра окончена!\nХотите начать заново?",
-                                        "Game Over",
-                                        MessageBoxButton.YesNo);
+            Logs.Text = "";
+        }
+        private void ShowGameOver()
+
+        {
+            ClearLog();
+            ClearEnemiesPanel();
+            var result = MessageBox.Show("Игра окончена!\nХотите начать заново?", "Game Over", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
                 InitializeGame();
@@ -598,20 +608,5 @@ namespace Пр12.Pages
                 NavigationService?.GoBack();
             }
         }
-    }
-
-    // Вспомогательный класс для цветов консоли
-    public static class ConsoleColors
-    {
-        public static ConsoleColor PlayerColor = ConsoleColor.Green;
-        public static ConsoleColor EnemyColor = ConsoleColor.Red;
-        public static ConsoleColor BossColor = ConsoleColor.Magenta;
-        public static ConsoleColor ItemColor = ConsoleColor.Yellow;
-        public static ConsoleColor SystemColor = ConsoleColor.Cyan;
-        public static ConsoleColor DamageColor = ConsoleColor.Red;
-        public static ConsoleColor HealColor = ConsoleColor.Green;
-        public static ConsoleColor WarningColor = ConsoleColor.Yellow;
-        public static ConsoleColor MenuColor = ConsoleColor.White;
-        public static ConsoleColor InputColor = ConsoleColor.Gray;
     }
 }

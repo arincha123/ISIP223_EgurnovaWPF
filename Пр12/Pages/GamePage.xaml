@@ -77,14 +77,11 @@
 
                 <StackPanel Grid.Column="1" VerticalAlignment="Center" >
                     <Button x:Name="SelectBtn" Content="Взять" Width="150" Height="33" Background="#FF4DA45C" Foreground="#FF2B2626" FontFamily="Lucida Sans Unicode" FontSize="20" Margin="10" Click="SelectBtn_Click" Visibility="Collapsed"/>
+                    <Button x:Name="DiscardBtn" Content="Отказаться" Width="150" Height="33" Background="#FF4DA45C" Foreground="#FF2B2626" FontFamily="Lucida Sans Unicode" FontSize="20" Margin="10" Click="DiscardBtn_Click" Visibility="Collapsed"/>
                     <Button x:Name="AttackBtn" Content="Атака" Width="150" Height="33" Background="#FF4DA45C" Foreground="#FF2B2626" FontFamily="Lucida Sans Unicode" FontSize="20" Margin="10" Click="AttackBtn_Click"/>
                     <Button x:Name="DefenceBtn" Content="Защита" Width="150" Height="33" Background="#FF4DA45C" Foreground="#FF2B2626" FontFamily="Lucida Sans Unicode" FontSize="20" Margin="10" Click="DefenceBtn_Click"/>
                 </StackPanel>
             </Grid>
         </Border>
-
-
-
-
     </Grid>
 </Page>

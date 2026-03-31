@@ -12,10 +12,10 @@ namespace ISIP223_Egurnova.Model
         public Mage()
         {
             Name = "Маг";
-            MaxHP = 25;
-            CurrentHP = 25;
-            Attack = 15;
-            Defense = 2;
+            MaxHP = 20;
+            CurrentHP = 20;
+            Attack = 10;
+            Defense = 1;
         }
 
         public override int GetDamage(Player player, bool usedDefense)

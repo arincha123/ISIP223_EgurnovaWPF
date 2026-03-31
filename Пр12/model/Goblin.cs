@@ -11,10 +11,10 @@ namespace ISIP223_Egurnova.Model
         public Goblin()
         {
             Name = "Гоблин";
-            MaxHP = 30;
-            CurrentHP = 30;
-            Attack = 12;
-            Defense = 3;
+            MaxHP = 15;
+            CurrentHP = 15;
+            Attack = 4;
+            Defense = 2;
         }
 
         public override int GetDamage(Player player, bool usedDefense)
