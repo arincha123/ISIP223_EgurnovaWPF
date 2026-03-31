@@ -21,10 +21,10 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Этаж" Grid.Row="0" Grid.Column="0" Margin="10 0 0 0" FontSize="18" VerticalAlignment="Center" Foreground="White" />
+                <TextBlock x:Name="FloorText" Grid.Row="0" Grid.Column="0" Margin="10 0 0 0" FontSize="18" VerticalAlignment="Center" Foreground="White" Text="Этаж: 1"/>
                 <WrapPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
-                    <TextBlock Text="Здоровье"  FontSize="18" VerticalAlignment="Center" Foreground="White"/>
-                    <ProgressBar x:Name="Hp" Width="250" Margin="20 0 0 0" Foreground="#FF137D26"/>
+                    <TextBlock Text="Здоровье" FontSize="18" VerticalAlignment="Center" Foreground="White"/>
+                    <ProgressBar x:Name="HpBar" Width="250" Margin="20 0 0 0" Foreground="#FF137D26" Minimum="0" Maximum="100" Value="100"/>
                 </WrapPanel>
             </Grid>
         </Border>
@@ -34,6 +34,18 @@
                 <ImageBrush ImageSource="/Pages/фон.png" Stretch="Fill"/>
             </Border.Background>
 
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="ВРАГИ" FontSize="24" Foreground="#FF137D26" HorizontalAlignment="Center" Margin="10"/>
+
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <WrapPanel x:Name="EnemiesPanel" HorizontalAlignment="Center" Orientation="Horizontal" Margin="10"/>
+                </ScrollViewer>
+            </Grid>
         </Border>
 
         <Border Grid.Row="2" BorderBrush="#FF137D26" BorderThickness="5" CornerRadius="10">
@@ -43,12 +55,36 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                
+
+                <Border x:Name="LogBorder" Grid.Column="2" BorderBrush="#FF137D26" BorderThickness="5" CornerRadius="10">
+                    <ScrollViewer x:Name="LogScrollViewer">
+                        <TextBlock x:Name="Logs" Foreground="White" TextWrapping="Wrap"/>
+                    </ScrollViewer>
+                </Border>
+
+                <Border x:Name="BorderForEquip" Grid.Column="0" BorderBrush="#FF137D26" BorderThickness="5" CornerRadius="10">
+                    <WrapPanel>
+                        <StackPanel>
+                            <Image x:Name="YourWeap" Source="/Images/Weap/лук.png" Height="140" Width="100" Stretch="Fill"/>
+                            <TextBlock x:Name="AttackTB" Text="ATK: 0" FontFamily="Arial Black" Foreground="#FF137D26" HorizontalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel>
+                            <Image x:Name="YourArmor" Source="/Images/Weap/лук.png" Height="140" Width="100" Stretch="Fill"/>
+                            <TextBlock x:Name="DefenceTB" Text="DEF: 0" FontFamily="Arial Black" Foreground="#FF137D26" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </WrapPanel>
+                </Border>
+
+                <StackPanel Grid.Column="1" VerticalAlignment="Center" >
+                    <Button x:Name="SelectBtn" Content="Взять" Width="150" Height="33" Background="#FF4DA45C" Foreground="#FF2B2626" FontFamily="Lucida Sans Unicode" FontSize="20" Margin="10" Click="SelectBtn_Click" Visibility="Collapsed"/>
+                    <Button x:Name="AttackBtn" Content="Атака" Width="150" Height="33" Background="#FF4DA45C" Foreground="#FF2B2626" FontFamily="Lucida Sans Unicode" FontSize="20" Margin="10" Click="AttackBtn_Click"/>
+                    <Button x:Name="DefenceBtn" Content="Защита" Width="150" Height="33" Background="#FF4DA45C" Foreground="#FF2B2626" FontFamily="Lucida Sans Unicode" FontSize="20" Margin="10" Click="DefenceBtn_Click"/>
+                </StackPanel>
             </Grid>
         </Border>
 
 
-        
-        
+
+
     </Grid>
 </Page>
