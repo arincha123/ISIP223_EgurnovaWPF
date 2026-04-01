@@ -16,12 +16,14 @@ namespace ISIP223_Egurnova.Model
     internal class Armor : Item
     {
         public ArmorType TypeArmor { get; set; }
+        public string imagePath = "";
         public bool IsWeapon => false;
 
-        public Armor(string name, int attack, int defense, ArmorType type)
+        public Armor(string name, int attack, int defense, ArmorType type, string imagePath)
             : base(name, attack, defense)
         {
             TypeArmor = type;
+            this.imagePath = imagePath;
         }
 
         public override string ToString()

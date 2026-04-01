@@ -38,6 +38,7 @@ namespace Пр12.Pages
 
         private void InitializeGame()
         {
+
             player = new Player();
             random = new Random();
             turnCount = 0;
@@ -45,6 +46,9 @@ namespace Пр12.Pages
             isDefending = false;
             isChoosingItem = false;
             selectedEnemy = null;
+            YourArmor.Source = new BitmapImage(new Uri(player.Armor.imagePath, UriKind.Relative));
+            YourWeap.Source = new BitmapImage(new Uri(player.Weapon.imagePath, UriKind.Relative));
+
 
             UpdateUI();
             AddLog("Добро пожаловать в Roguelike игру!", ConsoleColors.SystemColor);
@@ -82,6 +86,7 @@ namespace Пр12.Pages
             {
                 var enemyBorder = new Border
                 {
+                    Background = new SolidColorBrush(Colors.Black),
                     BorderBrush = new SolidColorBrush(Colors.Green),
                     BorderThickness = new Thickness(2),
                     CornerRadius = new CornerRadius(10),
@@ -96,8 +101,8 @@ namespace Пр12.Pages
                 var image = new Image
                 {
                     Source = GetEnemyImage(enemy),
-                    Width = 100,
-                    Height = 100,
+                    Width = 300,
+                    Height = 300,
                     Stretch = Stretch.Uniform
                 };
                 stackPanel.Children.Add(image);
@@ -151,33 +156,35 @@ namespace Пр12.Pages
             switch (enemy.Name)
             {
                 case "Гоблин":
-                    imagePath = "/Images/Enemies/goblin.png";
+                    imagePath = "/Images/Enemy/goblin.png";
                     break;
                 case "Скелет":
-                    imagePath = "/Images/Enemies/skeleton.png";
+                    imagePath = "/Images/Enemy/skeleton.png";
                     break;
                 case "Маг":
-                    imagePath = "/Images/Enemies/mage.png";
+                    imagePath = "/Images/Enemy/mage.png";
                     break;
                 case "Архимаг C++":
-                    imagePath = "/Images/Enemies/archmage.png";
+                    imagePath = "/Images/Enemy/archmage.png";
                     break;
                 case "Босс гоблинов ВВГ":
-                    imagePath = "/Images/Enemies/boss_goblin.png";
+                    imagePath = "/Images/Enemy/boss_goblin.png";
                     break;
                 case "Босс скелет Ковальский":
-                    imagePath = "/Images/Enemies/boss_skeleton.png";
+                    imagePath = "/Images/Enemy/boss_skeleton.png";
                     break;
                 case "Пестов С--":
-                    imagePath = "/Images/Enemies/boss_pestov.png";
+                    imagePath = "/Images/Enemy/BossPestov.png";
                     break;
                 default:
-                    imagePath = "/Images/Enemies/default.png";
+                    imagePath = "/Images/Enemy/default.png";
                     break;
             }
 
             return new BitmapImage(new Uri(imagePath, UriKind.Relative));
         }
+
+
 
         private void Enemy_Click(object sender, MouseButtonEventArgs e)
         {
@@ -335,11 +342,13 @@ namespace Пр12.Pages
             {
                 player.Weapon = weapon;
                 AddLog($"Вы экипировали: {weapon.Name}", ConsoleColors.SystemColor);
+                YourWeap.Source = new BitmapImage(new Uri(weapon.imagePath, UriKind.Relative));
             }
             else if (pendingItem is Armor armor)
             {
                 player.Armor = armor;
                 AddLog($"Вы экипировали: {armor.Name}", ConsoleColors.SystemColor);
+                YourArmor.Source = new BitmapImage(new Uri(armor.imagePath, UriKind.Relative));
             }
 
             isChoosingItem = false;

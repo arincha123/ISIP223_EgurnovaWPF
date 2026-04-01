@@ -63,16 +63,18 @@
                 </Border>
 
                 <Border x:Name="BorderForEquip" Grid.Column="0" BorderBrush="#FF137D26" BorderThickness="5" CornerRadius="10">
-                    <WrapPanel>
-                        <StackPanel>
-                            <Image x:Name="YourWeap" Source="/Images/Weap/лук.png" Height="140" Width="100" Stretch="Fill"/>
-                            <TextBlock x:Name="AttackTB" Text="ATK: 0" FontFamily="Arial Black" Foreground="#FF137D26" HorizontalAlignment="Center" />
-                        </StackPanel>
-                        <StackPanel>
-                            <Image x:Name="YourArmor" Source="/Images/Weap/лук.png" Height="140" Width="100" Stretch="Fill"/>
-                            <TextBlock x:Name="DefenceTB" Text="DEF: 0" FontFamily="Arial Black" Foreground="#FF137D26" HorizontalAlignment="Center" />
-                        </StackPanel>
-                    </WrapPanel>
+                    <Viewbox>
+                        <WrapPanel>
+                            <StackPanel>
+                                <Image x:Name="YourWeap" Source="/Images/Weap/лук.png" Height="140" Width="100" Stretch="Fill"/>
+                                <TextBlock x:Name="AttackTB" Text="ATK: 0" FontFamily="Arial Black" Foreground="#FF137D26" HorizontalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel>
+                                <Image x:Name="YourArmor" Source="/Images/Armor/кож дос.png" Height="140" Width="100" Stretch="Fill"/>
+                                <TextBlock x:Name="DefenceTB" Text="DEF: 0" FontFamily="Arial Black" Foreground="#FF137D26" HorizontalAlignment="Center" />
+                            </StackPanel>
+                        </WrapPanel>
+                    </Viewbox>
                 </Border>
 
                 <StackPanel Grid.Column="1" VerticalAlignment="Center" >

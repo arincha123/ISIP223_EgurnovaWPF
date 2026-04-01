@@ -16,11 +16,12 @@ namespace ISIP223_Egurnova.Model
     {
         public WeaponType TypeWeap { get; set; }
         public bool IsWeapon => true;
-
-        public Weapon(string name, int attack, int defense, WeaponType type)
+        public string imagePath = "";
+        public Weapon(string name, int attack, int defense, WeaponType type, string imagePath)
             : base(name, attack, defense)
         {
             TypeWeap = type;
+            this.imagePath = imagePath;
         }
 
         public override string ToString()

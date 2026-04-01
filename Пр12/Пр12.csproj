@@ -133,7 +133,6 @@
     <Resource Include="Images\фон.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Weap\арбалет.png" />
     <Resource Include="Images\Weap\боев пос.png" />
     <Resource Include="Images\Weap\кинжал убийцы.png" />
     <Resource Include="Images\Weap\клинок.png" />
@@ -141,6 +140,48 @@
     <Resource Include="Images\Weap\секира воина.png" />
     <Resource Include="Images\Weap\снайп арб.png" />
     <Resource Include="Images\Weap\стальной меч.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Enemy\mage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Weap\ржав.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Armor\бригант.png" />
+    <Resource Include="Images\Armor\драк брон.png" />
+    <Resource Include="Images\Armor\кож дос.png" />
+    <Resource Include="Images\Armor\кольчуг.png" />
+    <Resource Include="Images\Armor\латы.png" />
+    <Resource Include="Images\Armor\од маг.png" />
+    <Resource Include="Images\Armor\развед.png" />
+    <Resource Include="Images\Armor\чемп.png" />
+    <Resource Include="Images\Armor\чеш бр.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Enemy\BossPestov.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Enemy\goblin.png" />
+    <Resource Include="Images\Enemy\skeleton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Enemy\archmage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Enemy\boss_skeleton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Enemy\boss_goblin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Weap\маг посох.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Weap\книга закл.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Weap\кристал.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
