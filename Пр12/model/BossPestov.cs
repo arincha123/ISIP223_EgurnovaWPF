@@ -12,7 +12,7 @@ namespace ISIP223_Egurnova.Model
 
         public BossPestov()
         {
-            Name = "Пестов С-- ";
+            Name = "Пестов С--";
             MaxHP = (int)(25 * 1.3);
             CurrentHP = MaxHP;
             Attack = (int)(10 * 1.8);

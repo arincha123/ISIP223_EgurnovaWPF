@@ -40,10 +40,10 @@ namespace Пр12.Pages
         }
         
 
-private void dispatcherTimer_Tick(object sender, EventArgs e)
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             Random r = new Random();
-            StartBtm.Margin = new Thickness(r.Next((int)Window.GetWindow(this).Width-173), r.Next((int)Window.GetWindow(this).Height - 33), 0, 0);
+            StartBtm.Margin = new Thickness(r.Next((int)MainWindow.GetWindow(this).ActualWidth-173), r.Next((int)Window.GetWindow(this).ActualHeight - 33), 0, 0);
         }
     }
 }

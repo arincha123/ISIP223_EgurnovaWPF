@@ -184,8 +184,6 @@ namespace Пр12.Pages
             return new BitmapImage(new Uri(imagePath, UriKind.Relative));
         }
 
-
-
         private void Enemy_Click(object sender, MouseButtonEventArgs e)
         {
             if (isChoosingItem) return;
@@ -221,7 +219,7 @@ namespace Пр12.Pages
             }
             else if (eventType == 0)
             {
-                SpawnEnemies();
+                SpawnBoss();
             }
             else
             {

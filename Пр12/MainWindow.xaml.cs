@@ -32,8 +32,7 @@ namespace Пр12
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            Height = e.NewSize.Height;
-            Width = e.NewSize.Width;
+            
         }
     }
 }
