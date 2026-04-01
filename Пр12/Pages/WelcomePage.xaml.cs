@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Пр12.Pages
 {
@@ -20,14 +21,29 @@ namespace Пр12.Pages
     /// </summary>
     public partial class WelcomePage : Page
     {
+        DispatcherTimer dispatcherTimer = new DispatcherTimer();
         public WelcomePage()
         {
             InitializeComponent();
+            
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
+            dispatcherTimer.Start();
+            
+            
         }
 
         private void StartBtm_Click(object sender, RoutedEventArgs e)
         {
+            dispatcherTimer.Stop();
             NavigationService.Navigate(new GamePage());
+        }
+        
+
+private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            Random r = new Random();
+            StartBtm.Margin = new Thickness(r.Next((int)Window.GetWindow(this).Width-173), r.Next((int)Window.GetWindow(this).Height - 33), 0, 0);
         }
     }
 }

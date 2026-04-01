@@ -9,10 +9,10 @@
       Title="WelcomePage">
 
     <Grid Background="Black">
-        
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300" Height="150">
             <TextBlock Text="kIp FIn"  Foreground="#FF239677" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Castellar" />
-            <Button x:Name="StartBtm" Content="Начать обучение" HorizontalAlignment="Center" FontSize="18" Margin="0 30 0 0" Padding="5" FontFamily="Impact" Background="Black" Foreground="Black" BorderBrush="{x:Null}" Click="StartBtm_Click"/>
+            
         </StackPanel>
+		<Button x:Name="StartBtm" Content="Начать обучение" Width="173" FontSize="18" Height="33" Padding="5" FontFamily="Impact" Background="Black" Foreground="Black" BorderBrush="{x:Null}" Click="StartBtm_Click" HorizontalAlignment="Left" VerticalAlignment="Top" />
     </Grid>
 </Page>
