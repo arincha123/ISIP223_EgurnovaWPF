@@ -13,27 +13,20 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Пр12
+namespace Пр12.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для StartPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class StartPage : Page
     {
-        static public Button get_Btn_Back;
-
-        public MainWindow()
+        public StartPage()
         {
             InitializeComponent();
-            get_Btn_Back = Btn_Back;
+            MainWindow.get_Btn_Back.Visibility = Visibility.Hidden;
         }
 
-        private void Btn_Back_Click(object sender, RoutedEventArgs e)
-        {
-            if (MainFrame.NavigationService.CanGoBack)
-            {
-                MainFrame.NavigationService.GoBack();
-            }
-        }
+        
+
     }
 }
