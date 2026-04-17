@@ -36,39 +36,39 @@
                         <StackPanel Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" >
                             <WrapPanel Margin="10" >
                                 <TextBlock Text="Имя:" FontSize="18" Margin="40 0 0 0" />
-                                <TextBox x:Name="FirstName" Width="150" Margin="10 0 0 0" />
+                                <TextBox x:Name="FirstName1" Width="150" Margin="10 0 0 0" />
                             </WrapPanel>
                             <WrapPanel Margin="10" >
                                 <TextBlock Text="Фамилия:" FontSize="18" />
-                                <TextBox x:Name="LastName" Width="150" Margin="10 0 0 0" />
+                                <TextBox x:Name="LastName1" Width="150" Margin="10 0 0 0" />
                             </WrapPanel>
                             <WrapPanel Margin="10" >
                                 <TextBlock Text="Отчество:" FontSize="18" />
-                                <TextBox x:Name="MiddleName" Width="150" Margin="10 0 0 0" />
+                                <TextBox x:Name="MiddleName1" Width="150" Margin="10 0 0 0" />
                             </WrapPanel>
                         </StackPanel>
 
                         <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                             <WrapPanel Margin="10" >
                                 <TextBlock Text="Логин (номер телефона):" FontSize="18" />
-                                <TextBox x:Name="Login" Width="150" Margin="10 0 0 0" />
+                                <TextBox x:Name="Login1" Width="150" Margin="10 0 0 0" />
                             </WrapPanel>
                             <WrapPanel Margin="10" >
                                 <TextBlock Text="Пароль:" FontSize="18" Margin="0 0 140 0"/>
-                                <TextBox x:Name="Password" Width="150" Margin="10 0 0 0" />
+                                <TextBox x:Name="Password1" Width="150" Margin="10 0 0 0" />
                             </WrapPanel>
                         </StackPanel>
 
-                        <GroupBox Grid.Column="1" Grid.Row="0" Header="Роли" FontSize="18" >
-                            <RadioButton />
-                            <RadioButton/>
-                            <RadioButton/>
-                            <RadioButton/>
+                        <GroupBox Grid.Column="1" Grid.Row="0" Header="Роль:" FontSize="18" >
+                            <StackPanel Margin="10">
+                                <RadioButton Margin="5" x:Name="Client1" Content="Клиент"/>
+                                <RadioButton Margin="5" x:Name="Master1" Content="Мастер" />
+                                <RadioButton Margin="5" x:Name="Manager1" Content="Менеджер" />
+                                <RadioButton Margin="5" x:Name="Admin1" Content="Администатор" />
+                            </StackPanel>
                         </GroupBox>
- 
-                        
-                        
-                        
+
+                        <Button Grid.Column="1" Grid.Row="1" Height="33" Width="230" FontSize="18" Content="Добавить пользователя" />
                     </Grid>
                 </TabItem.Content>
             </TabItem>
@@ -76,15 +76,123 @@
                 <TabItem.Header>
                     <TextBlock FontSize="18">Удалить</TextBlock>
                 </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <ListBox Grid.Row="1" Grid.Column="0" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalContentAlignment="Stretch">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="20"/>
+                                            <RowDefinition Height="20"/>
+                                            <RowDefinition Height="20"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Name" Height="33"/>
+                                        <TextBlock Grid.Row="1" Grid.Column="0" Text="SureName" Height="33"/>
+                                        <TextBlock Grid.Row="2" Grid.Column="0" Text="MiddleName" Height="33"/>
+                                        
+                                        <TextBlock Grid.Row="0" Grid.Column="1" Text="Role" Height="33"/>
+                                        <TextBlock Grid.Row="1" Grid.Column="1" Text="Phone" Height="33"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            
+                            
+                        </ListBox>
+
+                        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Text="Введите телефон пользователя, которого хотите удалить: " FontSize="18" TextWrapping="WrapWithOverflow" />
+
+                            <WrapPanel Margin="10 10 10 20">
+                                <TextBlock Text="Номер телефона (логин)" FontSize="14"/>
+                                <TextBox x:Name="Phone2" Width="150" Margin="10 0 0 0"/>
+                            </WrapPanel>
+
+                            <Button x:Name="DelPol" Content="Удалить пользователя" Width="180" FontSize="16" />
+                        </StackPanel>
+                        
+                    </Grid>
+                </TabItem.Content>
             </TabItem>
             <TabItem>
                 <TabItem.Header>
                     <TextBlock FontSize="18">Изменить</TextBlock>
                 </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <ListBox Grid.Row="1" Grid.Column="0" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalContentAlignment="Stretch">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="20"/>
+                                            <RowDefinition Height="20"/>
+                                            <RowDefinition Height="20"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Name" Height="33"/>
+                                        <TextBlock Grid.Row="1" Grid.Column="0" Text="SureName" Height="33"/>
+                                        <TextBlock Grid.Row="2" Grid.Column="0" Text="MiddleName" Height="33"/>
+
+                                        <TextBlock Grid.Row="0" Grid.Column="1" Text="Role" Height="33"/>
+                                        <TextBlock Grid.Row="1" Grid.Column="1" Text="Phone" Height="33"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Text="Введите телефон пользователя, роль которого хотите изменить: " FontSize="18" TextWrapping="WrapWithOverflow" />
+                            <WrapPanel Margin="10 10 10 20">
+                                <TextBlock Text="Номер телефона (логин)" FontSize="14"/>
+                                <TextBox x:Name="Phone3" Width="150" Margin="10 0 0 0"/>
+                            </WrapPanel>
+                            <GroupBox Grid.Column="1" Grid.Row="0" Header="Роль:" FontSize="18" >
+                                <StackPanel Margin="10">
+                                    <RadioButton Margin="5" x:Name="Client3" Content="Клиент"/>
+                                    <RadioButton Margin="5" x:Name="Master3" Content="Мастер" />
+                                    <RadioButton Margin="5" x:Name="Manager3" Content="Менеджер" />
+                                    <RadioButton Margin="5" x:Name="Admin3" Content="Администатор" />
+                                </StackPanel>
+                            </GroupBox>
+                            <Button x:Name="ChangePol" Content="Изменить роль" Width="140" FontSize="16" Margin="10" />
+                        </StackPanel>
+                    </Grid>
+                </TabItem.Content>
             </TabItem>
-
-
-
         </TabControl>
 
     </Grid>
