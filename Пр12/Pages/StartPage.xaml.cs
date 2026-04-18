@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Пр12.Pages.Windows;
 
 namespace Пр12.Pages
 {
@@ -20,13 +21,30 @@ namespace Пр12.Pages
     /// </summary>
     public partial class StartPage : Page
     {
+        List<MasterService> AllServices;
         public StartPage()
         {
             InitializeComponent();
             MainWindow.get_Btn_Back.Visibility = Visibility.Hidden;
+
+            AllServices = Core.Context.MasterService.ToList();
+            ShowServ.ItemsSource = AllServices;
         }
 
-        
+        private void MasterCBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
+        }
+
+        private void CategoryCBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void LogIn_Click(object sender, RoutedEventArgs e)
+        {
+            Window lrwin = new LogRegWindow();
+            lrwin.Show();
+        }
     }
 }

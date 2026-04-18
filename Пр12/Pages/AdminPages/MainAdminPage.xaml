@@ -14,8 +14,11 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        
-        <TextBlock Grid.Row="0" Text="Логин" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" FontSize="18"/>
+        <WrapPanel>
+            <TextBlock Grid.Row="0" Text="Имя" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" FontSize="18"/>
+            <TextBlock Grid.Row="0" Text="Фамилия" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" FontSize="18"/>
+            <TextBlock Grid.Row="0" Text="Отчество" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" FontSize="18"/>
+        </WrapPanel>
         <TabControl Grid.Row="1" >
             <TabItem>
                 <TabItem.Header>
