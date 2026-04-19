@@ -15,17 +15,16 @@ namespace Пр12
     public partial class UserService
     {
         public int ID { get; set; }
-        public Nullable<int> UserID { get; set; }
+        public int UserID { get; set; }
         public int MasterID { get; set; }
         public System.DateTime Date { get; set; }
         public int ServiceID { get; set; }
         public int PaymentMethodID { get; set; }
         public string Comment { get; set; }
-        public System.DateTime Time { get; set; }
-        public bool IsAvailable { get; set; }
-        public System.DateTime EndTime { get; set; }
+        public int ScheduleID { get; set; }
     
         public virtual PaymentMethod PaymentMethod { get; set; }
+        public virtual Schedule Schedule { get; set; }
         public virtual Service Service { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }

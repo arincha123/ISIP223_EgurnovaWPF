@@ -13,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Пр12.Pages
+namespace Пр12.Pages.ManagerPages
 {
     /// <summary>
-    /// Логика взаимодействия для TovariPage.xaml
+    /// Логика взаимодействия для MainManagerPage.xaml
     /// </summary>
-    public partial class TovariPage : Page
+    public partial class MainManagerPage : Page
     {
-        public TovariPage()
+        public MainManagerPage()
         {
             InitializeComponent();
-            MainWindow.get_Btn_Back.Visibility = Visibility.Visible;
         }
     }
 }

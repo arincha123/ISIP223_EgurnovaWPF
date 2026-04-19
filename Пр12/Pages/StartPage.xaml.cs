@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Пр12.Pages.MasterPages;
 using Пр12.Pages.Windows;
 
 namespace Пр12.Pages
@@ -43,8 +44,15 @@ namespace Пр12.Pages
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
-            Window lrwin = new LogRegWindow();
-            lrwin.Show();
+            //Window lrwin = new LogRegWindow();
+            //lrwin.Show();
+
+            NavigationService.Navigate(new MainMasterPage());
+        }
+
+        private void Tovari_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new TovariPage());
         }
     }
 }

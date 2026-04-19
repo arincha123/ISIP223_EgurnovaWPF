@@ -144,15 +144,13 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserID" Type="int" />
+          <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="MasterID" Type="int" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="ServiceID" Type="int" Nullable="false" />
           <Property Name="PaymentMethodID" Type="int" Nullable="false" />
           <Property Name="Comment" Type="nvarchar" MaxLength="100" />
-          <Property Name="Time" Type="datetime" Nullable="false" />
-          <Property Name="IsAvailable" Type="bit" Nullable="false" />
-          <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="ScheduleID" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Cart_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
@@ -310,6 +308,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserService_Schedule">
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="1" />
+          <End Role="UserService" Type="Self.UserService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedule">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserService">
+              <PropertyRef Name="ScheduleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserService_Service">
           <End Role="Service" Type="Self.Service" Multiplicity="1" />
           <End Role="UserService" Type="Self.UserService" Multiplicity="*" />
@@ -323,7 +333,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserService_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="UserService" Type="Self.UserService" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -413,6 +423,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_UserService_PaymentMethod" Association="Self.FK_UserService_PaymentMethod">
             <End Role="PaymentMethod" EntitySet="PaymentMethod" />
+            <End Role="UserService" EntitySet="UserService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserService_Schedule" Association="Self.FK_UserService_Schedule">
+            <End Role="Schedule" EntitySet="Schedule" />
             <End Role="UserService" EntitySet="UserService" />
           </AssociationSet>
           <AssociationSet Name="FK_UserService_Service" Association="Self.FK_UserService_Service">
@@ -546,6 +560,7 @@
           <Property Name="MasterID" Type="Int32" Nullable="false" />
           <Property Name="IsAvailable" Type="Boolean" Nullable="false" />
           <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="UserService" Relationship="Self.FK_UserService_Schedule" FromRole="Schedule" ToRole="UserService" />
         </EntityType>
         <EntityType Name="ServCategory">
           <Key>
@@ -600,16 +615,15 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="MasterID" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ServiceID" Type="Int32" Nullable="false" />
           <Property Name="PaymentMethodID" Type="Int32" Nullable="false" />
           <Property Name="Comment" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Time" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IsAvailable" Type="Boolean" Nullable="false" />
-          <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ScheduleID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PaymentMethod" Relationship="Self.FK_UserService_PaymentMethod" FromRole="UserService" ToRole="PaymentMethod" />
+          <NavigationProperty Name="Schedule" Relationship="Self.FK_UserService_Schedule" FromRole="UserService" ToRole="Schedule" />
           <NavigationProperty Name="Service" Relationship="Self.FK_UserService_Service" FromRole="UserService" ToRole="Service" />
           <NavigationProperty Name="User" Relationship="Self.FK_UserService_User" FromRole="UserService" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="Self.FK_UserService_User1" FromRole="UserService" ToRole="User" />
@@ -758,6 +772,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserService_Schedule">
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="1" />
+          <End Role="UserService" Type="Self.UserService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedule">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserService">
+              <PropertyRef Name="ScheduleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Service_ServCategory">
           <End Role="ServCategory" Type="Self.ServCategory" Multiplicity="1" />
           <End Role="Service" Type="Self.Service" Multiplicity="*" />
@@ -783,7 +809,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserService_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="UserService" Type="Self.UserService" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -870,6 +896,10 @@
           <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
             <End Role="Role" EntitySet="Role" />
             <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserService_Schedule" Association="Self.FK_UserService_Schedule">
+            <End Role="Schedule" EntitySet="Schedule" />
+            <End Role="UserService" EntitySet="UserService" />
           </AssociationSet>
           <AssociationSet Name="FK_Service_ServCategory" Association="Self.FK_Service_ServCategory">
             <End Role="ServCategory" EntitySet="ServCategory" />
@@ -1053,9 +1083,7 @@
                 <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
                 <ScalarProperty Name="PaymentMethodID" ColumnName="PaymentMethodID" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="Time" ColumnName="Time" />
-                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

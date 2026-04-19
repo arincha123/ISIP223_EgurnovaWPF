@@ -14,10 +14,19 @@ namespace Пр12
     
     public partial class Schedule
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Schedule()
+        {
+            this.UserService = new HashSet<UserService>();
+        }
+    
         public int ID { get; set; }
         public System.DateTime Time { get; set; }
         public int MasterID { get; set; }
         public bool IsAvailable { get; set; }
         public System.DateTime EndTime { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserService> UserService { get; set; }
     }
 }

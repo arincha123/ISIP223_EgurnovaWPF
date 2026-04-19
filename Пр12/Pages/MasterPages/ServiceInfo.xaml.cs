@@ -13,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Пр12.Pages
+namespace Пр12.Pages.MasterPages
 {
     /// <summary>
-    /// Логика взаимодействия для TovariPage.xaml
+    /// Логика взаимодействия для ServiceInfo.xaml
     /// </summary>
-    public partial class TovariPage : Page
+    public partial class ServiceInfo : Page
     {
-        public TovariPage()
+        public ServiceInfo()
         {
             InitializeComponent();
-            MainWindow.get_Btn_Back.Visibility = Visibility.Visible;
         }
     }
 }
