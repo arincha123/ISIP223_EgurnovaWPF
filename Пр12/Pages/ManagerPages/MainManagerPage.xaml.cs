@@ -51,16 +51,22 @@ namespace Пр12.Pages.ManagerPages
             ManufacturersList.ItemsSource = ManufacturersForManager;
         }
 
-        private void ChangeST_Btn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+        //Услуги
+        //Добавляет новый тип (категорию) услуги, данные берёт из TextBox AddServType
         private void AddST_Btn_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
+        //Меняет тип услуги из ComboBox
+        private void ChangeST_Btn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+        //Записи
+        //По идее, когда пишешь в TextBox SearchClientBox по имени или номеру телефона, то результаты появляются тут и тут взаимодействуешь с записью
         private void SearchResultsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -81,11 +87,14 @@ namespace Пр12.Pages.ManagerPages
 
         }
 
+        //Заказы
         private void CloseOrderBtn_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
+
+        //Товары
         private void AddProductBtn_Click(object sender, RoutedEventArgs e)
         {
 
@@ -111,6 +120,8 @@ namespace Пр12.Pages.ManagerPages
 
         }
 
+
+        //Типы товара
         private void AddProductTypeBtn_Click(object sender, RoutedEventArgs e)
         {
 
@@ -121,6 +132,8 @@ namespace Пр12.Pages.ManagerPages
 
         }
 
+
+        //Производители
         private void AddManufacturerBtn_Click(object sender, RoutedEventArgs e)
         {
 
