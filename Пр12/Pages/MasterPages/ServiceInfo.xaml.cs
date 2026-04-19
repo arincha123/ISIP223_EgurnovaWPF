@@ -24,5 +24,19 @@ namespace Пр12.Pages.MasterPages
         {
             InitializeComponent();
         }
+
+        private void CloseZapis_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show(
+                       "Вы уверены, что хотите закрыть запись?",
+                       "Закрытие записи",
+                       MessageBoxButton.YesNo,
+                       MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+
+            }
+        }
     }
 }
