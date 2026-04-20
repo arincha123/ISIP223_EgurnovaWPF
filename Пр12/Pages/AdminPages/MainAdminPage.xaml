@@ -78,7 +78,7 @@
                             </StackPanel>
                         </GroupBox>
 
-                        <Button Grid.Column="1" Grid.Row="1" Height="33" Width="230" FontSize="18" Content="Добавить пользователя" />
+                        <Button Grid.Column="1" Grid.Row="1" Height="33" Width="230" FontSize="18" Content="Добавить пользователя" Click="Button_Click" />
                     </Grid>
                 </TabItem.Content>
             </TabItem>
@@ -89,43 +89,33 @@
                 <TabItem.Content>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-
-                        <ListBox Grid.Row="1" Grid.Column="0" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalContentAlignment="Stretch">
-                            <ListBox.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel/>
-                                </ItemsPanelTemplate>
-                            </ListBox.ItemsPanel>
-
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="20"/>
-                                            <RowDefinition Height="20"/>
-                                            <RowDefinition Height="20"/>
-                                        </Grid.RowDefinitions>
-
-                                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Name" Height="33"/>
-                                        <TextBlock Grid.Row="1" Grid.Column="0" Text="SureName" Height="33"/>
-                                        <TextBlock Grid.Row="2" Grid.Column="0" Text="MiddleName" Height="33"/>
-                                        
-                                        <TextBlock Grid.Row="0" Grid.Column="1" Text="Role" Height="33"/>
-                                        <TextBlock Grid.Row="1" Grid.Column="1" Text="Phone" Height="33"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                            
-                            
-                        </ListBox>
+                        <ListView x:Name="Clients1"  Grid.Column="0" FontSize="16" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=5}">
+                        <ListView.View>
+                            <GridView>
+                                    <GridViewColumn Header="Клиент" Width="150">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock>
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}{0} {1} {2}">
+                                                            <Binding Path="LastName"/>
+                                                            <Binding Path="FirstName"/>
+                                                            <Binding Path="MiddleName"/>
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Телефон" Width="100" DisplayMemberBinding="{Binding PhoneNumber}"/>
+                                    <GridViewColumn Header="Роль" Width="100" DisplayMemberBinding="{Binding Role.Name}"/>
+                            </GridView>
+                        </ListView.View>
+                        </ListView>
+                        
 
                         <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <TextBlock Text="Введите телефон пользователя, которого хотите удалить: " FontSize="18" TextWrapping="WrapWithOverflow" />
@@ -135,7 +125,7 @@
                                 <TextBox x:Name="Phone2" Width="150" Margin="10 0 0 0"/>
                             </WrapPanel>
 
-                            <Button x:Name="DelPol" Content="Удалить пользователя" Width="180" FontSize="16" />
+                            <Button x:Name="DelPol" Content="Удалить пользователя" Width="180" FontSize="16" Click="DelPol_Click" />
                         </StackPanel>
                         
                     </Grid>
@@ -152,37 +142,29 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <ListBox Grid.Row="1" Grid.Column="0" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalContentAlignment="Stretch">
-                            <ListBox.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel/>
-                                </ItemsPanelTemplate>
-                            </ListBox.ItemsPanel>
-
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="20"/>
-                                            <RowDefinition Height="20"/>
-                                            <RowDefinition Height="20"/>
-                                        </Grid.RowDefinitions>
-
-                                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Name" Height="33"/>
-                                        <TextBlock Grid.Row="1" Grid.Column="0" Text="SureName" Height="33"/>
-                                        <TextBlock Grid.Row="2" Grid.Column="0" Text="MiddleName" Height="33"/>
-
-                                        <TextBlock Grid.Row="0" Grid.Column="1" Text="Role" Height="33"/>
-                                        <TextBlock Grid.Row="1" Grid.Column="1" Text="Phone" Height="33"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
+                        <ListView x:Name="Clients2"  Grid.Column="0" FontSize="16" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=5}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Клиент" Width="150">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock>
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}{0} {1} {2}">
+                                                            <Binding Path="LastName"/>
+                                                            <Binding Path="FirstName"/>
+                                                            <Binding Path="MiddleName"/>
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Телефон" Width="100" DisplayMemberBinding="{Binding PhoneNumber}"/>
+                                    <GridViewColumn Header="Роль" Width="100" DisplayMemberBinding="{Binding Role.Name}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
 
                         <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <TextBlock Text="Введите телефон пользователя, роль которого хотите изменить: " FontSize="18" TextWrapping="WrapWithOverflow" />
@@ -198,7 +180,7 @@
                                     <RadioButton Margin="5" x:Name="Admin3" Content="Администатор" />
                                 </StackPanel>
                             </GroupBox>
-                            <Button x:Name="ChangePol" Content="Изменить роль" Width="140" FontSize="16" Margin="10" />
+                            <Button x:Name="ChangePol" Content="Изменить роль" Width="140" FontSize="16" Margin="10" Click="ChangePol_Click" />
                         </StackPanel>
                     </Grid>
                 </TabItem.Content>

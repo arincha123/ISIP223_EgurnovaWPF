@@ -832,7 +832,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="PR_17Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="PR_17Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Cart" EntityType="Self.Cart" />
           <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" />
           <EntitySet Name="MasterService" EntityType="Self.MasterService" />
@@ -923,7 +923,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище PR_17ModelContainer" CdmEntityContainer="PR_17Entities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище PR_17ModelContainer" CdmEntityContainer="PR_17Entities1">
           <EntitySetMapping Name="Cart">
             <EntityTypeMapping TypeName="PR_17Model.Cart">
               <MappingFragment StoreEntitySet="Cart">

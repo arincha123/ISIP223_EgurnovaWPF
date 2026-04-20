@@ -20,9 +20,31 @@ namespace Пр12.Pages.AdminPages
     /// </summary>
     public partial class MainAdminPage : Page
     {
+        List<User> UsersForAdmin;
         public MainAdminPage()
         {
             InitializeComponent();
+            MainWindow.get_Btn_Back.Visibility = Visibility.Visible;
+
+            UsersForAdmin = Core.Context.User.ToList();
+            Clients1.ItemsSource = UsersForAdmin;
+            Clients2.ItemsSource = UsersForAdmin;
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DelPol_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ChangePol_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
