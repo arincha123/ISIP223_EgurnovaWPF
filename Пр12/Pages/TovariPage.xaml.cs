@@ -23,7 +23,8 @@ namespace Пр12.Pages
         public TovariPage()
         {
             InitializeComponent();
-            MainWindow.get_Btn_Back.Visibility = Visibility.Visible;
+            if (MainWindow.Current != null)
+                MainWindow.Current.Btn_Back.Visibility = Visibility.Visible;
         }
     }
 }

@@ -27,10 +27,12 @@ namespace Пр12.Pages
         public StartPage()
         {
             InitializeComponent();
-            MainWindow.get_Btn_Back.Visibility = Visibility.Hidden;
+            MainWindow.Current.Btn_Back.Visibility = Visibility.Hidden;
 
             AllServices = Core.Context.MasterService.ToList();
             ShowServ.ItemsSource = AllServices;
+
+
         }
 
         private void MasterCBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -45,10 +47,8 @@ namespace Пр12.Pages
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
-            //Window lrwin = new LogRegWindow();
-            //lrwin.Show();
-
-            NavigationService.Navigate(new MainManagerPage());
+            Window lrwin = new LogRegWindow();
+            lrwin.Show();
         }
 
         private void Tovari_Click(object sender, RoutedEventArgs e)

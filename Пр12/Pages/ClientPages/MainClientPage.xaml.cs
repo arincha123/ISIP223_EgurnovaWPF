@@ -10,23 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Пр12.Pages.Windows
+namespace Пр12.Pages.ClientPages
 {
     /// <summary>
-    /// Логика взаимодействия для LogRegWindow.xaml
+    /// Логика взаимодействия для MainClientPage.xaml
     /// </summary>
-    public partial class LogRegWindow : Window
+    public partial class MainClientPage : Page
     {
-        public LogRegWindow()
+        public MainClientPage()
         {
             InitializeComponent();
-        }
-
-        private void LogIn_Btn_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

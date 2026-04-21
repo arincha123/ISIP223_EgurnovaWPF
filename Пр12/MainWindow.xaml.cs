@@ -4,35 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Пр12.Pages;
+using Пр12.Pages.Windows;
 
 namespace Пр12
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        static public Button get_Btn_Back;
+        public static MainWindow Current { get; private set; }
 
         public MainWindow()
         {
-            InitializeComponent();
-            get_Btn_Back = Btn_Back;
+            InitializeComponent(); 
+            Current = this;
+            this.Btn_Back.Visibility = Visibility.Hidden;
         }
+
 
         private void Btn_Back_Click(object sender, RoutedEventArgs e)
         {
-            if (MainFrame.NavigationService.CanGoBack)
+            if (MainFrame.CanGoBack)
             {
-                MainFrame.NavigationService.GoBack();
+                MainFrame.GoBack();
             }
         }
     }

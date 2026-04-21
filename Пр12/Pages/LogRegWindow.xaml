@@ -16,11 +16,11 @@
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                         <WrapPanel>
                             <TextBlock Margin="10 10 0 10"  FontSize="16" Text="Номер телефона:"/>
-                            <TextBox x:Name="WinPhone1" Height="20" Width="150" Margin="20 0 0 0"/>
+                            <TextBox x:Name="WinPhone1" Height="20" Width="150" Margin="20 0 0 0" TextChanged="LogInFields_TextChanged"/>
                         </WrapPanel>
                         <WrapPanel>
                             <TextBlock Margin="10 10 0 10" FontSize="16" Text="Пароль:"/>
-                            <TextBox x:Name="WinPassword1" Height="20" Width="150" Margin="89 0 0 0"/>
+                            <TextBox x:Name="WinPassword1" Height="20" Width="150" Margin="89 0 0 0" TextChanged="LogInFields_TextChanged"/>
                         </WrapPanel>
 
                         <Button x:Name="LogIn_Btn" Margin="30" Grid.Row="5" Grid.ColumnSpan="2" Content="Войти" Height="33" Width="100" HorizontalAlignment="Center" Click="LogIn_Btn_Click" />
@@ -51,21 +51,21 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Margin="10 10 0 10" Grid.Row="0" Grid.Column="0" FontSize="16" Text="Имя:"/>
-                        <TextBox Grid.Row="0" Grid.Column="1" x:Name="WinName2" Width="150" Height="20" Margin="20 0 0 0"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" x:Name="WinName2" Width="150" Height="20" Margin="20 0 0 0" TextChanged="RegFields_TextChanged"/>
 
                         <TextBlock Margin="10 10 0 10" Grid.Row="1" Grid.Column="0" FontSize="16" Text="Фамилия:"/>
-                        <TextBox Grid.Row="1" Grid.Column="1" x:Name="WinSureName2" Width="150" Height="20" Margin="20 0 0 0"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" x:Name="WinSureName2" Width="150" Height="20" Margin="20 0 0 0" TextChanged="RegFields_TextChanged"/>
 
                         <TextBlock Margin="10 10 0 10" Grid.Row="2" Grid.Column="0" FontSize="16" Text="Отчество:"/>
-                        <TextBox Grid.Row="2" Grid.Column="1" x:Name="WinMiddleName2" Width="150" Height="20" Margin="20 0 0 0"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" x:Name="WinMiddleName2" Width="150" Height="20" Margin="20 0 0 0" TextChanged="RegFields_TextChanged"/>
 
                         <TextBlock Margin="10 10 0 10" Grid.Row="3" Grid.Column="0" FontSize="16" Text="Номер телефона:"/>
-                        <TextBox Grid.Row="3" Grid.Column="1" x:Name="WinPhone2" Width="150" Height="20" Margin="20 0 0 0"/>
+                        <TextBox Grid.Row="3" Grid.Column="1" x:Name="WinPhone2" Width="150" Height="20" Margin="20 0 0 0" TextChanged="RegFields_TextChanged"/>
 
                         <TextBlock Margin="10 10 0 10" Grid.Row="4" Grid.Column="0" FontSize="16" Text="Пароль:"/>
                         <TextBox Grid.Row="4" Grid.Column="1" x:Name="WinPassword2" Width="150" Height="20" Margin="20 0 0 0"/>
 
-                        <Button x:Name="RegIn_Btn" Grid.Row="5" Grid.ColumnSpan="2" Content="Войти" Height="33" Width="100" HorizontalAlignment="Center" />
+                        <Button x:Name="RegIn_Btn" Grid.Row="5" Grid.ColumnSpan="2" Content="Войти" Height="33" Width="100" HorizontalAlignment="Center" Click="RegIn_Btn_Click" />
 
                     </Grid>
                 </TabItem.Content>

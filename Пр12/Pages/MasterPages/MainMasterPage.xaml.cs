@@ -25,7 +25,8 @@ namespace Пр12.Pages.MasterPages
         public MainMasterPage()
         {
             InitializeComponent();
-            MainWindow.get_Btn_Back.Visibility = Visibility.Visible;
+            if (MainWindow.Current != null)
+                MainWindow.Current.Btn_Back.Visibility = Visibility.Visible;
 
             MasterZapisi = Core.Context.UserService.ToList();
             Services.ItemsSource = MasterZapisi;

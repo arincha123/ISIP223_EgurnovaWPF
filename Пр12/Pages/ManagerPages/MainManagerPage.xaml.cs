@@ -30,7 +30,8 @@ namespace Пр12.Pages.ManagerPages
         public MainManagerPage()
         {
             InitializeComponent();
-            MainWindow.get_Btn_Back.Visibility = Visibility.Visible;
+            if (MainWindow.Current != null)
+                MainWindow.Current.Btn_Back.Visibility = Visibility.Visible;
 
             ServicesForManager = Core.Context.Service.ToList();
             ServList.ItemsSource = ServicesForManager;
