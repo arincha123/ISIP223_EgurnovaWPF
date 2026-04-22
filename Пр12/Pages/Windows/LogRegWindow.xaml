@@ -65,7 +65,7 @@
                         <TextBlock Margin="10 10 0 10" Grid.Row="4" Grid.Column="0" FontSize="16" Text="Пароль:"/>
                         <TextBox Grid.Row="4" Grid.Column="1" x:Name="WinPassword2" Width="150" Height="20" Margin="20 0 0 0"/>
 
-                        <Button x:Name="RegIn_Btn" Grid.Row="5" Grid.ColumnSpan="2" Content="Войти" Height="33" Width="100" HorizontalAlignment="Center" />
+                        <Button x:Name="RegIn_Btn" Grid.Row="5" Grid.ColumnSpan="2" Content="Войти" Height="33" Width="100" HorizontalAlignment="Center" Click="RegIn_Btn_Click" />
 
                     </Grid>
                 </TabItem.Content>

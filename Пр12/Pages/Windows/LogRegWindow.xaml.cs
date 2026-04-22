@@ -77,6 +77,7 @@ namespace Пр12.Pages.Windows
 
             if (string.IsNullOrWhiteSpace(firstName) ||
                 string.IsNullOrWhiteSpace(lastName) ||
+                string.IsNullOrWhiteSpace(middleName) ||
                 string.IsNullOrWhiteSpace(phoneNumber) ||
                 string.IsNullOrWhiteSpace(password))
             {
@@ -95,7 +96,7 @@ namespace Пр12.Pages.Windows
             {
                 FirstName = firstName,
                 LastName = lastName,
-                MiddleName = middleName ?? "",
+                MiddleName = middleName,
                 PhoneNumber = phoneNumber,
                 Password = password,
                 RoleID = 1

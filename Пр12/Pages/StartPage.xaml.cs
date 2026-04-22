@@ -132,10 +132,6 @@ namespace Пр12.Pages
             if (result == true) {
                 CheckAuthorization();
             }
-
-
-
-
         }
 
         private void Tovari_Click(object sender, RoutedEventArgs e)

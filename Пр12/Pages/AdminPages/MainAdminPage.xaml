@@ -9,10 +9,6 @@
       Title="MainAdminPage">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="45"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -20,11 +16,6 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="Имя" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" FontSize="18"/>
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="Фамилия" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" FontSize="18"/>
-        <TextBlock Grid.Row="0" Grid.Column="2" Text="Отчество" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" FontSize="18"/>
-        <TextBlock Grid.Row="0" Grid.Column="3" Text="Роль" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10" FontSize="18"/>
 
         <TabControl Grid.Row="1" Grid.ColumnSpan="4" >
             <TabItem>
@@ -46,26 +37,26 @@
                         <StackPanel VerticalAlignment="Center" Grid.Column="0" HorizontalAlignment="Center"  >
                             <WrapPanel Margin="10" >
                                 <TextBlock Text="Имя:" FontSize="18" Margin="40 0 0 0" />
-                                <TextBox x:Name="FirstName1" Width="150" Margin="10 0 0 0" />
+                                <TextBox FontSize="16" x:Name="FirstName1" Width="150" Margin="10 0 0 0" />
                             </WrapPanel>
                             <WrapPanel Margin="10" >
                                 <TextBlock Text="Фамилия:" FontSize="18" />
-                                <TextBox x:Name="LastName1" Width="150" Margin="10 0 0 0" />
+                                <TextBox FontSize="16" x:Name="LastName1" Width="150" Margin="10 0 0 0" />
                             </WrapPanel>
                             <WrapPanel Margin="10" >
                                 <TextBlock Text="Отчество:" FontSize="18" />
-                                <TextBox x:Name="MiddleName1" Width="150" Margin="10 0 0 0" />
+                                <TextBox FontSize="16" x:Name="MiddleName1" Width="150" Margin="10 0 0 0" />
                             </WrapPanel>
                         </StackPanel>
 
                         <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" >
                             <WrapPanel Margin="10" >
                                 <TextBlock Text="Логин (номер телефона):" FontSize="18" />
-                                <TextBox x:Name="Login1" Width="150" Margin="10 0 0 0" />
+                                <TextBox FontSize="16" x:Name="Login1" Width="150" Margin="10 0 0 0" />
                             </WrapPanel>
                             <WrapPanel Margin="10" >
                                 <TextBlock Text="Пароль:" FontSize="18" Margin="0 0 140 0"/>
-                                <TextBox x:Name="Password1" Width="150" Margin="10 0 0 0" />
+                                <TextBox FontSize="16" x:Name="Password1" Width="150" Margin="10 0 0 0" />
                             </WrapPanel>
                         </StackPanel>
 
@@ -122,7 +113,7 @@
 
                             <WrapPanel Margin="10 10 10 20">
                                 <TextBlock Text="Номер телефона (логин)" FontSize="14"/>
-                                <TextBox x:Name="Phone2" Width="150" Margin="10 0 0 0"/>
+                                <TextBox FontSize="16" x:Name="Phone2" Width="150" Margin="10 0 0 0"/>
                             </WrapPanel>
 
                             <Button x:Name="DelPol" Content="Удалить пользователя" Width="180" FontSize="16" Click="DelPol_Click" />
@@ -170,7 +161,7 @@
                             <TextBlock Text="Введите телефон пользователя, роль которого хотите изменить: " FontSize="18" TextWrapping="WrapWithOverflow" />
                             <WrapPanel Margin="10 10 10 20">
                                 <TextBlock Text="Номер телефона (логин)" FontSize="14"/>
-                                <TextBox x:Name="Phone3" Width="150" Margin="10 0 0 0"/>
+                                <TextBox FontSize="16" x:Name="Phone3" Width="150" Margin="10 0 0 0"/>
                             </WrapPanel>
                             <GroupBox Grid.Column="1" Grid.Row="0" Header="Роль:" FontSize="18" >
                                 <StackPanel Margin="10">
