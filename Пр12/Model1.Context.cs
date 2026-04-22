@@ -38,7 +38,6 @@ namespace Пр12
         public virtual DbSet<Schedule> Schedule { get; set; }
         public virtual DbSet<ServCategory> ServCategory { get; set; }
         public virtual DbSet<Service> Service { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserService> UserService { get; set; }
     }

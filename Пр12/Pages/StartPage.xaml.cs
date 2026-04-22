@@ -33,29 +33,54 @@ namespace Пр12.Pages
 
             AllServices = Core.Context.MasterService.ToList();
             ShowServ.ItemsSource = AllServices;
+
+            var masters = Core.Context.User.Where(u => u.RoleID == 2).Select(u => u.FirstName + " " + u.LastName).ToList();
+            masters.Insert(0, "Все мастера");
+            MasterCBox.ItemsSource = masters;
+            MasterCBox.SelectedIndex = 0;
+
+            var categories = Core.Context.ServCategory.Select(c => c.Name).ToList();
+
+            categories.Insert(0, "Все типы" );
+
+            CategoryCBox.ItemsSource = categories;
+            CategoryCBox.SelectedIndex = 0;
         }
 
-        private void MasterCBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void FilterAndShowServices()
         {
+            var result = AllServices.ToList();
 
-        }
+            string selectedMaster = MasterCBox.SelectedItem?.ToString();
+            if (selectedMaster != null && selectedMaster != "Все мастера")
+            {
+                result = result.Where(s => (s.User.FirstName + " " + s.User.LastName) == selectedMaster).ToList();
+            }
 
-        private void CategoryCBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+            string selectedCategory = CategoryCBox.SelectedItem?.ToString();
+            if (selectedCategory != null && selectedCategory != "Все типы")
+            {
+                result = result.Where(s => s.Service.ServCategory.Name == selectedCategory).ToList();
+            }
 
+            ShowServ.ItemsSource = result;
         }
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
-            //Window lrwin = new LogRegWindow();
-            //lrwin.Show();
+            Window lrwin = new LogRegWindow();
+            lrwin.Show();
 
-            NavigationService.Navigate(new MainClientPage());
         }
 
         private void Tovari_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new TovariPage());
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            FilterAndShowServices();
         }
     }
 }
