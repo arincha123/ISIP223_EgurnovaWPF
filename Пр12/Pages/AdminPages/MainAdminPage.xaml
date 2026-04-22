@@ -86,7 +86,7 @@
                         <ListView x:Name="Clients1"  Grid.Column="0" FontSize="16" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=5}">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="Клиент" Width="150">
+                                    <GridViewColumn Header="Клиент" Width="auto">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock>
@@ -101,8 +101,8 @@
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    <GridViewColumn Header="Телефон" Width="100" DisplayMemberBinding="{Binding PhoneNumber}"/>
-                                    <GridViewColumn Header="Роль" Width="100" DisplayMemberBinding="{Binding Role.Name}"/>
+                                    <GridViewColumn Header="Телефон" Width="auto" DisplayMemberBinding="{Binding PhoneNumber}"/>
+                                    <GridViewColumn Header="Роль" Width="auto" DisplayMemberBinding="{Binding Role.Name}"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>
@@ -136,7 +136,7 @@
                         <ListView x:Name="Clients2"  Grid.Column="0" FontSize="16" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=5}">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="Клиент" Width="150">
+                                    <GridViewColumn Header="Клиент" Width="auto">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock>
@@ -151,8 +151,8 @@
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    <GridViewColumn Header="Телефон" Width="100" DisplayMemberBinding="{Binding PhoneNumber}"/>
-                                    <GridViewColumn Header="Роль" Width="100" DisplayMemberBinding="{Binding Role.Name}"/>
+                                    <GridViewColumn Header="Телефон" Width="auto" DisplayMemberBinding="{Binding PhoneNumber}"/>
+                                    <GridViewColumn Header="Роль" Width="auto" DisplayMemberBinding="{Binding Role.Name}"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>
