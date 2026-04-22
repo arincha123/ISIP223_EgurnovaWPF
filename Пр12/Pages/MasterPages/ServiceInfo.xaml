@@ -25,18 +25,18 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0" FontSize="18" HorizontalAlignment="Center" Text="Название"/>
-        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18" HorizontalAlignment="Stretch" Text="{Binding Service.Name}"/>
+        <TextBlock Grid.Row="0" Grid.Column="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Название"/>
+        <TextBlock x:Name="ServName" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18" HorizontalAlignment="Stretch" Text="{Binding Service.Name}"/>
 
-        <TextBlock Grid.Row="1" Grid.Column="0" FontSize="18" HorizontalAlignment="Center" Text="Категория"/>
-        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18" HorizontalAlignment="Stretch" Text="{Binding Service.ServCategory.Name}"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" Text="Категория"/>
+        <TextBlock x:Name="ServCat" Grid.Row="1" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18" HorizontalAlignment="Stretch" Text="{Binding Service.ServCategory.Name}"/>
 
-        
-        <TextBlock Grid.Row="2" Grid.Column="0" FontSize="18" HorizontalAlignment="Center" Text="Дата"/>
-        <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18" HorizontalAlignment="Stretch" Text="{Binding Date, StringFormat='dd.MM.yyyy'}"/>
 
-        <TextBlock Grid.Row="3" Grid.Column="0" FontSize="18" HorizontalAlignment="Center" Text="Время"/>
-        <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18" HorizontalAlignment="Center">
+        <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" Text="Дата"/>
+        <TextBlock x:Name="ServDate" Grid.Row="2" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18" HorizontalAlignment="Stretch" Text="{Binding Date, StringFormat='dd.MM.yyyy'}"/>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" Text="Время"/>
+        <TextBlock x:Name="ServTime" Grid.Row="3" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18" HorizontalAlignment="Center">
             <TextBlock.Text>
                 <MultiBinding StringFormat="{}{0} - {1}">
                     <Binding Path="Schedule.Time" StringFormat="hh:mm"/>
@@ -45,8 +45,8 @@
             </TextBlock.Text>
         </TextBlock>
 
-        <TextBlock Grid.Row="4" Grid.Column="0" FontSize="18" HorizontalAlignment="Center" Text="ФИО клиента"/>
-        <TextBlock Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18" HorizontalAlignment="Stretch">
+        <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" Text="ФИО клиента"/>
+        <TextBlock x:Name="ServFIO" Grid.Row="4" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18" HorizontalAlignment="Stretch">
             <TextBlock.Text>
                 <MultiBinding StringFormat="{}{0} {1} {2}">
                     <Binding Path="User.LastName"/>
@@ -55,10 +55,10 @@
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>
-        
-        
-        <TextBlock Grid.Row="5" Grid.Column="0" FontSize="18" HorizontalAlignment="Center" Text="Номер телефона"/>
-        <TextBlock Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18" HorizontalAlignment="Stretch" Text="{Binding User.PhoneNumber}"/>
+
+
+        <TextBlock Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" Text="Номер телефона"/>
+        <TextBlock x:Name="ServPhone" Grid.Row="5" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18" HorizontalAlignment="Stretch" Text="{Binding User.PhoneNumber}"/>
 
 
         <Button x:Name="CloseZapis_Btn" Grid.Column="2" Grid.Row="6" Content="Закрыть запись?" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10"

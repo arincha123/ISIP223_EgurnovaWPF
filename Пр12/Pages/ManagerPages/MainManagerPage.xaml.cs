@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,11 @@ namespace Пр12.Pages.ManagerPages
             if (MainWindow.Current != null)
                 MainWindow.Current.Btn_Back.Visibility = Visibility.Visible;
 
+
+        }
+
+        private void LoadUsers()
+        {
             ServicesForManager = Core.Context.Service.ToList();
             ServList.ItemsSource = ServicesForManager;
 
@@ -46,10 +52,15 @@ namespace Пр12.Pages.ManagerPages
             ProductsList.ItemsSource = ProductsForManager;
 
             ProdCategoriesForManager = Core.Context.ProdCategory.ToList();
-            ProductTypesList.ItemsSource= ProdCategoriesForManager;
+            ProductTypesList.ItemsSource = ProdCategoriesForManager;
 
             ManufacturersForManager = Core.Context.Manufacturer.ToList();
             ManufacturersList.ItemsSource = ManufacturersForManager;
+        }
+
+        private void ClearAddFields()
+        {
+            AddManufacturerNameBox.Text = "";
         }
 
         //Услуги
@@ -137,12 +148,46 @@ namespace Пр12.Pages.ManagerPages
         //Производители
         private void AddManufacturerBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrEmpty(AddManufacturerNameBox.Text))
+            {
+                MessageBox.Show("Заполните все обязательные поля Название производителя", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
+            var existingMan = Core.Context.Manufacturer.FirstOrDefault(m => m.Name == AddManufacturerNameBox.Text);
+
+            if (existingMan != null)
+            {
+                MessageBox.Show("Производитель с таким названием уже существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            Manufacturer manuf = new Manufacturer()
+            {
+                Name = AddManufacturerNameBox.Text
+            };
+
+            try
+            {
+                Core.Context.Manufacturer.Add(manuf);
+                Core.Context.SaveChanges();
+                MessageBox.Show("Производитель успешно добавлен!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                ClearAddFields();
+
+                LoadUsers();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при добавлении: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
-        private void ChangeManufacturerBtn_Click(object sender, RoutedEventArgs e)
+        private void DelManufacturerBtn_Click(object sender, RoutedEventArgs e)
         {
-
+        
         }
+
+       
     }
 }

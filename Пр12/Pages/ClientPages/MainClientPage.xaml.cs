@@ -20,9 +20,14 @@ namespace Пр12.Pages.ClientPages
     /// </summary>
     public partial class MainClientPage : Page
     {
+        List<UserService> ServicesForUser;
         public MainClientPage()
         {
             InitializeComponent();
+            MainWindow.get_Btn_Back.Visibility = Visibility.Visible;
+
+            ServicesForUser = Core.Context.UserService.ToList();
+            ZapisiList.ItemsSource = ServicesForUser;
         }
     }
 }

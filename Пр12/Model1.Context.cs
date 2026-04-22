@@ -13,10 +13,10 @@ namespace Пр12
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PR_17Entities : DbContext
+    public partial class PR_17Entities1 : DbContext
     {
-        public PR_17Entities()
-            : base("name=PR_17Entities")
+        public PR_17Entities1()
+            : base("name=PR_17Entities1")
         {
         }
     
@@ -38,7 +38,6 @@ namespace Пр12
         public virtual DbSet<Schedule> Schedule { get; set; }
         public virtual DbSet<ServCategory> ServCategory { get; set; }
         public virtual DbSet<Service> Service { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserService> UserService { get; set; }
     }
