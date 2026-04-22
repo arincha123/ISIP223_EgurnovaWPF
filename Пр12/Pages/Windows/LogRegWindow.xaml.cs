@@ -42,7 +42,10 @@ namespace Пр12.Pages.Windows
                     MessageBox.Show($"Добро пожаловать, {existing.FirstName} {existing.LastName}!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
 
 
-                    this.Close();
+                    DialogResult = true;
+
+                    //this.Close();
+
                 }
                 else
                 {
@@ -104,8 +107,8 @@ namespace Пр12.Pages.Windows
 
             MessageBox.Show("Регистрация успешна!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
 
-
-            this.Close();
+            DialogResult = true;
+            //this.Close();
         }
 
 

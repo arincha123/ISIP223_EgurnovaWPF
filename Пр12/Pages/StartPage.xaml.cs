@@ -30,6 +30,9 @@ namespace Пр12.Pages
         {
             InitializeComponent();
             MainWindow.get_Btn_Back.Visibility = Visibility.Hidden;
+            AccountIn.Visibility = Visibility.Hidden;
+
+            CheckAuthorization();
 
             AllServices = Core.Context.MasterService.ToList();
             ShowServ.ItemsSource = AllServices;
@@ -45,6 +48,62 @@ namespace Пр12.Pages
 
             CategoryCBox.ItemsSource = categories;
             CategoryCBox.SelectedIndex = 0;
+        }
+
+        private void CheckAuthorization()
+        {
+            if (DataOfUser.isLoged)
+            {
+                LogIn.Visibility = Visibility.Hidden;
+                AccountIn.Visibility = Visibility.Visible;
+
+                string roleName = "";
+                switch (DataOfUser.curuser.RoleID)
+                {
+                    case 1:
+                        roleName = "Клиент";
+                        break;
+                    case 2:
+                        roleName = "Мастер";
+                        break;
+                    case 3:
+                        roleName = "Менеджер";
+                        break;
+                    case 4:
+                        roleName = "Администратор";
+                        break;
+                }
+            }
+            else
+            {
+                LogIn.Visibility = Visibility.Visible;
+                AccountIn.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void AccountIn_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataOfUser.curuser != null)
+            {
+                switch (DataOfUser.curuser.RoleID)
+                {
+                    case 1:
+                        NavigationService.Navigate(new MainClientPage());
+                        break;
+                    case 2:
+                        NavigationService.Navigate(new MainMasterPage());
+                        break;
+                    case 3:
+                        NavigationService.Navigate(new MainManagerPage());
+                        break;
+                    case 4:
+                        NavigationService.Navigate(new MainAdminPage());
+                        break;
+                    default:
+                        NavigationService.Navigate(new MainClientPage());
+                        break;
+                }
+            }
         }
 
         private void FilterAndShowServices()
@@ -69,7 +128,13 @@ namespace Пр12.Pages
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
             Window lrwin = new LogRegWindow();
-            lrwin.Show();
+            var result = lrwin.ShowDialog();
+            if (result == true) {
+                CheckAuthorization();
+            }
+
+
+
 
         }
 
