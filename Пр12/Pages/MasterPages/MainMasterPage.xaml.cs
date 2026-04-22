@@ -36,12 +36,16 @@ namespace Пр12.Pages.MasterPages
 
         private void Services_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new ServiceInfo());
+            UserService selectedServ = Services.SelectedItem as UserService;
+            if (selectedServ != null) {
+                ServiceInfo serviceInfo = new ServiceInfo(selectedServ);
+                NavigationService.Navigate(serviceInfo);
+            }
         }
 
         private void AddServ_Btn_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void DelServ_Btn_Click(object sender, RoutedEventArgs e)

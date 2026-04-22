@@ -57,22 +57,22 @@ namespace Пр12.Pages
                 LogIn.Visibility = Visibility.Hidden;
                 AccountIn.Visibility = Visibility.Visible;
 
-                string roleName = "";
-                switch (DataOfUser.curuser.RoleID)
-                {
-                    case 1:
-                        roleName = "Клиент";
-                        break;
-                    case 2:
-                        roleName = "Мастер";
-                        break;
-                    case 3:
-                        roleName = "Менеджер";
-                        break;
-                    case 4:
-                        roleName = "Администратор";
-                        break;
-                }
+                //string roleName = "";
+                //switch (DataOfUser.curuser.RoleID)
+                //{
+                //    case 1:
+                //        roleName = "Клиент";
+                //        break;
+                //    case 2:
+                //        roleName = "Мастер";
+                //        break;
+                //    case 3:
+                //        roleName = "Менеджер";
+                //        break;
+                //    case 4:
+                //        roleName = "Администратор";
+                //        break;
+                //}
             }
             else
             {
