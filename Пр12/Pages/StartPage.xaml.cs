@@ -29,7 +29,8 @@ namespace Пр12.Pages
         public StartPage()
         {
             InitializeComponent();
-            MainWindow.get_Btn_Back.Visibility = Visibility.Hidden;
+            if (MainWindow.Current != null)
+                MainWindow.Current.Btn_Back.Visibility = Visibility.Visible;
             AccountIn.Visibility = Visibility.Hidden;
 
             CheckAuthorization();

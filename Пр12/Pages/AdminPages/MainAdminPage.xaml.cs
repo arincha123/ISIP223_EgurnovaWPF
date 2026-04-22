@@ -24,7 +24,8 @@ namespace Пр12.Pages.AdminPages
         public MainAdminPage()
         {
             InitializeComponent();
-            MainWindow.get_Btn_Back.Visibility = Visibility.Visible;
+            if (MainWindow.Current != null)
+                MainWindow.Current.Btn_Back.Visibility = Visibility.Visible;
 
             LoadUsers();
         }
