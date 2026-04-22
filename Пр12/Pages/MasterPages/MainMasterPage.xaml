@@ -9,24 +9,8 @@
       Title="MainMasterPage">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="45"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="Имя" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" FontSize="18"/>
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="Фамилия" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" FontSize="18"/>
-        <TextBlock Grid.Row="0" Grid.Column="2" Text="Отчество" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" FontSize="18"/>
-        <TextBlock Grid.Row="0" Grid.Column="3" Text="Роль" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10" FontSize="18"/>
-
-        <TabControl Grid.Row="1" Grid.ColumnSpan="4">
+        <TabControl >
             <TabItem>
                 <TabItem.Header>
                     <TextBlock FontSize="18">Записи</TextBlock>
@@ -47,6 +31,7 @@
                     </Grid>
                 </TabItem.Content>
             </TabItem>
+            
             <TabItem>
                 <TabItem.Header>
                     <TextBlock FontSize="18">Услуги</TextBlock>
@@ -55,33 +40,53 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-                        <ListView x:Name="YourServices" FontSize="16" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Мои услуги" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,5"/>
+
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="Все услуги" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,5"/>
+
+                        <ListView x:Name="YourServices" Grid.Row="1" Grid.Column="0" FontSize="14" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="5">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="Услуга" Width="Auto" DisplayMemberBinding="{Binding Service.Name}"/>
+                                    <GridViewColumn Header="№" Width="40" DisplayMemberBinding="{Binding ID}"/>
+                                    <GridViewColumn Header="Услуга" Width="180" DisplayMemberBinding="{Binding Service.Name}"/>
+                                    <GridViewColumn Header="Цена" Width="80" DisplayMemberBinding="{Binding Price, StringFormat=C}"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>
 
-                        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock FontSize="16">Введите название услуги</TextBlock>
-                            <TextBox x:Name="AddServ" Width="200" Height="25" Margin="0 10 0 10"/>
-                            <Button x:Name="AddServ_Btn" FontSize="14" Height="25" Width="120" Content="Добавить услугу" Margin="0 0 0 30" Click="AddServ_Btn_Click"/>
+                        <ListView x:Name="AllServicesList" Grid.Row="1" Grid.Column="1" FontSize="14" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="5">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="№" Width="40" DisplayMemberBinding="{Binding ID}"/>
+                                    <GridViewColumn Header="Услуга" Width="180" DisplayMemberBinding="{Binding Name}"/>
+                                    <GridViewColumn Header="Категория" Width="120" DisplayMemberBinding="{Binding ServCategory.Name}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
 
-                            <TextBlock FontSize="16">Выберите название услуги</TextBlock>
-                            <ComboBox x:Name="ServForDel" Width="200" Margin="0 10 0 10" />
-                            <Button x:Name="DelServ_Btn" FontSize="14" Height="25" Width="120" Content="Удалить услугy" Click="DelServ_Btn_Click"/>
+                        <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+                            <TextBlock Text="Введите название из правого списка" FontSize="14" Margin="0,10,0,5"/>
+                            <TextBox x:Name="AddServ" Width="180" Height="30" Margin="0,5"/>
+                            <Button x:Name="AddServ_Btn" Content="Добавить по названию" Width="180" Height="35" 
+                        Margin="0,10" Click="AddServ_Btn_Click"/>
+
+                            <TextBlock Text="Удалить по ID" HorizontalAlignment="Center" FontSize="14" Margin="0,10,0,5"/>
+                            <TextBox x:Name="DelServ" Width="180" Height="30" Margin="0,5"/>
+                            <Button x:Name="DelServ_Btn" Content="Удалить по ID" Width="180" Height="35" 
+                        Margin="0,10" Click="DelServ_Btn_Click"/>
                         </StackPanel>
-                        
                     </Grid>
                 </TabItem.Content>
             </TabItem>
         </TabControl>
-        
-        
     </Grid>
 </Page>

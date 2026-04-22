@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0d26f38620ec465b8f95c359e5877d54" Name="Diagram1">
+      <Diagram DiagramId="b5a45c46de92401685b0ca52d7d9cadb" Name="Diagram1">
         <EntityTypeShape EntityType="PR_17Model.Cart" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="PR_17Model.Manufacturer" Width="1.5" PointX="3" PointY="17.125" IsExpanded="true" />
         <EntityTypeShape EntityType="PR_17Model.MasterService" Width="1.5" PointX="8.25" PointY="8.5" IsExpanded="true" />
@@ -12,7 +12,7 @@
         <EntityTypeShape EntityType="PR_17Model.OrderItems" Width="1.5" PointX="7.5" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PR_17Model.PaymentMethod" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PR_17Model.ProdCategory" Width="1.5" PointX="3" PointY="19.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PR_17Model.Product" Width="1.5" PointX="5.25" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PR_17Model.Product" Width="1.5" PointX="5.25" PointY="17.25" IsExpanded="true" />
         <EntityTypeShape EntityType="PR_17Model.ProductInCart" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="PR_17Model.Role" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PR_17Model.Schedule" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />

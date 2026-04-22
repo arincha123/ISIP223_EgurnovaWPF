@@ -9,6 +9,80 @@
       Title="MainClientPage">
 
     <Grid>
-        
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TabControl Grid.Row="1" Grid.ColumnSpan="4" >
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock FontSize="16">История записей</TextBlock>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <ListView x:Name="ZapisiList" FontSize="16" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=5}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Мастер" Width="250">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock>
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}{0} {1} {2}">
+                                                            <Binding Path="User.LastName"/>
+                                                            <Binding Path="User.FirstName"/>
+                                                            <Binding Path="User.MiddleName"/>
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Дата" Width="80" DisplayMemberBinding="{Binding Date, StringFormat=dd.MM.yyyy}"/>
+                                    <GridViewColumn Header="Время" Width="120">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock>
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}{0:HH:mm} - {1:HH:mm}">
+                                                            <Binding Path="Schedule.Time"/>
+                                                            <Binding Path="Schedule.EndTime"/>
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Услуга" Width="200" DisplayMemberBinding="{Binding Service.Name}"/>
+                                    <GridViewColumn Header="Комментарий" Width="200" DisplayMemberBinding="{Binding Comment}"/>
+                                    <GridViewColumn Header="Способ оплаты" Width="200" DisplayMemberBinding="{Binding PaymentMethod.Name}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock FontSize="16">История заказов</TextBlock>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <ListView x:Name="OrdersHistoryList" Grid.Row="1" FontSize="16" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="10" d:ItemsSource="{d:SampleData ItemCount=5}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="№ заказа" Width="80" DisplayMemberBinding="{Binding ID}"/>
+                                <GridViewColumn Header="Дата заказа" Width="120" DisplayMemberBinding="{Binding Date, StringFormat=dd.MM.yyy}"/>
+                                <GridViewColumn Header="Сумма" Width="100" DisplayMemberBinding="{Binding TotalAmount}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </TabItem.Content>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Page>

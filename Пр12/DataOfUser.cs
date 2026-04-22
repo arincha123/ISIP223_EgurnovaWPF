@@ -8,7 +8,7 @@ namespace Пр12
 {
     static internal class DataOfUser
     {
-        public static User user;
-        public static bool isLoged => user != null;
+        public static User curuser;
+        public static bool isLoged => curuser != null;
     }
 }

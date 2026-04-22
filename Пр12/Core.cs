@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Пр12
 {
-    internal class Core
+    static internal class Core
     {
-        public static PR_17Entities Context = new PR_17Entities();
+        public static PR_17Entities1 Context = new PR_17Entities1();
     }
 }

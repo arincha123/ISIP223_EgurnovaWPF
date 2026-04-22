@@ -29,7 +29,7 @@ namespace Пр12.Pages.Windows
             {
                 if (existing.Password == password)
                 {
-                    DataOfUser.user = existing;
+                    DataOfUser.curuser = existing;
 
                     MessageBox.Show($"Добро пожаловать, {existing.FirstName} {existing.LastName}!",
                                   "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -91,7 +91,7 @@ namespace Пр12.Pages.Windows
                 Password = password,
                 RoleID = 1
             };
-            DataOfUser.user = newUser;
+            DataOfUser.curuser = newUser;
 
             Core.Context.User.Add(newUser);
             Core.Context.SaveChanges();
@@ -102,6 +102,6 @@ namespace Пр12.Pages.Windows
             this.Close();
         }
 
-       
+
     }
 }

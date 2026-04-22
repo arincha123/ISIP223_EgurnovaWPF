@@ -111,7 +111,7 @@
     <Compile Include="Pages\TovariPage.xaml.cs">
       <DependentUpon>TovariPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\LogRegWindow.xaml.cs">
+    <Compile Include="Pages\Windows\LogRegWindow.xaml.cs">
       <DependentUpon>LogRegWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="PaymentMethod.cs">
@@ -187,7 +187,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\LogRegWindow.xaml">
+    <Page Include="Pages\Windows\LogRegWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -232,10 +232,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
   <ItemGroup>
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -247,6 +243,12 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
