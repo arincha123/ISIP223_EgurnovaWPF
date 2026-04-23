@@ -16,46 +16,53 @@ using Пр12.Pages.Windows;
 
 namespace Пр12.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для CartPage.xaml
-    /// </summary>
     public partial class CartPage : Page
     {
         private Cart usercart;
         private List<ProductInCartViewModel> products = new List<ProductInCartViewModel>();
+
         public CartPage(Cart cart)
         {
             InitializeComponent();
             usercart = cart;
+            LoadData();
         }
+
         public void LoadData()
         {
+            products.Clear();
 
-            var productsInCart = Core.Context.ProductInCart.Where(p => p.CartID == usercart.ID).ToList();
+            var productsInCart = Core.Context.ProductInCart
+                .Where(p => p.CartID == usercart.ID)
+                .ToList();
 
-            for (int i = 0; i < productsInCart.Count; i++)
+            foreach (var item in productsInCart)
             {
-                var product = new ProductInCartViewModel
+                var product = Core.Context.Product.Find(item.ProductID);
+                if (product != null)
                 {
-                    ProductID = productsInCart[i].ProductID,
-                    ProductInCartID = productsInCart[i].ID,
-                    Name = productsInCart[i].Product.Name,
-                    Price = productsInCart[i].Product.Cost - (productsInCart[i].Product.Cost * (decimal)(productsInCart[i].Product.Discount / 100)),
-                    Quantity = productsInCart[i].Quantity,
-                    Image = productsInCart[i].Product.Image
-
-                };
-                products.Add(product);
+                    var productVM = new ProductInCartViewModel
+                    {
+                        ProductID = item.ProductID,
+                        ProductInCartID = item.ID,
+                        Name = product.Name,
+                        Price = product.Cost - (product.Cost * (decimal)(product.Discount / 100)),
+                        Quantity = item.Quantity,
+                        Image = product.Image
+                    };
+                    products.Add(productVM);
+                }
             }
 
             ListBoxProductsInCart.ItemsSource = products;
             UpdateTotalQuantity();
-
         }
 
         private void UpdateProductQuantity(ProductInCartViewModel productInCart, int newQuantity)
         {
-            var prod = Core.Context.ProductInCart.FirstOrDefault(p => p.ProductID == productInCart.ProductID);
+            var prod = Core.Context.ProductInCart
+                .FirstOrDefault(p => p.ProductID == productInCart.ProductID && p.CartID == usercart.ID);
+
             if (newQuantity >= 1)
             {
                 if (prod != null)
@@ -67,15 +74,14 @@ namespace Пр12.Pages
             }
             else
             {
-
                 if (prod != null)
                 {
                     Core.Context.ProductInCart.Remove(prod);
                     Core.Context.SaveChanges();
                 }
                 products.Remove(productInCart);
-
             }
+
             ListBoxProductsInCart.ItemsSource = null;
             ListBoxProductsInCart.ItemsSource = products;
             UpdateTotalQuantity();
@@ -83,15 +89,11 @@ namespace Пр12.Pages
 
         private void UpdateTotalQuantity()
         {
-
             int totalQuantity = products.Sum(u => u.Quantity);
             decimal totalPrice = products.Sum(u => u.Price * u.Quantity);
-            usercart.TotalQuantity = totalQuantity;
-            usercart.TotalAmount = totalPrice;
-            DataOfUser.UserCart.TotalQuantity = totalQuantity;
-            DataOfUser.UserCart.TotalAmount = totalPrice;
+
             TxtBlockCartQuantity.Text = totalQuantity.ToString();
-            TxtBlcTotalPrice.Text = $"{totalPrice} Р";
+            TxtBlcTotalPrice.Text = $"{totalPrice:F2} ₽";
 
             var cartBD = Core.Context.Cart.FirstOrDefault(c => c.ID == usercart.ID);
             if (cartBD != null)
@@ -101,161 +103,69 @@ namespace Пр12.Pages
                 Core.Context.SaveChanges();
             }
 
+            if (DataOfUser.UserCart != null)
+            {
+                DataOfUser.UserCart.TotalQuantity = totalQuantity;
+                DataOfUser.UserCart.TotalAmount = totalPrice;
+            }
+
             if (totalQuantity == 0)
             {
-
                 TxtBlockEmptyCart.Visibility = Visibility.Visible;
                 ListBoxProductsInCart.Visibility = Visibility.Collapsed;
                 StackTotalPrice.Visibility = Visibility.Collapsed;
+                TxtBlockCartQuantity.Text = "0";
+            }
+            else
+            {
+                TxtBlockEmptyCart.Visibility = Visibility.Collapsed;
+                ListBoxProductsInCart.Visibility = Visibility.Visible;
+                StackTotalPrice.Visibility = Visibility.Visible;
             }
         }
+
         private void BtnMinusProd_Click(object sender, RoutedEventArgs e)
         {
             var btn = (Button)sender;
             var selectedproduct = btn.DataContext as ProductInCartViewModel;
-
-            UpdateProductQuantity(selectedproduct, selectedproduct.Quantity - 1);
+            if (selectedproduct != null)
+            {
+                UpdateProductQuantity(selectedproduct, selectedproduct.Quantity - 1);
+            }
         }
 
         private void BtnPlusProd_Click(object sender, RoutedEventArgs e)
         {
             var btn = (Button)sender;
             var selectedproduct = btn.DataContext as ProductInCartViewModel;
-
-            UpdateProductQuantity(selectedproduct, selectedproduct.Quantity + 1);
+            if (selectedproduct != null)
+            {
+                UpdateProductQuantity(selectedproduct, selectedproduct.Quantity + 1);
+            }
         }
 
         private void BtnDeleteProd_Click(object sender, RoutedEventArgs e)
         {
             var btn = (Button)sender;
             var selectedproduct = btn.DataContext as ProductInCartViewModel;
-
-            UpdateProductQuantity(selectedproduct, 0);
+            if (selectedproduct != null)
+            {
+                UpdateProductQuantity(selectedproduct, 0);
+            }
         }
 
         private void BtnOrder_Click(object sender, RoutedEventArgs e)
         {
+            if (products.Count == 0)
+            {
+                MessageBox.Show("Корзина пуста!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             var wind = new WindowOrder(this);
-            wind.Show();
-            NavigationService.GoBack();
+            wind.Owner = Window.GetWindow(this);
+            wind.ShowDialog();
+            LoadData();
         }
     }
 }
-
-//namespace Пр12.Pages
-//{
-    
-    
-//        public void LoadData()
-//        {
-
-//            var productsInCart = Core.Context.ProductInCart.Where(p => p.CartID == usercart.ID).ToList();
-
-//            for (int i = 0; i < productsInCart.Count; i++)
-//            {
-//                var product = new ProductInCartViewModel
-//                {
-//                    ProductID = productsInCart[i].ProductID,
-//                    ProductInCartID = productsInCart[i].ID,
-//                    Name = productsInCart[i].Product.Name,
-//                    Price = productsInCart[i].Product.Cost - (productsInCart[i].Product.Cost * (decimal)(productsInCart[i].Product.Discount / 100)),
-//                    Quantity = productsInCart[i].Quantity,
-//                    Image = productsInCart[i].Product.Image
-
-//                };
-//                products.Add(product);
-//            }
-
-//            ListBoxProductsInCart.ItemsSource = products;
-//            UpdateTotalQuantity();
-
-//        }
-
-//        private void UpdateProductQuantity(ProductInCartViewModel productInCart, int newQuantity)
-//        {
-//            var prod = Core.Context.ProductInCart.FirstOrDefault(p => p.ProductID == productInCart.ProductID);
-//            if (newQuantity >= 1)
-//            {
-//                if (prod != null)
-//                {
-//                    prod.Quantity = newQuantity;
-//                    Core.Context.SaveChanges();
-//                }
-//                productInCart.Quantity = newQuantity;
-//            }
-//            else
-//            {
-
-//                if (prod != null)
-//                {
-//                    Core.Context.ProductInCart.Remove(prod);
-//                    Core.Context.SaveChanges();
-//                }
-//                products.Remove(productInCart);
-
-//            }
-//            ListBoxProductsInCart.ItemsSource = null;
-//            ListBoxProductsInCart.ItemsSource = products;
-//            UpdateTotalQuantity();
-//        }
-
-//        private void UpdateTotalQuantity()
-//        {
-
-//            int totalQuantity = products.Sum(u => u.Quantity);
-//            decimal totalPrice = products.Sum(u => u.Price * u.Quantity);
-//            usercart.TotalQuantity = totalQuantity;
-//            usercart.TotalAmount = totalPrice;
-//            DataOfUser.UserCart.TotalQuantity = totalQuantity;
-//            DataOfUser.UserCart.TotalAmount = totalPrice;
-//            TxtBlockCartQuantity.Text = totalQuantity.ToString();
-//            TxtBlcTotalPrice.Text = $"{totalPrice} Р";
-
-//            var cartBD = Core.Context.Cart.FirstOrDefault(c => c.ID == usercart.ID);
-//            if (cartBD != null)
-//            {
-//                cartBD.TotalQuantity = totalQuantity;
-//                cartBD.TotalAmount = totalPrice;
-//                Core.Context.SaveChanges();
-//            }
-
-//            if (totalQuantity == 0)
-//            {
-
-//                TxtBlockEmptyCart.Visibility = Visibility.Visible;
-//                ListBoxProductsInCart.Visibility = Visibility.Collapsed;
-//                StackTotalPrice.Visibility = Visibility.Collapsed;
-//            }
-//        }
-//        private void BtnMinusProd_Click(object sender, RoutedEventArgs e)
-//        {
-//            var btn = (Button)sender;
-//            var selectedproduct = btn.DataContext as ProductInCartViewModel;
-
-//            UpdateProductQuantity(selectedproduct, selectedproduct.Quantity - 1);
-//        }
-
-//        private void BtnPlusProd_Click(object sender, RoutedEventArgs e)
-//        {
-//            var btn = (Button)sender;
-//            var selectedproduct = btn.DataContext as ProductInCartViewModel;
-
-//            UpdateProductQuantity(selectedproduct, selectedproduct.Quantity + 1);
-//        }
-
-//        private void BtnDeleteProd_Click(object sender, RoutedEventArgs e)
-//        {
-//            var btn = (Button)sender;
-//            var selectedproduct = btn.DataContext as ProductInCartViewModel;
-
-//            UpdateProductQuantity(selectedproduct, 0);
-//        }
-
-//        private void BtnOrder_Click(object sender, RoutedEventArgs e)
-//        {
-//            var wind = new WindowOrder(this);
-//            wind.Show();
-//            NavigationService.GoBack();
-//        }
-//    }
-//}

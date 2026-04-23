@@ -127,12 +127,11 @@ namespace Пр12.Pages
                 CreateCart();
             }
 
-
-
             Button btn = (Button)sender;
             Product selectedProduct = (Product)btn.DataContext;
 
-            var existprod = Core.Context.ProductInCart.FirstOrDefault(a => a.ProductID == selectedProduct.ID);
+            var existprod = Core.Context.ProductInCart
+                .FirstOrDefault(a => a.ProductID == selectedProduct.ID && a.CartID == DataOfUser.UserCart.ID);
 
             if (existprod == null)
             {
@@ -141,10 +140,8 @@ namespace Пр12.Pages
                     CartID = DataOfUser.UserCart.ID,
                     ProductID = selectedProduct.ID,
                     Quantity = 1
-
                 };
                 Core.Context.ProductInCart.Add(pridcart);
-
             }
             else
             {
@@ -152,9 +149,37 @@ namespace Пр12.Pages
             }
             Core.Context.SaveChanges();
 
-
-
+            UpdateCartInfo();
         }
+
+        private void UpdateCartInfo()
+        {
+            var cart = Core.Context.Cart.FirstOrDefault(c => c.ID == DataOfUser.UserCart.ID);
+            if (cart != null)
+            {
+                var items = Core.Context.ProductInCart.Where(pc => pc.CartID == cart.ID).ToList();
+                int totalQuantity = items.Sum(i => i.Quantity);
+                decimal totalAmount = 0;
+
+                foreach (var item in items)
+                {
+                    var product = Core.Context.Product.Find(item.ProductID);
+                    if (product != null)
+                    {
+                        totalAmount += (product.Cost - (product.Cost * (decimal)(product.Discount / 100))) * item.Quantity;
+                    }
+                }
+
+                cart.TotalQuantity = totalQuantity;
+                cart.TotalAmount = totalAmount;
+                Core.Context.SaveChanges();
+
+                DataOfUser.UserCart.TotalQuantity = totalQuantity;
+                DataOfUser.UserCart.TotalAmount = totalAmount;
+            }
+        }
+
+
 
         private void BtnCart_Click(object sender, RoutedEventArgs e)
         {

@@ -9,43 +9,7 @@
       Title="TovariPage">
 
     <Grid>
-        <!--<Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <Button x:Name="CartIn" FontSize="16" Width="70" Height="27" HorizontalAlignment="Right" Margin="0 0 10 0" Grid.Row="0" Content="Корзина" />
-        <WrapPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0">
-            <TextBlock Text="Поиск: " FontSize="16" />
-            <TextBox x:Name="Search" Height="27" Margin="10 0 0 0" Width="250" />
-        </WrapPanel>
-
-        <WrapPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <ComboBox x:Name="TypeComBox" Width="150" Height="27" Margin="0 0 50 0" />
-            <ComboBox x:Name="ManufComBox" Width="150" Height="27" Margin="10 0 10 0"/>
-            <ComboBox x:Name="SortComBox" Width="150" Height="27" Margin="50 0 0 0"/>
-        </WrapPanel>
-
-        <ListBox x:Name="TovariList" Grid.Row="3">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel/>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
- 
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            
-            
-            
-        </ListBox>-->
-
-            <Grid.RowDefinitions>
+        <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -54,9 +18,9 @@
                 <TextBlock Text="⌕" FontSize="16" Margin="10"/>
                 <TextBox x:Name="TxtBoxSearch" Width="150" Height="27" FontSize="20" TextChanged="TxtBoxSearch_TextChanged"/>
 
-                <ComboBox x:Name="ComboBoxFiltrProdCat" Height="27" Width="100" Margin="10 0 0 0" SelectedIndex="0" SelectionChanged="ComboBoxFiltrProdCat_SelectionChanged"/>
-                <ComboBox x:Name="ComboBoxFiltrProdMan" Height="27" Width="100" Margin="10 0 0 0" SelectedIndex="0" SelectionChanged="ComboBoxFiltrProdCat_SelectionChanged"/>
-                <Button x:Name="BtnSortRating" Content="Сортировка по рейтингу" Background="White" Foreground="Black" FontSize="16" Height="27" Margin="10 0 0 0" Click="BtnSortRating_Click"/>
+                <ComboBox x:Name="ComboBoxFiltrProdCat" Height="27" FontSize="16" Width="100" Margin="10 0 0 0" SelectedIndex="0" SelectionChanged="ComboBoxFiltrProdCat_SelectionChanged"/>
+                <ComboBox x:Name="ComboBoxFiltrProdMan" Height="27" FontSize="16" Width="100" Margin="10 0 0 0" SelectedIndex="0" SelectionChanged="ComboBoxFiltrProdCat_SelectionChanged"/>
+                <Button x:Name="BtnSortRating" Content="Сортировка по рейтингу" Background="White" Foreground="Black" FontSize="16" Width="200" Height="27" Margin="10 0 0 0" Click="BtnSortRating_Click"/>
             </WrapPanel>
 
 
@@ -68,17 +32,17 @@
                             <StackPanel HorizontalAlignment="Center">
                                 <Grid>
                                     <Image Source="{Binding Image}" Width="150"  Height="150"/>
-                                    <TextBlock Text="{Binding Rating}" HorizontalAlignment="Right"  FontSize="18" />
-                                    <Border Visibility="{Binding DiscountVisibility}"  Background="#FF469C5B" Width="39" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top">
-                                    <TextBlock Text="{Binding Discount, StringFormat={}{0}%}" HorizontalAlignment="Left" FontSize="18"/>
-                                </Border>
+                                    <TextBlock Text="{Binding Rating}" HorizontalAlignment="Right"  FontSize="16" />
+                                    <Border Visibility="{Binding DiscountVisibility}"  Background="#FF469C5B" Width="30" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                    <TextBlock Text="{Binding Discount, StringFormat={}{0}%}" HorizontalAlignment="Center" FontSize="16"/>
+                                    </Border>
                                 </Grid>
                                 <TextBlock Text="{Binding Name}"/>
                                 <WrapPanel>
                                     <TextBlock Text="{Binding PriceWithDiscount, StringFormat={}{0:F2} P}" Margin="0 0 10 0" />
                                     <TextBlock Visibility="{Binding DiscountVisibility}" Text="{Binding Cost, StringFormat={}{0} P}" TextDecorations="StrikeThrough" Foreground="Gray"/>
                                 </WrapPanel>
-                                <Button x:Name="BtnAddCart" Content="Добавить в корзину" Click="BtnAddCart_Click"/>
+                                <Button x:Name="BtnAddCart" Content="Добавить в корзину"  FontSize="16" Click="BtnAddCart_Click"/>
 
                             </StackPanel>
 
@@ -105,6 +69,6 @@
             </ListBox>
 
 
-        <Button x:Name="BtnCart" Content="Корзина" Grid.Row="1" Height="33" Width="70" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BtnCart_Click"/>
+        <Button x:Name="BtnCart" Content="Корзина" Grid.Row="1" Height="33" Width="70" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BtnCart_Click"/>
     </Grid>
 </Page>

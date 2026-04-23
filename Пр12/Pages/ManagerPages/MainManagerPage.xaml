@@ -191,7 +191,7 @@
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="№ заказа" Width="80" DisplayMemberBinding="{Binding ID}"/>
-                                    <GridViewColumn Header="Сумма" Width="80" DisplayMemberBinding="{Binding TotalAmount, StringFormat=C}"/>
+                                    <GridViewColumn Header="Сумма" Width="80" DisplayMemberBinding="{Binding TotalAmount, StringFormat={}{0} P}"/>
                                     <GridViewColumn Header="Дата" Width="80" DisplayMemberBinding="{Binding Date, StringFormat=dd.MM.yyyy}"/>
                                 </GridView>
                             </ListView.View>

@@ -21,12 +21,14 @@ namespace Пр12
         }
     
         public int ID { get; set; }
-        public System.DateTime Time { get; set; }
+        public System.DateTime StartTime { get; set; }
         public int MasterID { get; set; }
+        public int ServiceID { get; set; }
         public bool IsAvailable { get; set; }
         public System.DateTime EndTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserService> UserService { get; set; }
+        public virtual ICollection<Service> Service { get; set; }
     }
 }

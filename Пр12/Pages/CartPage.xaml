@@ -17,12 +17,10 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <TextBlock Text="корзина /" FontSize="40" FontWeight="Bold"/>
+            <TextBlock Text="Корзина /" FontSize="28" FontWeight="Bold"/>
             <TextBlock x:Name="TxtBlockCartQuantity" FontSize="35" Margin="5"/>
         </StackPanel>
-        <TextBlock Grid.Row="1" x:Name="TxtBlockEmptyCart" Text="В корзине ничего нет..." 
-                       FontSize="24"  Margin="10"
-                       Visibility="Collapsed"/>
+        <TextBlock Grid.Row="1" x:Name="TxtBlockEmptyCart" Text="В корзине ничего нет..." FontSize="24"  Margin="10" Visibility="Collapsed"/>
 
         <ListBox Grid.Row="1" x:Name="ListBoxProductsInCart" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListBox.ItemTemplate>
@@ -54,10 +52,10 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <StackPanel x:Name="StackTotalPrice" Grid.Row="2" Orientation="Horizontal">
-            <TextBlock Text="Итоговая цена:" FontSize="22" Margin="0 0 10 0"/>
+        <StackPanel x:Name="StackTotalPrice" HorizontalAlignment="Center" Grid.Row="2" Orientation="Vertical">
+            <TextBlock Text="Итоговая цена:" FontSize="22"/>
             <TextBlock x:Name="TxtBlcTotalPrice" FontSize="30" FontWeight="Bold" Margin="0 0 0 20"/>
         </StackPanel>
-        <Button x:Name="BtnOrder" Grid.Row="3" Width="200" Margin="20 0 0 0" Height="40" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Оформить заказ" FontSize="22" Click="BtnOrder_Click"/>
+        <Button x:Name="BtnOrder" Grid.Row="3" Width="200" Height="40" VerticalAlignment="Top" HorizontalAlignment="Center" Content="Оформить заказ" FontSize="22" Click="BtnOrder_Click"/>
     </Grid>
 </Page>
