@@ -173,17 +173,12 @@ namespace Пр12.Pages
         private void AccountOut_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show(
-                "Вы действительно хотите выйти из аккаунта?",
-                "Подтверждение выхода",
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Question);
+                "Вы действительно хотите выйти из аккаунта?", "Подтверждение выхода", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)
             {
                 DataOfUser.curuser = null;
-
                 CheckAuthorization();
-
                 MessageBox.Show("Вы успешно вышли из аккаунта!", "Выход", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
