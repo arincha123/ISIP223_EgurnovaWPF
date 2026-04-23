@@ -332,7 +332,7 @@ namespace Пр12.Pages.ManagerPages
             // Текущая информация
             stackPanel.Children.Add(new TextBlock
             {
-                Text = $"Текущая запись: {selectedRecord.Date:dd.MM.yyyy} с {selectedRecord.Schedule.Time:HH:mm} до {selectedRecord.Schedule.EndTime:HH:mm}",
+                Text = $"Текущая запись: {selectedRecord.Date:dd.MM.yyyy} с {selectedRecord.Schedule.StartTime:HH:mm} до {selectedRecord.Schedule.EndTime:HH:mm}",
                 FontWeight = FontWeights.Bold,
                 Margin = new Thickness(0, 0, 0, 10)
             });
@@ -364,7 +364,7 @@ namespace Пр12.Pages.ManagerPages
                 {
                     var availableTimes = Core.Context.Schedule
                         .Where(sch => sch.MasterID == selectedRecord.MasterID &&
-                                     sch.Time.Date == newDatePicker.SelectedDate.Value.Date &&
+                                     sch.StartTime.Date == newDatePicker.SelectedDate.Value.Date &&
                                      sch.IsAvailable == true)
                         .ToList();
                     newTimeCombo.ItemsSource = availableTimes;

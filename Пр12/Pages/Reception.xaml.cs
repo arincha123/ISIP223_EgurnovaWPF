@@ -53,7 +53,12 @@ namespace Пр12.Pages
             Schedule schedule = btn.DataContext as Schedule;
             if (schedule != null)
             {
-                MessageBoxResult result = MessageBox.Show($"Хотите записаться на {schedule.Service.Name} в {schedule.StartTime}?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                var service = Core.Context.Service.Find(schedule.ServiceID);
+                string serviceName = service != null ? service.Name : "Неизвестная услуга";
+
+                MessageBoxResult result = MessageBox.Show($"Хотите записаться на {serviceName} в {schedule.StartTime:HH:mm}?",
+                    "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
                 if (result == MessageBoxResult.Yes)
                 {
                     string pay = ComboBoxPaymentMethod.SelectedItem.ToString();
@@ -69,8 +74,7 @@ namespace Пр12.Pages
                             ServiceID = _service.ID,
                             PaymentMethodID = paymentMethod.ID,
                             Comment = TxtBoxComment.Text,
-                            ScheduleID = schedule.ID,
-                            Status = "Scheduled"
+                            ScheduleID = schedule.ID
                         };
 
                         Core.Context.UserService.Add(userService);

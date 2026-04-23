@@ -172,6 +172,7 @@
                                 </StackPanel>
                             </GroupBox>
                             <Button x:Name="ChangePol" Content="Изменить роль" Width="140" FontSize="16" Margin="10" Click="ChangePol_Click" />
+                            <Button x:Name="FrizePol" Content="Заморозить" Width="140" FontSize="16" Margin="10" Click="FrizePol_Click" />
                         </StackPanel>
                     </Grid>
                 </TabItem.Content>

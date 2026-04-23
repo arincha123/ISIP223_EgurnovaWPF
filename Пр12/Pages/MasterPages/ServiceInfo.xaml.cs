@@ -51,7 +51,7 @@ namespace Пр12.Pages.MasterPages
                     ServName.Text = service.Service.Name;
                     ServCat.Text = service.Service.ServCategory?.Name ?? "Не указана";
                     ServDate.Text = service.Date.ToString("dd.MM.yyyy");
-                    ServTime.Text = $"{service.Schedule.Time:HH:mm} - {service.Schedule.EndTime:HH:mm}";
+                    ServTime.Text = $"{service.Schedule.StartTime:HH:mm} - {service.Schedule.EndTime:HH:mm}";
                     ServFIO.Text = $"{service.User.LastName} {service.User.FirstName} {service.User.MiddleName}";
                     ServPhone.Text = service.User.PhoneNumber;
                 }

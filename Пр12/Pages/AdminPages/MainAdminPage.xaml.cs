@@ -227,5 +227,65 @@ namespace Пр12.Pages.AdminPages
                 }
             }
         }
+
+        private void FrizePol_Click(object sender, RoutedEventArgs e)
+        {
+            string phoneNumber = Phone3.Text;
+
+            if (string.IsNullOrWhiteSpace(phoneNumber))
+            {
+                MessageBox.Show("Введите номер телефона пользователя!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            var user = Core.Context.User.FirstOrDefault(u => u.PhoneNumber == phoneNumber);
+
+            if (user == null)
+            {
+                MessageBox.Show("Пользователь с таким номером телефона не найден!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (DataOfUser.curuser != null && user.ID == DataOfUser.curuser.ID)
+            {
+                MessageBox.Show("Вы не можете заморозить самого себя!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (user.RoleID == 4 && DataOfUser.curuser.RoleID == 4 && user.ID != DataOfUser.curuser.ID)
+            {
+                MessageBox.Show("Вы не можете заморозить другого администратора!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            string action = user.IsFrozen ? "разморозить" : "заморозить";
+            string statusAfter = user.IsFrozen ? "активен" : "заморожен";
+
+            var result = MessageBox.Show($"Вы действительно хотите {action} пользователя {user.LastName} {user.FirstName}?\nПосле этого он будет {statusAfter}.",
+                "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    user.IsFrozen = !user.IsFrozen;
+                    Core.Context.SaveChanges();
+
+                    string message = user.IsFrozen ?
+                        $"Пользователь {user.LastName} {user.FirstName} заморожен! Он не сможет войти в аккаунт." :
+                        $"Пользователь {user.LastName} {user.FirstName} разморожен! Он снова может войти в аккаунт.";
+
+                    MessageBox.Show(message, "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    Phone3.Text = "";
+
+                    LoadUsers();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при изменении статуса: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
     }
 }

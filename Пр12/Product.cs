@@ -31,10 +31,7 @@ namespace Пр12
         public double Rating { get; set; }
         public string Image { get; set; }
         public bool IsFrozen { get; set; }
-
-        public decimal PriceWithDiscount => Cost - (Cost * (decimal)(Discount / 100));
-        public bool HasDiscountMore15 => Discount > 15;
-
+    
         public virtual Manufacturer Manufacturer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItems> OrderItems { get; set; }

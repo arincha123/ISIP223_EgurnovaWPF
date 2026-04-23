@@ -21,6 +21,8 @@ namespace Пр12.Pages
     public partial class ChoosePage : Page
     {
         private ServCategory _category;
+        private Service _preSelectedService;
+        private User _preSelectedMaster;
         private List<Service> _services;
         private List<User> _masters;
         private List<MasterService> _masterService;
@@ -28,6 +30,7 @@ namespace Пр12.Pages
 
         private Service _selectedService;
         private User _selectedMaster;
+
         public ChoosePage(ServCategory category)
         {
             InitializeComponent();
@@ -36,14 +39,51 @@ namespace Пр12.Pages
             LoadData();
         }
 
+        public ChoosePage(ServCategory category, User master, Service service)
+        {
+            InitializeComponent();
+            _category = category;
+            _preSelectedMaster = master;
+            _preSelectedService = service;
+            DataContext = _category;
+            LoadDataWithPreselection();
+        }
+
         private void LoadData()
         {
-            _masterService = Core.Context.MasterService.Where(m => m.User.Role.Name == "Мастер" && m.Service.ServCategory.ID == _category.ID).ToList();
-            _masters = _masterService.Select(u => u.User).ToList();
+            _masterService = Core.Context.MasterService
+                .Where(m => m.Service.CategoryID == _category.ID)
+                .ToList();
+
+            _masters = _masterService.Select(u => u.User).Distinct().ToList();
             _services = Core.Context.Service.Where(s => s.CategoryID == _category.ID).ToList();
+
             ListBoxMasters.ItemsSource = _masters;
             ListBoxServices.ItemsSource = _services;
+        }
 
+        private void LoadDataWithPreselection()
+        {
+            LoadData();
+
+            if (_preSelectedService != null)
+            {
+                _selectedService = _preSelectedService;
+                isRadioCheck = true;
+
+                ListBoxServices.SelectedItem = _selectedService;
+
+                ListBoxServices.ScrollIntoView(_selectedService);
+            }
+
+            if (_preSelectedMaster != null)
+            {
+                _selectedMaster = _preSelectedMaster;
+
+                ListBoxMasters.SelectedItem = _selectedMaster;
+
+                ListBoxMasters.ScrollIntoView(_selectedMaster);
+            }
         }
 
         private void BtnChoiceMaster_Click(object sender, RoutedEventArgs e)
@@ -58,9 +98,13 @@ namespace Пр12.Pages
                 MessageBox.Show("Выберите услугу!");
                 return;
             }
+
             Button btn = (Button)sender;
             _selectedMaster = btn.DataContext as User;
-            if (_selectedMaster == null && _selectedService == null) return;
+
+            if (_selectedMaster == null && _selectedService == null)
+                return;
+
             NavigationService.Navigate(new Reception(_selectedMaster, _selectedService));
         }
 
@@ -69,7 +113,6 @@ namespace Пр12.Pages
             isRadioCheck = true;
             RadioButton btn = (RadioButton)sender;
             _selectedService = btn.DataContext as Service;
-
         }
     }
 }

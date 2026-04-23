@@ -22,12 +22,11 @@ namespace Пр12
     
         public int ID { get; set; }
         public System.DateTime Date { get; set; }
+        public System.DateTime DeliverDate { get; set; }
         public decimal TotalAmount { get; set; }
         public int UserID { get; set; }
-        public DateTime DeliverDate { get; set; }
         public bool IsClosed { get; set; }
-
-
+    
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItems> OrderItems { get; set; }

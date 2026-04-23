@@ -50,7 +50,7 @@ namespace Пр12.Pages.ClientPages
                 foreach (var us in ServicesForUser)
                 {
                     us.Service = Core.Context.Service.Find(us.ServiceID);
-                    us.User1 = Core.Context.User.Find(us.MasterID); // Мастер
+                    us.User1 = Core.Context.User.Find(us.MasterID);
                     us.Schedule = Core.Context.Schedule.Find(us.ScheduleID);
                     us.PaymentMethod = Core.Context.PaymentMethod.Find(us.PaymentMethodID);
                 }

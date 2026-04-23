@@ -145,5 +145,35 @@ namespace Пр12.Pages
         {
             FilterAndShowServices();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (!DataOfUser.isLoged)
+            {
+                MessageBox.Show("Войдите в аккаунт!");
+                return;
+            }
+
+            Button btn = (Button)sender;
+            MasterService selectedItem = btn.DataContext as MasterService;
+
+            if (selectedItem == null || selectedItem.Service == null || selectedItem.User == null)
+            {
+                MessageBox.Show("Выберите услугу из списка!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            // Передаем категорию и мастера
+            NavigationService.Navigate(new ChoosePage(selectedItem.Service.ServCategory, selectedItem.User, selectedItem.Service));
+        }
+        //private void Button_Click_1(object sender, RoutedEventArgs e)
+        //{
+        //    if (DataOfUser.isLoged == true)
+        //    {
+        //        Button btn = (Button)sender;
+        //        ServCategory category = (ServCategory)btn.DataContext;
+        //        NavigationService.Navigate(new ChoosePage(category));
+        //    }
+        //}
     }
 }
