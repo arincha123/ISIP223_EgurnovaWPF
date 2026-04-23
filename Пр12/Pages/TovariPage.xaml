@@ -40,7 +40,7 @@
                                 <TextBlock Text="{Binding Name}"/>
                                 <WrapPanel>
                                     <TextBlock Text="{Binding PriceWithDiscount, StringFormat={}{0:F2} P}" Margin="0 0 10 0" />
-                                    <TextBlock Visibility="{Binding DiscountVisibility}" Text="{Binding Cost, StringFormat={}{0} P}" TextDecorations="StrikeThrough" Foreground="Gray"/>
+                                    <TextBlock Visibility="{Binding DiscountVisibility}" Text="{Binding Cost, StringFormat={}{0} P}" Foreground="Gray"/>
                                 </WrapPanel>
                                 <Button x:Name="BtnAddCart" Content="Добавить в корзину"  FontSize="16" Click="BtnAddCart_Click"/>
 

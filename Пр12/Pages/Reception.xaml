@@ -13,34 +13,53 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" BorderBrush="Gray" BorderThickness="1" CornerRadius="3">
+        <Border Grid.Row="0" BorderBrush="Gray" BorderThickness="1" CornerRadius="3" Padding="10">
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel x:Name="StackMaster">
-                    <Image x:Name="ImageMaster" Grid.Column="0" Source="{Binding Image}" Height="150" Width="150"/>
-                    <TextBlock Text="{Binding FirstName}" FontSize="20" HorizontalAlignment="Center"/>
-                </StackPanel>
-                <StackPanel Grid.Column="1" x:Name="StackService" VerticalAlignment="Center">
-                    <TextBlock Text="{Binding Name}" FontSize="22" Margin="0 0 0 10"/>
-                    <TextBlock Text="{Binding Description}" FontSize="22"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
+                <StackPanel Grid.Row="0" x:Name="StackMaster" Margin="0,0,0,10">
+                    <TextBlock FontSize="20" HorizontalAlignment="Center">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="Мастер: {0} {1} {2}">
+                                <Binding Path="FirstName" />
+                                <Binding Path="LastName" />
+                                <Binding Path="MiddleName" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" x:Name="StackService">
+                    <TextBlock FontSize="22" HorizontalAlignment="Center">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="Услуга: {0}">
+                                <Binding Path="Name" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
                 </StackPanel>
             </Grid>
         </Border>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 20">
             <TextBlock  Text="Доступные записи: " FontSize="25" Margin="0 0 10 0"/>
             <DatePicker x:Name="Calendar" DisplayDate="2026-04-25" DisplayDateStart="2026-01-01" DisplayDateEnd="2026-12-31" IsTodayHighlighted ="True"                        
                        Width="200"  SelectedDateChanged="Calendar_SelectedDateChanged" FontSize="22"/>
         </StackPanel>
-        <ListBox x:Name="ListBoxAppointments" Grid.Row="2" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="ListBoxAppointments_SelectionChanged">
+
+        <StackPanel Grid.Row="2" Margin="0 20 0 20" HorizontalAlignment="Center">
+                <TextBlock Text="Выберите способ оплаты: " FontSize="28"/>
+                <ComboBox x:Name="ComboBoxPaymentMethod"  Margin="0 10 0 0" Width="250"/>
+        </StackPanel>
+        
+        <ListBox x:Name="ListBoxAppointments" HorizontalAlignment="Center" Grid.Row="3" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="ListBoxAppointments_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -60,11 +79,10 @@
         </ListBox>
 
 
-        <StackPanel Grid.Row="3" Orientation="Vertical"  HorizontalAlignment="Left">
-            <TextBlock Text="Выберите способ оплаты: " FontSize="28"/>
-            <ComboBox x:Name="ComboBoxPaymentMethod"  Margin="0 10 0 0"/>
-            <TextBlock Text="Введите комментарий (не обязательно)" FontSize="22" Margin="0 10 0 0"/>
-            <TextBox x:Name="TxtBoxComment" Width="350" Height="100" FontSize="25" Margin="0 10 0 0"/>
+        <StackPanel Grid.Row="4" Orientation="Vertical" Margin="0 20 0 20" HorizontalAlignment="Center">
+            
+            <TextBlock Text="Введите комментарий (не обязательно)" HorizontalAlignment="Center" FontSize="16" Margin="0 70 0 0"/>
+            <TextBox x:Name="TxtBoxComment" Width="350" Height="33" FontSize="25" Margin="0 10 0 0"/>
         </StackPanel>
     </Grid>
 </Page>

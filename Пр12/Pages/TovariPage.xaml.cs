@@ -47,7 +47,6 @@ namespace Пр12.Pages
         private void TxtBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             ListBoxProducts.ItemsSource = products.Where(p => p.Name.ToLower().Contains(TxtBoxSearch.Text.ToLower())).ToList();
-
         }
 
         private void ComboBoxFiltrProdCat_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -56,8 +55,6 @@ namespace Пр12.Pages
             string selectManufacturer = (string)ComboBoxFiltrProdMan.SelectedItem;
             if (selectManufacturer == null || selectCategory == null) return;
             Filrt(selectCategory, selectManufacturer);
-
-
         }
 
         private void Filrt(string selectCategory, string selectManufacturer)
@@ -84,26 +81,16 @@ namespace Пр12.Pages
                 prod = prod.OrderByDescending(p => p.Rating).ToList();
 
             ListBoxProducts.ItemsSource = prod;
-
-
-
         }
-
-
 
         private void BtnSortRating_Click(object sender, RoutedEventArgs e)
         {
             IsFiltr = !IsFiltr;
-
-
             Filrt((string)ComboBoxFiltrProdCat.SelectedItem, (string)ComboBoxFiltrProdMan.SelectedItem);
-
-
         }
 
         private void CreateCart()
         {
-
             Cart cart = new Cart()
             {
                 UserID = DataOfUser.curuser.ID,
@@ -178,8 +165,6 @@ namespace Пр12.Pages
                 DataOfUser.UserCart.TotalAmount = totalAmount;
             }
         }
-
-
 
         private void BtnCart_Click(object sender, RoutedEventArgs e)
         {

@@ -43,7 +43,7 @@ namespace Пр12.Pages
             ComboBoxPaymentMethod.ItemsSource = _payments;
             StackService.DataContext = _service;
             StackMaster.DataContext = _master;
-            _schedules = Core.Context.Schedule.Where(s => s.IsAvailable == true && s.MasterID == _master.ID && s.ServiceID == _service.ID).ToList();
+            _schedules = Core.Context.Schedule.Where(s => s.IsAvailable == true && s.MasterID == _master.ID).ToList();
             ListBoxAppointments.ItemsSource = _schedules;
         }
 
@@ -53,19 +53,26 @@ namespace Пр12.Pages
             Schedule schedule = btn.DataContext as Schedule;
             if (schedule != null)
             {
-                var service = Core.Context.Service.Find(schedule.ServiceID);
-                string serviceName = service != null ? service.Name : "Неизвестная услуга";
+                // Получаем название услуги
+                string serviceName = _service?.Name ?? "Неизвестная услуга";
 
                 MessageBoxResult result = MessageBox.Show($"Хотите записаться на {serviceName} в {schedule.StartTime:HH:mm}?",
                     "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
                 if (result == MessageBoxResult.Yes)
                 {
+                    // Проверяем выбран ли способ оплаты
+                    if (ComboBoxPaymentMethod.SelectedItem == null)
+                    {
+                        MessageBox.Show("Выберите способ оплаты!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+
                     string pay = ComboBoxPaymentMethod.SelectedItem.ToString();
                     PaymentMethod paymentMethod = _paymentMethods.FirstOrDefault(s => s.Name == pay);
+
                     try
                     {
-
                         UserService userService = new UserService()
                         {
                             UserID = DataOfUser.curuser.ID,
@@ -74,24 +81,25 @@ namespace Пр12.Pages
                             ServiceID = _service.ID,
                             PaymentMethodID = paymentMethod.ID,
                             Comment = TxtBoxComment.Text,
-                            ScheduleID = schedule.ID
+                            ScheduleID = schedule.ID,
+                            Status = "Записан"
                         };
 
                         Core.Context.UserService.Add(userService);
 
+                        // Обновляем статус слота
                         var sch = Core.Context.Schedule.First(s => s.ID == schedule.ID);
                         sch.IsAvailable = false;
+
                         Core.Context.SaveChanges();
                         MessageBox.Show("Запись подтверждена!");
                         NavigationService.Navigate(new StartPage());
-
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("Ошибка записи");
+                        MessageBox.Show($"Ошибка записи: {ex.Message}");
                     }
                 }
-                else return;
             }
         }
 

@@ -20,6 +20,7 @@ namespace Пр12.Pages
     /// </summary>
     public partial class ChoosePage : Page
     {
+         
         private ServCategory _category;
         private Service _preSelectedService;
         private User _preSelectedMaster;
@@ -34,6 +35,8 @@ namespace Пр12.Pages
         public ChoosePage(ServCategory category)
         {
             InitializeComponent();
+            if (MainWindow.Current != null)
+                MainWindow.Current.Btn_Back.Visibility = Visibility.Visible;
             _category = category;
             DataContext = _category;
             LoadData();
@@ -93,7 +96,7 @@ namespace Пр12.Pages
                 MessageBox.Show("Войдите в аккаунт");
                 return;
             }
-            if (!isRadioCheck)
+            if (!isRadioCheck ||  _selectedService == null)
             {
                 MessageBox.Show("Выберите услугу!");
                 return;
@@ -101,6 +104,12 @@ namespace Пр12.Pages
 
             Button btn = (Button)sender;
             _selectedMaster = btn.DataContext as User;
+
+            if (_selectedMaster == null)
+            {
+                MessageBox.Show("Ошибка: мастер не выбран!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             if (_selectedMaster == null && _selectedService == null)
                 return;

@@ -13,10 +13,10 @@ namespace Пр12
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PR_17Entities2 : DbContext
+    public partial class PR_17Entities : DbContext
     {
-        public PR_17Entities2()
-            : base("name=PR_17Entities2")
+        public PR_17Entities()
+            : base("name=PR_17Entities")
         {
         }
     
@@ -25,10 +25,8 @@ namespace Пр12
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Cart> Cart { get; set; }
         public virtual DbSet<Manufacturer> Manufacturer { get; set; }
         public virtual DbSet<MasterService> MasterService { get; set; }
-        public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderItems> OrderItems { get; set; }
         public virtual DbSet<PaymentMethod> PaymentMethod { get; set; }
         public virtual DbSet<ProdCategory> ProdCategory { get; set; }
@@ -41,5 +39,7 @@ namespace Пр12
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserService> UserService { get; set; }
+        public virtual DbSet<Cart> Cart { get; set; }
+        public virtual DbSet<Order> Order { get; set; }
     }
 }

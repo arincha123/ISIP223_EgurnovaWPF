@@ -8,6 +8,6 @@ namespace Пр12
 {
     static internal class Core
     {
-        public static PR_17Entities2 Context = new PR_17Entities2();
+        public static PR_17Entities Context = new PR_17Entities();
     }
 }

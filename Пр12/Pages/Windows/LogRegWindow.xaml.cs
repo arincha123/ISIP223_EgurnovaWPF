@@ -27,6 +27,13 @@ namespace Пр12.Pages.Windows
             User existing = Core.Context.User.Where(u => u.PhoneNumber == phoneNumber).FirstOrDefault();
             if (existing != null)
             {
+                if (existing.IsFrozen == true)
+                {
+                    MessageBox.Show("Ваш аккаунт заблокирован! Обратитесь к администратору.",
+                                  "Доступ запрещен", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
                 if (existing.Password == password)
                 {
                     DataOfUser.curuser = existing;

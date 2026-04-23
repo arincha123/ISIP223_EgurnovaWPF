@@ -32,6 +32,7 @@ namespace Пр12.Pages
             if (MainWindow.Current != null)
                 MainWindow.Current.Btn_Back.Visibility = Visibility.Hidden;
             AccountIn.Visibility = Visibility.Hidden;
+            AccountOut.Visibility = Visibility.Hidden;
 
             CheckAuthorization();
 
@@ -57,28 +58,13 @@ namespace Пр12.Pages
             {
                 LogIn.Visibility = Visibility.Hidden;
                 AccountIn.Visibility = Visibility.Visible;
-
-                //string roleName = "";
-                //switch (DataOfUser.curuser.RoleID)
-                //{
-                //    case 1:
-                //        roleName = "Клиент";
-                //        break;
-                //    case 2:
-                //        roleName = "Мастер";
-                //        break;
-                //    case 3:
-                //        roleName = "Менеджер";
-                //        break;
-                //    case 4:
-                //        roleName = "Администратор";
-                //        break;
-                //}
+                AccountOut.Visibility = Visibility.Visible;
             }
             else
             {
                 LogIn.Visibility = Visibility.Visible;
                 AccountIn.Visibility = Visibility.Hidden;
+                AccountOut.Visibility = Visibility.Hidden;
             }
         }
 
@@ -107,7 +93,6 @@ namespace Пр12.Pages
             }
         }
 
-
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
             Window lrwin = new LogRegWindow();
@@ -120,7 +105,20 @@ namespace Пр12.Pages
 
         private void Tovari_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new TovariPage());
+            if (DataOfUser.curuser == null || !DataOfUser.isLoged)
+            {
+                MessageBox.Show("Войдите в аккаунт, чтобы просматривать товары!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (DataOfUser.curuser.Role != null)
+            {
+                NavigationService.Navigate(new TovariPage());
+            }
+            else
+            {
+                MessageBox.Show("Товары могут просматривать только клиенты!", "Доступ запрещен", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
         private void FilterAndShowServices()
         {
@@ -148,9 +146,15 @@ namespace Пр12.Pages
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if (!DataOfUser.isLoged)
+            if (!DataOfUser.isLoged || DataOfUser.curuser == null)
             {
-                MessageBox.Show("Войдите в аккаунт!");
+                MessageBox.Show("Войдите в аккаунт!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (DataOfUser.curuser.Role.Name != "Клиент")
+            {
+                MessageBox.Show("Записываться на услуги могут только клиенты!", "Доступ запрещен", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -163,17 +167,25 @@ namespace Пр12.Pages
                 return;
             }
 
-            // Передаем категорию и мастера
             NavigationService.Navigate(new ChoosePage(selectedItem.Service.ServCategory, selectedItem.User, selectedItem.Service));
         }
-        //private void Button_Click_1(object sender, RoutedEventArgs e)
-        //{
-        //    if (DataOfUser.isLoged == true)
-        //    {
-        //        Button btn = (Button)sender;
-        //        ServCategory category = (ServCategory)btn.DataContext;
-        //        NavigationService.Navigate(new ChoosePage(category));
-        //    }
-        //}
+
+        private void AccountOut_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show(
+                "Вы действительно хотите выйти из аккаунта?",
+                "Подтверждение выхода",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                DataOfUser.curuser = null;
+
+                CheckAuthorization();
+
+                MessageBox.Show("Вы успешно вышли из аккаунта!", "Выход", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
     }
 }

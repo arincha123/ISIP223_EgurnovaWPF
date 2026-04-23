@@ -22,6 +22,7 @@ namespace Пр12
         public int PaymentMethodID { get; set; }
         public string Comment { get; set; }
         public int ScheduleID { get; set; }
+        public string Status { get; set; }
     
         public virtual PaymentMethod PaymentMethod { get; set; }
         public virtual Schedule Schedule { get; set; }

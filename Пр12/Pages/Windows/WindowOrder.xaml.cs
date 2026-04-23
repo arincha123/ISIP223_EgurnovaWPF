@@ -66,7 +66,7 @@ namespace Пр12.Pages.Windows
                         Date = DateTime.Now,
                         TotalAmount = DataOfUser.UserCart.TotalAmount,
                         UserID = DataOfUser.curuser.ID,
-                        DeliverDate = date,
+                        DeliveryDate = date,
                         IsClosed = false
                     };
                     Core.Context.Order.Add(order);
