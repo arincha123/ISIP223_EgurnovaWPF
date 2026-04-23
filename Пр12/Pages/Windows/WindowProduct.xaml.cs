@@ -19,9 +19,12 @@ namespace Пр12.Pages.Windows
     /// </summary>
     public partial class WindowProduct : Window
     {
-        public WindowProduct()
+        public Product _product { get; set; }
+        public WindowProduct(Product product)
         {
             InitializeComponent();
+            _product = product;
+            DataContext = _product;
         }
     }
 }

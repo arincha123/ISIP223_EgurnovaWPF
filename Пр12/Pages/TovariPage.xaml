@@ -61,7 +61,7 @@
 
 
 
-        <ListBox x:Name="ListBoxProducts" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="ListBoxProducts_MouseDoubleClick" SelectionChanged="ListBoxProducts_SelectionChanged">
+        <ListBox x:Name="ListBoxProducts" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="ListBoxProducts_MouseDoubleClick">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border>

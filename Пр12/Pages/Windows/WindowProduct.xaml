@@ -7,6 +7,31 @@
         mc:Ignorable="d"
         Title="WindowProduct" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Margin="0 0 30 0">
+            <TextBlock Text="{Binding Rating}" FontSize="30" HorizontalAlignment="Right"/>
+            <Image Grid.Column="0" VerticalAlignment="Center" Height="300" Width="300" Source="{Binding Image}"/>
+            <Border Visibility="{Binding DiscountVisibility}" Background="#FF21AB3C" Width="39" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBlock Text="{Binding Discount, StringFormat={}{0}%}" HorizontalAlignment="Left" FontSize="18"/>
+
+            </Border>
+        </Grid>
+
+
+        <StackPanel Grid.Column="1">
+            <TextBlock Text="{Binding Name}" FontSize="30"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding PriceWithDiscount, StringFormat={}{0:F2} P}" Margin="0 0 10 0" />
+                <TextBlock Visibility="{Binding DiscountVisibility}" Text="{Binding Cost, StringFormat={}{0} P}" TextDecorations="StrikeThrough" Foreground="Gray"/>
+            </StackPanel>
+            <TextBlock Text="{Binding ProdCategory.Name, StringFormat=Категория: {0}}" FontSize="20"/>
+            <TextBlock Text="{Binding Manufacturer.Name, StringFormat=Производитель: {0}}" FontSize="20"/>
+            <TextBlock Text="{Binding Description, StringFormat=Описание: {0}}" FontSize="20"/>
+
+        </StackPanel>
     </Grid>
 </Window>
