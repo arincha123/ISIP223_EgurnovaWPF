@@ -227,7 +227,7 @@
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Товар" Width="150" DisplayMemberBinding="{Binding Name}"/>
-                                    <GridViewColumn Header="Цена" Width="80" DisplayMemberBinding="{Binding Cost, StringFormat=C}"/>
+                                    <GridViewColumn Header="Цена" Width="80" DisplayMemberBinding="{Binding Cost, StringFormat={}{0:F2} ₽}"/>
                                     <GridViewColumn Header="Производитель" Width="100" DisplayMemberBinding="{Binding Manufacturer.Name}"/>
                                     <GridViewColumn Header="Тип" Width="100" DisplayMemberBinding="{Binding ProdCategory.Name}"/>
                                     <GridViewColumn Header="Скидка" Width="60" DisplayMemberBinding="{Binding Discount, StringFormat={}{0}%}"/>
