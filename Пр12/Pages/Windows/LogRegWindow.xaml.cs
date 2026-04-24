@@ -2,14 +2,21 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Navigation;
 using Пр12.Pages;
+using Пр12.Pages.AdminPages;
+using Пр12.Pages.ClientPages;
+using Пр12.Pages.ManagerPages;
+using Пр12.Pages.MasterPages;
 
 namespace Пр12.Pages.Windows
 {
     public partial class LogRegWindow : Window
     {
-        public LogRegWindow()
+        NavigationService navigationService;
+        public LogRegWindow(NavigationService navigationService)
         {
+            this.navigationService = navigationService;
             InitializeComponent();
         }
 
@@ -41,8 +48,29 @@ namespace Пр12.Pages.Windows
                     MessageBox.Show($"Добро пожаловать, {existing.FirstName} {existing.LastName}!",
                                   "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
 
-
+                    if (DataOfUser.curuser != null)
+                    {
+                        switch (DataOfUser.curuser.RoleID)
+                        {
+                            case 1:
+                                navigationService.Navigate(new MainClientPage());
+                                break;
+                            case 2:
+                                navigationService.Navigate(new MainMasterPage());
+                                break;
+                            case 3:
+                                navigationService.Navigate(new MainManagerPage());
+                                break;
+                            case 4:
+                                navigationService.Navigate(new MainAdminPage());
+                                break;
+                            default:
+                                navigationService.Navigate(new MainClientPage());
+                                break;
+                        }
+                    }
                     this.Close();
+
                 }
                 else
                 {

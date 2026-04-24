@@ -46,7 +46,7 @@ namespace Пр12.Pages.ManagerPages
             UserServicesForManager = Core.Context.UserService.ToList();
             ZapisiList.ItemsSource = UserServicesForManager;
 
-            OrdersForManager = Core.Context.Order.ToList();
+            OrdersForManager = Core.Context.Order.Where(o => !o.IsClosed).ToList();
             OrdersList.ItemsSource = OrdersForManager;
 
 
@@ -224,7 +224,6 @@ namespace Пр12.Pages.ManagerPages
 
             try
             {
-                // Поиск клиентов (роль 1 - клиент)
                 var results = Core.Context.User
                     .Where(u => u.RoleID == 1 &&
                                (u.LastName.Contains(searchText) ||
@@ -233,7 +232,6 @@ namespace Пр12.Pages.ManagerPages
                                 (u.PhoneNumber != null && u.PhoneNumber.Contains(searchText))))
                     .ToList();
 
-                // Формируем отображаемое имя
                 var displayResults = results.Select(u => new
                 {
                     User = u,
@@ -262,7 +260,6 @@ namespace Пр12.Pages.ManagerPages
         public UserService selectedRecord;
         private void CancelRecordBtn_Click(object sender, RoutedEventArgs e)
         {
-            // Проверяем, выбрана ли запись
             if (ZapisiList.SelectedItem == null)
             {
                 MessageBox.Show("Выделите запись, которую хотите отменить!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -271,7 +268,6 @@ namespace Пр12.Pages.ManagerPages
 
             selectedRecord = (UserService)ZapisiList.SelectedItem;
 
-            // Подтверждение отмены
             MessageBoxResult result = MessageBox.Show($"Вы уверены, что хотите отменить запись клиента {selectedRecord.User.LastName} {selectedRecord.User.FirstName}?",
                 "Подтверждение отмены", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -279,12 +275,10 @@ namespace Пр12.Pages.ManagerPages
             {
                 try
                 {
-                    // Находим запись в базе
                     var recordToDelete = Core.Context.UserService.Find(selectedRecord.ID);
 
                     if (recordToDelete != null)
                     {
-                        // Возвращаем доступность времени
                         var schedule = Core.Context.Schedule.Find(recordToDelete.ScheduleID);
                         if (schedule != null)
                         {
@@ -296,7 +290,6 @@ namespace Пр12.Pages.ManagerPages
 
                         MessageBox.Show("Запись успешно отменена!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                        // Обновляем список записей
                         LoadData();
                     }
                 }
@@ -309,7 +302,6 @@ namespace Пр12.Pages.ManagerPages
 
         private void RescheduleBtn_Click(object sender, RoutedEventArgs e)
         {
-            // Проверяем, выбрана ли запись
             if (ZapisiList.SelectedItem == null)
             {
                 MessageBox.Show("Выделите запись, которую хотите перенести!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -318,7 +310,6 @@ namespace Пр12.Pages.ManagerPages
 
             selectedRecord = (UserService)ZapisiList.SelectedItem;
 
-            // Создаем диалог для выбора новой даты и времени
             var dialog = new Window
             {
                 Title = $"Перенос записи - {selectedRecord.User.LastName} {selectedRecord.User.FirstName}",
@@ -329,7 +320,6 @@ namespace Пр12.Pages.ManagerPages
 
             var stackPanel = new StackPanel { Margin = new Thickness(10) };
 
-            // Текущая информация
             stackPanel.Children.Add(new TextBlock
             {
                 Text = $"Текущая запись: {selectedRecord.Date:dd.MM.yyyy} с {selectedRecord.Schedule.StartTime:HH:mm} до {selectedRecord.Schedule.EndTime:HH:mm}",
@@ -337,17 +327,14 @@ namespace Пр12.Pages.ManagerPages
                 Margin = new Thickness(0, 0, 0, 10)
             });
 
-            // Выбор новой даты
             stackPanel.Children.Add(new TextBlock { Text = "Выберите новую дату:", FontSize = 14, Margin = new Thickness(0, 0, 0, 5) });
             var newDatePicker = new DatePicker { Margin = new Thickness(0, 0, 0, 10) };
             stackPanel.Children.Add(newDatePicker);
 
-            // Выбор нового времени
             stackPanel.Children.Add(new TextBlock { Text = "Выберите новое время:", FontSize = 14, Margin = new Thickness(0, 0, 0, 5) });
             var newTimeCombo = new ComboBox { Margin = new Thickness(0, 0, 0, 10), DisplayMemberPath = "Time" };
             stackPanel.Children.Add(newTimeCombo);
 
-            // Кнопки
             var buttonPanel = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Center };
             var okButton = new Button { Content = "Перенести", Width = 100, Height = 30, Margin = new Thickness(5) };
             var cancelButton = new Button { Content = "Отмена", Width = 100, Height = 30, Margin = new Thickness(5) };
@@ -357,7 +344,6 @@ namespace Пр12.Pages.ManagerPages
 
             dialog.Content = stackPanel;
 
-            // Загрузка доступного времени при выборе даты
             newDatePicker.SelectedDateChanged += (s, args) =>
             {
                 if (newDatePicker.SelectedDate.HasValue)
@@ -381,24 +367,20 @@ namespace Пр12.Pages.ManagerPages
 
                 try
                 {
-                    // Находим запись в базе
                     var recordToUpdate = Core.Context.UserService.Find(selectedRecord.ID);
                     Schedule newSchedule = (Schedule)newTimeCombo.SelectedItem;
 
                     if (recordToUpdate != null)
                     {
-                        // Возвращаем доступность старого времени
                         var oldSchedule = Core.Context.Schedule.Find(recordToUpdate.ScheduleID);
                         if (oldSchedule != null)
                         {
                             oldSchedule.IsAvailable = true;
                         }
 
-                        // Обновляем запись
                         recordToUpdate.ScheduleID = newSchedule.ID;
                         recordToUpdate.Date = newDatePicker.SelectedDate.Value;
 
-                        // Занимаем новое время
                         newSchedule.IsAvailable = false;
 
                         Core.Context.SaveChanges();
@@ -422,35 +404,30 @@ namespace Пр12.Pages.ManagerPages
 
         private void AddRecordBtn_Click(object sender, RoutedEventArgs e)
         {
-            // Проверка выбора клиента
             if (selectedClient == null)
             {
                 MessageBox.Show("Сначала выберите клиента из списка поиска!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            // Проверка выбора услуги
             if (NewServiceCombo.SelectedItem == null)
             {
                 MessageBox.Show("Выберите услугу!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            // Проверка выбора даты
             if (NewDatePicker.SelectedDate == null)
             {
                 MessageBox.Show("Выберите дату!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            // Проверка выбора времени
             if (NewTimeCombo.SelectedItem == null)
             {
                 MessageBox.Show("Выберите время!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            // Проверка выбора мастера
             if (NewMasterCombo.SelectedItem == null)
             {
                 MessageBox.Show("Выберите мастера!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -463,7 +440,6 @@ namespace Пр12.Pages.ManagerPages
                 User selectedMaster = (User)NewMasterCombo.SelectedItem;
                 Schedule selectedSchedule = (Schedule)NewTimeCombo.SelectedItem;
 
-                // Создаем новую запись
                 UserService newRecord = new UserService()
                 {
                     UserID = selectedClient.ID,
@@ -471,11 +447,10 @@ namespace Пр12.Pages.ManagerPages
                     ServiceID = selectedService.ID,
                     Date = NewDatePicker.SelectedDate.Value,
                     ScheduleID = selectedSchedule.ID,
-                    PaymentMethodID = 1, // 1 - наличные, 2 - карта
+                    PaymentMethodID = 1,
                     Comment = ""
                 };
 
-                // Обновляем доступность времени
                 selectedSchedule.IsAvailable = false;
 
                 Core.Context.UserService.Add(newRecord);
@@ -483,7 +458,6 @@ namespace Пр12.Pages.ManagerPages
 
                 MessageBox.Show("Клиент успешно записан!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                // Очищаем поля
                 selectedClient = null;
                 SearchClientBox.Text = "";
                 SearchResultsList.ItemsSource = null;
@@ -492,7 +466,6 @@ namespace Пр12.Pages.ManagerPages
                 NewTimeCombo.ItemsSource = null;
                 NewMasterCombo.SelectedIndex = -1;
 
-                // Обновляем список записей
                 LoadData();
             }
             catch (Exception ex)
@@ -524,7 +497,7 @@ namespace Пр12.Pages.ManagerPages
                     var order = Core.Context.Order.Find(selectedOrder.ID);
                     if (order != null)
                     {
-                        Core.Context.Order.Remove(order);
+                        order.IsClosed = true;
                         Core.Context.SaveChanges();
 
                         MessageBox.Show("Заказ закрыт!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -550,19 +523,16 @@ namespace Пр12.Pages.ManagerPages
                 {
                     selectedProduct = (Product)ProductsList.SelectedItem;
 
-                    // Заполняем поля для редактирования
                     ProductNameBox.Text = selectedProduct.Name;
                     ProductPriceBox.Text = selectedProduct.Cost.ToString();
                     ProductDiscountBox.Text = selectedProduct.Discount.ToString();
 
-                    // Устанавливаем выбранные значения в ComboBox
                     if (selectedProduct.Manufacturer != null)
                     {
                         ProductManufacturerCombo.SelectedValue = selectedProduct.ManufacturerID;
                     }
                     else
                     {
-                        // Если Manufacturer не загружен, загружаем его
                         var manufacturer = Core.Context.Manufacturer.Find(selectedProduct.ManufacturerID);
                         ProductManufacturerCombo.SelectedValue = manufacturer?.ID;
                     }
@@ -573,7 +543,6 @@ namespace Пр12.Pages.ManagerPages
                     }
                     else
                     {
-                        // Если ProdCategory не загружен, загружаем его
                         var category = Core.Context.ProdCategory.Find(selectedProduct.CategoryID);
                         ProductTypeCombo.SelectedValue = category?.ID;
                     }
@@ -587,7 +556,6 @@ namespace Пр12.Pages.ManagerPages
         }
         private void AddProductBtn_Click(object sender, RoutedEventArgs e)
         {
-            // Проверка полей
             if (string.IsNullOrWhiteSpace(ProductNameBox.Text))
             {
                 MessageBox.Show("Введите название товара!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -655,7 +623,6 @@ namespace Пр12.Pages.ManagerPages
                 return;
             }
 
-            // Проверка полей
             if (string.IsNullOrWhiteSpace(ProductNameBox.Text))
             {
                 MessageBox.Show("Введите название товара!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -687,7 +654,6 @@ namespace Пр12.Pages.ManagerPages
 
             try
             {
-                // Находим товар в базе
                 var productToUpdate = Core.Context.Product.Find(selectedProduct.ID);
 
                 if (productToUpdate != null)

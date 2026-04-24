@@ -33,7 +33,7 @@ namespace Пр12.Pages
                 MainWindow.Current.Btn_Back.Visibility = Visibility.Hidden;
             AccountIn.Visibility = Visibility.Hidden;
             AccountOut.Visibility = Visibility.Hidden;
-
+            
             CheckAuthorization();
 
             AllServices = Core.Context.MasterService.ToList();
@@ -66,6 +66,24 @@ namespace Пр12.Pages
                 AccountIn.Visibility = Visibility.Hidden;
                 AccountOut.Visibility = Visibility.Hidden;
             }
+            //if (DataOfUser.curuser != null)
+            //{
+            //    switch (DataOfUser.curuser.RoleID)
+            //    {
+            //        case 2:
+            //            NavigationService.Navigate(new MainMasterPage());
+            //            break;
+            //        case 3:
+            //            NavigationService.Navigate(new MainManagerPage());
+            //            break;
+            //        case 4:
+            //            NavigationService.Navigate(new MainAdminPage());
+            //            break;
+            //        default:
+            //            //NavigationService.Navigate(new MainClientPage());
+            //            break;
+            //    }
+            //}
         }
 
         private void AccountIn_Click(object sender, RoutedEventArgs e)
@@ -95,11 +113,33 @@ namespace Пр12.Pages
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
-            Window lrwin = new LogRegWindow();
+            Window lrwin = new LogRegWindow(NavigationService.GetNavigationService(this));
             var result = lrwin.ShowDialog();
             if (result == true)
             {
                 CheckAuthorization();
+
+                //if (DataOfUser.curuser != null)
+                //{
+                //    switch (DataOfUser.curuser.RoleID)
+                //    {
+                //        case 1:
+                //            NavigationService.Navigate(new MainClientPage());
+                //            break;
+                //        case 2:
+                //            NavigationService.Navigate(new MainMasterPage());
+                //            break;
+                //        case 3:
+                //            NavigationService.Navigate(new MainManagerPage());
+                //            break;
+                //        case 4:
+                //            NavigationService.Navigate(new MainAdminPage());
+                //            break;
+                //        default:
+                //            NavigationService.Navigate(new MainClientPage());
+                //            break;
+                //    }
+                //}
             }
         }
 
