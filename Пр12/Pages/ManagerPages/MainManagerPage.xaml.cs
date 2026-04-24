@@ -75,7 +75,7 @@ namespace Пр12.Pages.ManagerPages
             var services = Core.Context.Service.Select(s => s.Name).ToList();
             NewServiceCombo.ItemsSource = services;
 
-            var masters = Core.Context.User.Where(u => u.RoleID == 2).Select(s => s.FirstName + s.LastName + s.MiddleName).ToList();
+            var masters = Core.Context.User.Where(u => u.RoleID == 2).Select(s => s.FirstName + " " + s.LastName + " " + s.MiddleName).ToList();
             NewMasterCombo.ItemsSource = masters;
 
             //var times = List<String>()
