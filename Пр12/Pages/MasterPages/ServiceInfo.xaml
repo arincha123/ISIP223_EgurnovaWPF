@@ -36,7 +36,7 @@
         <TextBlock x:Name="ServDate" Grid.Row="2" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18" HorizontalAlignment="Stretch" Text="{Binding Date, StringFormat='dd.MM.yyyy'}"/>
 
         <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" Text="Время"/>
-        <TextBlock x:Name="ServTime" Grid.Row="3" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18" HorizontalAlignment="Center">
+        <TextBlock x:Name="ServTime" Grid.Row="3" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18">
             <TextBlock.Text>
                 <MultiBinding StringFormat="{}{0} - {1}">
                     <Binding Path="Schedule.Time" StringFormat="hh:mm"/>

@@ -162,12 +162,20 @@ namespace Пр12.Pages.MasterPages
 
         private void AddServ_Btn_Click(object sender, RoutedEventArgs e)
         {
+
+            decimal price;
+
+
             if (string.IsNullOrWhiteSpace(AddServ.Text))
             {
                 MessageBox.Show("Введите название услуги!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
+            if (!decimal.TryParse(AddPrice.Text, out price))
+            {
+                MessageBox.Show("Введите корректную цену услуги!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             try
             {
                 var service = Core.Context.Service.FirstOrDefault(s => s.Name == AddServ.Text.Trim());
@@ -192,7 +200,7 @@ namespace Пр12.Pages.MasterPages
                 {
                     MasterID = currentMaster.ID,
                     ServiceID = service.ID,
-                    Price = 0
+                    Price = price,
                 };
 
                 Core.Context.MasterService.Add(newMasterService);
@@ -202,6 +210,7 @@ namespace Пр12.Pages.MasterPages
                     MessageBoxButton.OK, MessageBoxImage.Information);
 
                 AddServ.Text = "";
+                AddPrice.Text = "";
                 LoadData();
             }
             catch (Exception ex)

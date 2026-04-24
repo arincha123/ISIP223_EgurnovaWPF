@@ -33,9 +33,9 @@
                                                 <TextBlock>
                                                     <TextBlock.Text>
                                                         <MultiBinding StringFormat="{}{0} {1} {2}">
-                                                            <Binding Path="User.LastName"/>
-                                                            <Binding Path="User.FirstName"/>
-                                                            <Binding Path="User.MiddleName"/>
+                                                            <Binding Path="User1.LastName"/>
+                                                            <Binding Path="User1.FirstName"/>
+                                                            <Binding Path="User1.MiddleName"/>
                                                         </MultiBinding>
                                                     </TextBlock.Text>
                                                 </TextBlock>
@@ -49,7 +49,7 @@
                                                 <TextBlock>
                                                     <TextBlock.Text>
                                                         <MultiBinding StringFormat="{}{0:HH:mm} - {1:HH:mm}">
-                                                            <Binding Path="Schedule.Time"/>
+                                                            <Binding Path="Schedule.StartTime"/>
                                                             <Binding Path="Schedule.EndTime"/>
                                                         </MultiBinding>
                                                     </TextBlock.Text>
