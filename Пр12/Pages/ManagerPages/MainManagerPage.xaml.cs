@@ -35,6 +35,7 @@ namespace Пр12.Pages.ManagerPages
             if (MainWindow.Current != null)
                 MainWindow.Current.Btn_Back.Visibility = Visibility.Visible;
 
+
             LoadData();
         }
 
@@ -69,6 +70,16 @@ namespace Пр12.Pages.ManagerPages
             ProductTypeCombo.ItemsSource = categories;
             ProductTypeCombo.DisplayMemberPath = "Name";
             ProductTypeCombo.SelectedValuePath = "ID";
+
+
+            var services = Core.Context.Service.Select(s => s.Name).ToList();
+            NewServiceCombo.ItemsSource = services;
+
+            var masters = Core.Context.User.Where(u => u.RoleID == 2).Select(s => s.FirstName + s.LastName + s.MiddleName).ToList();
+            NewMasterCombo.ItemsSource = masters;
+
+            //var times = List<String>()
+            //NewTimeCombo.ItemsSource = 
 
         }
 
