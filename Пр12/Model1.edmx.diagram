@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ec4a00badb564175a827164daac5da88" Name="Diagram1">
+        <EntityTypeShape EntityType="ShutKrolModel.Book" Width="1.5" PointX="5.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShutKrolModel.BookInGenre" Width="1.5" PointX="7.5" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShutKrolModel.Complaint" Width="1.5" PointX="10.5" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShutKrolModel.Genre" Width="1.5" PointX="5.25" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShutKrolModel.ReadingList" Width="1.5" PointX="7.5" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShutKrolModel.RequestForAuthor" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShutKrolModel.RequestForDefrosting" Width="1.5" PointX="7.5" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShutKrolModel.Review" Width="1.5" PointX="10.5" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShutKrolModel.Role" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShutKrolModel.StatusForLists" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShutKrolModel.StatusForUser" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShutKrolModel.TypeOfDefrosting" Width="1.5" PointX="5.25" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShutKrolModel.User" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <AssociationConnector Association="ShutKrolModel.FK_Book_User" ManuallyRouted="false" />
+        <AssociationConnector Association="ShutKrolModel.FK_BookInGenre_Book" ManuallyRouted="false" />
+        <AssociationConnector Association="ShutKrolModel.FK_Complaint_Book" ManuallyRouted="false" />
+        <AssociationConnector Association="ShutKrolModel.FK_ReadingList_Book" ManuallyRouted="false" />
+        <AssociationConnector Association="ShutKrolModel.FK_RequestForDefrosting_Book" ManuallyRouted="false" />
+        <AssociationConnector Association="ShutKrolModel.FK_Review_Book" ManuallyRouted="false" />
+        <AssociationConnector Association="ShutKrolModel.FK_BookInGenre_Genre" ManuallyRouted="false" />
+        <AssociationConnector Association="ShutKrolModel.FK_Complaint_Review" ManuallyRouted="false" />
+        <AssociationConnector Association="ShutKrolModel.FK_Complaint_User" ManuallyRouted="false" />
+        <AssociationConnector Association="ShutKrolModel.FK_ReadingList_StatusForLists" ManuallyRouted="false" />
+        <AssociationConnector Association="ShutKrolModel.FK_ReadingList_User" ManuallyRouted="false" />
+        <AssociationConnector Association="ShutKrolModel.FK_RequestForAuthor_StatusForUser" ManuallyRouted="false" />
+        <AssociationConnector Association="ShutKrolModel.FK_RequestForAuthor_User" ManuallyRouted="false" />
+        <AssociationConnector Association="ShutKrolModel.FK_RequestForDefrosting_StatusForUser" ManuallyRouted="false" />
+        <AssociationConnector Association="ShutKrolModel.FK_RequestForDefrosting_TypeOfDefrosting" ManuallyRouted="false" />
+        <AssociationConnector Association="ShutKrolModel.FK_RequestForDefrosting_User" ManuallyRouted="false" />
+        <AssociationConnector Association="ShutKrolModel.FK_Review_User" ManuallyRouted="false" />
+        <AssociationConnector Association="ShutKrolModel.FK_User_Role" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
