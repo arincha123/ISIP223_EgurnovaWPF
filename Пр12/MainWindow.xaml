@@ -10,10 +10,10 @@
     <Grid>
         <TabControl TabStripPlacement="Left">
             <TabItem ToolTip="Каталог книг" Style="{StaticResource SlidebarItem}">
-                <!--<Frame Grid.Column="1" NavigationUIVisibility="Hidden" x:Name="frameCatalog" Source="/Pages/CatalogPage.xaml" Margin="10 0 0 0"/>-->
                 <TabItem.Header>
                     <Image Source="/Icons/каталог_книг.png" Height="60" Width="60"/>
                 </TabItem.Header>
+                <Frame NavigationUIVisibility="Hidden" x:Name="frameCatalog" Source="/Pages/CatalogPage.xaml" Margin="10 0 0 0"/>
             </TabItem>
             
             <TabItem ToolTip="Списки книг" Style="{StaticResource SlidebarItem}">

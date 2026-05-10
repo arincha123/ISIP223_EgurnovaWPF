@@ -9,6 +9,110 @@
       Title="CatalogPage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" Grid.Column="0"  Margin="10,15,10,15"  VerticalAlignment="Center"  Height="45" 
+                BorderBrush="#FF151286" BorderThickness="1.5" CornerRadius="23" Background="White">
+            <Grid>
+                <!--картинка лупы-->
+                <TextBlock Text="🔍"  VerticalAlignment="Center" HorizontalAlignment="Left" 
+                       Margin="15,0,0,0"  FontSize="16" Foreground="#999999"/>
+
+                <!--сам поиск-->
+                <TextBox x:Name="SearchBox" Height="45" 
+                     VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="40,0,15,0"
+                     BorderThickness="0" Background="Transparent" FontSize="14" Foreground="#333333"
+                     CaretBrush="#FF151286" ToolTipService.IsEnabled="False"/>
+
+                <!--водяной знак в поиске-->
+                <TextBlock IsHitTestVisible="False" 
+                       Text="Название книги..." 
+                       VerticalAlignment="Center" HorizontalAlignment="Left" Margin="40,0,0,0" 
+                       Foreground="#AAAAAA" FontSize="14">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=SearchBox}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+        </Border>
+
+        <!--сортировка по названию и оценке-->
+        <Border Grid.Row="0" Grid.Column="1" Margin="5,15,5,15" VerticalAlignment="Center" Height="45"
+            CornerRadius="23" Background="#F5F5F5" BorderBrush="#E0E0E0" BorderThickness="1">
+
+            <ComboBox x:Name="ComboSort" Width="140" Height="45"
+                  Background="Transparent" BorderThickness="0" FontSize="13"
+                  Padding="15,0,10,0">
+                <ComboBoxItem Content="По названию"/>
+                <ComboBoxItem Content="По рейтингу"/>
+            </ComboBox>
+        </Border>
+
+        <!--фильтрация по жанрам-->
+        <Border Grid.Row="0" Grid.Column="2" Margin="5,15,10,15" VerticalAlignment="Center" Height="45"
+            CornerRadius="23" Background="#F5F5F5" BorderBrush="#E0E0E0" BorderThickness="1">
+
+            <ComboBox x:Name="ComboAiltr" Width="140" Height="45"
+                  Background="Transparent" BorderThickness="0" FontSize="13" Padding="15,0,10,0">
+                <ComboBoxItem Content="Фильтр по жанрам"/>
+            </ComboBox>
+        </Border>
+
+        <Border Grid.Row="1" Grid.ColumnSpan="3">
+            <ListBox x:Name="ListBooks"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" d:ItemsSource="{d:SampleData ItemCount=7}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="200" Height="420" Margin="10">
+                            <StackPanel>
+                                <Grid Width="200" Height="290" Margin="0 0 0 10">
+                                    <Image Source="{Binding PathToCover}" VerticalAlignment="Top" Stretch="UniformToFill"/>
+                                </Grid>
+                                <TextBlock Text="{Binding Title}" FontSize="14" TextWrapping="Wrap" HorizontalAlignment="Stretch" />
+                                <TextBlock Text="{Binding User.Name}" FontSize="14" TextWrapping="Wrap" HorizontalAlignment="Stretch"/>
+                                <WrapPanel Margin="0 0 0 10">
+                                    <TextBlock Text="★"/>
+                                    <TextBlock Text="💬"/>
+                                </WrapPanel>
+                            
+                                <Button Style="{StaticResource ActionBtn}" Content="Добавить в список" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            
+
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+
+
+            </ListBox>
+        </Border>
+
+
+
+
+
+
+
     </Grid>
 </Page>

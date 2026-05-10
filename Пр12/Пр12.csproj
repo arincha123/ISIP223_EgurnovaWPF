@@ -184,9 +184,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Images\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Icons\профиль.png" />
   </ItemGroup>
@@ -206,6 +204,8 @@
     <Resource Include="Icons\заморозка.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\власть.jpg" />
+    <Resource Include="Images\безумие.jpg" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>

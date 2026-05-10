@@ -23,6 +23,10 @@ namespace Пр12.Pages
         public CatalogPage()
         {
             InitializeComponent();
+
+            List<Book> books = Core.Context.Book.ToList();
+            ListBooks.ItemsSource = books;
+
         }
     }
 }
