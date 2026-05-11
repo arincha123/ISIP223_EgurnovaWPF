@@ -23,10 +23,39 @@ namespace Пр12.Pages
         public CatalogPage()
         {
             InitializeComponent();
+            PageLoad();
+        }
 
+        private void PageLoad()
+        {
             List<Book> books = Core.Context.Book.ToList();
             ListBooks.ItemsSource = books;
 
+
+            List<string> genres = Core.Context.Genre.Select(g => g.Name).ToList();
+            ComboFiltr.ItemsSource = genres;
+
+
+        }
+
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            List<Book> sortedBooks = Core.Context.Book.ToList();
+            sortedBooks = sortedBooks.Where(b => b.Title.ToLower().Contains(SearchBox.Text.ToLower())).ToList();
+            ListBooks.ItemsSource = sortedBooks;
+        }
+
+        private void ComboSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ComboFiltr_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
+
+
+
 }
