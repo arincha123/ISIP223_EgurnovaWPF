@@ -53,26 +53,21 @@
         </Border>
 
         <!--сортировка по названию и оценке-->
-        <Border Grid.Row="0" Grid.Column="1" Margin="5,15,5,15" VerticalAlignment="Center" Height="45"
-            CornerRadius="23" Background="#F5F5F5" BorderBrush="#E0E0E0" BorderThickness="1">
 
-            <ComboBox x:Name="ComboSort" Width="140" Height="45"
-                  Background="Transparent" BorderThickness="0" FontSize="13"
-                  Padding="15,0,10,0">
-                <ComboBoxItem Content="По названию"/>
-                <ComboBoxItem Content="По рейтингу"/>
-            </ComboBox>
-        </Border>
+        <ComboBox Grid.Row="0" Grid.Column="1" x:Name="ComboSort" Width="140" Height="45"
+                  Background="Transparent"  BorderThickness="0" FontSize="13"
+                  Padding="15,0,10,0" RenderTransformOrigin="0,1" BorderBrush="{x:Null}">
+
+            <ComboBoxItem Content="По названию"/>
+            <ComboBoxItem Content="По рейтингу"/>
+        </ComboBox>
 
         <!--фильтрация по жанрам-->
-        <Border Grid.Row="0" Grid.Column="2" Margin="5,15,10,15" VerticalAlignment="Center" Height="45"
-            CornerRadius="23" Background="#F5F5F5" BorderBrush="#E0E0E0" BorderThickness="1">
 
-            <ComboBox x:Name="ComboAiltr" Width="140" Height="45"
+        <ComboBox Grid.Row="0" Grid.Column="2" x:Name="ComboAiltr" Width="140" Height="45"
                   Background="Transparent" BorderThickness="0" FontSize="13" Padding="15,0,10,0">
-                <ComboBoxItem Content="Фильтр по жанрам"/>
-            </ComboBox>
-        </Border>
+            <ComboBoxItem Content="Фильтр по жанрам"/>
+        </ComboBox>
 
         <Border Grid.Row="1" Grid.ColumnSpan="3">
             <ListBox x:Name="ListBooks"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" d:ItemsSource="{d:SampleData ItemCount=7}">
