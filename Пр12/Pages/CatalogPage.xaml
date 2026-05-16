@@ -80,7 +80,7 @@
         </ComboBox>
 
         <!--сами книги-->
-        <Border Grid.Row="1" Grid.ColumnSpan="3" BorderBrush="White" BorderThickness="0" CornerRadius="30" Background="White" ClipToBounds="True">
+        <Border Grid.Row="1" Grid.ColumnSpan="3" BorderBrush="White" BorderThickness="0" CornerRadius="30 30 0 0" Background="White" ClipToBounds="True">
             <ListBox x:Name="ListBooks"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" d:ItemsSource="{d:SampleData ItemCount=7}" Background="Transparent">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
