@@ -36,6 +36,7 @@ namespace Пр12
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<StatusForLists> StatusForLists { get; set; }
         public virtual DbSet<StatusForUser> StatusForUser { get; set; }
+        public virtual DbSet<TypeOfComplaint> TypeOfComplaint { get; set; }
         public virtual DbSet<TypeOfDefrosting> TypeOfDefrosting { get; set; }
         public virtual DbSet<User> User { get; set; }
     }

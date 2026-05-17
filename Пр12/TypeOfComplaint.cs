@@ -12,18 +12,18 @@ namespace Пр12
     using System;
     using System.Collections.Generic;
     
-    public partial class Complaint
+    public partial class TypeOfComplaint
     {
-        public int ID { get; set; }
-        public int UserID { get; set; }
-        public Nullable<int> BookID { get; set; }
-        public Nullable<int> ReviewID { get; set; }
-        public int ReasonID { get; set; }
-        public System.DateTime Date { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TypeOfComplaint()
+        {
+            this.Complaint = new HashSet<Complaint>();
+        }
     
-        public virtual Book Book { get; set; }
-        public virtual Review Review { get; set; }
-        public virtual TypeOfComplaint TypeOfComplaint { get; set; }
-        public virtual User User { get; set; }
+        public int ID { get; set; }
+        public string Reason { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Complaint> Complaint { get; set; }
     }
 }

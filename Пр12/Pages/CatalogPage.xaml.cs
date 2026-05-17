@@ -20,6 +20,8 @@ namespace Пр12.Pages
     /// </summary>
     public partial class CatalogPage : Page
     {
+        List<Book> allBooks = Core.Context.Book.ToList();
+        List<Book> filteredBooks = Core.Context.Book.ToList();
         public CatalogPage()
         {
             InitializeComponent();
@@ -28,34 +30,75 @@ namespace Пр12.Pages
 
         private void PageLoad()
         {
-            List<Book> books = Core.Context.Book.ToList();
-            ListBooks.ItemsSource = books;
-
+            ListBooks.ItemsSource = allBooks;
 
             List<string> genres = Core.Context.Genre.Select(g => g.Name).ToList();
             ComboFiltr.ItemsSource = genres;
-
-
+            genres.Insert(0, "Все жанры");
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            List<Book> sortedBooks = Core.Context.Book.ToList();
-            sortedBooks = sortedBooks.Where(b => b.Title.ToLower().Contains(SearchBox.Text.ToLower())).ToList();
-            ListBooks.ItemsSource = sortedBooks;
+            ApplyFiltersAndSearch();
         }
 
         private void ComboSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            ApplyFiltersAndSearch();
         }
 
         private void ComboFiltr_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            ApplyFiltersAndSearch();
+        }
 
+        void ApplyFiltersAndSearch()
+        {
+            var result = allBooks.ToList();
+
+            //поиск
+            if (!string.IsNullOrEmpty(SearchBox.Text))
+            {
+                var searchtext = SearchBox.Text.ToLower();
+
+                result = result.Where(b => (b.Title != null && b.Title.ToLower().Contains(searchtext)) ||
+                    (b.User != null && b.User.Name != null && b.User.Name.ToLower().Contains(searchtext))).ToList();
+            }
+
+            //работа сортировки по названию и рейтингу
+            if (ComboSort.SelectedItem is ComboBoxItem selecteditem && selecteditem.Tag != null)
+            {
+                string TypeOfSort = selecteditem.Tag?.ToString();
+                switch (TypeOfSort)
+                {
+                    case "По названию":
+                        result = allBooks.OrderBy(b => b.Title).ToList();
+                        break;
+                    case "По рейтингу":
+                        result = allBooks.OrderBy(b => b.AvgRating).ToList();
+                        break;
+                }
+            }
+
+            //фильтрация по жанрам
+            if (ComboFiltr.SelectedItem != null && ComboFiltr.SelectedItem.ToString() != "Все жанры")
+            {
+                string selectedGenre = ComboFiltr.SelectedItem.ToString();
+                result = result.Where(s => s.BookInGenre != null && s.BookInGenre.Any(bg => bg.Genre != null && bg.Genre.Name == selectedGenre)).ToList();
+            }
+
+            filteredBooks = result;
+            ListBooks.ItemsSource = filteredBooks;
+        }
+
+        private void ListBooks_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Book selectedbook = ListBooks.SelectedItem as Book;
+            if (selectedbook != null)
+            {
+                BookInfo infiOfBook = new BookInfo(selectedbook);
+                NavigationService.Navigate(infiOfBook);
+            }
         }
     }
-
-
-
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище ShutKrolModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище ShutKrolModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Book">
           <Key>
             <PropertyRef Name="ID" />
@@ -34,7 +34,7 @@
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="BookID" Type="int" />
           <Property Name="ReviewID" Type="int" />
-          <Property Name="Reason" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ReasonID" Type="int" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Genre">
@@ -85,6 +85,7 @@
           <Property Name="BookID" Type="int" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="IsFrozen" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -106,6 +107,13 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StatusName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeOfComplaint">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <EntityType Name="TypeOfDefrosting">
           <Key>
@@ -183,6 +191,18 @@
             </Principal>
             <Dependent Role="Complaint">
               <PropertyRef Name="ReviewID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complaint_TypeOfComplaint">
+          <End Role="TypeOfComplaint" Type="Self.TypeOfComplaint" Multiplicity="1" />
+          <End Role="Complaint" Type="Self.Complaint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfComplaint">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Complaint">
+              <PropertyRef Name="ReasonID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -354,6 +374,7 @@
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StatusForLists" EntityType="Self.StatusForLists" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StatusForUser" EntityType="Self.StatusForUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeOfComplaint" EntityType="Self.TypeOfComplaint" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeOfDefrosting" EntityType="Self.TypeOfDefrosting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Book_User" Association="Self.FK_Book_User">
@@ -374,6 +395,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Complaint_Review" Association="Self.FK_Complaint_Review">
             <End Role="Review" EntitySet="Review" />
+            <End Role="Complaint" EntitySet="Complaint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complaint_TypeOfComplaint" Association="Self.FK_Complaint_TypeOfComplaint">
+            <End Role="TypeOfComplaint" EntitySet="TypeOfComplaint" />
             <End Role="Complaint" EntitySet="Complaint" />
           </AssociationSet>
           <AssociationSet Name="FK_Complaint_User" Association="Self.FK_Complaint_User">
@@ -429,7 +454,8 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ShutKrolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -470,10 +496,11 @@
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="BookID" Type="Int32" />
           <Property Name="ReviewID" Type="Int32" />
-          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReasonID" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Book" Relationship="Self.FK_Complaint_Book" FromRole="Complaint" ToRole="Book" />
           <NavigationProperty Name="Review" Relationship="Self.FK_Complaint_Review" FromRole="Complaint" ToRole="Review" />
+          <NavigationProperty Name="TypeOfComplaint" Relationship="Self.FK_Complaint_TypeOfComplaint" FromRole="Complaint" ToRole="TypeOfComplaint" />
           <NavigationProperty Name="User" Relationship="Self.FK_Complaint_User" FromRole="Complaint" ToRole="User" />
         </EntityType>
         <EntityType Name="Genre">
@@ -534,6 +561,7 @@
           <Property Name="BookID" Type="Int32" Nullable="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsFrozen" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Book" Relationship="Self.FK_Review_Book" FromRole="Review" ToRole="Book" />
           <NavigationProperty Name="Complaint" Relationship="Self.FK_Complaint_Review" FromRole="Review" ToRole="Complaint" />
           <NavigationProperty Name="User" Relationship="Self.FK_Review_User" FromRole="Review" ToRole="User" />
@@ -562,6 +590,14 @@
           <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="RequestForAuthor" Relationship="Self.FK_RequestForAuthor_StatusForUser" FromRole="StatusForUser" ToRole="RequestForAuthor" />
           <NavigationProperty Name="RequestForDefrosting" Relationship="Self.FK_RequestForDefrosting_StatusForUser" FromRole="StatusForUser" ToRole="RequestForDefrosting" />
+        </EntityType>
+        <EntityType Name="TypeOfComplaint">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Reason" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Complaint" Relationship="Self.FK_Complaint_TypeOfComplaint" FromRole="TypeOfComplaint" ToRole="Complaint" />
         </EntityType>
         <EntityType Name="TypeOfDefrosting">
           <Key>
@@ -683,6 +719,18 @@
             </Principal>
             <Dependent Role="Complaint">
               <PropertyRef Name="ReviewID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complaint_TypeOfComplaint">
+          <End Role="TypeOfComplaint" Type="Self.TypeOfComplaint" Multiplicity="1" />
+          <End Role="Complaint" Type="Self.Complaint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfComplaint">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Complaint">
+              <PropertyRef Name="ReasonID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -818,6 +866,7 @@
           <EntitySet Name="Role" EntityType="Self.Role" />
           <EntitySet Name="StatusForLists" EntityType="Self.StatusForLists" />
           <EntitySet Name="StatusForUser" EntityType="Self.StatusForUser" />
+          <EntitySet Name="TypeOfComplaint" EntityType="Self.TypeOfComplaint" />
           <EntitySet Name="TypeOfDefrosting" EntityType="Self.TypeOfDefrosting" />
           <EntitySet Name="User" EntityType="Self.User" />
           <AssociationSet Name="FK_Book_User" Association="Self.FK_Book_User">
@@ -850,6 +899,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Complaint_Review" Association="Self.FK_Complaint_Review">
             <End Role="Review" EntitySet="Review" />
+            <End Role="Complaint" EntitySet="Complaint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complaint_TypeOfComplaint" Association="Self.FK_Complaint_TypeOfComplaint">
+            <End Role="TypeOfComplaint" EntitySet="TypeOfComplaint" />
             <End Role="Complaint" EntitySet="Complaint" />
           </AssociationSet>
           <AssociationSet Name="FK_Complaint_User" Association="Self.FK_Complaint_User">
@@ -929,7 +982,7 @@
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="BookID" ColumnName="BookID" />
                 <ScalarProperty Name="ReviewID" ColumnName="ReviewID" />
-                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="ReasonID" ColumnName="ReasonID" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -985,6 +1038,7 @@
                 <ScalarProperty Name="BookID" ColumnName="BookID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IsFrozen" ColumnName="IsFrozen" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1009,6 +1063,14 @@
               <MappingFragment StoreEntitySet="StatusForUser">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeOfComplaint">
+            <EntityTypeMapping TypeName="ShutKrolModel.TypeOfComplaint">
+              <MappingFragment StoreEntitySet="TypeOfComplaint">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
