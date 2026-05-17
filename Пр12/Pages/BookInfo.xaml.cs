@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Пр12.Windows;
 
 namespace Пр12.Pages
 {
@@ -32,26 +33,32 @@ namespace Пр12.Pages
         {
             CurrentBook = currentBook;
             DataContext = this;
+
+            UpdateBookRating();
+            LoadFreezeBtn();
             LoadReviews();
+        }
+
+        private void LoadFreezeBtn()
+        {
+            if (UserData.curUser != null && UserData.curUser.RoleID == 3)
+            {
+                FreezeBook.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                FreezeBook.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void LoadReviews()
         {
-            // Загружаем только незамороженные отзывы для текущей книги
-            Reviews = Core.Context.Review
-                .Include("User")
-                .Where(r => r.BookID == CurrentBook.ID && !r.IsFrozen)
-                .OrderByDescending(r => r.Date)
-                .ToList();
+            Reviews = Core.Context.Review.Include("User").Where(r => r.BookID == CurrentBook.ID && !r.IsFrozen).OrderByDescending(r => r.Date).ToList();
 
-            // Обновляем ListBox
             ReviewsListBox.ItemsSource = null;
             ReviewsListBox.ItemsSource = Reviews;
 
-            // Обновляем счетчик отзывов (если есть TextBlock для счетчика)
-            UpdateReviewsCount();
 
-            // Показываем сообщение, если отзывов нет
             if (Reviews.Count == 0)
             {
                 NoReviewsText.Visibility = Visibility.Visible;
@@ -62,17 +69,19 @@ namespace Пр12.Pages
             }
         }
 
-        private void UpdateReviewsCount()
+        private void UpdateBookRating()
         {
-            // Если у вас есть TextBlock для отображения количества отзывов
-            // Например, ReviewsCountTextBlock.Text = $"Отзывы ({Reviews.Count})";
-
-            // Или если у вас есть биндинг, то обновляем вручную
-            var reviewsCountText = FindName("ReviewsCountTextBlock") as TextBlock;
-            if (reviewsCountText != null)
+            double avgRating = 0;
+            if (CurrentBook.Review.Count > 0)
             {
-                reviewsCountText.Text = $"Отзывы ({Reviews.Count})";
+                double sum = 0;
+                foreach (var review in CurrentBook.Review)
+                {
+                    sum += review.Rating;
+                }
+                avgRating = sum / CurrentBook.Review.Count;
             }
+            RatingText.Text = Math.Round(avgRating).ToString();
         }
 
         private void Btn_Back_Click(object sender, RoutedEventArgs e)
@@ -83,19 +92,72 @@ namespace Пр12.Pages
             }
         }
 
-        private void CommentTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         private void SubmitReviewButton_Click(object sender, RoutedEventArgs e)
         {
+            string text = CommentText.Text.Trim();
+            if (text == null)
+            {
+                MessageBox.Show("Напишите свой отзыв...");
+                return;
+            }
+
+            ComboBoxItem selectedItem = RatingComboBox.SelectedItem as ComboBoxItem;
+            int rating = int.Parse(selectedItem.Content.ToString());
+
+            Review newReview = new Review
+            {
+                BookID = CurrentBook.ID,
+                UserID = UserData.curUser.ID,
+                Text = text,
+                Rating = rating,
+                Date = DateTime.Now,
+                IsFrozen = false
+            };
+
+            Core.Context.Review.Add(newReview);
+            Core.Context.SaveChanges();
+
+            CommentText.Clear();
+            RatingComboBox.SelectedIndex = 0;
+
+            LoadReviews();
+
+            UpdateBookRating();
+        }
+
+        private void Readpart_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(CurrentBook.Text))
+            {
+                TextOfBook textWindow = new TextOfBook(CurrentBook.Title, CurrentBook.Text);
+                textWindow.Owner = Window.GetWindow(this);
+                textWindow.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Фрагмент книги недоступен!", "Информация",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void AddInList_Click(object sender, RoutedEventArgs e)
+        {
 
         }
 
+        private void FreezeBook_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
 
+        private void ComplainAuthorBtn_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
 
+        private void ComplainBookBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

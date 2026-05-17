@@ -52,21 +52,21 @@
                     Style="{StaticResource ActionBtn}"
                     Content="Читать фрагмент"
                     Width="180"
-                    Margin="20 10 0 0"/>
+                    Margin="20 10 0 0" Click="Readpart_Click"/>
 
                 <!--кнопка для добавления в список-->
                 <Button x:Name="AddInList"
                     Style="{StaticResource ActionBtn}"
                     Content="Добавить в список"
                     Width="180"
-                    Margin="20 10 0 10"/>
+                    Margin="20 10 0 10" Click="AddInList_Click"/>
 
                 <!--кнопка для заморозки книги (для админа)-->
                 <Button x:Name="FreezeBook"
                     Style="{StaticResource ActionBtn}"
                     Content="Заморозить книгу"
                     Width="180"
-                    Margin="20 0 0 20"/>
+                    Margin="20 0 0 20" Click="FreezeBook_Click"/>
 
             </StackPanel>
 
@@ -96,11 +96,16 @@
                     
                     <WrapPanel>
 
-                        <TextBlock Text="{Binding DataContext.CurrentBook.AvgRating, StringFormat='{}{0}★'}"
-                               FontSize="20"  
-                               Margin="0 0 0 0" 
-                               FontWeight="Bold"/>
+                        <TextBlock x:Name="RatingText"
+                                   Text=""
+                                   FontSize="20"  
+                                   Margin="0 0 0 0" 
+                                   FontWeight="Bold"/>
 
+                        <TextBlock Text="★"
+                                    FontSize="20"  
+                                    Margin="0 0 0 0" 
+                                    FontWeight="Bold"/>
                     </WrapPanel>
                 </Border>
 
@@ -159,18 +164,18 @@
                                 BorderThickness="0"
                                 BorderBrush="{x:Null}"
                                 VerticalAlignment="Center"
-                                Margin="10 0 0 0"/>
+                                Margin="10 0 0 0" Click="ComplainAuthorBtn_Click"/>
 
                     <!--кнопка жалобы на книгу-->
                     <Button x:Name="ComplainBookBtn"
                             Style="{StaticResource BtnBack}"
-                            Content="Пожаловаться на автора"
+                            Content="Пожаловаться на книгу"
                             Width="200"
                             Background="Transparent"
                             BorderThickness="0"
                             BorderBrush="{x:Null}"
                             VerticalAlignment="Center"
-                            Margin="10 0 0 0"/>
+                            Margin="10 0 0 0" Click="ComplainBookBtn_Click"/>
 
                 </WrapPanel>
                 
@@ -194,16 +199,43 @@
                                         <TextBlock Text="{Binding User.Name}"
                                                    FontWeight="Bold"
                                                    FontSize="16"
-                                                   Margin="0,0,10,0"/>
+                                                   Margin="0,0,10,0"
+                                                   VerticalAlignment="Center"/>
 
                                         <TextBlock Text="{Binding Rating, StringFormat='Оценка: {0}★'}"
                                                    FontSize="14"
-                                                   Foreground="#FF151286"/>
+                                                   Foreground="#FF151286"
+                                                   VerticalAlignment="Center"/>
 
                                         <TextBlock Text="{Binding Date, StringFormat=' - {0:dd.MM.yyyy HH:mm}'}"
                                                    FontSize="12"
                                                    Foreground="Gray"
-                                                   Margin="10,0,0,0"/>
+                                                   Margin="10,0,0,0"
+                                                   VerticalAlignment="Center"/>
+                                        <WrapPanel>
+
+
+                                            <Button x:Name="ComplainbookBtn"
+                                                     Style="{StaticResource BtnBack}"
+                                                     Content="Пожаловаться на пользователя"
+                                                     Width="250"
+                                                     Background="Transparent"
+                                                     BorderThickness="0"
+                                                     BorderBrush="{x:Null}"
+                                                     VerticalAlignment="Center"
+                                                     Margin="30 0 0 0"/>
+
+                                            <Button x:Name="ComplainReviewBtn"
+                                                     Style="{StaticResource BtnBack}"
+                                                     Content="Пожаловаться на отзыв"
+                                                     Width="200"
+                                                     Background="Transparent"
+                                                     BorderThickness="0"
+                                                     BorderBrush="{x:Null}"
+                                                     VerticalAlignment="Center"
+                                                     Margin="10 0 0 0"/>
+                                        </WrapPanel>
+
                                     </WrapPanel>
 
                                     <TextBlock Text="{Binding Text}"
@@ -246,12 +278,12 @@
                         Margin="30 0 30 20"
                         Padding="15">
                     <StackPanel>
-                        
-                        <TextBlock Text="Оставить отзыв"
-                                   FontSize="18"
-                                   FontWeight="Bold"
-                                   Margin="0,0,0,10"/>
 
+                            <TextBlock Text="Оставить отзыв"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Padding="0 5 0 0"/>
+                       
                         <!-- выбор оценки -->
                         <WrapPanel Margin="0,0,0,10">
                             
@@ -279,7 +311,7 @@
                         </WrapPanel>
 
                         <!-- поле для ввода текста отзыва -->
-                        <TextBox x:Name="CommentTextBox"
+                        <TextBox x:Name="CommentText"
                                  TextWrapping="Wrap"
                                  Height="80"
                                  AcceptsReturn="True"
