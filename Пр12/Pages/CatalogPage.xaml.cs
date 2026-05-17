@@ -33,6 +33,7 @@ namespace Пр12.Pages
             ListBooks.ItemsSource = allBooks;
 
             List<string> genres = Core.Context.Genre.Select(g => g.Name).ToList();
+            ComboFiltr.Items.Clear();
             ComboFiltr.ItemsSource = genres;
             genres.Insert(0, "Все жанры");
         }
@@ -100,5 +101,6 @@ namespace Пр12.Pages
                 NavigationService.Navigate(infiOfBook);
             }
         }
+
     }
 }
