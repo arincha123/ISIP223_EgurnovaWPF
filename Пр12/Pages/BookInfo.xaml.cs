@@ -102,7 +102,8 @@ namespace Пр12.Pages
             }
 
             ComboBoxItem selectedItem = RatingComboBox.SelectedItem as ComboBoxItem;
-            int rating = int.Parse(selectedItem.Content.ToString());
+            int selectedRating = int.Parse(selectedItem.Content.ToString().Split(' ')[0]);
+            int rating = selectedRating * 2;
 
             Review newReview = new Review
             {
@@ -140,9 +141,62 @@ namespace Пр12.Pages
             }
         }
 
+        
         private void AddInList_Click(object sender, RoutedEventArgs e)
         {
+            //// Проверяем, авторизован ли пользователь
+            //if (UserData.curUser == null)
+            //{
+            //    MessageBox.Show("Чтобы добавить книгу в список, необходимо авторизоваться!", "Ошибка",
+            //        MessageBoxButton.OK, MessageBoxImage.Warning);
+            //    return;
+            //}
 
+            //try
+            //{
+            //    // Проверяем, есть ли уже книга в списке
+            //    var existing = Core.Context.ReadingList
+            //        .FirstOrDefault(rl => rl.UserID == UserData.curUser.ID && rl.BookID == CurrentBook.ID);
+
+            //    if (existing != null)
+            //    {
+            //        MessageBox.Show("Эта книга уже есть в вашем списке!", "Информация",
+            //            MessageBoxButton.OK, MessageBoxImage.Information);
+            //        return;
+            //    }
+
+                var addToListWindow = new AddInListWindow();
+                addToListWindow.Owner = Window.GetWindow(this);
+
+                if (addToListWindow.ShowDialog() == true)
+                {
+                    var readingItem = new ReadingList
+                    {
+                        UserID = UserData.curUser.ID,
+                        BookID = CurrentBook.ID,
+                        ListStatusID = addToListWindow.SelectedListStatusID
+                    };
+
+                    Core.Context.ReadingList.Add(readingItem);
+                    Core.Context.SaveChanges();
+
+                    string statusName = "";
+                    switch (addToListWindow.SelectedListStatusID)
+                    {
+                        case 2: statusName = "В планах"; break;
+                        case 3: statusName = "Читаю"; break;
+                        case 4: statusName = "Прочитано"; break;
+                    }
+
+                    MessageBox.Show($"Книга добавлена в список \"{statusName}\"!", "Успех",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show($"Ошибка при добавлении в список: {ex.Message}", "Ошибка",
+            //        MessageBoxButton.OK, MessageBoxImage.Error);
+            //}
         }
 
         private void FreezeBook_Click(object sender, RoutedEventArgs e)
@@ -150,12 +204,27 @@ namespace Пр12.Pages
 
         }
 
+
+
+
+
         private void ComplainAuthorBtn_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
         private void ComplainBookBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+        private void ComplainReviewBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ComplainUserBtn_Click(object sender, RoutedEventArgs e)
         {
 
         }

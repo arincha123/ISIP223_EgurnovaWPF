@@ -215,7 +215,7 @@
                                         <WrapPanel>
 
 
-                                            <Button x:Name="ComplainbookBtn"
+                                            <Button x:Name="ComplainUserBtn"
                                                      Style="{StaticResource BtnBack}"
                                                      Content="Пожаловаться на пользователя"
                                                      Width="250"
@@ -223,7 +223,7 @@
                                                      BorderThickness="0"
                                                      BorderBrush="{x:Null}"
                                                      VerticalAlignment="Center"
-                                                     Margin="30 0 0 0"/>
+                                                     Margin="30 0 0 0" Click="ComplainUserBtn_Click"/>
 
                                             <Button x:Name="ComplainReviewBtn"
                                                      Style="{StaticResource BtnBack}"
@@ -233,7 +233,7 @@
                                                      BorderThickness="0"
                                                      BorderBrush="{x:Null}"
                                                      VerticalAlignment="Center"
-                                                     Margin="10 0 0 0"/>
+                                                     Margin="10 0 0 0" Click="ComplainReviewBtn_Click"/>
                                         </WrapPanel>
 
                                     </WrapPanel>

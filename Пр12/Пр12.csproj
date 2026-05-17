@@ -129,6 +129,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="UserData.cs" />
+    <Compile Include="Windows\AddInListWindow.xaml.cs">
+      <DependentUpon>AddInListWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\TextOfBook.xaml.cs">
       <DependentUpon>TextOfBook.xaml</DependentUpon>
     </Compile>
@@ -157,6 +160,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\WelcomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\AddInListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

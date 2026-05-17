@@ -92,7 +92,7 @@
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="1.5"
-                            CornerRadius="18">
+                            CornerRadius="10">
                         <ContentPresenter HorizontalAlignment="Center" 
                              VerticalAlignment="Center"/>
                     </Border>
@@ -159,7 +159,7 @@
                                 Placement="Bottom"
                                 AllowsTransparency="True"
                                 Focusable="False"
-                                Width="{TemplateBinding Width}">
+                                Width="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}">
                             <Border Background="White" 
                                     BorderBrush="#E0E0E0" 
                                     BorderThickness="1" 

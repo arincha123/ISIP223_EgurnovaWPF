@@ -1,0 +1,56 @@
+﻿<Window x:Class="Пр12.Windows.AddInListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Пр12.Windows"
+        mc:Ignorable="d"
+        Title="AddInListWindow" Height="296" Width="482">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Выберите список для добавления книги:"
+                   FontSize="16"
+                   FontWeight="Bold"
+                   Margin="0,0,0,20"/>
+
+        <ComboBox x:Name="ListComboBox"
+                  Style="{StaticResource ComboForBooks}"
+                  Grid.Row="1"
+                  Height="35"
+                  FontSize="14"
+                  SelectedIndex="0">
+            
+            <ComboBoxItem Content="В планах" Tag="2"/>
+            <ComboBoxItem Content="Читаю" Tag="3"/>
+            <ComboBoxItem Content="Прочитано" Tag="4"/>
+        </ComboBox>
+
+        <WrapPanel Grid.Row="2"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Margin="0,20,0,0">
+            
+            <Button x:Name="CancelBtn"
+                    Style="{StaticResource BtnBack}"
+                    Content="Отмена"
+                    Width="80"
+                    Height="30"
+                    Margin="0,0,10,0"
+                    Click="CancelBtn_Click"/>
+            
+            <Button x:Name="AddBtn"
+                    Style="{StaticResource ActionBtn}"
+                    Content="Добавить"
+                    Width="80"
+                    Height="30"
+                    Background="#FF63C8D0"
+                    Foreground="White"
+                    Click="AddBtn_Click"/>
+        </WrapPanel>
+    </Grid>
+</Window>
