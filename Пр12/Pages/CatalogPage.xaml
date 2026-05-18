@@ -10,7 +10,7 @@
 
 
 
-    <Grid Background="#FFEFEFEF">
+    <Grid>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>

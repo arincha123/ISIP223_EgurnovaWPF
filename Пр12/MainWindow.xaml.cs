@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Пр12.Pages;
+using Пр12.Windows;
 
 namespace Пр12
 {
@@ -20,9 +22,11 @@ namespace Пр12
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
         }
+
     }
 }
