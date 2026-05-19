@@ -144,6 +144,9 @@
     <Compile Include="Windows\AuthReg.xaml.cs">
       <DependentUpon>AuthReg.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\ComplaintWindow.xaml.cs">
+      <DependentUpon>ComplaintWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\TextOfBook.xaml.cs">
       <DependentUpon>TextOfBook.xaml</DependentUpon>
     </Compile>
@@ -188,6 +191,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\AuthReg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ComplaintWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

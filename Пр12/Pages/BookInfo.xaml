@@ -67,7 +67,9 @@
                     Style="{StaticResource ActionBtn}"
                     Content="Заморозить книгу"
                     Width="180"
-                    Margin="20 0 0 20" Click="FreezeBook_Click"/>
+                    Margin="20 0 0 20" 
+                    Visibility="{Binding FreezeButtonVisibility, RelativeSource={RelativeSource AncestorType=Page}}"
+                    Click="FreezeBook_Click"/>
 
             </StackPanel>
 
@@ -158,25 +160,27 @@
                     
                         <!-- кнопка жалобы на автора -->
                     <Button x:Name="ComplainAuthorBtn"
-                                Style="{StaticResource BtnBack}"
-                                Content="Пожаловаться на автора"
-                                Width="200"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                BorderBrush="{x:Null}"
-                                VerticalAlignment="Center"
-                                Margin="10 0 0 0" Click="ComplainAuthorBtn_Click"/>
-
-                    <!--кнопка жалобы на книгу-->
-                    <Button x:Name="ComplainBookBtn"
                             Style="{StaticResource BtnBack}"
-                            Content="Пожаловаться на книгу"
+                            Content="Пожаловаться на автора"
+                            Tag="Author"
                             Width="200"
                             Background="Transparent"
                             BorderThickness="0"
                             BorderBrush="{x:Null}"
                             VerticalAlignment="Center"
-                            Margin="10 0 0 0" Click="ComplainBookBtn_Click"/>
+                            Margin="10 0 0 0" Click="ComplainBtn_Click"/>
+
+                    <!--кнопка жалобы на книгу-->
+                    <Button x:Name="ComplainBookBtn"
+                            Style="{StaticResource BtnBack}"
+                            Content="Пожаловаться на книгу"
+                            Tag="Book"
+                            Width="200"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            BorderBrush="{x:Null}"
+                            VerticalAlignment="Center"
+                            Margin="10 0 0 0" Click="ComplainBtn_Click"/>
 
                 </WrapPanel>
                 
@@ -215,26 +219,25 @@
                                                    VerticalAlignment="Center"/>
                                         <WrapPanel>
 
-
-                                            <Button x:Name="ComplainUserBtn"
-                                                     Style="{StaticResource BtnBack}"
-                                                     Content="Пожаловаться на пользователя"
-                                                     Width="250"
-                                                     Background="Transparent"
-                                                     BorderThickness="0"
-                                                     BorderBrush="{x:Null}"
-                                                     VerticalAlignment="Center"
-                                                     Margin="30 0 0 0" Click="ComplainUserBtn_Click"/>
-
                                             <Button x:Name="ComplainReviewBtn"
-                                                     Style="{StaticResource BtnBack}"
-                                                     Content="Пожаловаться на отзыв"
-                                                     Width="200"
-                                                     Background="Transparent"
-                                                     BorderThickness="0"
-                                                     BorderBrush="{x:Null}"
-                                                     VerticalAlignment="Center"
-                                                     Margin="10 0 0 0" Click="ComplainReviewBtn_Click"/>
+                                                    Style="{StaticResource BtnBack}"
+                                                    Content="Пожаловаться на отзыв"
+                                                    Tag="Review"
+                                                    Width="200"
+                                                    Background="Transparent"
+                                                    BorderThickness="0"
+                                                    BorderBrush="{x:Null}"
+                                                    VerticalAlignment="Center"
+                                                    Margin="10 0 0 0" 
+                                                    Click="ComplainBtn_Click"/>
+
+                                            <Button Content="Заморозить отзыв"
+                                                    Style="{StaticResource ActionBtn}"
+                                                    Width="150"
+                                                    Height="33"
+                                                    Visibility="{Binding FreezeButtonVisibility, RelativeSource={RelativeSource AncestorType=Page}}"
+                                                    Click="FreezeReview_Click"/>
+
                                         </WrapPanel>
 
                                     </WrapPanel>

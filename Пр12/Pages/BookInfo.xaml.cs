@@ -23,6 +23,8 @@ namespace Пр12.Pages
     {
         public Book CurrentBook { get; set; }
         public List<Review> Reviews { get; set; }
+        public bool IsAdmin => UserData.curUser != null && UserData.curUser.RoleID == 3;
+        public Visibility FreezeButtonVisibility => (UserData.curUser != null && UserData.curUser.RoleID == 3) ? Visibility.Visible : Visibility.Collapsed;
 
         public BookInfo()
         {
@@ -57,6 +59,7 @@ namespace Пр12.Pages
 
             ReviewsListBox.ItemsSource = null;
             ReviewsListBox.ItemsSource = Reviews;
+
 
 
             if (Reviews.Count == 0)
@@ -150,7 +153,6 @@ namespace Пр12.Pages
             }
         }
 
-
         private void AddInList_Click(object sender, RoutedEventArgs e)
         {
             Book selectedBook = CurrentBook;
@@ -217,32 +219,128 @@ namespace Пр12.Pages
 
         private void FreezeBook_Click(object sender, RoutedEventArgs e)
         {
+            var result = MessageBox.Show($"Вы уверены, что хотите заморозить книгу \"{CurrentBook.Title}\"?\n\nПосле заморозки книга будет скрыта от пользователей.",
+                "Подтверждение заморозки", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    CurrentBook.IsFrozen = true;
+                    Core.Context.SaveChanges();
+
+                    MessageBox.Show("Книга успешно заморожена!", "Успех",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    if (NavigationService.CanGoBack)
+                        NavigationService.GoBack();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void FreezeReview_Click(object sender, RoutedEventArgs e)
+        {
+            if (UserData.curUser == null || UserData.curUser.RoleID != 3)
+            {
+                MessageBox.Show("У вас нет прав для заморозки отзыва!", "Ошибка",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            Button button = sender as Button;
+            Review selectedReview = button?.Tag as Review;
+
+            if (selectedReview == null)
+            {
+                MessageBox.Show("Отзыв не найден!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            var result = MessageBox.Show($"Заморозить отзыв пользователя {selectedReview.User?.Name}?",
+                "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    selectedReview.IsFrozen = true;
+                    Core.Context.SaveChanges();
+
+                    LoadReviews();
+                    UpdateBookRating();
+
+                    MessageBox.Show("Отзыв заморожен!", "Успех",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
 
 
 
-
-        private void ComplainAuthorBtn_Click(object sender, RoutedEventArgs e)
+        private void ComplainBtn_Click(object sender, RoutedEventArgs e)
         {
+            Button button = sender as Button;
+            string complaintType = button?.Tag?.ToString();
 
-        }
+            if (string.IsNullOrEmpty(complaintType))
+            {
+                MessageBox.Show("Ошибка определения типа жалобы!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
-        private void ComplainBookBtn_Click(object sender, RoutedEventArgs e)
-        {
+            if (UserData.curUser == null)
+            {
+                MessageBox.Show("Чтобы отправить жалобу, необходимо авторизоваться!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
-        }
+            int typeId = 0;
+            string targetName = "";
+            int? reviewId = null;
 
+            switch (complaintType)
+            {
+                case "Book":
+                    typeId = 1;
+                    targetName = CurrentBook.Title;
+                    break;
 
-        private void ComplainReviewBtn_Click(object sender, RoutedEventArgs e)
-        {
+                case "Author":
+                    typeId = 3;
+                    targetName = CurrentBook.User?.Name ?? "Автор";
+                    break;
 
-        }
+                case "Review":
+                    typeId = 2;
+                    Review selectedReview = button?.DataContext as Review;
+                    if (selectedReview == null)
+                    {
+                        MessageBox.Show("Отзыв не найден!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    targetName = $"Отзыв пользователя {selectedReview.User?.Name}";
+                    reviewId = selectedReview.ID;
+                    break;
 
-        private void ComplainUserBtn_Click(object sender, RoutedEventArgs e)
-        {
+                default:
+                    MessageBox.Show("Неизвестный тип жалобы!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+            }
 
+            ComplaintWindow complaintWindow = new ComplaintWindow(typeId, targetName, CurrentBook.ID, reviewId);
+            complaintWindow.Owner = Window.GetWindow(this);
+            complaintWindow.ShowDialog();
         }
 
     }
