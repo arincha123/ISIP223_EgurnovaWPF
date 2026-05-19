@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Пр12.Windows;
 
 namespace Пр12.Pages
 {
@@ -102,5 +103,72 @@ namespace Пр12.Pages
             }
         }
 
+        private void AddToListBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            Book selectedBook = button?.DataContext as Book;
+
+            if (selectedBook == null)
+            {
+                MessageBox.Show("Книга не найдена!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (UserData.curUser == null)
+            {
+                MessageBox.Show("Чтобы добавить книгу в список, необходимо авторизоваться!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            var existingBook = Core.Context.ReadingList.FirstOrDefault(rl => rl.UserID == UserData.curUser.ID && rl.BookID == selectedBook.ID);
+
+            if (existingBook != null)
+            {
+                string statusName = "";
+                switch (existingBook.ListStatusID)
+                {
+                    case 1: statusName = "Заброшено"; break;
+                    case 2: statusName = "В планах"; break;
+                    case 3: statusName = "Читаю"; break;
+                    case 4: statusName = "Прочитано"; break;
+                }
+
+                MessageBox.Show($"Эта книга уже находится в списке \"{statusName}\"!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            AddInListWindow addWindow = new AddInListWindow();
+            addWindow.Owner = Window.GetWindow(this);
+
+            if (addWindow.ShowDialog() == true)
+            {
+                try
+                {
+                    ReadingList newReadingItem = new ReadingList
+                    {
+                        UserID = UserData.curUser.ID,
+                        BookID = selectedBook.ID,
+                        ListStatusID = addWindow.SelectedListStatusID
+                    };
+
+                    Core.Context.ReadingList.Add(newReadingItem);
+                    Core.Context.SaveChanges();
+
+                    string statusName = "";
+                    switch (addWindow.SelectedListStatusID)
+                    {
+                        case 2: statusName = "В планах"; break;
+                        case 3: statusName = "Читаю"; break;
+                        case 4: statusName = "Прочитано"; break;
+                    }
+
+                    MessageBox.Show($"Книга \"{selectedBook.Title}\" добавлена в список \"{statusName}\"!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при добавлении: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
     }
 }

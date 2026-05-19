@@ -150,59 +150,68 @@ namespace Пр12.Pages
             }
         }
 
-        
+
         private void AddInList_Click(object sender, RoutedEventArgs e)
         {
-            if (UserData.curUser == null)
+            Book selectedBook = CurrentBook;
+
+            if (selectedBook == null)
             {
-                MessageBox.Show("Чтобы добавить книгу в список, необходимо авторизоваться!", "Ошибка",
-                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Книга не найдена!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            try
+            if (UserData.curUser == null)
             {
-                var existing = Core.Context.ReadingList
-                    .FirstOrDefault(rl => rl.UserID == UserData.curUser.ID && rl.BookID == CurrentBook.ID);
+                MessageBox.Show("Чтобы добавить книгу в список, необходимо авторизоваться!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
-                if (existing != null)
+            var existingBook = Core.Context.ReadingList.FirstOrDefault(rl => rl.UserID == UserData.curUser.ID && rl.BookID == selectedBook.ID);
+
+            if (existingBook != null)
+            {
+                string statusName = GetStatusName(existingBook.ListStatusID);
+                MessageBox.Show($"Эта книга уже находится в списке \"{statusName}\"!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            AddInListWindow addWindow = new AddInListWindow();
+            addWindow.Owner = Window.GetWindow(this);
+
+            if (addWindow.ShowDialog() == true)
+            {
+                try
                 {
-                    MessageBox.Show("Эта книга уже есть в вашем списке!", "Информация",
-                        MessageBoxButton.OK, MessageBoxImage.Information);
-                    return;
-                }
-
-                var addToListWindow = new AddInListWindow();
-                addToListWindow.Owner = Window.GetWindow(this);
-
-                if (addToListWindow.ShowDialog() == true)
-                {
-                    var readingItem = new ReadingList
+                    ReadingList newReadingItem = new ReadingList
                     {
                         UserID = UserData.curUser.ID,
-                        BookID = CurrentBook.ID,
-                        ListStatusID = addToListWindow.SelectedListStatusID
+                        BookID = selectedBook.ID,
+                        ListStatusID = addWindow.SelectedListStatusID
                     };
 
-                    Core.Context.ReadingList.Add(readingItem);
+                    Core.Context.ReadingList.Add(newReadingItem);
                     Core.Context.SaveChanges();
 
-                    string statusName = "";
-                    switch (addToListWindow.SelectedListStatusID)
-                    {
-                        case 2: statusName = "В планах"; break;
-                        case 3: statusName = "Читаю"; break;
-                        case 4: statusName = "Прочитано"; break;
-                    }
-
-                    MessageBox.Show($"Книга добавлена в список \"{statusName}\"!", "Успех",
-                        MessageBoxButton.OK, MessageBoxImage.Information);
+                    string statusName = GetStatusName(addWindow.SelectedListStatusID);
+                    MessageBox.Show($"Книга \"{selectedBook.Title}\" добавлена в список \"{statusName}\"!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при добавлении: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            catch (Exception ex)
+        }
+
+        private string GetStatusName(int statusId)
+        {
+            switch (statusId)
             {
-                MessageBox.Show($"Ошибка при добавлении в список: {ex.Message}", "Ошибка",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                case 1: return "Заброшено";
+                case 2: return "В планах";
+                case 3: return "Читаю";
+                case 4: return "Прочитано";
+                default: return "Неизвестно";
             }
         }
 
@@ -235,5 +244,6 @@ namespace Пр12.Pages
         {
 
         }
+
     }
 }

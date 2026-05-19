@@ -50,5 +50,9 @@
                 </TabItem.Header>
             </TabItem>
         </TabControl>
+
+        <Frame x:Name="AuthFrame" 
+               NavigationUIVisibility="Hidden"/>
+        
     </Grid>
 </Page>

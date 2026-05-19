@@ -107,16 +107,16 @@ namespace Пр12.Pages
         private void DisplayBooksByStatus(List<ReadingList> books)
         {
             var abandoned = books.Where(b => b.ListStatusID == 1).ToList();
-            AbandonedItemsControl.ItemsSource = abandoned;
+            AbandonedListBox.ItemsSource = abandoned;
 
             var plans = books.Where(b => b.ListStatusID == 2).ToList();
-            PlansItemsControl.ItemsSource = plans;
+            PlansListBox.ItemsSource = plans;
 
             var reading = books.Where(b => b.ListStatusID == 3).ToList();
-            ReadingItemsControl.ItemsSource = reading;
+            ReadingListBox.ItemsSource = reading;
 
             var read = books.Where(b => b.ListStatusID == 4).ToList();
-            ReadItemsControl.ItemsSource = read;
+            ReadListBox.ItemsSource = read;
 
             UpdateTabHeaders(abandoned.Count, plans.Count, reading.Count, read.Count);
         }
@@ -190,5 +190,18 @@ namespace Пр12.Pages
                 NavigationService.GoBack();
             }
         }
+
+        private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ListBox listBox = sender as ListBox;
+            ReadingList selectedItem = listBox?.SelectedItem as ReadingList;
+
+            if (selectedItem?.Book != null)
+            {
+                BookInfo bookInfo = new BookInfo(selectedItem.Book);
+                NavigationService.Navigate(bookInfo);
+            }
+        }
+
     }
 }

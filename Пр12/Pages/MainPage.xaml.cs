@@ -21,15 +21,13 @@ namespace Пр12.Pages
     /// </summary>
     public partial class MainPage : Page
     {
-        public static Frame MainFrame { get; private set; }
-
         public MainPage()
         {
             InitializeComponent();
-            Loaded += MainWindow_Loaded;
+            Loaded += MainPage_Loaded;
         }
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
             CheckAuthorization();
         }
@@ -38,26 +36,28 @@ namespace Пр12.Pages
         {
             if (UserData.curUser == null)
             {
-                var welcomeWindow = new AuthReg();
-                welcomeWindow.Owner = Application.Current.MainWindow;
+                AuthFrame.Visibility = Visibility.Visible;
+                MainTabControl.Visibility = Visibility.Collapsed;
 
-                if (welcomeWindow.ShowDialog() == true)
-                {
-                    UpdateUIBasedOnRole();
-                }
-                else
-                {
-                    Application.Current.MainWindow?.Close();
-                }
+                var authPage = new AuthRegPage();
+                authPage.LoginSuccess = true;
+                AuthFrame.Navigate(authPage);
             }
             else
             {
-                UpdateUIBasedOnRole();
+                ShowMainContent();
             }
         }
 
         private void OnLoginSuccess()
         {
+            ShowMainContent();
+        }
+
+        private void ShowMainContent()
+        {
+            AuthFrame.Visibility = Visibility.Collapsed;
+            MainTabControl.Visibility = Visibility.Visible;
             UpdateUIBasedOnRole();
         }
 
@@ -92,6 +92,8 @@ namespace Пр12.Pages
 
         private TabItem FindTabItemByToolTip(string toolTip)
         {
+            if (MainTabControl == null) return null;
+
             foreach (TabItem item in MainTabControl.Items)
             {
                 if (item.ToolTip?.ToString() == toolTip)

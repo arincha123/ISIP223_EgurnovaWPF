@@ -26,6 +26,7 @@ namespace Пр12
         public MainWindow()
         {
             InitializeComponent();
+            MainFrame.Navigate(new MainPage());
         }
 
     }

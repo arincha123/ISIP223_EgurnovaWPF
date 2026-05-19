@@ -123,7 +123,7 @@
                     <DataTemplate>
                         <Border 
                             Width="200" 
-                            Height="420" 
+                            Height="405" 
                             Margin="10">
                             <StackPanel>
                                 <Grid 
@@ -150,10 +150,11 @@
                                     <TextBlock Text="💬"/>
                                 </WrapPanel>
 
-                                <Button Style="{StaticResource ActionBtn}" 
+                                <Button x:Name="AddToListBtn"
+                                        Style="{StaticResource ActionBtn}" 
                                         Content="Добавить в список" 
                                         HorizontalAlignment="Center" 
-                                        VerticalAlignment="Center"/>
+                                        VerticalAlignment="Center" Click="AddToListBtn_Click"/>
                             </StackPanel>
                         </Border>
                     </DataTemplate>

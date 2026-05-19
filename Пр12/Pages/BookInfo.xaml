@@ -59,7 +59,8 @@
                     Style="{StaticResource ActionBtn}"
                     Content="Добавить в список"
                     Width="180"
-                    Margin="20 10 0 10" Click="AddInList_Click"/>
+                    Margin="20 10 0 10" 
+                    Click="AddInList_Click"/>
 
                 <!--кнопка для заморозки книги (для админа)-->
                 <Button x:Name="FreezeBook"
