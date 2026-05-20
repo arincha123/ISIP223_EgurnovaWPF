@@ -129,6 +129,8 @@ namespace Пр12.Pages
                 Core.Context.User.Add(newUser);
                 Core.Context.SaveChanges();
 
+                UserData.curUser = newUser;
+
                 MessageBox.Show("Регистрация прошла успешно! Теперь войдите.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 MainTabControl.SelectedIndex = 0;

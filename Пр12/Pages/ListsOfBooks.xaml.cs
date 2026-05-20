@@ -45,8 +45,6 @@ namespace Пр12.Pages
         {
             if (UserData.curUser == null)
             {
-                MessageBox.Show("Пользователь не авторизован!", "Ошибка",
-                    MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 

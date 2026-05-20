@@ -48,6 +48,7 @@
                 <TabItem.Header>
                     <Image Source="/Icons/профиль.png" Height="60" Width="60"/>
                 </TabItem.Header>
+                <Frame  NavigationUIVisibility="Hidden" x:Name="frameProfile" Source="/Pages/ProfilePage.xaml" Margin="10 0 0 0"/>
             </TabItem>
         </TabControl>
 
