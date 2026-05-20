@@ -98,6 +98,13 @@ namespace Пр12.Pages
             Book selectedbook = ListBooks.SelectedItem as Book;
             if (selectedbook != null)
             {
+                if (UserData.curUser != null && UserData.curUser.IsFrozen)
+                {
+                    MessageBox.Show("Ваш аккаунт заморожен! Для просмотра информации о книге обратитесь к администратору.",
+                                   "Аккаунт заморожен", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
                 BookInfo infiOfBook = new BookInfo(selectedbook);
                 NavigationService.Navigate(infiOfBook);
             }
@@ -105,6 +112,13 @@ namespace Пр12.Pages
 
         private void AddToListBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (UserData.curUser.IsFrozen == true)
+            {
+                MessageBox.Show("Ваш аккаунт заморожен! Обратитесь к администратору. Вы не можете добавлять книги в списки.", "Ошибка",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             Button button = sender as Button;
             Book selectedBook = button?.DataContext as Book;
 

@@ -1,0 +1,71 @@
+﻿<Page x:Class="Пр12.Pages.FrozePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Пр12.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="FrozePage">
+
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="1"
+                   Text="ВНИМАНИЕ! Ваш аккаунт заморожен"
+                   FontSize="24"
+                   FontWeight="Bold"
+                   Foreground="#FF0000"
+                   HorizontalAlignment="Center"
+                   Margin="0 0 0 20"/>
+
+        <Border Grid.Row="2"
+                Background="#FFF5F5F5"
+                BorderBrush="#FF151286"
+                BorderThickness="1"
+                CornerRadius="10"
+                Padding="15"
+                Margin="0 0 0 20">
+
+            <StackPanel>
+                <TextBlock Text="Причина заморозки:"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           Foreground="#333333"
+                           Margin="0 0 0 10"/>
+
+                <TextBlock x:Name="FreezeReasonText"
+                           Text="Ваш аккаунт был заморожен администратором за нарушение правил сообщества."
+                           FontSize="14"
+                           Foreground="Gray"
+                           TextWrapping="Wrap"/>
+            </StackPanel>
+        </Border>
+
+        <TextBlock Grid.Row="3"
+                   Text="Вы не можете оставлять отзывы, добавлять книги в списки и пользоваться другими функциями приложения."
+                   FontSize="18"
+                   Foreground="Gray"
+                   TextWrapping="Wrap"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   TextAlignment="Center"
+                   Margin="25 0 25 25"/>
+
+        <TextBlock Grid.Row="3"
+                   Text="Чтобы оспорить заморозку зайдите в Профиль"
+                   FontSize="18"
+                   Foreground="Gray"
+                   TextWrapping="Wrap"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   TextAlignment="Center"
+                   Margin="25"/>
+
+    </Grid>
+</Page>

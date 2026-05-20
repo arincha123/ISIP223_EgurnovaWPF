@@ -60,27 +60,51 @@ namespace Пр12.Pages
         {
             if (UserData.curUser == null) return;
 
+            var catalogTab = FindTabItemByToolTip("Каталог книг");
+            var listsTab = FindTabItemByToolTip("Списки книг");
             var adminTab = FindTabItemByToolTip("Администрирование");
             var authorTab = FindTabItemByToolTip("Страница автора");
             var freezeTab = FindTabItemByToolTip("Предупреждение о заморозке");
             var profileTab = FindTabItemByToolTip("Профиль");
 
+            if (UserData.curUser.IsFrozen)
+            {
+                if (catalogTab != null) catalogTab.Visibility = Visibility.Visible;
+                if (listsTab != null) listsTab.Visibility = Visibility.Visible;
+                if (profileTab != null) profileTab.Visibility = Visibility.Visible;
+                if (freezeTab != null) freezeTab.Visibility = Visibility.Visible;
+
+                if (adminTab != null) adminTab.Visibility = Visibility.Collapsed;
+                if (authorTab != null) authorTab.Visibility = Visibility.Collapsed;
+
+                return;
+            }
+
             if (UserData.curUser.RoleID == 3)
             {
+                if (catalogTab != null) catalogTab.Visibility = Visibility.Visible;
+                if (listsTab != null) listsTab.Visibility = Visibility.Visible;
                 if (adminTab != null) adminTab.Visibility = Visibility.Visible;
                 if (authorTab != null) authorTab.Visibility = Visibility.Visible;
-                if (freezeTab != null) freezeTab.Visibility = Visibility.Visible;
+                if (profileTab != null) profileTab.Visibility = Visibility.Visible;
+                if (freezeTab != null) freezeTab.Visibility = Visibility.Collapsed;
             }
             else if (UserData.curUser.RoleID == 2)
             {
+                if (catalogTab != null) catalogTab.Visibility = Visibility.Visible;
+                if (listsTab != null) listsTab.Visibility = Visibility.Visible;
                 if (adminTab != null) adminTab.Visibility = Visibility.Collapsed;
                 if (authorTab != null) authorTab.Visibility = Visibility.Visible;
-                if (freezeTab != null) freezeTab.Visibility = Visibility.Visible;
+                if (profileTab != null) profileTab.Visibility = Visibility.Visible;
+                if (freezeTab != null) freezeTab.Visibility = Visibility.Collapsed;
             }
             else
             {
+                if (catalogTab != null) catalogTab.Visibility = Visibility.Visible;
+                if (listsTab != null) listsTab.Visibility = Visibility.Visible;
                 if (adminTab != null) adminTab.Visibility = Visibility.Collapsed;
                 if (authorTab != null) authorTab.Visibility = Visibility.Collapsed;
+                if (profileTab != null) profileTab.Visibility = Visibility.Visible;
                 if (freezeTab != null) freezeTab.Visibility = Visibility.Collapsed;
             }
         }

@@ -41,12 +41,12 @@ namespace Пр12.Windows
 
                 if (user != null)
                 {
-                    if (user.IsFrozen)
-                    {
-                        MessageBox.Show("Ваш аккаунт заморожен! Обратитесь к администратору.", "Ошибка",
-                            MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
+                    //if (user.IsFrozen)
+                    //{
+                    //    MessageBox.Show("Ваш аккаунт заморожен! Обратитесь к администратору.", "Ошибка",
+                    //        MessageBoxButton.OK, MessageBoxImage.Error);
+                    //    return;
+                    //}
 
                     UserData.curUser = user;
 

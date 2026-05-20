@@ -46,7 +46,6 @@ namespace Пр12.Pages
                     {
                         MessageBox.Show("Ваш аккаунт заморожен! Обратитесь к администратору.", "Ошибка",
                             MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
                     }
 
                     UserData.curUser = user;

@@ -48,6 +48,12 @@ namespace Пр12.Pages
                 return;
             }
 
+            if (UserData.curUser.IsFrozen)
+            {
+                HideComboboxes();
+                
+            }
+
             allUserBooks = Core.Context.ReadingList.Include("Book").Include("Book.User").Include("Book.BookInGenre")
                 .Include("Book.BookInGenre.Genre").Where(rl => rl.UserID == UserData.curUser.ID).ToList();
 
@@ -63,8 +69,8 @@ namespace Пр12.Pages
             if (!string.IsNullOrEmpty(SearchBox.Text))
             {
                 var searchtext = SearchBox.Text.ToLower();
-                result = result.Where(b =>
-                    (b.Book.Title != null && b.Book.Title.ToLower().Contains(searchtext)) ||
+
+                result = result.Where(b =>(b.Book.Title != null && b.Book.Title.ToLower().Contains(searchtext)) ||
                     (b.Book.User != null && b.Book.User.Name != null && b.Book.User.Name.ToLower().Contains(searchtext))
                 ).ToList();
             }
@@ -163,6 +169,14 @@ namespace Пр12.Pages
             {
                 LoadUserLists();
             }
+        }
+
+        public void HideComboboxes()
+        {
+            AbandonedListBox.IsHitTestVisible = false;
+            PlansListBox.IsHitTestVisible = false;
+            ReadingListBox.IsHitTestVisible = false;
+            ReadListBox.IsHitTestVisible = false;
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)

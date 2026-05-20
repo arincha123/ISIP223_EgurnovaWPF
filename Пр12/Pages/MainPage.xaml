@@ -42,6 +42,7 @@
                 <TabItem.Header>
                     <Image Source="/Icons/заморозка.png" Height="60" Width="60"/>
                 </TabItem.Header>
+                <Frame NavigationUIVisibility="Hidden" x:Name="frameFroze" Source="/Pages/FrozePage.xaml" Margin="10 0 0 0"/>
             </TabItem>
 
             <TabItem ToolTip="Профиль" Style="{StaticResource SlidebarItem}">

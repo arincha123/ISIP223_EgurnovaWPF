@@ -36,7 +36,7 @@ namespace Пр12.Pages
                 UserEamil.Text = UserData.curUser.Email;
 
                 string role = "";
-                switch (UserData.curUser.Role.ID)
+                switch (UserData.curUser.RoleID)
                 {
                     case 1: role = "Читатель"; break;
                     case 2: role = "Автор"; break;
@@ -45,7 +45,13 @@ namespace Пр12.Pages
 
                 UserRole.Text = role;
 
-            }else
+                if (UserData.curUser.RoleID == 2 || UserData.curUser.RoleID == 3)
+                {
+                    ReqForAuth.Visibility = Visibility.Collapsed;
+                }
+
+            }
+            else
             {
                 return;
             }
@@ -59,6 +65,18 @@ namespace Пр12.Pages
             reviews= rev.OrderByDescending(r => r.Date).ToList();
 
             ReviewsListBox.ItemsSource = reviews;
+
+            if (reviews.Count == 0)
+            {
+                NoReviewsText.Visibility = Visibility.Visible;
+                ReviewsListBox.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                NoReviewsText.Visibility = Visibility.Collapsed;
+                ReviewsListBox.Visibility = Visibility.Visible;
+            }
+
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -68,6 +86,13 @@ namespace Пр12.Pages
 
         private void ReqForAuth_Click(object sender, RoutedEventArgs e)
         {
+            if (UserData.curUser != null && UserData.curUser.IsFrozen)
+            {
+                MessageBox.Show("Ваш аккаунт заморожен! Для просмотра информации о книге обратитесь к администратору.",
+                               "Аккаунт заморожен", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             var result = MessageBox.Show("Вы точно уверены, что хотите подать заявку на роль?", "Подача заявки", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
