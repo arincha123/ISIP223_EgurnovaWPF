@@ -18,6 +18,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+        
         <Border Grid.Row="1"
                 Background="White"
                 BorderBrush="#FF151286"
@@ -88,9 +89,22 @@
                 Padding="10"
                 Margin="0 0 0 15">
 
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Right">
+            <WrapPanel HorizontalAlignment="Right">
 
+                <Button x:Name="ReqForUnfroz"
+                        Grid.Row="5"
+                        Content="Оспорить заморозку"
+                        Width="150"
+                        Height="35"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Background="#FF151286"
+                        Foreground="White"
+                        Cursor="Hand"
+                        Margin="0 0 30 0"
+                        Visibility="Visible"
+                        Click="ReqForUnfroz_Click"/>
+                
                 <Button x:Name="ReqForAuth"
                         Content="Подать заявку на роль автора"
                         Width="200"
@@ -99,7 +113,9 @@
                         Foreground="White"
                         Cursor="Hand"
                         Click="ReqForAuth_Click"/>
-            </StackPanel>
+
+
+            </WrapPanel>
         </Border>
 
         <Border x:Name="FreezeWarningBorder"
@@ -156,7 +172,7 @@
                  MaxHeight="300"
                  BorderBrush="#E0E0E0"
                  BorderThickness="1"
-                 Margin="0 0 0 15">
+                 Margin="0 0 0 15" d:ItemsSource="{d:SampleData ItemCount=5}">
 
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -216,18 +232,5 @@
                    VerticalAlignment="Center"
                    Visibility="Collapsed"/>
 
-        <Button x:Name="ReqForUnfroz"
-                Grid.Row="5"
-                Content="Оспорить заморозку"
-                Width="150"
-                Height="35"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Background="#FF151286"
-                Foreground="White"
-                Cursor="Hand"
-                Margin="0,0,0,15"
-                Visibility="Collapsed"
-                Click="ReqForUnfroz_Click"/>
     </Grid>
 </Page>

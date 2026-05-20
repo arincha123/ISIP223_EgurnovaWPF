@@ -31,12 +31,34 @@ namespace Пр12.Pages
 
         private void PageLoad()
         {
+            foreach (var book in allBooks)
+            {
+                UpdateBookRating(book);
+            }
+
             ListBooks.ItemsSource = allBooks;
 
             List<string> genres = Core.Context.Genre.Select(g => g.Name).ToList();
             ComboFiltr.Items.Clear();
             ComboFiltr.ItemsSource = genres;
             genres.Insert(0, "Все жанры");
+        }
+
+        private void UpdateBookRating(Book book)
+        {
+            if (book.Review != null && book.Review.Count > 0)
+            {
+                double sum = 0;
+                foreach (var review in book.Review)
+                {
+                    sum += review.Rating;
+                }
+                book.AvgRating = Math.Round(sum / book.Review.Count, 1);
+            }
+            else
+            {
+                book.AvgRating = 0;
+            }
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -109,6 +131,7 @@ namespace Пр12.Pages
                 NavigationService.Navigate(infiOfBook);
             }
         }
+
 
         private void AddToListBtn_Click(object sender, RoutedEventArgs e)
         {

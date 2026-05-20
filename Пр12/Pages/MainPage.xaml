@@ -9,6 +9,7 @@
       Title="MainPage">
 
     <Grid>
+
         <TabControl x:Name="MainTabControl" TabStripPlacement="Left">
             <TabItem ToolTip="Каталог книг" Style="{StaticResource SlidebarItem}">
                 <TabItem.Header>
@@ -28,7 +29,7 @@
                 <TabItem.Header>
                     <Image Source="/Icons/администрирование.png" Height="60" Width="60"/>
                 </TabItem.Header>
-                <!--<Frame  NavigationUIVisibility="Hidden" x:Name="frameAdmin" Source="/Pages/AdminPage.xaml" Margin="10 0 0 0"/>-->
+                <Frame  NavigationUIVisibility="Hidden" x:Name="frameAdmin" Source="/Pages/AuthorPage.xaml" Margin="10 0 0 0"/>
 
             </TabItem>
 
@@ -36,6 +37,7 @@
                 <TabItem.Header>
                     <Image Source="/Icons/страница_автора.png" Height="60" Width="60"/>
                 </TabItem.Header>
+                <Frame NavigationUIVisibility="Hidden" x:Name="frameAuthor" Source="/Pages/AuthorPage.xaml" Margin="10 0 0 0"/>
             </TabItem>
 
             <TabItem ToolTip="Предупреждение о заморозке" Style="{StaticResource SlidebarItem}">
@@ -52,6 +54,19 @@
                 <Frame  NavigationUIVisibility="Hidden" x:Name="frameProfile" Source="/Pages/ProfilePage.xaml" Margin="10 0 0 0"/>
             </TabItem>
         </TabControl>
+
+        <Button x:Name="LogoutBtn"
+                Content="Выход"
+                Width="80"
+                Height="40"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Margin="10,0,10,20"
+                Style="{StaticResource BtnBack}"
+                FontSize="14"
+                FontWeight="SemiBold"
+                Panel.ZIndex="1000"
+                Click="LogoutBtn_Click"/>
 
         <Frame x:Name="AuthFrame" 
                NavigationUIVisibility="Hidden"/>

@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Пр12.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ListOfBooks">
+      Title="ListOfBooks" Loaded="Page_Loaded">
 
     <Grid>
         <Grid.RowDefinitions>

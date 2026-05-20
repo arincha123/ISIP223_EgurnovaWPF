@@ -26,12 +26,9 @@ namespace Пр12.Pages
         public ListOfBooks()
         {
             InitializeComponent();
-            PageLoad();
-        }
+            Loaded += Page_Loaded;
 
-        private void PageLoad()
-        {
-            allBooks = Core.Context.Book.Include("User").Include("BookInGenre").Include("BookInGenre.Genre").ToList();
+            allBooks = Core.Context.Book.ToList();
 
             List<string> genres = Core.Context.Genre.Select(g => g.Name).ToList();
             genres.Insert(0, "Все жанры");
@@ -39,7 +36,10 @@ namespace Пр12.Pages
             ComboFiltr.SelectedIndex = 0;
 
             LoadUserLists();
+
+
         }
+
 
         private void LoadUserLists()
         {
@@ -195,13 +195,13 @@ namespace Пр12.Pages
         }
 
 
-        private void Btn_Back_Click(object sender, RoutedEventArgs e)
-        {
-            if (NavigationService.CanGoBack)
-            {
-                NavigationService.GoBack();
-            }
-        }
+        //private void Btn_Back_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (NavigationService.CanGoBack)
+        //    {
+        //        NavigationService.GoBack();
+        //    }
+        //}
 
         private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -213,6 +213,11 @@ namespace Пр12.Pages
                 BookInfo bookInfo = new BookInfo(selectedItem.Book);
                 NavigationService.Navigate(bookInfo);
             }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadUserLists();
         }
 
     }

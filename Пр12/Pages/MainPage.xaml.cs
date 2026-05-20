@@ -25,6 +25,7 @@ namespace Пр12.Pages
         {
             InitializeComponent();
             Loaded += MainPage_Loaded;
+            LoadBtn();
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
@@ -123,10 +124,29 @@ namespace Пр12.Pages
             return null;
         }
 
-        public void Logout()
+        public void LoadBtn()
         {
-            UserData.curUser = null;
-            CheckAuthorization();
+            if (UserData.curUser == null)
+            {
+                LogoutBtn.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void LogoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Вы уверены, что хотите выйти?", "Выход",
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                UserData.curUser = null;
+
+                var mainWindow = Application.Current.MainWindow as MainWindow;
+                if (mainWindow != null)
+                {
+                    mainWindow.Content = new MainPage();
+                }
+            }
         }
     }
 }

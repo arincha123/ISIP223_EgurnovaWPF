@@ -1,0 +1,189 @@
+﻿<Page x:Class="Пр12.Pages.AddBook"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Пр12.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddBook">
+
+    <Grid Margin="20">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        
+
+
+        <ScrollViewer>
+            <StackPanel>
+
+                <TextBlock Grid.Row="1"
+                            Text="Название книги"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Foreground="#333333"
+                            Margin="0 50 0 10"/>
+
+                <TextBox x:Name="TitleTextBox"
+                         Grid.Row="2"
+                         Height="33"
+                         FontSize="16"
+                         BorderBrush="#E0E0E0"
+                         BorderThickness="1"
+                         Padding="15,0"
+                         Margin="0 0 0 5"
+                         VerticalContentAlignment="Center"/>
+
+                <TextBlock Grid.Row="3"
+                            Text="Путь к обложке книги"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Foreground="#333333"
+                            Margin="0 0 0 5"/>
+
+                <TextBox x:Name="TxtBoxImagePath"
+                         Text="{Binding CoverImage}"
+                         Grid.Row="4"
+                         Height="33"
+                         FontSize="16"
+                         BorderBrush="#E0E0E0"
+                         BorderThickness="1"
+                         Padding="15,0"
+                         Margin="0 0 0 5"
+                         VerticalContentAlignment="Center"/>
+
+                <TextBlock Grid.Row="5"
+                               Text="Жанры"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               Foreground="#333333"
+                               Margin="0 0 0 5"/>
+
+                <StackPanel Grid.Row="6" Margin="0,0,0,20">
+                    <ComboBox x:Name="GenresComboBox" 
+                              DisplayMemberPath="Name"
+                              Height="35"
+                              FontSize="16"
+                              Margin="0 0 0 10"/>
+
+                    <Button x:Name="BtnAddGenre" 
+                                Content="+ Добавить жанр" 
+                                FontSize="14" 
+                                Width="150" 
+                                Height="35" 
+                                Background="#FF151286" 
+                                Foreground="White"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                Click="BtnAddGenre_Click"/>
+
+                    <ListBox x:Name="ListBoxGenres" 
+                                 Height="100"
+                                 Margin="0,10,0,0"
+                                 BorderBrush="#E0E0E0"
+                                 BorderThickness="1">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" 
+                                                Text="{Binding Name}" 
+                                                FontSize="14"
+                                                VerticalAlignment="Center"/>
+
+                                    <Button x:Name="BtnDeleteGenre" 
+                                            Grid.Column="1" 
+                                            Content="✖" 
+                                            FontSize="12" 
+                                            Width="25" 
+                                            Height="23"
+                                            Background="Transparent"
+                                            BorderThickness="0"
+                                            Cursor="Hand"
+                                            Click="BtnDeleteGenre_Click"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel >
+
+                <TextBlock Grid.Row="7"
+                               Text="Описание"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               Foreground="#333333"
+                               Margin="0,0,0,10"/>
+
+                <TextBox x:Name="DescriptionTextBox"
+                             Grid.Row="8"
+                             Height="120"
+                             FontSize="16"
+                             TextWrapping="Wrap"
+                             AcceptsReturn="True"
+                             VerticalScrollBarVisibility="Auto"
+                             BorderBrush="#E0E0E0"
+                             BorderThickness="1"
+                             Padding="15,10"
+                             Margin="0,0,0,20"/>
+
+                <TextBlock Grid.Row="9"
+                               Text="Текст книги"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               Foreground="#333333"
+                               Margin="0,0,0,10"/>
+
+                <TextBox x:Name="TextTextBox"
+                             Grid.Row="10"
+                             Height="200"
+                             FontSize="16"
+                             TextWrapping="Wrap"
+                             AcceptsReturn="True"
+                             VerticalScrollBarVisibility="Auto"
+                             BorderBrush="#E0E0E0"
+                             BorderThickness="1"
+                             Padding="15,10"
+                             Margin="0,0,0,20"/>
+
+                <WrapPanel Grid.Row="11"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Bottom"
+                           Margin="0,20,20,20">
+                    
+                    <Button x:Name="CancelBtn"
+                            Style="{StaticResource BtnBack}"
+                            Content="Отмена"
+                            Width="120"
+                            Height="40"
+                            Margin="0,0,15,0"
+                            Click="CancelBtn_Click"/>
+
+                    <Button x:Name="SaveBtn"
+                            Style="{StaticResource ActionBtn}"
+                            Content="Сохранить книгу"
+                            Width="150"
+                            Height="40"
+                            Background="#FF151286"
+                            Foreground="White"
+                            Click="SaveBtn_Click"/>
+                </WrapPanel>
+            </StackPanel>
+            
+            
+        </ScrollViewer>
+    </Grid>
+</Page>
