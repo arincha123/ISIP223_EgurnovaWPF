@@ -49,11 +49,6 @@ namespace Пр12.Pages
             }
         }
 
-        private void OnLoginSuccess()
-        {
-            ShowMainContent();
-        }
-
         private void ShowMainContent()
         {
             AuthFrame.Visibility = Visibility.Collapsed;

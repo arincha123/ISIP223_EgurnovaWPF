@@ -65,5 +65,19 @@ namespace Пр12.Pages
         {
             LoadReview();
         }
+
+        private void ReqForAuth_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Вы точно уверены, что хотите подать заявку на роль?", "Подача заявки", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                UserData.curUser.RoleID = 2;
+            }
+        }
+
+        private void ReqForUnfroz_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
