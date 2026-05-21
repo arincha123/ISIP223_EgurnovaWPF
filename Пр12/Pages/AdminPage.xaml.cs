@@ -225,7 +225,23 @@ namespace Пр12.Pages
                 Core.Context.SaveChanges();
                 LoadFrozenLists();
                 LoadUsers();
+
+                UpdateCatalogPage();
+
                 MessageBox.Show("Книга разморожена!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void UpdateCatalogPage()
+        {
+            var mainWindow = Application.Current.MainWindow as MainWindow;
+            if (mainWindow != null)
+            {
+                var frame = mainWindow.FindName("frameCatalog") as Frame;
+                if (frame?.Content is CatalogPage catalogPage)
+                {
+                    catalogPage.RefreshData();
+                }
             }
         }
 

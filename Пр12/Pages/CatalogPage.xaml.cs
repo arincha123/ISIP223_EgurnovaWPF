@@ -21,7 +21,7 @@ namespace Пр12.Pages
     /// </summary>
     public partial class CatalogPage : Page
     {
-        List<Book> allBooks = Core.Context.Book.ToList();
+        private List<Book> allBooks {  get; set; }
         List<Book> filteredBooks = Core.Context.Book.ToList();
         public CatalogPage()
         {
@@ -31,6 +31,8 @@ namespace Пр12.Pages
 
         private void PageLoad()
         {
+            allBooks = Core.Context.Book.Where(b => b.IsFrozen == false).ToList();
+
             foreach (var book in allBooks)
             {
                 UpdateBookRating(book);
@@ -39,7 +41,6 @@ namespace Пр12.Pages
             ListBooks.ItemsSource = allBooks;
 
             List<string> genres = Core.Context.Genre.Select(g => g.Name).ToList();
-            ComboFiltr.Items.Clear();
             ComboFiltr.ItemsSource = genres;
             genres.Insert(0, "Все жанры");
         }
@@ -78,7 +79,7 @@ namespace Пр12.Pages
 
         void ApplyFiltersAndSearch()
         {
-            var result = allBooks.ToList();
+            var result = allBooks.Where(b => b.IsFrozen == false).ToList();
 
             //поиск
             if (!string.IsNullOrEmpty(SearchBox.Text))
@@ -132,6 +133,17 @@ namespace Пр12.Pages
             }
         }
 
+        public void RefreshData()
+        {
+            allBooks = Core.Context.Book.Where(b => b.IsFrozen == false).ToList();
+
+            foreach (var book in allBooks)
+            {
+                UpdateBookRating(book);
+            }
+
+            ApplyFiltersAndSearch();
+        }
 
         private void AddToListBtn_Click(object sender, RoutedEventArgs e)
         {

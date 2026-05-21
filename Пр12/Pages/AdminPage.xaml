@@ -265,6 +265,7 @@
                                                         Style="{StaticResource ActionBtn}"
                                                         Width="100"
                                                         Height="25"
+                                                        Margin="20 0 0 0 "
                                                         Click="UnfreezeBook_Click"/>
                                             </Grid>
                                         </Border>
@@ -288,11 +289,13 @@
                                                     <ColumnDefinition Width="Auto"/>
                                                 </Grid.ColumnDefinitions>
                                                 <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                                                
                                                 <Button Grid.Column="1" 
                                                         Content="Разморозить"
                                                         Style="{StaticResource ActionBtn}"
                                                         Width="100"
                                                         Height="25"
+                                                        Margin="20 0 0 0 "
                                                         Click="UnfreezeUser_Click"/>
                                             </Grid>
                                         </Border>
@@ -317,13 +320,14 @@
                                                 </Grid.ColumnDefinitions>
                                                 <TextBlock Text="{Binding Text}" 
                                                            VerticalAlignment="Center"
-                                                           MaxWidth="300"
-                                                           TextTrimming="WordEllipsis"/>
+                                                           MaxWidth="300"/>
+                                                
                                                 <Button Grid.Column="1" 
                                                         Content="Разморозить"
                                                         Style="{StaticResource ActionBtn}"
                                                         Width="100"
                                                         Height="25"
+                                                        Margin="20 0 0 0"
                                                         Click="UnfreezeReview_Click"/>
                                             </Grid>
                                         </Border>

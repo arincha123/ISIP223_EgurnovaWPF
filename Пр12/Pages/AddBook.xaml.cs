@@ -16,18 +16,21 @@ using System.Windows.Shapes;
 namespace Пр12.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для AddBook.xaml
+    /// Станица добавления новой книги
     /// </summary>
     public partial class AddBook : Page
     {
-        private List<Genre> allgenres { get; set; }
-        private List<Genre> selectedgenres = new List<Genre>();
+        private List<Genre> allgenres { get; set; } //все жанры
+        private List<Genre> selectedgenres = new List<Genre>(); //выбранные жанры
         public AddBook()
         {
             InitializeComponent();
             LoadGenres();
         }
 
+        /// <summary>
+        /// Загрузка (обновление) доступных жанров
+        /// </summary>
         private void LoadGenres()
         {
             var allGenres = Core.Context.Genre.ToList();
@@ -37,6 +40,9 @@ namespace Пр12.Pages
             ListBoxGenres.ItemsSource = selectedgenres.ToList();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void BtnAddGenre_Click(object sender, RoutedEventArgs e)
         {
             if (GenresComboBox.SelectedItem is Genre selectedGenre)
@@ -167,14 +173,5 @@ namespace Пр12.Pages
                 }
             }
         }
-        //private void Btn_Back_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (NavigationService.CanGoBack)
-        //    {
-        //        NavigationService.GoBack();
-        //    }
-        //}
-        
-
     }
 }

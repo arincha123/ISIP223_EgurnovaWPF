@@ -54,8 +54,8 @@ namespace Пр12.Pages
                 
             }
 
-            allUserBooks = Core.Context.ReadingList.Include("Book").Include("Book.User").Include("Book.BookInGenre")
-                .Include("Book.BookInGenre.Genre").Where(rl => rl.UserID == UserData.curUser.ID).ToList();
+            allUserBooks = Core.Context.ReadingList.Where(rl => rl.UserID == UserData.curUser.ID).ToList();
+            allUserBooks = allUserBooks.Where(rl => rl.Book.IsFrozen == false).ToList();
 
             ApplyFiltersAndSearch();
         }
