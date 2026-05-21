@@ -114,6 +114,13 @@ namespace Пр12.Pages
                 return;
             }
 
+            if (CurrentBook.AuthorID == UserData.curUser.ID)
+            {
+                MessageBox.Show("Вы не можете оставлять отзывы на свои собственные книги!", "Ошибка",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             int selectedRating = int.Parse(selectedItem.Content.ToString().Split(' ')[0]);
             int rating = selectedRating * 2;
 
