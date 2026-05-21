@@ -305,32 +305,42 @@ namespace Пр12.Pages
                 return;
             }
 
-            int typeId = 0;
-            string targetName = "";
+            if (UserData.curUser.IsFrozen)
+            {
+                MessageBox.Show("Ваш аккаунт заморожен! Вы не можете отправлять жалобы.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            int? authorId = null;
+            int? bookId = null;
             int? reviewId = null;
+            string targetName = "";
+            string targetType = "";
 
             switch (complaintType)
             {
                 case "Book":
-                    typeId = 1;
+                    bookId = CurrentBook.ID;
                     targetName = CurrentBook.Title;
+                    targetType = "Книгу";
                     break;
 
                 case "Author":
-                    typeId = 3;
-                    targetName = CurrentBook.User?.Name ?? "Автор";
+                    authorId = CurrentBook.AuthorID;
+                    targetName = CurrentBook.User?.Name ?? "Автора";
+                    targetType = "Автора";
                     break;
 
                 case "Review":
-                    typeId = 2;
                     Review selectedReview = button?.DataContext as Review;
                     if (selectedReview == null)
                     {
                         MessageBox.Show("Отзыв не найден!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
-                    targetName = $"Отзыв пользователя {selectedReview.User?.Name}";
                     reviewId = selectedReview.ID;
+                    targetName = $"Отзыв пользователя {selectedReview.User?.Name}";
+                    targetType = "Отзыв";
                     break;
 
                 default:
@@ -338,7 +348,7 @@ namespace Пр12.Pages
                     return;
             }
 
-            ComplaintWindow complaintWindow = new ComplaintWindow(typeId, targetName, CurrentBook.ID, reviewId);
+            ComplaintWindow complaintWindow = new ComplaintWindow(targetType, targetName, authorId, bookId, reviewId);
             complaintWindow.Owner = Window.GetWindow(this);
             complaintWindow.ShowDialog();
         }

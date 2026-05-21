@@ -16,7 +16,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="TxtTargetInfo"
+        <TextBlock x:Name="TxtBlcComplaintTarget"
                    Text="Жалоба"
                    FontSize="18"
                    FontWeight="Bold"
@@ -38,15 +38,20 @@
                    FontWeight="SemiBold"
                    Margin="0,0,0,10"/>
 
-        <ComboBox x:Name="CmbReasons"
-                  Style="{StaticResource ComboForBooks}"
-                  Text="Причина жалобы"
-                  Grid.Row="3"
-                  Height="40"
-                  MaxHeight="200"
-                  FontSize="14"
-                  SelectedIndex="0"/>
-
+        <ListBox x:Name="ListBoxReasons"
+                 Grid.Row="2"
+                 BorderBrush="#E0E0E0"
+                 BorderThickness="1">
+            
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <RadioButton Content="{Binding Reason}"
+                                 GroupName="ReasonGroup"
+                                 Margin="10,5"
+                                 Checked="RadioButton_Checked"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <WrapPanel Grid.Row="4"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Bottom"
@@ -65,7 +70,7 @@
                     Height="35"
                     Background="#FF151286"
                     Foreground="White"
-                    Click="BtnSend_Click"
+                    Click="BtnComplaint_Click"
                     />
         </WrapPanel>
     </Grid>

@@ -29,7 +29,7 @@
                 <TabItem.Header>
                     <Image Source="/Icons/администрирование.png" Height="60" Width="60"/>
                 </TabItem.Header>
-                <Frame  NavigationUIVisibility="Hidden" x:Name="frameAdmin" Source="/Pages/AuthorPage.xaml" Margin="10 0 0 0"/>
+                <Frame  NavigationUIVisibility="Hidden" x:Name="frameAdmin" Source="/Pages/AdminPage.xaml" Margin="10 0 0 0"/>
 
             </TabItem>
 

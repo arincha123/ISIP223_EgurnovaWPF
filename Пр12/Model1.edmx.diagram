@@ -38,6 +38,7 @@
         <AssociationConnector Association="ShutKrolModel.FK_RequestForDefrosting_User" ManuallyRouted="false" />
         <AssociationConnector Association="ShutKrolModel.FK_Review_User" ManuallyRouted="false" />
         <AssociationConnector Association="ShutKrolModel.FK_User_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="ShutKrolModel.FK_Complaint_User1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

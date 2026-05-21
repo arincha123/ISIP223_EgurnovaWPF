@@ -19,88 +19,79 @@ namespace Пр12.Windows
     /// </summary>
     public partial class ComplaintWindow : Window
     {
-        private int ComplaintType;
-        private string TargetName;
-        private int BookId;
-        private int? ReviewId;
+        private int? _authorId;
+        private int? _bookId;
+        private int? _reviewId;
+        private string _targetName;
+        private string _targetType;
+        private TypeOfComplaint _selectedReason;
+        private bool isReasonSelected = false;
 
-        public ComplaintWindow(int complaintType, string targetName, int bookId, int? reviewId = null)
+        public ComplaintWindow(string targetType, string targetName, int? authorId, int? bookId, int? reviewId)
         {
             InitializeComponent();
 
+            _targetType = targetType;
+            _targetName = targetName;
+            _authorId = authorId;
+            _bookId = bookId;
+            _reviewId = reviewId;
 
-            ComplaintType = complaintType;
-            TargetName = targetName;
-            BookId = bookId;
-            ReviewId = reviewId;
+            TxtBlcComplaintTarget.Text = $"Жалоба на {targetType} «{targetName}»";
 
-            List<string> reasons = Core.Context.TypeOfComplaint.Select(r => r.Reason).ToList();
-            reasons.Insert(0, "Выберите причину");
-            CmbReasons.ItemsSource = reasons;
-            CmbReasons.SelectedIndex = 0;
-
-            string typeText = "";
-            switch (complaintType)
-            {
-                case 1: typeText = "книгу"; break;
-                case 2: typeText = "отзыв"; break;
-                case 3: typeText = "автора"; break;
-            }
-
-            TxtTargetInfo.Text = $"Жалоба на {typeText}";
-            TxtTargetName.Text = targetName;
+            LoadReasons();
         }
 
-        private void BtnSend_Click(object sender, RoutedEventArgs e)
+        private void LoadReasons()
         {
-            string selectedReason = CmbReasons.SelectedItem as string;
+            var reasons = Core.Context.TypeOfComplaint.ToList();
+            ListBoxReasons.ItemsSource = reasons;
+        }
 
-            if (string.IsNullOrEmpty(selectedReason) || selectedReason == "Выберите причину")
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            isReasonSelected = true;
+            RadioButton radio = (RadioButton)sender;
+            _selectedReason = (TypeOfComplaint)radio.DataContext;
+        }
+
+        private void BtnComplaint_Click(object sender, RoutedEventArgs e)
+        {
+            if (!isReasonSelected)
             {
                 MessageBox.Show("Выберите причину жалобы!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            var result = MessageBox.Show($"Отправить жалобу на {TargetName}?\nПричина: {selectedReason}", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show($"Отправить жалобу на {_targetType} «{_targetName}»?\nПричина: {_selectedReason.Reason}",
+                "Подтверждение жалобы", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-            if (result != MessageBoxResult.Yes) return;
-
-            try
+            if (result == MessageBoxResult.Yes)
             {
-                Complaint newComplaint = new Complaint();
-                newComplaint.UserID = UserData.curUser.ID;
-                newComplaint.ReasonID = CmbReasons.SelectedIndex;
-                newComplaint.Date = DateTime.Now;
-
-                switch (ComplaintType)
+                try
                 {
-                    case 1:
-                        newComplaint.BookID = BookId;
-                        newComplaint.ReviewID = null;
-                        break;
+                    var complaint = new Complaint
+                    {
+                        UserID = UserData.curUser.ID,
+                        AuthorID = _authorId,
+                        BookID = _bookId,
+                        ReviewID = _reviewId,
+                        ReasonID = _selectedReason.ID,
+                        Date = DateTime.Now
+                    };
 
-                    case 2:
-                        newComplaint.BookID = BookId;
-                        newComplaint.ReviewID = ReviewId;
-                        break;
+                    Core.Context.Complaint.Add(complaint);
+                    Core.Context.SaveChanges();
 
-                    case 3:
-                        newComplaint.BookID = BookId;
-                        newComplaint.ReviewID = null;
-                        break;
+                    MessageBox.Show("Ваша жалоба отправлена!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    DialogResult = true;
+                    Close();
                 }
-
-                Core.Context.Complaint.Add(newComplaint);
-                Core.Context.SaveChanges();
-
-                MessageBox.Show("Жалоба отправлена!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                DialogResult = true;
-                Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка сохранения: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 

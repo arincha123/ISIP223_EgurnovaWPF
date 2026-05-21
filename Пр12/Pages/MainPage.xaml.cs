@@ -86,7 +86,7 @@ namespace Пр12.Pages
                 if (catalogTab != null) catalogTab.Visibility = Visibility.Visible;
                 if (listsTab != null) listsTab.Visibility = Visibility.Visible;
                 if (adminTab != null) adminTab.Visibility = Visibility.Visible;
-                if (authorTab != null) authorTab.Visibility = Visibility.Visible;
+                if (authorTab != null) authorTab.Visibility = Visibility.Collapsed;
                 if (profileTab != null) profileTab.Visibility = Visibility.Visible;
                 if (freezeTab != null) freezeTab.Visibility = Visibility.Collapsed;
             }

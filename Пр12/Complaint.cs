@@ -20,10 +20,12 @@ namespace Пр12
         public Nullable<int> ReviewID { get; set; }
         public int ReasonID { get; set; }
         public System.DateTime Date { get; set; }
+        public Nullable<int> AuthorID { get; set; }
     
         public virtual Book Book { get; set; }
         public virtual Review Review { get; set; }
         public virtual TypeOfComplaint TypeOfComplaint { get; set; }
         public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

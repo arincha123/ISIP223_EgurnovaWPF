@@ -54,6 +54,13 @@ namespace Пр12.Pages
 
         private void EditBookBtn_Click(object sender, RoutedEventArgs e)
         {
+            Button btn = sender as Button;
+            Book book = (Book)btn.DataContext;
+
+            if (book != null)
+            {
+                NavigationService.Navigate(new EditBook(book));
+            }
 
         }
 

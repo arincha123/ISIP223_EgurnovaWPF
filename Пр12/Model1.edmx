@@ -32,6 +32,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="AuthorID" Type="int" />
           <Property Name="BookID" Type="int" />
           <Property Name="ReviewID" Type="int" />
           <Property Name="ReasonID" Type="int" Nullable="false" />
@@ -215,6 +216,18 @@
             </Principal>
             <Dependent Role="Complaint">
               <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complaint_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Complaint" Type="Self.Complaint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Complaint">
+              <PropertyRef Name="AuthorID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -405,6 +418,10 @@
             <End Role="User" EntitySet="User" />
             <End Role="Complaint" EntitySet="Complaint" />
           </AssociationSet>
+          <AssociationSet Name="FK_Complaint_User1" Association="Self.FK_Complaint_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Complaint" EntitySet="Complaint" />
+          </AssociationSet>
           <AssociationSet Name="FK_ReadingList_Book" Association="Self.FK_ReadingList_Book">
             <End Role="Book" EntitySet="Book" />
             <End Role="ReadingList" EntitySet="ReadingList" />
@@ -501,6 +518,8 @@
           <NavigationProperty Name="Review" Relationship="Self.FK_Complaint_Review" FromRole="Complaint" ToRole="Review" />
           <NavigationProperty Name="TypeOfComplaint" Relationship="Self.FK_Complaint_TypeOfComplaint" FromRole="Complaint" ToRole="TypeOfComplaint" />
           <NavigationProperty Name="User" Relationship="Self.FK_Complaint_User" FromRole="Complaint" ToRole="User" />
+          <Property Name="AuthorID" Type="Int32" />
+          <NavigationProperty Name="User1" Relationship="ShutKrolModel.FK_Complaint_User1" FromRole="Complaint" ToRole="User" />
         </EntityType>
         <EntityType Name="Genre">
           <Key>
@@ -624,6 +643,7 @@
           <NavigationProperty Name="RequestForDefrosting" Relationship="Self.FK_RequestForDefrosting_User" FromRole="User" ToRole="RequestForDefrosting" />
           <NavigationProperty Name="Review" Relationship="Self.FK_Review_User" FromRole="User" ToRole="Review" />
           <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Complaint1" Relationship="ShutKrolModel.FK_Complaint_User1" FromRole="User" ToRole="Complaint" />
         </EntityType>
         <Association Name="FK_Book_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
@@ -944,7 +964,23 @@
             <End Role="Role" EntitySet="Role" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
+          <AssociationSet Name="FK_Complaint_User1" Association="ShutKrolModel.FK_Complaint_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Complaint" EntitySet="Complaint" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Complaint_User1">
+          <End Type="ShutKrolModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="ShutKrolModel.Complaint" Role="Complaint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Complaint">
+              <PropertyRef Name="AuthorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -977,6 +1013,7 @@
           <EntitySetMapping Name="Complaint">
             <EntityTypeMapping TypeName="ShutKrolModel.Complaint">
               <MappingFragment StoreEntitySet="Complaint">
+                <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="BookID" ColumnName="BookID" />

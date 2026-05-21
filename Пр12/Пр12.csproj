@@ -95,6 +95,9 @@
     <Compile Include="Pages\AddBook.xaml.cs">
       <DependentUpon>AddBook.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AdminPage.xaml.cs">
+      <DependentUpon>AdminPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AuthorPage.xaml.cs">
       <DependentUpon>AuthorPage.xaml</DependentUpon>
     </Compile>
@@ -106,6 +109,9 @@
     </Compile>
     <Compile Include="Pages\CatalogPage.xaml.cs">
       <DependentUpon>CatalogPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EditBook.xaml.cs">
+      <DependentUpon>EditBook.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\FrozePage.xaml.cs">
       <DependentUpon>FrozePage.xaml</DependentUpon>
@@ -156,6 +162,9 @@
     <Compile Include="Windows\AuthReg.xaml.cs">
       <DependentUpon>AuthReg.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\ChangePassword.xaml.cs">
+      <DependentUpon>ChangePassword.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ComplaintWindow.xaml.cs">
       <DependentUpon>ComplaintWindow.xaml</DependentUpon>
     </Compile>
@@ -182,6 +191,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\AdminPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AuthorPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -195,6 +208,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\CatalogPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\EditBook.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -219,6 +236,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\AuthReg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ChangePassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
