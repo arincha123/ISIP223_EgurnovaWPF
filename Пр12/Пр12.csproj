@@ -287,6 +287,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\кладбище.jpg" />
+    <Resource Include="Images\1984.jpg" />
+    <Resource Include="Images\сияние.jpg" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
