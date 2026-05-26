@@ -106,6 +106,16 @@ namespace Пр12.Pages
                 return;
             }
 
+            var existingReview = Core.Context.Review.FirstOrDefault(r => r.BookID == CurrentBook.ID && r.UserID == UserData.curUser.ID);
+
+            if (existingReview != null)
+            {
+                MessageBox.Show("Вы уже оставляли отзыв на эту книгу!", "Ошибка",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+
             ComboBoxItem selectedItem = RatingComboBox.SelectedItem as ComboBoxItem;
             if (selectedItem == null)
             {
@@ -122,7 +132,7 @@ namespace Пр12.Pages
             }
 
             int selectedRating = int.Parse(selectedItem.Content.ToString().Split(' ')[0]);
-            int rating = selectedRating * 2;
+            int rating = selectedRating;
 
             Review newReview = new Review
             {
@@ -262,6 +272,7 @@ namespace Пр12.Pages
             Button button = sender as Button;
             Review selectedReview = button?.Tag as Review;
 
+
             if (selectedReview == null)
             {
                 MessageBox.Show("Отзыв не найден!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -291,9 +302,6 @@ namespace Пр12.Pages
                 }
             }
         }
-
-
-
 
         private void ComplainBtn_Click(object sender, RoutedEventArgs e)
         {

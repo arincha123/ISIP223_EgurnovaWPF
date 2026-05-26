@@ -25,8 +25,21 @@ namespace Пр12.Pages
         {
             InitializeComponent();
             LoadUser();
-            
         }
+
+        /// <summary>
+        /// Загрузка страницы вместе с отзывами
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadReview();
+        }
+
+        /// <summary>
+        /// Подзагрузка информации о текущем пользователе
+        /// </summary>
         public void LoadUser()
         {
             if (UserData.curUser != null)
@@ -57,6 +70,9 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Подзагрузка всех отзывов текущего пользователя
+        /// </summary>
         public void LoadReview()
         {
             if (UserData.curUser == null) return;
@@ -79,11 +95,12 @@ namespace Пр12.Pages
 
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            LoadReview();
-        }
 
+        /// <summary>
+        /// Оформоение заявки на роль автора
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ReqForAuth_Click(object sender, RoutedEventArgs e)
         {
             if (UserData.curUser == null)
@@ -151,6 +168,11 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Оформление заявки на разморозку
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ReqForUnfroz_Click(object sender, RoutedEventArgs e)
         {
             if (UserData.curUser == null)

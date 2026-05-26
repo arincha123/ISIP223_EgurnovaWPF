@@ -23,6 +23,9 @@ namespace Пр12.Pages
         private List<ReadingList> allUserBooks;
         private List<Book> allBooks;
 
+        /// <summary>
+        /// Загрузка страницы + подзагрузка жанров в combobox
+        /// </summary>
         public ListOfBooks()
         {
             InitializeComponent();
@@ -36,11 +39,21 @@ namespace Пр12.Pages
             ComboFiltr.SelectedIndex = 0;
 
             LoadUserLists();
-
-
         }
 
+        /// <summary>
+        /// Загрузка страницы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadUserLists();
+        }
 
+        /// <summary>
+        /// Загрузка списков книг
+        /// </summary>
         private void LoadUserLists()
         {
             if (UserData.curUser == null)
@@ -60,6 +73,9 @@ namespace Пр12.Pages
             ApplyFiltersAndSearch();
         }
 
+        /// <summary>
+        /// Применение фильтров/сортировки/поиска
+        /// </summary>
         private void ApplyFiltersAndSearch()
         {
             if (allUserBooks == null) return;
@@ -69,9 +85,18 @@ namespace Пр12.Pages
             if (!string.IsNullOrEmpty(SearchBox.Text))
             {
                 var searchtext = SearchBox.Text.ToLower();
-
-                result = result.Where(b =>(b.Book.Title != null && b.Book.Title.ToLower().Contains(searchtext)) ||
+                result = result.Where(b =>
+                    (b.Book.Title != null && b.Book.Title.ToLower().Contains(searchtext)) ||
                     (b.Book.User != null && b.Book.User.Name != null && b.Book.User.Name.ToLower().Contains(searchtext))
+                ).ToList();
+            }
+
+            if (ComboFiltr.SelectedItem != null && ComboFiltr.SelectedItem.ToString() != "Все жанры")
+            {
+                string selectedGenre = ComboFiltr.SelectedItem.ToString();
+                result = result.Where(s =>
+                    s.Book.BookInGenre != null &&
+                    s.Book.BookInGenre.Any(bg => bg.Genre != null && bg.Genre.Name == selectedGenre)
                 ).ToList();
             }
 
@@ -84,7 +109,14 @@ namespace Пр12.Pages
                         result = result.OrderBy(b => b.Book.Title).ToList();
                         break;
                     case "По рейтингу":
-                        result = result.OrderBy(b => b.Book.AvgRating).ToList();
+                        foreach (var item in result)
+                        {
+                            if (item.Book.Review != null && item.Book.Review.Any())
+                            {
+                                item.Book.AvgRating = Math.Round(item.Book.Review.Average(r => r.Rating), 1);
+                            }
+                        }
+                        result = result.OrderByDescending(b => b.Book.AvgRating).ToList();
                         break;
                     default:
                         result = result.OrderBy(b => b.Book.Title).ToList();
@@ -95,19 +127,13 @@ namespace Пр12.Pages
             {
                 result = result.OrderBy(b => b.Book.Title).ToList();
             }
-
-            if (ComboFiltr.SelectedItem != null && ComboFiltr.SelectedItem.ToString() != "Все жанры")
-            {
-                string selectedGenre = ComboFiltr.SelectedItem.ToString();
-                result = result.Where(s =>
-                    s.Book.BookInGenre != null &&
-                    s.Book.BookInGenre.Any(bg => bg.Genre != null && bg.Genre.Name == selectedGenre)
-                ).ToList();
-            }
-
             DisplayBooksByStatus(result);
         }
 
+        /// <summary>
+        /// Загрузка списков книг
+        /// </summary>
+        /// <param name="books"></param>
         private void DisplayBooksByStatus(List<ReadingList> books)
         {
             var abandoned = books.Where(b => b.ListStatusID == 1).ToList();
@@ -124,7 +150,14 @@ namespace Пр12.Pages
 
             UpdateTabHeaders(abandoned.Count, plans.Count, reading.Count, read.Count);
         }
-
+        
+        /// <summary>
+        /// Опновление заголовка: количества книг в каждом списке
+        /// </summary>
+        /// <param name="abandonedCount"></param>
+        /// <param name="plansCount"></param>
+        /// <param name="readingCount"></param>
+        /// <param name="readCount"></param>
         private void UpdateTabHeaders(int abandonedCount, int plansCount, int readingCount, int readCount)
         {
             AbandonedTab.Header = $"Заброшено ({abandonedCount})";
@@ -133,6 +166,11 @@ namespace Пр12.Pages
             ReadTab.Header = $"Прочитано ({readCount})";
         }
 
+        /// <summary>
+        /// Перемещение в другой список
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MoveToList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var comboBox = sender as ComboBox;
@@ -171,6 +209,9 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Скрытие combobox, чтобы нельзя было перемещать книги, если ты заморожен
+        /// </summary>
         public void HideComboboxes()
         {
             AbandonedListBox.IsHitTestVisible = false;
@@ -183,26 +224,20 @@ namespace Пр12.Pages
         {
             ApplyFiltersAndSearch();
         }
-
         private void ComboSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ApplyFiltersAndSearch();
         }
-
         private void ComboFiltr_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ApplyFiltersAndSearch();
         }
 
-
-        //private void Btn_Back_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (NavigationService.CanGoBack)
-        //    {
-        //        NavigationService.GoBack();
-        //    }
-        //}
-
+        /// <summary>
+        /// Переход на страницу детальной информации о книге
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ListBox listBox = sender as ListBox;
@@ -214,11 +249,5 @@ namespace Пр12.Pages
                 NavigationService.Navigate(bookInfo);
             }
         }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            LoadUserLists();
-        }
-
     }
 }

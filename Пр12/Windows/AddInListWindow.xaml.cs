@@ -26,6 +26,11 @@ namespace Пр12.Windows
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Добавление книги в один из списков
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
             var selectedItem = ListComboBox.SelectedItem as ComboBoxItem;
@@ -38,6 +43,11 @@ namespace Пр12.Windows
             Close();
         }
 
+        /// <summary>
+        /// Кнопка назад / отмены
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;

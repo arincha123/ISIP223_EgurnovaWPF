@@ -159,6 +159,9 @@
     <Compile Include="Windows\AddInListWindow.xaml.cs">
       <DependentUpon>AddInListWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\AppealBookWindow.xaml.cs">
+      <DependentUpon>AppealBookWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\AuthReg.xaml.cs">
       <DependentUpon>AuthReg.xaml</DependentUpon>
     </Compile>
@@ -232,6 +235,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\AddInListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\AppealBookWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

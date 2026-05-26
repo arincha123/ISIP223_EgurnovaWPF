@@ -129,7 +129,7 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Border Width="200" 
-                                         Height="335" 
+                                        Height="360" 
                                          Margin="10"
                                          Background="White"
                                          BorderBrush="#E0E0E0"
@@ -199,7 +199,7 @@
                             <DataTemplate>
 
                                 <Border Width="200" 
-                                         Height="335" 
+                                        Height="360" 
                                          Margin="10"
                                          Background="White"
                                          BorderBrush="#E0E0E0"
@@ -268,7 +268,7 @@
                             <DataTemplate>
 
                                 <Border Width="200" 
-                                        Height="335" 
+                                        Height="360" 
                                         Margin="10"
                                         Background="White"
                                         BorderBrush="#E0E0E0"
@@ -335,7 +335,7 @@
                             <DataTemplate>
 
                                 <Border Width="200" 
-                                         Height="335" 
+                                        Height="360"
                                          Margin="10"
                                          Background="White"
                                          BorderBrush="#E0E0E0"

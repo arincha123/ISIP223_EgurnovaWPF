@@ -17,22 +17,32 @@ using Пр12.Windows;
 namespace Пр12.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainPage.xaml
+    /// Логика взаимодействия для MainPage.xaml (основной странице, на которой расоложены: боковое меню и Frame-ы)
     /// </summary>
     public partial class MainPage : Page
     {
+        public static Frame CatalogFrame { get; set; }
         public MainPage()
         {
             InitializeComponent();
+            CatalogFrame = frameCatalog;
             Loaded += MainPage_Loaded;
             LoadBtn();
         }
 
+        /// <summary>
+        /// При загрузке страницы проверяется авторизирован ли пользователь или нет
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
             CheckAuthorization();
         }
 
+        /// <summary>
+        /// Проверка на то, авторизирован ли пользователь или нет. Если нет, то кидает на страницу авторизацции
+        /// </summary>
         private void CheckAuthorization()
         {
             if (UserData.curUser == null)
@@ -50,6 +60,9 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Скрытие окна авторизации и демонстрация интерфейса приложения
+        /// </summary>
         private void ShowMainContent()
         {
             AuthFrame.Visibility = Visibility.Collapsed;
@@ -57,6 +70,9 @@ namespace Пр12.Pages
             UpdateUIBasedOnRole();
         }
 
+        /// <summary>
+        /// Загрузка "интерфейса" в зависимости от роли пользователя
+        /// </summary>
         private void UpdateUIBasedOnRole()
         {
             if (UserData.curUser == null) return;
@@ -110,6 +126,11 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Поиск вкладок по Tooltip 
+        /// </summary>
+        /// <param name="toolTip"></param>
+        /// <returns></returns>
         private TabItem FindTabItemByToolTip(string toolTip)
         {
             if (MainTabControl == null) return null;
@@ -124,6 +145,9 @@ namespace Пр12.Pages
             return null;
         }
 
+        /// <summary>
+        /// Загрузка кнопки для смены учётки
+        /// </summary>
         public void LoadBtn()
         {
             if (UserData.curUser == null)
@@ -132,6 +156,11 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Опработка нажатия на кнопку "Выход"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LogoutBtn_Click(object sender, RoutedEventArgs e)
         {
             var result = MessageBox.Show("Вы уверены, что хотите выйти?", "Выход",

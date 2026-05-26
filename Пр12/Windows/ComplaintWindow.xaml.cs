@@ -27,6 +27,14 @@ namespace Пр12.Windows
         private TypeOfComplaint _selectedReason;
         private bool isReasonSelected = false;
 
+        /// <summary>
+        /// Загрузка окна с уже заполненными параметрами для подачи жалобы
+        /// </summary>
+        /// <param name="targetType">объект, на который жалуются</param>
+        /// <param name="targetName">имя объекта</param>
+        /// <param name="authorId">ID автора (если есть)</param>
+        /// <param name="bookId">ID книги (если есть)</param>
+        /// <param name="reviewId">ID отзыва (если есть)</param>
         public ComplaintWindow(string targetType, string targetName, int? authorId, int? bookId, int? reviewId)
         {
             InitializeComponent();
@@ -42,12 +50,20 @@ namespace Пр12.Windows
             LoadReasons();
         }
 
+        /// <summary>
+        /// Загрузка списка причин для жалобы
+        /// </summary>
         private void LoadReasons()
         {
             var reasons = Core.Context.TypeOfComplaint.ToList();
             ListBoxReasons.ItemsSource = reasons;
         }
 
+        /// <summary>
+        /// Получение конкретной выбранной причины
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
             isReasonSelected = true;
@@ -55,6 +71,11 @@ namespace Пр12.Windows
             _selectedReason = (TypeOfComplaint)radio.DataContext;
         }
 
+        /// <summary>
+        /// "Оформление" жалобы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnComplaint_Click(object sender, RoutedEventArgs e)
         {
             if (!isReasonSelected)
@@ -95,6 +116,11 @@ namespace Пр12.Windows
             }
         }
 
+        /// <summary>
+        /// Кнопка назад / отмены
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;

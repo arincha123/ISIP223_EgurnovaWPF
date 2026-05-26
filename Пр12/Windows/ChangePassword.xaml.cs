@@ -28,6 +28,11 @@ namespace Пр12.Windows
             _user = user;
         }
 
+        /// <summary>
+        /// Сохранение нового пароля
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(PasswordBox.Password))
@@ -53,6 +58,11 @@ namespace Пр12.Windows
             Close();
         }
 
+        /// <summary>
+        /// Кнопка назад / отмены
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;

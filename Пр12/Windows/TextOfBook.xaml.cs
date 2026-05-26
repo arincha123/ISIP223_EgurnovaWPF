@@ -20,8 +20,11 @@ namespace Пр12.Windows
     /// </summary>
     public partial class TextOfBook : Window
     {
-
-
+        /// <summary>
+        /// Загрузка текста, выбранной книги
+        /// </summary>
+        /// <param name="bookTitle"></param>
+        /// <param name="bookText"></param>
         public TextOfBook(string bookTitle, string bookText)
         {
             InitializeComponent();
@@ -29,6 +32,11 @@ namespace Пр12.Windows
             TextContent.Text = bookText;
         }
 
+        /// <summary>
+        /// Кнопка назад / отмены
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_Back_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

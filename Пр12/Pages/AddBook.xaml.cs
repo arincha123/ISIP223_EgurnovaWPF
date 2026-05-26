@@ -20,7 +20,6 @@ namespace Пр12.Pages
     /// </summary>
     public partial class AddBook : Page
     {
-        private List<Genre> allgenres { get; set; } //все жанры
         private List<Genre> selectedgenres = new List<Genre>(); //выбранные жанры
         public AddBook()
         {
@@ -154,6 +153,8 @@ namespace Пр12.Pages
                 MessageBox.Show($"Ошибка при сохранении: {ex.Message}", "Ошибка",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+
         }
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e)

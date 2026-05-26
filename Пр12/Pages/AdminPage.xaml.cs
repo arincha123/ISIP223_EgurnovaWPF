@@ -234,14 +234,10 @@ namespace Пр12.Pages
 
         private void UpdateCatalogPage()
         {
-            var mainWindow = Application.Current.MainWindow as MainWindow;
-            if (mainWindow != null)
+            var frame = MainPage.CatalogFrame;
+            if (frame?.Content is CatalogPage catalogPage)
             {
-                var frame = mainWindow.FindName("frameCatalog") as Frame;
-                if (frame?.Content is CatalogPage catalogPage)
-                {
-                    catalogPage.RefreshData();
-                }
+                catalogPage.RefreshData();
             }
         }
 
@@ -275,7 +271,7 @@ namespace Пр12.Pages
         private void RoleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox comboBox = sender as ComboBox;
-            if (comboBox == null || comboBox.SelectedItem == null)
+            if (comboBox == null || comboBox.SelectedIndex == -1)
                 return;
 
             User user = comboBox.DataContext as User;
@@ -284,25 +280,42 @@ namespace Пр12.Pages
 
             if (user.ID == UserData.curUser.ID)
             {
-                MessageBox.Show("Вы не можете изменить свою собственную роль!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                comboBox.SelectedValue = user.RoleID;
+                MessageBox.Show("Вы не можете изменить свою собственную роль!", "Ошибка",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                comboBox.SelectedIndex = GetRoleIndex(user.RoleID);
                 return;
             }
 
-            string selectedRole = comboBox.SelectedItem.ToString();
-            int roleId = 1;
-            if (selectedRole == "Автор")
-                roleId = 2;
-            if (selectedRole == "Администратор")
-                roleId = 3;
+            ComboBoxItem selectedItem = comboBox.SelectedItem as ComboBoxItem;
+            int newRoleId = int.Parse(selectedItem.Tag.ToString());
 
-            if (user.RoleID == roleId)
-                return;
+            if (user.RoleID == newRoleId) return;
 
-            user.RoleID = roleId;
-            Core.Context.SaveChanges();
-            LoadUsers();
-            MessageBox.Show($"Роль пользователя {user.Name} изменена!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            var result = MessageBox.Show($"Изменить роль пользователя {user.Name}?",
+                "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                user.RoleID = newRoleId;
+                Core.Context.SaveChanges();
+                LoadUsers();
+                MessageBox.Show("Роль изменена!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                comboBox.SelectedIndex = GetRoleIndex(user.RoleID);
+            }
+        }
+
+        private int GetRoleIndex(int roleId)
+        {
+            switch (roleId)
+            {
+                case 1: return 0;
+                case 2: return 1;
+                case 3: return 2;
+                default: return 0;
+            }
         }
 
         private void ChangePassword_Click(object sender, RoutedEventArgs e)

@@ -77,9 +77,22 @@ namespace Пр12.Pages
             ApplyFiltersAndSearch();
         }
 
-        void ApplyFiltersAndSearch()
+        private void ApplyFiltersAndSearch()
         {
-            var result = allBooks.Where(b => b.IsFrozen == false).ToList();
+            var result = allBooks.Where(b => !b.IsFrozen).ToList();
+
+            foreach (var book in result)
+            {
+                    if (book.Review != null && book.Review.Any())
+                    {
+                        double sum = book.Review.Sum(r => r.Rating);
+                        book.AvgRating = Math.Round(sum / book.Review.Count, 1);
+                    }
+                    else
+                    {
+                        book.AvgRating = 0;
+                    }
+            }
 
             //поиск
             if (!string.IsNullOrEmpty(SearchBox.Text))
@@ -97,10 +110,10 @@ namespace Пр12.Pages
                 switch (TypeOfSort)
                 {
                     case "По названию":
-                        result = allBooks.OrderBy(b => b.Title).ToList();
+                        result = result.OrderBy(b => b.Title).ToList();
                         break;
                     case "По рейтингу":
-                        result = allBooks.OrderBy(b => b.AvgRating).ToList();
+                        result = result.OrderByDescending(b => b.AvgRating).ToList();
                         break;
                 }
             }

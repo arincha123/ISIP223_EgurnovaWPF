@@ -24,6 +24,11 @@ namespace Пр12.Windows
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Работа кода при нажатии на кнопку автооризации
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             string login = LoginTextBox.Text.Trim();
@@ -41,13 +46,6 @@ namespace Пр12.Windows
 
                 if (user != null)
                 {
-                    //if (user.IsFrozen)
-                    //{
-                    //    MessageBox.Show("Ваш аккаунт заморожен! Обратитесь к администратору.", "Ошибка",
-                    //        MessageBoxButton.OK, MessageBoxImage.Error);
-                    //    return;
-                    //}
-
                     UserData.curUser = user;
 
                     MessageBox.Show($"Добро пожаловать, {user.Name}!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -66,6 +64,12 @@ namespace Пр12.Windows
             }
         }
 
+
+        /// <summary>
+        /// Работа кода при нажатии на кнопку регистрации м последующим перекидыванием на страницу авторизации
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
             string name = RegNameTextBox.Text.Trim();

@@ -233,6 +233,7 @@
 
                                             <Button Content="Заморозить отзыв"
                                                     Style="{StaticResource ActionBtn}"
+                                                    Tag="{Binding}"
                                                     Width="150"
                                                     Height="33"
                                                     Visibility="{Binding FreezeButtonVisibility, RelativeSource={RelativeSource AncestorType=Page}}"
@@ -301,7 +302,7 @@
                                       Height="25"
                                       BorderBrush="{x:Null}"
                                       BorderThickness="0"
-                                      Width="50"
+                                      Width="60"
                                       SelectedIndex="0"
                                       Cursor="Hand"
                                       Margin="10">

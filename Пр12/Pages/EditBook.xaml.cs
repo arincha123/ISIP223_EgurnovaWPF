@@ -32,6 +32,9 @@ namespace Пр12.Pages
 
         }
 
+        /// <summary>
+        /// Подзагрузка жанров для будущего изменения жанров книги
+        /// </summary>
         private void LoadGenres()
         {
             var allGenres = Core.Context.Genre.ToList();
@@ -41,6 +44,9 @@ namespace Пр12.Pages
             ListBoxGenres.ItemsSource = selectedgenres.ToList();
         }
 
+        /// <summary>
+        /// Подзагрузка всей уже имеющейся информации о книге
+        /// </summary>
         private void LoadBookData()
         {
             TitleTextBox.Text = editingBook.Title;
@@ -51,6 +57,12 @@ namespace Пр12.Pages
             selectedgenres = editingBook.BookInGenre?.Select(bg => bg.Genre).ToList() ?? new List<Genre>();
             LoadGenres();
         }
+
+        /// <summary>
+        /// Добавление жанра
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnAddGenre_Click(object sender, RoutedEventArgs e)
         {
             if (GenresComboBox.SelectedItem is Genre selectedGenre)
@@ -65,19 +77,25 @@ namespace Пр12.Pages
             }
         }
 
-        private void LoadEditingBook(Book book)
-        {
-            var bookGenreIds = book.BookInGenre.Select(bg => bg.GenreID).ToList();
+        //private void LoadEditingBook(Book book)
+        //{
+        //    var bookGenreIds = book.BookInGenre.Select(bg => bg.GenreID).ToList();
 
-            foreach (var item in ListBoxGenres.Items)
-            {
-                var genre = item as Genre;
-                if (genre != null && bookGenreIds.Contains(genre.ID))
-                {
-                    ListBoxGenres.SelectedItems.Add(item); // Выделяем
-                }
-            }
-        }
+        //    foreach (var item in ListBoxGenres.Items)
+        //    {
+        //        var genre = item as Genre;
+        //        if (genre != null && bookGenreIds.Contains(genre.ID))
+        //        {
+        //            ListBoxGenres.SelectedItems.Add(item); // Выделяем
+        //        }
+        //    }
+        //}
+
+        /// <summary>
+        /// Кнопка удаления жанров
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnDeleteGenre_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
@@ -89,6 +107,11 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Сохранение всех изменений
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             editingBook.Title = TitleTextBox.Text.Trim();
@@ -110,12 +133,22 @@ namespace Пр12.Pages
 
             Core.Context.SaveChanges();
             MessageBox.Show("Книга обновлена!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            editingBook.PathToCover = TxtBoxImagePath.Text;
+
+            Core.Context.SaveChanges();
+
             NavigationService.GoBack();
         }
 
+        /// <summary>
+        /// Отмена всех изменений
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
-            var result = MessageBox.Show("Вы уверены, что хотите отменить добавление книги? Все данные будут потеряны.",
+            var result = MessageBox.Show("Вы уверены, что хотите отменить изменение книги? Все данные будут потеряны.",
              "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)

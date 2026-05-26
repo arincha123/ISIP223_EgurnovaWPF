@@ -88,8 +88,8 @@
                   RenderOptions.EdgeMode="Aliased"
                   Style="{StaticResource ComboForBooks}" SelectionChanged="ComboSort_SelectionChanged">
             <ComboBoxItem Content="Все"/>
-            <ComboBoxItem Content="По названию"/>
-            <ComboBoxItem Content="По рейтингу"/>
+            <ComboBoxItem Content="По названию" Tag="По названию"/>
+            <ComboBoxItem Content="По рейтингу" Tag="По рейтингу"/>
         </ComboBox>
 
         <!--фильтрация по жанрам-->
