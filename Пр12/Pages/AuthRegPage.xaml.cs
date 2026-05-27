@@ -25,6 +25,12 @@ namespace Пр12.Pages
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// Нажатие на кнопку авторизации
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             string login = LoginTextBox.Text.Trim();
@@ -65,6 +71,11 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Нажатие на кнопку регистрации
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
             string name = RegNameTextBox.Text.Trim();

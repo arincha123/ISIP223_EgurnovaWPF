@@ -87,7 +87,7 @@
 
                                         <!--////////////////////////////////////////////////////////////////////////////////-->
                                         <TextBlock Grid.Row="3" Grid.Column="0"
-                                                   Text="{Binding Author.Name, StringFormat='Автор: {0}'}"
+                                                   Text="{Binding BadUser, StringFormat='Автор: {0}'}"
                                                    FontSize="13"
                                                    Margin="0,0,0,3"/>
 

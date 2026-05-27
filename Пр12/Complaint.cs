@@ -11,7 +11,7 @@ namespace Пр12
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Complaint
     {
         public int ID { get; set; }
@@ -21,11 +21,22 @@ namespace Пр12
         public int ReasonID { get; set; }
         public System.DateTime Date { get; set; }
         public Nullable<int> AuthorID { get; set; }
-    
+
         public virtual Book Book { get; set; }
         public virtual Review Review { get; set; }
         public virtual TypeOfComplaint TypeOfComplaint { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
+
+        public string BadUser => GetUser();
+
+        private string GetUser()
+        {
+            if (BookID != null)
+            {
+                return Book.User.Name;
+            }
+            return User1.Name;
+        }
     }
 }

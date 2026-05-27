@@ -34,6 +34,11 @@ namespace Пр12.Pages
             Loaded += Page_Loaded;
         }
 
+        /// <summary>
+        /// Загрузка всех списков
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             LoadComplaints();
@@ -43,13 +48,18 @@ namespace Пр12.Pages
             LoadUsers();
         }
 
-        //загрузка списков
+        /// <summary>
+        /// Загрузка списка жалоб
+        /// </summary>
         private void LoadComplaints()
         {
             allComplaints = Core.Context.Complaint.OrderByDescending(c => c.Date).ToList();
             ComplaintsListBox.ItemsSource = allComplaints;
         }
 
+        /// <summary>
+        /// Загрузка списков замороженных объектов
+        /// </summary>
         private void LoadFrozenLists()
         {
             allBooks = Core.Context.Book.Where(b => b.IsFrozen == true).ToList();
@@ -62,12 +72,18 @@ namespace Пр12.Pages
             FrozenReviewsListBox.ItemsSource = allReviews;
         }
 
+        /// <summary>
+        /// Загрузка списка пользователей
+        /// </summary>
         private void LoadUsers()
         {
             allUsers = Core.Context.User.ToList();
             UsersListBox.ItemsSource = allUsers;
         }
 
+        /// <summary>
+        /// Загрузка списка тех, кто подал запрос на разморозку
+        /// </summary>
         private void LoadDefrostRequests()
         {
             allDefrostRequests = Core.Context.RequestForDefrosting.Where(r => r.RequestStatusID == 2).OrderByDescending(r => r.Date)
@@ -75,6 +91,9 @@ namespace Пр12.Pages
             DefrostRequestsListBox.ItemsSource = allDefrostRequests;
         }
 
+        /// <summary>
+        /// Загрузка списка тех, кто подал запрос на изменение статума на "Автор"
+        /// </summary>
         private void LoadAuthorRequests()
         {
             allAuthorRequests = Core.Context.RequestForAuthor.Where(r => r.StatusID == 2).OrderByDescending(r => r.Date)
@@ -82,7 +101,11 @@ namespace Пр12.Pages
             AuthorRequestsListBox.ItemsSource = allAuthorRequests;
         }
 
-        //жалобы
+        /// <summary>
+        /// Принятие жалобы (замораживает объект)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AcceptComplaint_Click(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
@@ -124,6 +147,11 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Отклонение жалобы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RejectComplaint_Click(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
@@ -138,7 +166,11 @@ namespace Пр12.Pages
             }
         }
 
-        //заявки на разморозку
+        /// <summary>
+        /// Принятие заявки на разморозку (размораживает книгу или автора)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AcceptDefrostRequest_Click(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
@@ -167,6 +199,11 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Отклонение заявки на разморозку
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RejectDefrostRequest_Click(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
@@ -181,7 +218,11 @@ namespace Пр12.Pages
             }
         }
 
-        //заявки на получение роли автора
+        /// <summary>
+        /// Принятие заявки на роль Автора
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AcceptAuthorRequest_Click(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
@@ -200,6 +241,11 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Отклонение заявки на роль Автора 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RejectAuthorRequest_Click(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
@@ -214,7 +260,11 @@ namespace Пр12.Pages
             }
         }
 
-        //замороженные книги, пользователи, отзывы
+        /// <summary>
+        /// Размораживание книги
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UnfreezeBook_Click(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
@@ -232,6 +282,9 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Обновление каталога
+        /// </summary>
         private void UpdateCatalogPage()
         {
             var frame = MainPage.CatalogFrame;
@@ -241,6 +294,11 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Размораживание пользователя (автора)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UnfreezeUser_Click(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
@@ -255,6 +313,11 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Размораживание отзыва
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UnfreezeReview_Click(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
@@ -268,6 +331,11 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Изменение роли
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RoleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox comboBox = sender as ComboBox;
@@ -307,6 +375,11 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Получение ID роли в зависимости от выбранного comboboxItem
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <returns></returns>
         private int GetRoleIndex(int roleId)
         {
             switch (roleId)
@@ -318,6 +391,11 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Изменение пароля
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChangePassword_Click(object sender, RoutedEventArgs e)
         {
             User user = (sender as Button)?.DataContext as User;

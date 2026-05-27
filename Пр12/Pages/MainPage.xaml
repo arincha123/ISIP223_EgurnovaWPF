@@ -11,21 +11,21 @@
     <Grid>
 
         <TabControl x:Name="MainTabControl" TabStripPlacement="Left">
-            <TabItem ToolTip="Каталог книг" Style="{StaticResource SlidebarItem}">
+            <TabItem x:Name="TCatalog" ToolTip="Каталог книг" Style="{StaticResource SlidebarItem}">
                 <TabItem.Header>
                     <Image Source="/Icons/каталог_книг.png" Height="60" Width="60"/>
                 </TabItem.Header>
                 <Frame NavigationUIVisibility="Hidden" x:Name="frameCatalog" Source="/Pages/CatalogPage.xaml" Margin="10 0 0 0"/>
             </TabItem>
 
-            <TabItem ToolTip="Списки книг" Style="{StaticResource SlidebarItem}">
+            <TabItem x:Name="TLists" ToolTip="Списки книг" Style="{StaticResource SlidebarItem}">
                 <TabItem.Header>
                     <Image Source="/Icons/списки_книг.png" Height="60" Width="60"/>
                 </TabItem.Header>
                 <Frame NavigationUIVisibility="Hidden" x:Name="frameListBook" Source="/Pages/ListsOfBooks.xaml" Margin="10 0 0 0"/>
             </TabItem>
 
-            <TabItem ToolTip="Администрирование" Style="{StaticResource SlidebarItem}">
+            <TabItem x:Name="TAdmin" ToolTip="Администрирование" Style="{StaticResource SlidebarItem}">
                 <TabItem.Header>
                     <Image Source="/Icons/администрирование.png" Height="60" Width="60"/>
                 </TabItem.Header>
@@ -33,21 +33,21 @@
 
             </TabItem>
 
-            <TabItem ToolTip="Страница автора" Style="{StaticResource SlidebarItem}">
+            <TabItem x:Name="TAuthor" ToolTip="Страница автора" Style="{StaticResource SlidebarItem}">
                 <TabItem.Header>
                     <Image Source="/Icons/страница_автора.png" Height="60" Width="60"/>
                 </TabItem.Header>
                 <Frame NavigationUIVisibility="Hidden" x:Name="frameAuthor" Source="/Pages/AuthorPage.xaml" Margin="10 0 0 0"/>
             </TabItem>
 
-            <TabItem ToolTip="Предупреждение о заморозке" Style="{StaticResource SlidebarItem}">
+            <TabItem x:Name="TFreeze" ToolTip="Предупреждение о заморозке" Style="{StaticResource SlidebarItem}">
                 <TabItem.Header>
                     <Image Source="/Icons/заморозка.png" Height="60" Width="60"/>
                 </TabItem.Header>
                 <Frame NavigationUIVisibility="Hidden" x:Name="frameFroze" Source="/Pages/FrozePage.xaml" Margin="10 0 0 0"/>
             </TabItem>
 
-            <TabItem ToolTip="Профиль" Style="{StaticResource SlidebarItem}">
+            <TabItem x:Name="TProfile" ToolTip="Профиль" Style="{StaticResource SlidebarItem}">
                 <TabItem.Header>
                     <Image Source="/Icons/профиль.png" Height="60" Width="60"/>
                 </TabItem.Header>

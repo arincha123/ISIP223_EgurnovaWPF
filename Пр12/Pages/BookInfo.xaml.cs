@@ -41,6 +41,9 @@ namespace Пр12.Pages
             LoadReviews();
         }
 
+        /// <summary>
+        /// Загрузка кнопри заморозки для администратора
+        /// </summary>
         private void LoadFreezeBtn()
         {
             if (UserData.curUser != null && UserData.curUser.RoleID == 3)
@@ -53,14 +56,15 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Загрузка отзывов
+        /// </summary>
         private void LoadReviews()
         {
             Reviews = Core.Context.Review.Include("User").Where(r => r.BookID == CurrentBook.ID && !r.IsFrozen).OrderByDescending(r => r.Date).ToList();
 
             ReviewsListBox.ItemsSource = null;
             ReviewsListBox.ItemsSource = Reviews;
-
-
 
             if (Reviews.Count == 0)
             {
@@ -72,6 +76,9 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Обновление рейтинга книг
+        /// </summary>
         private void UpdateBookRating()
         {
             double avgRating = 0;
@@ -87,6 +94,11 @@ namespace Пр12.Pages
             RatingText.Text = Math.Round(avgRating).ToString();
         }
 
+        /// <summary>
+        /// Кнопка "Назад"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_Back_Click(object sender, RoutedEventArgs e)
         {
             if (NavigationService.CanGoBack)
@@ -95,6 +107,11 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Оставление отзыва
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SubmitReviewButton_Click(object sender, RoutedEventArgs e)
         {
             string text = CommentText.Text.Trim();
@@ -131,30 +148,47 @@ namespace Пр12.Pages
                 return;
             }
 
-            int selectedRating = int.Parse(selectedItem.Content.ToString().Split(' ')[0]);
-            int rating = selectedRating;
+            var result = MessageBox.Show("Вы уверены, что хотите оставить отзыв?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-            Review newReview = new Review
+            if (result == MessageBoxResult.Yes)
             {
-                BookID = CurrentBook.ID,
-                UserID = UserData.curUser.ID,
-                Text = text,
-                Rating = rating,
-                Date = DateTime.Now,
-                IsFrozen = false
-            };
+                int selectedRating = int.Parse(selectedItem.Content.ToString().Split(' ')[0]);
+                int rating = selectedRating;
 
-            Core.Context.Review.Add(newReview);
-            Core.Context.SaveChanges();
+                try
+                {
+                    Review newReview = new Review
+                    {
+                        BookID = CurrentBook.ID,
+                        UserID = UserData.curUser.ID,
+                        Text = text,
+                        Rating = rating,
+                        Date = DateTime.Now,
+                        IsFrozen = false
+                    };
 
-            CommentText.Clear();
-            RatingComboBox.SelectedIndex = 0;
+                    Core.Context.Review.Add(newReview);
+                    Core.Context.SaveChanges();
 
-            LoadReviews();
+                    CommentText.Clear();
+                    RatingComboBox.SelectedIndex = 0;
 
-            UpdateBookRating();
+                    LoadReviews();
+
+                    UpdateBookRating();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при добавлении отзыва: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
+        /// <summary>
+        /// Переход к окну для чтения фрагмента книги
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Readpart_Click(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(CurrentBook.Text))
@@ -170,6 +204,11 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Добавление в список
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddInList_Click(object sender, RoutedEventArgs e)
         {
             Book selectedBook = CurrentBook;
@@ -222,6 +261,11 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Получение ID списка для отображения сообщения, что книга добавлена в конкретный список
+        /// </summary>
+        /// <param name="statusId"></param>
+        /// <returns></returns>
         private string GetStatusName(int statusId)
         {
             switch (statusId)
@@ -234,6 +278,11 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Кнопка заморозки книги для администрации
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FreezeBook_Click(object sender, RoutedEventArgs e)
         {
             var result = MessageBox.Show($"Вы уверены, что хотите заморозить книгу \"{CurrentBook.Title}\"?\n\nПосле заморозки книга будет скрыта от пользователей.",
@@ -260,6 +309,11 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Кнопка заморозки отзыва
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FreezeReview_Click(object sender, RoutedEventArgs e)
         {
             if (UserData.curUser == null || UserData.curUser.RoleID != 3)
@@ -303,6 +357,11 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Общая функция для подачи жалобы, где тип объекта зависит от Tag объекта
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ComplainBtn_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;

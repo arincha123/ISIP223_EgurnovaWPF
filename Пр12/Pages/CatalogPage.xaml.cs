@@ -29,6 +29,9 @@ namespace Пр12.Pages
             PageLoad();
         }
 
+        /// <summary>
+        /// Подгрузка списка книг и жанров
+        /// </summary>
         private void PageLoad()
         {
             allBooks = Core.Context.Book.Where(b => b.IsFrozen == false).ToList();
@@ -45,6 +48,10 @@ namespace Пр12.Pages
             genres.Insert(0, "Все жанры");
         }
 
+        /// <summary>
+        /// Обновление рейтинга книг 
+        /// </summary>
+        /// <param name="book"></param>
         private void UpdateBookRating(Book book)
         {
             if (book.Review != null && book.Review.Count > 0)
@@ -66,17 +73,18 @@ namespace Пр12.Pages
         {
             ApplyFiltersAndSearch();
         }
-
         private void ComboSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ApplyFiltersAndSearch();
         }
-
         private void ComboFiltr_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ApplyFiltersAndSearch();
         }
 
+        /// <summary>
+        /// Применение фильтрации, сортировки и поиска
+        /// </summary>
         private void ApplyFiltersAndSearch()
         {
             var result = allBooks.Where(b => !b.IsFrozen).ToList();
@@ -129,6 +137,11 @@ namespace Пр12.Pages
             ListBooks.ItemsSource = filteredBooks;
         }
 
+        /// <summary>
+        /// Переход на страницу детальной информации
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListBooks_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Book selectedbook = ListBooks.SelectedItem as Book;
@@ -146,6 +159,10 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Вообще является публичной функцией, которая нужна, чтобы страницу каталога книг 
+        /// можно было обновлять через админа (после разморозки книг)
+        /// </summary>
         public void RefreshData()
         {
             allBooks = Core.Context.Book.Where(b => b.IsFrozen == false).ToList();
@@ -158,6 +175,11 @@ namespace Пр12.Pages
             ApplyFiltersAndSearch();
         }
 
+        /// <summary>
+        /// Добавление книг в списки
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddToListBtn_Click(object sender, RoutedEventArgs e)
         {
             if (UserData.curUser.IsFrozen == true)

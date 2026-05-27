@@ -29,11 +29,19 @@ namespace Пр12.Pages
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Загрузка книг при открытии окна
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             LoadBooks();
         }
 
+        /// <summary>
+        /// Метод загрузки книг (вынесен отдельно, чтобы другие методы тоже могли его вызывать)
+        /// </summary>
         private void LoadBooks()
         {
             if (UserData.curUser == null) return;
@@ -48,11 +56,21 @@ namespace Пр12.Pages
 
         }
 
+        /// <summary>
+        /// Добавление новой книги
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddBookBtn_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AddBook());
         }
 
+        /// <summary>
+        /// Изменение книги
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditBookBtn_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
@@ -65,6 +83,11 @@ namespace Пр12.Pages
 
         }
 
+        /// <summary>
+        /// Оспаривание заморозки книги
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AppealFreezeBookBtn_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
@@ -124,6 +147,11 @@ namespace Пр12.Pages
             }
         }
 
+        /// <summary>
+        /// Удаление книги
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DelBookBtn_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;

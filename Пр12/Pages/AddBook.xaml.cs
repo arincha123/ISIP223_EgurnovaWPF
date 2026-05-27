@@ -40,7 +40,7 @@ namespace Пр12.Pages
         }
 
         /// <summary>
-        /// 
+        /// Добвление жанров книге
         /// </summary>
         private void BtnAddGenre_Click(object sender, RoutedEventArgs e)
         {
@@ -65,6 +65,12 @@ namespace Пр12.Pages
                     MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
+        /// <summary>
+        /// Удаление жанра
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnDeleteGenre_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
@@ -76,7 +82,11 @@ namespace Пр12.Pages
             }
         }
 
-
+        /// <summary>
+        /// Сохранение добавленной книги
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(TitleTextBox.Text))
@@ -157,6 +167,11 @@ namespace Пр12.Pages
 
         }
 
+        /// <summary>
+        /// Отмена / выход из окна добавления новой книги
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
             var result = MessageBox.Show("Вы уверены, что хотите отменить добавление книги? Все данные будут потеряны.",
