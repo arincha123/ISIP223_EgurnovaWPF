@@ -15,14 +15,14 @@
         </Grid.RowDefinitions>
 
         <Border Grid.Row="1"
-        Width="400"
-        Height="480"
-        HorizontalAlignment="Center"
-        VerticalAlignment="Center"
-        Background="White"
-        BorderBrush="#E0E0E0"
-        BorderThickness="1"
-        CornerRadius="15">
+                Width="480"
+                Height="600"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="White"
+                BorderBrush="#E0E0E0"
+                BorderThickness="1"
+                CornerRadius="15">
 
             <Grid Margin="20 30 20 20">
                 <Grid.RowDefinitions>
@@ -32,10 +32,10 @@
                 </Grid.RowDefinitions>
 
                 <TabControl x:Name="MainTabControl"
-                    Grid.Row="1"
-                    Background="Transparent"
-                    BorderThickness="0"
-                    HorizontalAlignment="Center">
+                            Grid.Row="1"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            HorizontalAlignment="Center">
 
                     <TabControl.Resources>
                         <Style TargetType="TabItem">
@@ -73,7 +73,7 @@
 
                     <!--вход-->
                     <TabItem Header="Вход">
-                        <StackPanel Margin="0 20 0 0">
+                        <StackPanel Margin="0 70 0 0">
 
                             <!--логин-->
                             <TextBlock Text="Логин"
@@ -147,8 +147,7 @@
 
                     <!--регистрация-->
                     <TabItem Header="Регистрация">
-                        <ScrollViewer VerticalScrollBarVisibility="Auto"
-                              Height="380">
+                        <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Disabled"  Height="480">
                             <StackPanel Margin="0,20,0,20">
 
                                 <!--имя пользователя-->

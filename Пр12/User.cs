@@ -19,11 +19,11 @@ namespace Пр12
         {
             this.Book = new HashSet<Book>();
             this.Complaint = new HashSet<Complaint>();
+            this.Complaint1 = new HashSet<Complaint>();
             this.ReadingList = new HashSet<ReadingList>();
             this.RequestForAuthor = new HashSet<RequestForAuthor>();
             this.RequestForDefrosting = new HashSet<RequestForDefrosting>();
             this.Review = new HashSet<Review>();
-            this.Complaint1 = new HashSet<Complaint>();
         }
     
         public int ID { get; set; }
@@ -39,6 +39,8 @@ namespace Пр12
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Complaint> Complaint { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Complaint> Complaint1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReadingList> ReadingList { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RequestForAuthor> RequestForAuthor { get; set; }
@@ -47,7 +49,5 @@ namespace Пр12
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Review> Review { get; set; }
         public virtual Role Role { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Complaint> Complaint1 { get; set; }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Пр12
 {
+    
     static internal class Core
     {
         public static Entities Context = new Entities();
